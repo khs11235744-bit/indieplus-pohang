@@ -51,7 +51,7 @@ def movie_detail(code):
     trailer=(re.search(r'data-source="([^"]+\.mp4)"',page,re.I) or [None,""])[1]
     stills=unique(re.findall(r'https://img\.dtryx\.com/poster/[^"\']+\.Large\.(?:jpg|png|jpeg)',page,re.I))
     return {"code":code,"title":title,"eng":eng,"director":director,"actors":actors,
-            "short":shorten(synopsis),"synopsis":synopsis,"poster":poster,"still":stills[0] if stills else "",
+            "short":shorten(synopsis),"synopsis":synopsis,"poster":poster,"still":stills[0] if stills else "","stills":stills[:8],
             "trailer":trailer,"meta":meta,"sourceUrl":f"{BASE}/movie/view.do?MovieCd={code}"}
 html=get(MAIN)
 playing=html.split('<!-- // 현재상영작 top 10 -->',1)[0]

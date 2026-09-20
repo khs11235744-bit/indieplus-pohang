@@ -1,37 +1,85 @@
 {
   "029552": {
-    "still": "./assets/share/029552-still.jpg",
-    "poster": "./assets/share/029552-poster.jpg"
+    "poster": "./assets/share/029552-poster.jpg",
+    "stills": [
+      "./assets/share/029552-still1.jpg",
+      "./assets/share/029552-still2.jpg",
+      "./assets/share/029552-still3.jpg",
+      "./assets/share/029552-still4.jpg"
+    ],
+    "still": "./assets/share/029552-still1.jpg"
   },
   "028449": {
-    "still": "./assets/share/028449-still.jpg",
-    "poster": "./assets/share/028449-poster.jpg"
+    "poster": "./assets/share/028449-poster.jpg",
+    "stills": [
+      "./assets/share/028449-still1.jpg",
+      "./assets/share/028449-still2.jpg",
+      "./assets/share/028449-still3.jpg",
+      "./assets/share/028449-still4.jpg"
+    ],
+    "still": "./assets/share/028449-still1.jpg"
   },
   "029550": {
-    "still": "./assets/share/029550-still.jpg",
-    "poster": "./assets/share/029550-poster.jpg"
+    "poster": "./assets/share/029550-poster.jpg",
+    "stills": [
+      "./assets/share/029550-still1.jpg",
+      "./assets/share/029550-still2.jpg",
+      "./assets/share/029550-still3.jpg",
+      "./assets/share/029550-still4.jpg"
+    ],
+    "still": "./assets/share/029550-still1.jpg"
   },
   "027432": {
     "poster": "./assets/share/027432-poster.jpg"
   },
   "027434": {
-    "still": "./assets/share/027434-still.jpg",
-    "poster": "./assets/share/027434-poster.jpg"
+    "poster": "./assets/share/027434-poster.jpg",
+    "stills": [
+      "./assets/share/027434-still1.jpg",
+      "./assets/share/027434-still2.jpg",
+      "./assets/share/027434-still3.jpg",
+      "./assets/share/027434-still4.jpg"
+    ],
+    "still": "./assets/share/027434-still1.jpg"
   },
   "027030": {
-    "still": "./assets/share/027030-still.jpg",
-    "poster": "./assets/share/027030-poster.jpg"
+    "poster": "./assets/share/027030-poster.jpg",
+    "stills": [
+      "./assets/share/027030-still1.jpg",
+      "./assets/share/027030-still2.jpg",
+      "./assets/share/027030-still3.jpg",
+      "./assets/share/027030-still4.jpg"
+    ],
+    "still": "./assets/share/027030-still1.jpg"
   },
   "026254": {
-    "still": "./assets/share/026254-still.png",
-    "poster": "./assets/share/026254-poster.png"
+    "poster": "./assets/share/026254-poster.png",
+    "stills": [
+      "./assets/share/026254-still1.png",
+      "./assets/share/026254-still2.png",
+      "./assets/share/026254-still3.png",
+      "./assets/share/026254-still4.png"
+    ],
+    "still": "./assets/share/026254-still1.png"
   },
   "029204": {
-    "still": "./assets/share/029204-still.png",
-    "poster": "./assets/share/029204-poster.jpg"
+    "poster": "./assets/share/029204-poster.jpg",
+    "stills": [
+      "./assets/share/029204-still1.png",
+      "./assets/share/029204-still2.png",
+      "./assets/share/029204-still3.png",
+      "./assets/share/029204-still4.png"
+    ],
+    "still": "./assets/share/029204-still1.png"
   },
   "029131": {
-    "still": "./assets/share/029131-still.jpg",
-    "poster": "./assets/share/029131-poster.jpg"
+    "poster": "./assets/share/029131-poster.jpg",
+    "stills": [
+      "./assets/share/029131-still1.jpg",
+      "./assets/share/029131-still2.jpg",
+      "./assets/share/029131-still3.jpg",
+      "./assets/share/029131-still4.jpg"
+    ],
+    "still": "./assets/share/029131-still1.jpg"
   }
 }
