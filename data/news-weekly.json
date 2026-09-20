@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-20T12:25:54.573487+00:00",
+  "generatedAt": "2026-09-20T16:23:06.607Z",
   "periodLabel": "최근 2주 / 주간 편집본",
-  "translationPolicy": "원문 전문을 복제하지 않고 제목·핵심 내용만 한국어로 번역·요약",
+  "translationPolicy": "영문 원문을 기본 노출하지 않고, 사실 확인 후 4~7문장 한국어 기사형 요약·왜 주목할까·핵심 포인트를 제공한다.",
   "digestTitle": "이번 주 세계 독립·예술영화 뉴스",
-  "digestSummary": "이번 주에는 선댄스의 공간 재편과 창작자 지원, 베니스 영화제 결산과 수상 결과, TIFF·BIFF의 프로그램 확대가 큰 흐름을 이룬다. IndieWire와 Screen Daily에서는 신작 리뷰와 독립제작 현장의 목소리도 이어졌다.",
+  "digestSummary": "이번 주 세계 영화계는 ‘영화제 이후의 흐름’이 선명하다. 베니스는 수상과 관객 지표를 통해 한 해의 중심 작품들을 정리했고, 선댄스는 2027년 새 개최 공간과 제작지원으로 다음 사이클을 준비하고 있다. TIFF·BIFF·도쿄는 상영뿐 아니라 창작자 교육, 산업 네트워크, 아시아 지역 프로그램을 확대하는 움직임을 보였다. 동시에 〈NAZA〉처럼 영화제 화제작이 빠르게 실제 배급으로 이어지는 사례와 Killer Films의 중간예산 제작 논의가 독립영화 생태계의 현실을 보여준다.",
   "items": [
     {
       "id": "bcdc6896435b9b",
@@ -15,13 +15,19 @@
       "sourceUrl": "https://www.sundance.org",
       "titleOriginal": "Inside the 2027 Sundance Film Festival Venues: Chautauqua Auditorium Welcomes a New Era of Film",
       "titleKo": "2027 선댄스의 새 영화제 공간, 셔토쿼 오디토리엄이 여는 새로운 시대",
-      "summaryKo": "2027 선댄스 영화제가 새로운 상영 공간을 소개하며 다음 영화제의 관람 경험과 공간 구성을 예고했다.",
+      "summaryKo": "2027 선댄스영화제가 콜로라도 볼더에서 사용할 주요 상영 공간 가운데 셔토쿼 오디토리엄을 소개했다. 1898년에 세워진 이 역사적 공연장은 볼더에서 최초의 영화 상영이 이뤄졌던 장소이기도 하다. 영화제를 앞두고 지열 냉난방, 접근성 개선, 화장실·편의시설 정비, 화재 안전과 구조 보강 등 대규모 개선이 진행되고 있다. 선댄스는 이 공간을 새 개최지의 상징적인 극장으로 활용하면서 영화제의 이동이 단순한 장소 변경이 아니라 새로운 관람 문화를 만드는 과정임을 강조하고 있다. 오래된 장소의 기억과 현대적인 영화제 운영이 만나는 지점이라는 점에서 2027년 선댄스의 분위기를 미리 보여주는 소식이다.",
       "tags": [
         "Sundance",
         "영화제공간",
         "2027"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "선댄스의 개최지 이동이 실제 관람 경험과 영화제 정체성을 어떻게 바꿀지 보여주는 첫 구체 사례다.",
+      "keyPoints": [
+        "1898년 개관한 셔토쿼 오디토리엄",
+        "접근성·지열 냉난방·안전 설비 개선",
+        "2027 선댄스의 핵심 상영 공간"
+      ]
     },
     {
       "id": "f05d6a64009c98",
@@ -33,13 +39,19 @@
       "sourceUrl": "https://www.sundance.org",
       "titleOriginal": "Sundance Institute and The Walt Disney Studios Announce the Next Cycles of the Project Advancement and Completion Fund and the Artist Fellowship",
       "titleKo": "선댄스와 월트디즈니 스튜디오, 제작지원 기금·아티스트 펠로십 차기 지원 발표",
-      "summaryKo": "선댄스 인스티튜트와 월트디즈니 스튜디오가 프로젝트 진전·완성 기금과 아티스트 펠로십의 다음 지원 주기를 발표했다.",
+      "summaryKo": "선댄스 인스티튜트와 월트디즈니 스튜디오가 독립 창작자를 위한 제작지원 프로그램의 다음 주기를 발표했다. 프로젝트 진전·완성 기금은 선정 프로젝트에 2만5천 달러의 제한 없는 지원금을 제공하고, 아티스트 펠로십은 창작자 개인에게 1만5천 달러를 지원한다. 지원금은 특정 제작 항목에만 묶이지 않아 후반작업, 개발, 생활비 등 창작자가 가장 필요한 지점에 활용할 수 있다. 대형 스튜디오와 독립영화 지원기관이 장기 파트너십을 통해 작품 개발 단계부터 완성 단계까지 지원한다는 점이 핵심이다. 영화제 상영 이전의 창작 생태계를 어떻게 유지할 것인가에 대한 선댄스의 역할도 다시 확인된다.",
       "tags": [
         "Sundance",
         "제작지원",
         "펠로십"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "상영작 뉴스보다 한 단계 앞선 ‘어떤 독립영화가 만들어질 수 있는가’를 좌우하는 제작지원 소식이다.",
+      "keyPoints": [
+        "프로젝트 지원금 2만5천 달러",
+        "아티스트 펠로십 1만5천 달러",
+        "선댄스·디즈니 공동 창작자 지원"
+      ]
     },
     {
       "id": "f3935f86a954c3",
@@ -51,13 +63,19 @@
       "sourceUrl": "https://www.sundance.org",
       "titleOriginal": "Film Festival Watch: 8 Sundance Institute–Supported Films to See at the 2026 Toronto International Film Festival",
       "titleKo": "2026 토론토영화제에서 만날 선댄스 지원작 8편",
-      "summaryKo": "선댄스 인스티튜트가 지원한 작품 가운데 2026 토론토국제영화제에서 주목할 8편을 소개했다.",
+      "summaryKo": "선댄스 인스티튜트가 2026 토론토국제영화제에서 만날 수 있는 지원작 8편을 묶어 소개했다. 이 목록에는 선댄스의 각종 랩과 제작지원 프로그램을 거친 신작들이 포함돼, 한 기관의 지원이 실제 국제영화제 진출로 어떻게 이어지는지를 보여준다. 소개작에는 〈Bedford Park〉, 〈Josephine〉, 〈Ha-Chan Shake Your Booty!〉, 〈Once Upon a Time in Harlem〉, 〈Seventeen〉, 〈Elephants in the Fog〉, 〈The Only Living Pickpocket in New York〉 등이 포함됐다. 선댄스는 단순히 자국 영화제 프로그램을 소개하는 데서 그치지 않고, 지원작이 다른 국제영화제에서 어떤 경로로 관객을 만나는지도 계속 추적하고 있다. TIFF에서 새 목소리를 찾는 관객이라면 좋은 사전 큐레이션으로 활용할 만하다.",
       "tags": [
         "TIFF",
         "Sundance",
         "추천작"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "선댄스 랩·지원 시스템이 실제 국제영화제 라인업으로 연결되는 흐름을 한눈에 볼 수 있다.",
+      "keyPoints": [
+        "TIFF 2026 선댄스 지원작 8편",
+        "랩·제작지원 출신 작품 중심",
+        "국제영화제 간 창작자 이동 경로"
+      ]
     },
     {
       "id": "e3fadc50f987d8",
@@ -69,13 +87,19 @@
       "sourceUrl": "https://www.labiennale.org",
       "titleOriginal": "Biennale Cinema 2026 | Figures for the 83rd Venice International Film Festival",
       "titleKo": "제83회 베니스국제영화제 결산 수치 공개",
-      "summaryKo": "베니스 영화제가 2026년 제83회 행사 주요 통계를 공개했다. 공식 발표에 따르면 유료 관람권 판매는 11만7천여 장으로 전년보다 증가했다.",
+      "summaryKo": "제83회 베니스국제영화제가 2026년 행사 운영과 관객 지표를 공개했다. 공식 발표에 따르면 유료 관람권은 약 11만7천656장으로 전년보다 14% 늘었다. 영화제 등록 인원은 약 1만4천 명, 산업 프로그램인 Venice Production Bridge에는 약 3천 명이 참여했다. 온라인에서도 3천730만 회가 넘는 조회와 73만 건 이상의 상호작용을 기록하며 현장 관객과 디지털 확산이 함께 증가했다. 예술영화 중심의 전통적인 영화제가 여전히 대규모 관객과 산업 관계자를 동시에 끌어들이고 있다는 점이 이번 수치의 핵심이다.",
       "tags": [
         "Venice",
         "영화제결산",
         "관객"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "예술영화 영화제가 극장 관객과 산업 네트워크, 온라인 확산을 동시에 유지하고 있음을 수치로 확인할 수 있다.",
+      "keyPoints": [
+        "유료 관람권 약 11만7천656장",
+        "전년 대비 티켓 판매 14% 증가",
+        "Venice Production Bridge 약 3천 명"
+      ]
     },
     {
       "id": "46634792879411",
@@ -87,13 +111,19 @@
       "sourceUrl": "https://www.labiennale.org",
       "titleOriginal": "Biennale Cinema 2026 | Official awards of the 83rd Venice International Film Festival",
       "titleKo": "제83회 베니스국제영화제 공식 수상 결과 발표",
-      "summaryKo": "제83회 베니스국제영화제가 폐막 시상식에서 국제 심사위원단이 선정한 공식 수상 결과를 발표했다.",
+      "summaryKo": "제83회 베니스국제영화제가 공식 경쟁 부문 수상 결과를 발표했다. 황금사자상은 메이 엘투키 감독의 〈Woman Unknown〉이 받았고, 심사위원대상은 이창동 감독의 〈Possible Love〉에 돌아갔다. 감독상은 〈DAU〉의 일리야 흐르자노프스키가 수상했다. 이번 심사위원단은 배우·감독 매기 질렌할이 이끌었다. 수상 결과는 2026~2027년 예술영화 배급과 각국 시상식 레이스에서 어떤 작품들이 중심에 설지 가늠할 수 있는 중요한 출발점이다.",
       "tags": [
         "Venice",
         "수상작",
         "2026"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "베니스 수상작은 이후 국제 배급과 비평 담론, 시상식 시즌의 흐름을 크게 좌우한다.",
+      "keyPoints": [
+        "황금사자 〈Woman Unknown〉",
+        "심사위원대상 이창동 〈Possible Love〉",
+        "감독상 일리야 흐르자노프스키"
+      ]
     },
     {
       "id": "12cbaaecead888",
@@ -105,13 +135,19 @@
       "sourceUrl": "https://tiff.net",
       "titleOriginal": "Expected talent coming to TIFF ’26",
       "titleKo": "TIFF 2026, 영화제를 찾을 주요 게스트 공개",
-      "summaryKo": "토론토국제영화제가 2026년 영화제에 참석할 예정인 주요 영화인과 게스트 정보를 공개했다.",
+      "summaryKo": "토론토국제영화제가 TIFF 2026에 참석할 예정인 주요 영화인과 게스트 정보를 공개했다. 영화제는 세계 각지의 감독, 배우, 제작자들이 상영과 관객 행사, 산업 프로그램에 참여할 예정이라고 밝혔다. TIFF는 북미 배급과 시상식 시즌의 중요한 출발점이어서 어떤 창작자가 현장을 찾는지 자체가 작품 홍보와 거래에 영향을 준다. 이번 명단은 영화제 프로그램이 단순한 상영을 넘어 감독과 배우의 대화, 업계 미팅, 프리미어 이벤트를 중심으로 작동한다는 점을 보여준다. 실제 참석 여부는 일정에 따라 변동될 수 있어 개별 행사는 공식 일정 확인이 필요하다.",
       "tags": [
         "TIFF",
         "게스트",
         "토론토"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "TIFF의 게스트 라인업은 작품의 북미 공개 전략과 관객 대화, 산업 관심도를 읽는 단서가 된다.",
+      "keyPoints": [
+        "TIFF 2026 주요 게스트 발표",
+        "관객 행사·산업 프로그램 연계",
+        "참석 일정은 변동 가능"
+      ]
     },
     {
       "id": "0210d251a70f0d",
@@ -123,13 +159,19 @@
       "sourceUrl": "https://www.indiewire.com",
       "titleOriginal": "'The Daughters of Abraham' Review: Cultures Collide in TIFF Premiere",
       "titleKo": "〈The Daughters of Abraham〉 리뷰: TIFF 프리미어에서 충돌하는 문화들",
-      "summaryKo": "토론토국제영화제에서 처음 공개된 〈The Daughters of Abraham〉을 두고 서로 다른 문화와 가치가 부딪히는 지점을 짚은 IndieWire 리뷰다.",
+      "summaryKo": "IndieWire가 TIFF에서 처음 공개된 〈The Daughters of Abraham〉을 리뷰했다. 이 글은 작품의 중심에 놓인 서로 다른 문화와 가치 체계의 충돌이 인물 관계를 어떻게 흔드는지에 주목한다. 단순한 ‘문화 차이’의 소개보다, 각 인물이 자신의 배경과 가족·사회적 기대를 어떤 방식으로 협상하는지가 영화의 주요 긴장으로 읽힌다. 리뷰는 영화가 문화적 차이를 쉽게 화해시키기보다 충돌의 불편함을 드러내는 지점을 중심으로 평가한다. TIFF에서 새롭게 공개된 독립영화의 비평적 반응을 빠르게 확인할 수 있는 기사다.",
       "tags": [
         "TIFF",
         "리뷰",
         "문화"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "국제영화제에서 문화적 정체성을 다루는 신작이 어떤 비평 언어로 읽히는지 살펴볼 수 있다.",
+      "keyPoints": [
+        "TIFF 프리미어 리뷰",
+        "문화와 가치의 충돌에 주목",
+        "독립영화 신작 비평 반응"
+      ]
     },
     {
       "id": "7cffa9b49c9100",
@@ -141,13 +183,19 @@
       "sourceUrl": "https://www.indiewire.com",
       "titleOriginal": "'Tender Loving Care' Director Mike Leigh Breaks Down His Process",
       "titleKo": "마이크 리 감독이 밝힌 〈Tender Loving Care〉의 작업 방식",
-      "summaryKo": "마이크 리 감독이 신작 〈Tender Loving Care〉를 중심으로 배우와 장면을 만들어가는 자신의 연출 과정을 설명했다.",
+      "summaryKo": "마이크 리 감독이 신작 〈Tender Loving Care〉를 계기로 자신의 작업 방식을 설명했다. 그는 오랫동안 완성된 각본을 배우에게 그대로 전달하기보다 인물과 상황을 배우들과 함께 발전시키는 독특한 제작 방식으로 알려져 있다. 이번 인터뷰도 결과물보다 인물의 행동과 장면이 어떻게 만들어지는지, 배우와의 협업이 연출 과정에서 어떤 역할을 하는지에 초점을 맞춘다. 마이크 리 영화의 자연스러운 대화와 생활감이 즉흥처럼 보이지만 실제로는 긴 개발과 리허설을 거쳐 만들어진다는 점을 이해하는 데 도움이 된다. 신작 자체뿐 아니라 한 감독의 창작 방법론을 들여다볼 수 있는 기사다.",
       "tags": [
         "MikeLeigh",
         "감독론",
         "IndieWire"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "완성된 영화 뒤에 있는 배우·감독 협업 과정을 이해하면 마이크 리의 연출을 훨씬 구체적으로 볼 수 있다.",
+      "keyPoints": [
+        "마이크 리 신작 작업 과정",
+        "배우와 인물·장면을 발전시키는 방식",
+        "연출 방법론 중심 인터뷰"
+      ]
     },
     {
       "id": "7b92ba0970cded",
@@ -159,13 +207,19 @@
       "sourceUrl": "https://www.indiewire.com",
       "titleOriginal": "‘NAZA,’ Israeli Military Doc from ‘No Other Land’ Directors, Sets Speedy Fall Release in U.S.",
       "titleKo": "〈노 아더 랜드〉 감독들의 군사 다큐 〈NAZA〉, 미국 가을 개봉 확정",
-      "summaryKo": "〈노 아더 랜드〉 공동연출진이 참여한 다큐멘터리 〈NAZA〉가 미국에서 빠른 시일 안에 극장 개봉을 준비한다는 소식이다.",
+      "summaryKo": "〈노 아더 랜드〉 공동연출진이 참여한 이스라엘 군사 다큐멘터리 〈NAZA〉가 미국 극장 개봉 일정을 확정했다. 작품에는 이스라엘 정보기관·군 관련 인물 24명의 인터뷰가 포함돼 군사 시스템 내부의 증언을 전면에 내세운다. 베니스에서 심사위원특별상을 받은 뒤 뉴욕영화제에서 공개되고, 9월30일 뉴욕 IFC 센터를 시작으로 10월9일 로스앤젤레스와 주요 도시, 이후 전국으로 확대될 예정이다. 〈노 아더 랜드〉의 유발 아브라함 등 관련 창작진이 다시 정치적 현실과 기록의 윤리를 다룬다는 점에서 관심이 크다. 조너선 글레이저가 총괄프로듀서로 참여했고, 영화제 화제작이 빠르게 미국 배급으로 이어지는 사례이기도 하다.",
       "tags": [
         "NAZA",
         "다큐멘터리",
         "배급"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "국제영화제의 정치 다큐가 짧은 시간 안에 미국 극장 배급으로 연결되는 흐름과 제작진의 연속성을 함께 볼 수 있다.",
+      "keyPoints": [
+        "베니스 심사위원특별상",
+        "미국 9월30일부터 순차 개봉",
+        "군·정보기관 관련 24명 인터뷰"
+      ]
     },
     {
       "id": "4b6dfc07bbbe84",
@@ -177,13 +231,19 @@
       "sourceUrl": "https://www.screendaily.com",
       "titleOriginal": "UK-Ireland box office preview: Can Zach Cregger’s ‘Resident Evil’ reach ‘Weapons’ heights?",
       "titleKo": "영국·아일랜드 박스오피스 전망: 신작 〈Resident Evil〉의 흥행 가능성",
-      "summaryKo": "Screen Daily가 영국·아일랜드 주말 박스오피스를 앞두고 주요 개봉작의 흥행 전망을 짚었다.",
+      "summaryKo": "Screen Daily가 영국·아일랜드 주말 박스오피스를 앞두고 주요 신작의 출발 조건을 정리했다. 관심작 가운데 하나는 잭 크레거의 〈Resident Evil〉로, 전작 〈Weapons〉의 흥행 수준에 접근할 수 있을지가 관전 포인트로 제시됐다. 가족 관객을 겨냥한 〈Shaun the Sheep: Beast of Mossy Bottom〉도 647개 상영관 규모로 개봉하며 시장을 나눠 가진다. 프리뷰 매출과 상영관 수, 기존 시리즈 성적을 함께 비교해 주말 성적을 전망하는 산업 기사다. 예술영화 중심 뉴스와는 결이 다르지만, 독립·중간예산 작품이 실제 배급 시장에서 어떤 경쟁 환경을 만나는지 이해하는 참고 자료가 된다.",
       "tags": [
         "박스오피스",
         "영국영화시장",
         "ScreenDaily"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "영화의 평가와 별개로 실제 배급 규모와 경쟁작이 흥행을 어떻게 좌우하는지 볼 수 있다.",
+      "keyPoints": [
+        "〈Resident Evil〉 흥행 전망",
+        "〈Shaun the Sheep〉 647개관 개봉",
+        "영국·아일랜드 주말 시장 분석"
+      ]
     },
     {
       "id": "436258d2a8fb4e",
@@ -195,13 +255,19 @@
       "sourceUrl": "https://www.screendaily.com",
       "titleOriginal": "Killer Films co-heads talk mid-budget films, Todd Haynes, and their director golden rule at TIFF",
       "titleKo": "Killer Films 공동대표가 말하는 중간예산 영화와 토드 헤인즈, 그리고 감독 선택의 원칙",
-      "summaryKo": "TIFF 현장에서 Killer Films 공동대표들이 중간예산 영화 제작, 토드 헤인즈와의 협업, 감독을 선택하는 기준을 이야기했다.",
+      "summaryKo": "Killer Films 공동대표 크리스틴 버천과 파멜라 코플러가 TIFF 마켓에서 현재 독립제작 환경을 이야기했다. 두 사람은 성인 관객을 겨냥한 중간예산 드라마를 제작하고 극장에 올리는 일이 여전히 어렵다고 진단했다. 동시에 최근 〈Materialists〉 같은 작품의 성과를 예로 들며 관객이 사라진 것이 아니라 적절한 작품과 배급 방식이 필요하다고 설명했다. 감독을 선택할 때는 아이디어의 규모와 제작 가능성뿐 아니라 실제 협업 관계를 만들 수 있는 사람인가를 중요하게 본다는 원칙도 언급했다. 토드 헤인즈와 장기간 작업해온 Killer Films의 경험을 통해 독립제작사가 감독과 어떤 방식으로 관계를 구축하는지 확인할 수 있는 대담이다.",
       "tags": [
         "TIFF",
         "KillerFilms",
         "제작"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "중간예산 영화가 줄어드는 시장에서 독립 제작사가 어떤 기준으로 프로젝트와 감독을 선택하는지 직접 들을 수 있다.",
+      "keyPoints": [
+        "중간예산 드라마 제작의 어려움",
+        "감독과의 지속 가능한 협업 중시",
+        "Killer Films의 TIFF 산업 대담"
+      ]
     },
     {
       "id": "1a742481861559",
@@ -213,13 +279,19 @@
       "sourceUrl": "https://www.indiewire.com",
       "titleOriginal": "‘Up Against It’ Review: An Uneven Medical Dramedy Relies on Sincerity to Mask Its Flaws",
       "titleKo": "〈Up Against It〉 리뷰: 진정성에 기대는 불균형한 메디컬 드라메디",
-      "summaryKo": "IndieWire가 〈Up Against It〉을 두고 진정성은 있지만 완성도의 기복이 있는 메디컬 드라메디로 평가한 리뷰다.",
+      "summaryKo": "IndieWire가 메디컬 드라메디 〈Up Against It〉을 리뷰하며 작품의 장점과 한계를 함께 짚었다. 리뷰는 영화가 인물과 상황을 대하는 진정성에는 호의적이지만, 장르의 톤과 에피소드 구성에서는 고르지 못한 부분이 있다고 평가한다. 코미디와 드라마가 교차하는 작품일수록 웃음과 감정의 균형이 중요하지만, 이 영화는 그 연결이 항상 매끄럽지는 않다는 지적이다. 그럼에도 배우와 인물에 대한 호감, 감정의 솔직함이 약점을 일정 부분 상쇄한다고 본다. 영화제 신작이 공개 직후 어떤 비평적 평가를 받는지 확인할 수 있는 초기 반응 중 하나다.",
       "tags": [
         "리뷰",
         "독립영화",
         "IndieWire"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "호의와 비판이 동시에 존재하는 리뷰를 통해 영화제 화제작을 홍보 문구가 아니라 실제 비평 관점에서 볼 수 있다.",
+      "keyPoints": [
+        "메디컬 드라메디 신작 리뷰",
+        "진정성은 강점",
+        "톤·완성도의 기복은 약점"
+      ]
     },
     {
       "id": "5f71c522b1c85e",
@@ -231,13 +303,19 @@
       "sourceUrl": "https://homegrown.co.in",
       "titleOriginal": "Indian Cinema Takes Centre Stage At The 31st Busan International Film Festival",
       "titleKo": "제31회 부산국제영화제에서 주목받는 인도 영화",
-      "summaryKo": "제31회 부산국제영화제에서 인도 영화와 영화인들의 존재감이 커지고 있다는 현지 매체의 소개다.",
+      "summaryKo": "제31회 부산국제영화제에서 인도 영화와 영화인들의 존재감이 확대되고 있다는 현지 매체의 보도다. 기사에서는 인도 영화가 단순한 지역 소개를 넘어 아시아 영화 프로그램과 국제 교류의 한 축으로 자리 잡고 있다는 흐름을 강조한다. 부산은 오랫동안 아시아 신인 감독과 다양한 지역영화를 발굴해온 영화제인 만큼, 인도 독립영화의 참여 확대는 프로그램의 지리적 폭을 보여주는 지표이기도 하다. 인도 영화산업 내부에서도 상업영화와 별개로 독립·지역 영화가 국제영화제를 통해 관객을 넓히는 경로가 중요해지고 있다. 구체적인 상영작과 행사 일정은 BIFF 공식 프로그램에서 최종 확인하는 것이 좋다.",
       "tags": [
         "BIFF",
         "인도영화",
         "아시아영화"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "한국 관객이 인도영화를 대형 상업영화 밖의 독립·지역 영화 흐름으로 만날 수 있는 통로를 보여준다.",
+      "keyPoints": [
+        "제31회 BIFF 인도영화 조명",
+        "아시아 영화 교류 확대",
+        "상영작은 BIFF 공식 일정 확인 필요"
+      ]
     },
     {
       "id": "f6ae0dd13235d3",
@@ -249,13 +327,19 @@
       "sourceUrl": "https://www.koreatimes.co.kr",
       "titleOriginal": "Busan film fest, Netflix expand Creative Asia workshop to record scale",
       "titleKo": "부산국제영화제·넷플릭스, ‘Creative Asia’ 워크숍 역대 최대 규모로 확대",
-      "summaryKo": "부산국제영화제와 넷플릭스가 아시아 창작자 지원 프로그램 ‘Creative Asia’ 워크숍을 확대한다는 소식이다.",
+      "summaryKo": "부산국제영화제와 넷플릭스가 아시아 창작자 지원 프로그램 ‘Creative Asia’의 규모를 역대 최대로 확대한다. 올해 프로그램은 10월10일 동서대학교 센텀캠퍼스에서 열리며 AFCNet, 미국영화협회(MPA) 등과 협력한다. 촬영, 스토리텔링, 로케이션 스카우팅 관련 마스터클래스와 제작 예산·AI를 다루는 세션이 포함된다. 특히 넷플릭스 콘텐츠 실무자와 함께하는 실습형 워크숍이 처음 도입돼 단순 강연보다 실제 제작 과정에 가까운 프로그램으로 확장됐다. BIFF가 상영 중심 영화제를 넘어 아시아 신진 창작자의 교육·산업 네트워크까지 넓히고 있다는 점이 핵심이다.",
       "tags": [
         "BIFF",
         "Netflix",
         "CreativeAsia"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "아시아 독립 창작자에게 국제영화제와 글로벌 플랫폼이 실제 제작 교육과 네트워크를 제공하는 방식이 구체화되고 있다.",
+      "keyPoints": [
+        "10월10일 동서대 센텀캠퍼스",
+        "넷플릭스 실습형 워크숍 신설",
+        "촬영·스토리·예산·AI 세션"
+      ]
     },
     {
       "id": "74973f5e3c32f2",
@@ -267,13 +351,19 @@
       "sourceUrl": "https://www.indiatodayne.in",
       "titleOriginal": "Assam filmmaker Bobby Sarma Baruah joins Venice jury for Asian cinema",
       "titleKo": "아삼 감독 보비 사르마 바루아, 아시아영화 관련 베니스 심사위원 참여",
-      "summaryKo": "인도 아삼 출신 감독 보비 사르마 바루아가 아시아 영화 관련 베니스 심사 활동에 참여한다는 소식이다.",
+      "summaryKo": "인도 아삼 출신 감독 보비 사르마 바루아가 베니스영화제의 아시아영화 관련 NETPAC 심사위원단에 참여했다. 심사위원단은 필리핀의 에드 레자노와 키르기스스탄의 아셀 셰르니야조바 등 세 명으로 구성됐다. NETPAC은 아시아 영화를 국제무대에서 발굴하고 소개해온 네트워크로, 심사위원 구성 자체가 각 지역 영화계의 연결을 보여준다. 인도 북동부처럼 국제 배급에서 상대적으로 덜 조명된 지역의 영화인이 베니스 심사에 참여한다는 점도 의미가 있다. 아시아 영화가 하나의 단일한 시장이 아니라 서로 다른 지역과 언어권의 네트워크라는 사실을 환기하는 소식이다.",
       "tags": [
         "Venice",
         "아시아영화",
         "인도영화"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "국제영화제의 ‘아시아 영화’가 어떤 지역 전문가들의 시선으로 평가되는지 보여주는 사례다.",
+      "keyPoints": [
+        "보비 사르마 바루아 NETPAC 심사 참여",
+        "3인 국제 심사위원단",
+        "아시아 지역영화 네트워크"
+      ]
     },
     {
       "id": "6c6407be8d2584",
@@ -285,13 +375,19 @@
       "sourceUrl": "https://indiantelevision.com",
       "titleOriginal": "Tokyo Film Festival adds new awards and Asia-focused section",
       "titleKo": "도쿄국제영화제, 새 시상 부문과 아시아 중심 섹션 신설",
-      "summaryKo": "도쿄국제영화제가 새로운 상과 아시아 영화를 집중 조명하는 프로그램을 추가한다는 소식이다.",
+      "summaryKo": "도쿄국제영화제가 제39회 행사를 앞두고 시상과 프로그램 구성을 확대한다. 일본영화를 소개하는 Nippon Cinema Now에는 작품상과 심사위원특별상 등 새로운 상이 마련된다. 동시에 동남아시아 영화를 집중 조명하는 신규 섹션이 추가돼 아시아 지역 프로그램의 범위가 넓어진다. 영화문화에 기여한 여성 창작자와 인물을 조명하는 새로운 시상도 도입될 예정이다. 경쟁부문 중심의 전통적인 영화제 구조에서 벗어나 일본영화와 동남아시아, 영화문화의 다양성을 보다 적극적으로 드러내려는 변화로 읽힌다.",
       "tags": [
         "TIFF Tokyo",
         "아시아영화",
         "신설부문"
       ],
-      "translationStatus": "translated-reviewed"
+      "translationStatus": "translated-reviewed",
+      "whyItMatters": "도쿄영화제가 자국영화 소개와 동남아시아 영화 발굴, 다양성 시상을 동시에 강화하고 있다는 구조적 변화다.",
+      "keyPoints": [
+        "Nippon Cinema Now 신규 시상",
+        "동남아시아 중심 새 섹션",
+        "여성 영화문화 기여자 시상 신설"
+      ]
     }
   ]
 }
