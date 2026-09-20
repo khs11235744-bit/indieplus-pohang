@@ -2,7 +2,8 @@ const communityPosts=()=>JSON.parse(localStorage.getItem("indiePohangCommunity")
 const saveCommunity=a=>localStorage.setItem("indiePohangCommunity",JSON.stringify(a));
 const magazineArchive=()=>JSON.parse(localStorage.getItem("indiePohangMagazines")||"[]");
 const saveMagazines=a=>localStorage.setItem("indiePohangMagazines",JSON.stringify(a));
-let v05Share={preset:"cinema",format:"feed",rating:0,tags:[],stamp:"",stillIndex:0,stillIndices:[0],layout:"auto",activePhoto:0,frames:[],textScale:1,textAlign:"left"};
+let v05Share={preset:"cinema",format:"feed",rating:0,tags:[],stamp:"",stillIndex:0,stillIndices:[0],layout:"auto",activePhoto:0,frames:[],textAlign:"left",titleScale:1,midScale:1,reviewScale:1,copyOffset:0};
+let shareGestureV05={pointers:new Map(),drag:null,pinch:null};
 
 function userProfile(){
   const p=profile();
@@ -53,7 +54,13 @@ function presetStyle(name){
     minimal:{bg:"#f7f7f3",text:"#111214",muted:"#73777d",accent:"#111214"},
     festival:{bg:"#f7f3e8",text:"#161616",muted:"#746f65",accent:"#1d4b78"},
     noir:{bg:"#050505",text:"#f0eee7",muted:"#777777",accent:"#e6e6e6"},
-    postcard:{bg:"#e8ded0",text:"#1d1a17",muted:"#71685f",accent:"#9c372f"}
+    postcard:{bg:"#e8ded0",text:"#1d1a17",muted:"#71685f",accent:"#9c372f"},
+    editorial:{bg:"#f0ede5",text:"#171717",muted:"#67625b",accent:"#a21d16"},
+    contact:{bg:"#0a0a0a",text:"#f4f0e6",muted:"#99958b",accent:"#f0c14b"},
+    split:{bg:"#0c1520",text:"#f3f6f8",muted:"#8796a6",accent:"#55d6ff"},
+    gallery:{bg:"#fbfaf6",text:"#171717",muted:"#77736e",accent:"#7670a8"},
+    neon:{bg:"#100a19",text:"#fff6ff",muted:"#b69bc2",accent:"#ff49c8"},
+    classic:{bg:"#ece3d2",text:"#241d17",muted:"#766b5f",accent:"#7e2f27"}
   };return map[name]||map.cinema;
 }
 function shareMediaV05(code){
@@ -86,23 +93,29 @@ async function makeShareBlobV05(code,opts={}){
   const m=MOVIES[code],format=opts.format||"feed",dims=format==="story"?[1080,1920]:format==="square"?[1080,1080]:[1080,1350];
   const [w,h]=dims,canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;const ctx=canvas.getContext("2d"),sty=presetStyle(opts.preset||"cinema"),media=shareMediaV05(code);
   ctx.fillStyle=sty.bg;ctx.fillRect(0,0,w,h);
-  const magazine=opts.preset==="magazine",ticket=opts.preset==="ticket",film=opts.preset==="filmstrip",noir=opts.preset==="noir",postcard=opts.preset==="postcard",festival=opts.preset==="festival";
-  const imageH=magazine?Math.round(h*.48):ticket?Math.round(h*.41):postcard?Math.round(h*.50):Math.round(h*.56);
-  ctx.save();if(noir)ctx.filter="grayscale(1) contrast(1.28)";await drawShareCollageV05(ctx,media,opts,0,0,w,imageH);ctx.restore();
-  if(film){ctx.fillStyle="#050505";for(let yy=18;yy<imageH;yy+=58){ctx.fillRect(10,yy,24,34);ctx.fillRect(w-34,yy,24,34)}}
+  const preset=opts.preset||"cinema",magazine=preset==="magazine",ticket=preset==="ticket",film=preset==="filmstrip",noir=preset==="noir",postcard=preset==="postcard",festival=preset==="festival",editorialP=preset==="editorial",contactP=preset==="contact",splitP=preset==="split",galleryP=preset==="gallery",neonP=preset==="neon",classicP=preset==="classic";
+  const imageH=Math.round(h*(ticket?.41:magazine?.48:postcard?.50:editorialP?.46:galleryP?.49:classicP?.47:contactP?.58:splitP?.52:.56));
+  ctx.save();if(noir)ctx.filter="grayscale(1) contrast(1.28)";if(contactP)ctx.filter="contrast(1.08) saturate(.88)";await drawShareCollageV05(ctx,media,opts,0,0,w,imageH);ctx.restore();
+  if(film||contactP){ctx.fillStyle=contactP?sty.accent:"#050505";for(let y=18;y<imageH;y+=58){ctx.fillRect(10,y,24,34);ctx.fillRect(w-34,y,24,34)}}
   if(festival){ctx.strokeStyle=sty.accent;ctx.lineWidth=10;ctx.strokeRect(24,24,w-48,imageH-48)}
   if(postcard){ctx.strokeStyle="rgba(255,255,255,.72)";ctx.lineWidth=22;ctx.strokeRect(34,34,w-68,imageH-68)}
-  if(!magazine&&!ticket){const g=ctx.createLinearGradient(0,imageH*.48,0,imageH+155);g.addColorStop(0,"rgba(9,10,11,0)");g.addColorStop(1,sty.bg);ctx.fillStyle=g;ctx.fillRect(0,imageH*.35,w,imageH*.78)}
-  const pad=Math.round(w*.07),top=imageH+Math.round(h*.032),scale=Math.max(.75,Math.min(1.45,Number(opts.textScale)||1)),align=opts.textAlign||"left",tx=align==="center"?w/2:align==="right"?w-pad:pad,maxTextW=w-pad*2;
-  ctx.textAlign=align;ctx.fillStyle=sty.accent;ctx.font="900 "+Math.round(w*.025*scale)+"px Pretendard, sans-serif";
-  ctx.fillText(magazine?"INDIE PORT JOURNAL":ticket?"ADMIT ONE · INDIE PORT":festival?"FESTIVAL PROGRAM":noir?"NOIR FILE":postcard?"MOVIE POSTCARD":"INDIE PORT · from INDIEPLUS POHANG",tx,top);
-  ctx.fillStyle=sty.text;ctx.font="900 "+Math.round(w*(magazine?.064:.058)*scale)+"px Pretendard, sans-serif";
-  const titleLines=wrapLines(ctx,m.title,maxTextW,2);titleLines.forEach((line,i)=>ctx.fillText(line,tx,top+72+i*Math.round(68*scale)));
-  let yy=top+72+titleLines.length*Math.round(68*scale)+24;const rating=Number(opts.rating||0);
-  if(rating){ctx.fillStyle=sty.accent;ctx.font="800 "+Math.round(w*.029*scale)+"px Pretendard, sans-serif";ctx.fillText("★ "+rating.toFixed(1)+" / 5",tx,yy);yy+=Math.round(50*scale)}
-  const quote=opts.text||editorial.oneLiners?.[code]||m.short||"";ctx.fillStyle=sty.text;ctx.font=(magazine?"600 ":"700 ")+Math.round(w*.031*scale)+"px Pretendard, sans-serif";
-  const qLines=wrapLines(ctx,magazine?quote:"“"+quote+"”",maxTextW,format==="story"?9:format==="square"?4:6);qLines.forEach((line,i)=>ctx.fillText(line,tx,yy+i*Math.round(45*scale)));yy+=qLines.length*Math.round(45*scale)+20;
-  const tags=(opts.tags||[]).slice(0,8).map(t=>"#"+String(t).replace(/^#/,"")).join("  ");if(tags){ctx.fillStyle=sty.muted;ctx.font="700 "+Math.round(w*.020*scale)+"px Pretendard, sans-serif";ctx.fillText(tags,tx,Math.min(yy,h-pad*1.7))}
+  if(editorialP){ctx.fillStyle=sty.accent;ctx.fillRect(0,0,w,12);ctx.fillRect(Math.round(w*.07),imageH-8,Math.round(w*.24),8)}
+  if(splitP){ctx.fillStyle=sty.accent;ctx.fillRect(w-18,0,18,imageH)}
+  if(galleryP){ctx.strokeStyle="#ffffff";ctx.lineWidth=24;ctx.strokeRect(28,28,w-56,imageH-56);ctx.strokeStyle=sty.accent;ctx.lineWidth=3;ctx.strokeRect(42,42,w-84,imageH-84)}
+  if(neonP){ctx.save();ctx.shadowColor=sty.accent;ctx.shadowBlur=28;ctx.strokeStyle=sty.accent;ctx.lineWidth=5;ctx.strokeRect(24,24,w-48,imageH-48);ctx.restore()}
+  if(classicP){ctx.strokeStyle=sty.accent;ctx.lineWidth=3;ctx.strokeRect(30,30,w-60,imageH-60);ctx.strokeRect(42,42,w-84,imageH-84)}
+  if(!magazine&&!ticket&&!editorialP&&!galleryP&&!classicP){const g=ctx.createLinearGradient(0,imageH*.48,0,imageH+155);g.addColorStop(0,"rgba(9,10,11,0)");g.addColorStop(1,sty.bg);ctx.fillStyle=g;ctx.fillRect(0,imageH*.35,w,imageH*.78)}
+  const pad=Math.round(w*.07),align=opts.textAlign||"left",tx=align==="center"?w/2:align==="right"?w-pad:pad,maxTextW=w-pad*2,top=imageH+Math.round(h*.032)+Math.round(h*Math.max(-.15,Math.min(.2,Number(opts.copyOffset)||0)));
+  const titleScale=Math.max(.7,Math.min(1.5,Number(opts.titleScale)||1)),midScale=Math.max(.7,Math.min(1.5,Number(opts.midScale)||1)),reviewScale=Math.max(.7,Math.min(1.5,Number(opts.reviewScale)||1)),serif=magazine||editorialP||postcard||classicP;
+  const header=magazine?"INDIE PORT JOURNAL":ticket?"ADMIT ONE · INDIE PORT":festival?"FESTIVAL PROGRAM":noir?"NOIR FILE":postcard?"MOVIE POSTCARD":editorialP?"EDITORIAL":contactP?"CONTACT SHEET":splitP?"SPLIT SCREEN":galleryP?"GALLERY NOTE":neonP?"NEON CINEMA":classicP?"CLASSIC REVIEW":"INDIE PORT · CINEMA CARD";
+  ctx.textAlign=align;ctx.fillStyle=sty.accent;ctx.font="900 "+Math.round(w*.024)+"px Pretendard, sans-serif";ctx.fillText(header,tx,top);
+  const title=opts.title||m.title||"";ctx.fillStyle=sty.text;ctx.font="900 "+Math.round(w*(serif?.062:.058)*titleScale)+"px "+(serif?'Georgia, "Noto Serif KR", serif':'Pretendard, sans-serif');
+  const titleGap=Math.round(w*.064*titleScale),titleLines=wrapLines(ctx,title,maxTextW,2);titleLines.forEach((line,i)=>ctx.fillText(line,tx,top+68+i*titleGap));
+  let yy=top+68+titleLines.length*titleGap+16;
+  const mid=opts.mid||"";if(mid){ctx.fillStyle=sty.muted;ctx.font="700 "+Math.round(w*.026*midScale)+"px Pretendard, sans-serif";const midGap=Math.round(w*.036*midScale),midLines=wrapLines(ctx,mid,maxTextW,2);midLines.forEach((line,i)=>ctx.fillText(line,tx,yy+i*midGap));yy+=midLines.length*midGap+18}
+  const rating=Number(opts.rating||0);if(rating){ctx.fillStyle=sty.accent;ctx.font="800 "+Math.round(w*.027)+"px Pretendard, sans-serif";ctx.fillText("★ "+rating.toFixed(1)+" / 5",tx,yy);yy+=46}
+  const review=opts.text||editorial.oneLiners?.[code]||m.short||"";if(review){ctx.fillStyle=sty.text;ctx.font=(serif?"600 ":"700 ")+Math.round(w*.029*reviewScale)+"px "+(serif?'Georgia, "Noto Serif KR", serif':'Pretendard, sans-serif');const lineGap=Math.round(w*.041*reviewScale),reviewLines=wrapLines(ctx,review,maxTextW,format==="story"?9:format==="square"?4:6);reviewLines.forEach((line,i)=>ctx.fillText(line,tx,yy+i*lineGap));yy+=reviewLines.length*lineGap+18}
+  const tags=(opts.tags||[]).slice(0,8).map(t=>"#"+String(t).replace(/^#/,"")).join("  ");if(tags){ctx.fillStyle=sty.muted;ctx.font="700 "+Math.round(w*.019)+"px Pretendard, sans-serif";ctx.fillText(tags,tx,Math.min(yy,h-pad*1.7))}
   if(opts.stamp){ctx.save();ctx.translate(w-pad*1.55,h-pad*1.25);ctx.rotate(-.12);ctx.strokeStyle=sty.accent;ctx.lineWidth=6;ctx.strokeRect(-150,-48,300,96);ctx.fillStyle=sty.accent;ctx.font="900 "+Math.round(w*.027)+"px Pretendard, sans-serif";ctx.textAlign="center";ctx.fillText(opts.stamp,0,12);ctx.restore()}
   ctx.fillStyle=sty.muted;ctx.font="600 "+Math.round(w*.018)+"px Pretendard, sans-serif";ctx.textAlign="left";ctx.fillText("indieplus pohang · cinema diary",pad,h-pad*.55);
   return await new Promise(resolve=>canvas.toBlob(resolve,"image/png",.96));
@@ -118,62 +131,64 @@ function openSharePanelV05(code,postId=""){
       '<div class="preset-row" id="presetRow"></div><div class="share-formats" id="formatRow"><button data-format="feed" class="on">4:5 피드</button><button data-format="story">9:16 스토리</button><button data-format="square">1:1</button></div>'+
       '<div class="share-photo-title"><b>사진 선택</b><span id="sharePhotoCount">1 / 5</span></div><div class="still-picker multi" id="stillPicker"></div><div class="share-photo-order" id="sharePhotoOrder"></div>'+
       '<div class="share-layout-row"><button data-share-layout="auto" class="on">자동 콜라주</button><button data-share-layout="free">자유편집</button></div>'+
+      '<div class="share-gesture-wrap"><div class="share-gesture-head"><b>손가락 직접편집</b><small>사진을 끌어 이동 · 두 손가락으로 확대/축소</small></div><div class="share-gesture-stage" id="shareGestureStage"></div></div>'+
       '<div class="share-free-editor" id="shareFreeEditor"><div class="free-photo-head"><b id="freePhotoLabel">사진 1 편집</b><button id="resetFreeFrames" type="button">자동 위치로 초기화</button></div><label>X <input id="freeX" type="range" min="0" max="100" step="1"></label><label>Y <input id="freeY" type="range" min="0" max="100" step="1"></label><label>너비 <input id="freeW" type="range" min="18" max="100" step="1"></label><label>높이 <input id="freeH" type="range" min="18" max="100" step="1"></label></div>'+
-      '<textarea id="shareTextV05" maxlength="700" placeholder="공유할 글을 자유롭게 입력"></textarea><div class="share-text-tools"><label>글자 크기 <input id="shareTextScale" type="range" min="75" max="145" step="5" value="100"></label><div><button data-text-align="left" class="on">왼쪽</button><button data-text-align="center">가운데</button><button data-text-align="right">오른쪽</button></div></div>'+
+      '<div class="share-copy-editor"><label>큰 제목<input id="shareTitleV05" maxlength="70" placeholder="큰 제목"></label><label>중간글<input id="shareMidV05" maxlength="120" placeholder="중간 문장 · 부제 · 감독/작품 정보"></label><label>짧은 비평<textarea id="shareTextV05" maxlength="700" placeholder="짧은 비평"></textarea></label></div><div class="share-text-tools"><label>큰 제목 크기<input id="shareTitleScale" type="range" min="70" max="150" step="5" value="100"></label><label>중간글 크기<input id="shareMidScale" type="range" min="70" max="150" step="5" value="100"></label><label>비평 크기<input id="shareReviewScale" type="range" min="70" max="150" step="5" value="100"></label><label>문구 위치<input id="shareCopyOffset" type="range" min="-15" max="20" step="1" value="0"></label><div><button data-text-align="left" class="on">왼쪽</button><button data-text-align="center">가운데</button><button data-text-align="right">오른쪽</button></div></div>'+
       '<div class="share-options"><label>별점 <input id="shareRating" type="range" min="0" max="5" step="0.5" value="0"><b id="shareRatingValue">0.0</b></label><label>태그 <input id="shareTags" type="text" placeholder="#독립영화 #포항 #오늘의영화"></label><label>도장 <select id="shareStamp"><option value="">없음</option><option>관람완료</option><option>강력추천</option><option>GV 참석</option><option>재관람</option><option>포항관객</option></select></label></div>'+
       '<div class="share-preview"><img id="sharePreviewV05" alt="공유카드 미리보기"></div><div class="share-actions"><button class="primary" id="nativeShareV05">SNS로 공유</button><button class="ghostbtn" id="saveShareV05">이미지 저장</button><button class="ghostbtn" id="magazineSaveV05">긴 비평 쓰기</button></div><small>선택한 1~5장의 사진과 편집 상태가 그대로 PNG·SNS 공유에 반영됩니다.</small></div>';
     document.body.appendChild(panel);
     document.getElementById("closeShareV05").onclick=()=>panel.classList.remove("open");
     panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("open")});
-    document.getElementById("presetRow").innerHTML=[["cinema","Cinema"],["magazine","Magazine"],["ticket","Ticket"],["filmstrip","Filmstrip"],["minimal","Minimal"],["festival","Festival"],["noir","Noir"],["postcard","Postcard"]].map(([k,n],i)=>'<button data-preset="'+k+'" class="'+(i?"":"on")+'">'+n+'</button>').join("");
+    document.getElementById("presetRow").innerHTML=[["cinema","Cinema"],["magazine","Magazine"],["ticket","Ticket"],["filmstrip","Filmstrip"],["minimal","Minimal"],["festival","Festival"],["noir","Noir"],["postcard","Postcard"],["editorial","Editorial"],["contact","Contact Sheet"],["split","Split"],["gallery","Gallery"],["neon","Neon"],["classic","Classic"]].map(([k,n],i)=>'<button data-preset="'+k+'" class="'+(i?"":"on")+'">'+n+'</button>').join("");
     panel.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{panel.querySelectorAll("[data-preset]").forEach(x=>x.classList.remove("on"));b.classList.add("on");v05Share.preset=b.dataset.preset;refreshV05Preview()});
     panel.querySelectorAll("[data-format]").forEach(b=>b.onclick=()=>{panel.querySelectorAll("[data-format]").forEach(x=>x.classList.remove("on"));b.classList.add("on");v05Share.format=b.dataset.format;refreshV05Preview()});
-    panel.querySelectorAll("[data-share-layout]").forEach(b=>b.onclick=()=>{v05Share.layout=b.dataset.shareLayout;panel.querySelectorAll("[data-share-layout]").forEach(x=>x.classList.toggle("on",x===b));if(v05Share.layout==="free"&&!v05Share.frames.length)v05Share.frames=shareDefaultFramesV05(v05Share.stillIndices.length);syncFreeEditorV05();refreshV05Preview()});
+    panel.querySelectorAll("[data-share-layout]").forEach(b=>b.onclick=()=>{v05Share.layout=b.dataset.shareLayout;panel.querySelectorAll("[data-share-layout]").forEach(x=>x.classList.toggle("on",x===b));if(v05Share.layout==="free"&&!v05Share.frames.length)v05Share.frames=shareDefaultFramesV05(v05Share.stillIndices.length);syncFreeEditorV05();renderGestureStageV05();refreshV05Preview()});
     panel.querySelectorAll("[data-text-align]").forEach(b=>b.onclick=()=>{v05Share.textAlign=b.dataset.textAlign;panel.querySelectorAll("[data-text-align]").forEach(x=>x.classList.toggle("on",x===b));refreshV05Preview()});
-    ["shareTextV05","shareTags","shareStamp"].forEach(id=>document.getElementById(id).addEventListener("input",debounceV05Preview));
-    document.getElementById("shareTextScale").addEventListener("input",e=>{v05Share.textScale=Number(e.target.value)/100;debounceV05Preview()});
+    ["shareTitleV05","shareMidV05","shareTextV05","shareTags","shareStamp"].forEach(id=>document.getElementById(id).addEventListener("input",debounceV05Preview));
+    document.getElementById("shareTitleScale").addEventListener("input",e=>{v05Share.titleScale=Number(e.target.value)/100;debounceV05Preview()});document.getElementById("shareMidScale").addEventListener("input",e=>{v05Share.midScale=Number(e.target.value)/100;debounceV05Preview()});document.getElementById("shareReviewScale").addEventListener("input",e=>{v05Share.reviewScale=Number(e.target.value)/100;debounceV05Preview()});document.getElementById("shareCopyOffset").addEventListener("input",e=>{v05Share.copyOffset=Number(e.target.value)/100;debounceV05Preview()});
     ["freeX","freeY","freeW","freeH"].forEach(id=>document.getElementById(id).addEventListener("input",updateFreeFrameV05));
-    document.getElementById("resetFreeFrames").onclick=()=>{v05Share.frames=shareDefaultFramesV05(v05Share.stillIndices.length);syncFreeEditorV05();refreshV05Preview()};
+    document.getElementById("resetFreeFrames").onclick=()=>{v05Share.frames=shareDefaultFramesV05(v05Share.stillIndices.length);syncFreeEditorV05();renderGestureStageV05();refreshV05Preview()};
+    bindGestureStageV05();
     document.getElementById("shareRating").addEventListener("input",e=>{document.getElementById("shareRatingValue").textContent=Number(e.target.value).toFixed(1);debounceV05Preview()});
     document.getElementById("nativeShareV05").onclick=shareV05;
     document.getElementById("saveShareV05").onclick=downloadV05;
     document.getElementById("magazineSaveV05").onclick=()=>{panel.classList.remove("open");openMagazineStudioV2(null)};
   }
   const txt=post?.body||latestReviewText(code)||editorial.oneLiners?.[code]||m.short||"";
-  document.getElementById("shareTextV05").value=txt;
+  document.getElementById("shareTitleV05").value=m.title||"";document.getElementById("shareMidV05").value=m.director?("감독 "+m.director):"";document.getElementById("shareTextV05").value=txt;
   document.getElementById("shareRating").value=post?.rating||0;document.getElementById("shareRatingValue").textContent=Number(post?.rating||0).toFixed(1);
   document.getElementById("shareTags").value=(post?.tags||[]).map(t=>"#"+t).join(" ");
   document.getElementById("shareStamp").value="";
-  v05Share={preset:"cinema",format:"feed",rating:Number(post?.rating||0),tags:post?.tags||[],stamp:"",stillIndex:0,stillIndices:[0],layout:"auto",activePhoto:0,frames:shareDefaultFramesV05(1),textScale:1,textAlign:"left"};
-  document.getElementById("shareTextScale").value=100;
+  v05Share={preset:"cinema",format:"feed",rating:Number(post?.rating||0),tags:post?.tags||[],stamp:"",stillIndex:0,stillIndices:[0],layout:"auto",activePhoto:0,frames:shareDefaultFramesV05(1),textAlign:"left",titleScale:1,midScale:1,reviewScale:1,copyOffset:0};
+  document.getElementById("shareTitleScale").value=100;document.getElementById("shareMidScale").value=100;document.getElementById("shareReviewScale").value=100;document.getElementById("shareCopyOffset").value=0;
   panel.querySelectorAll("[data-preset]").forEach(x=>x.classList.toggle("on",x.dataset.preset==="cinema"));panel.querySelectorAll("[data-format]").forEach(x=>x.classList.toggle("on",x.dataset.format==="feed"));
   panel.querySelectorAll("[data-share-layout]").forEach(x=>x.classList.toggle("on",x.dataset.shareLayout==="auto"));panel.querySelectorAll("[data-text-align]").forEach(x=>x.classList.toggle("on",x.dataset.textAlign==="left"));
-  renderStillPicker(code);renderPhotoOrderV05();syncFreeEditorV05();panel.classList.add("open");refreshV05Preview();
+  renderStillPicker(code);renderPhotoOrderV05();syncFreeEditorV05();renderGestureStageV05();panel.classList.add("open");refreshV05Preview();
 }
 function debounceV05Preview(){clearTimeout(window.__v05share);window.__v05share=setTimeout(refreshV05Preview,220)}
 function readV05Opts(){
   const tags=(document.getElementById("shareTags")?.value||"").split(/[\s,]+/).map(x=>x.replace(/^#/,"").trim()).filter(Boolean);
-  return {preset:v05Share.preset,format:v05Share.format,rating:Number(document.getElementById("shareRating")?.value||0),tags,stamp:document.getElementById("shareStamp")?.value||"",stillIndex:v05Share.stillIndices?.[0]??0,stillIndices:[...(v05Share.stillIndices||[0])],layout:v05Share.layout||"auto",frames:(v05Share.frames||[]).map(x=>({...x})),textScale:v05Share.textScale||1,textAlign:v05Share.textAlign||"left",text:document.getElementById("shareTextV05")?.value.trim()||""};
+  return {preset:v05Share.preset,format:v05Share.format,rating:Number(document.getElementById("shareRating")?.value||0),tags,stamp:document.getElementById("shareStamp")?.value||"",stillIndex:v05Share.stillIndices?.[0]??0,stillIndices:[...(v05Share.stillIndices||[0])],layout:v05Share.layout||"auto",frames:(v05Share.frames||[]).map(x=>({...x})),textAlign:v05Share.textAlign||"left",titleScale:v05Share.titleScale||1,midScale:v05Share.midScale||1,reviewScale:v05Share.reviewScale||1,copyOffset:Number(v05Share.copyOffset||0),title:document.getElementById("shareTitleV05")?.value.trim()||"",mid:document.getElementById("shareMidV05")?.value.trim()||"",text:document.getElementById("shareTextV05")?.value.trim()||""};
 }
 function renderStillPicker(code){
   const root=document.getElementById("stillPicker"),media=shareMediaV05(code);if(!root)return;
   root.innerHTML=media.map((src,i)=>{const n=(v05Share.stillIndices||[]).indexOf(i);return '<button data-still="'+i+'" class="'+(n>=0?"on":"")+'"><img src="'+src+'" alt="사진 '+(i+1)+'"><span>'+(n>=0?String(n+1):"+")+'</span></button>'}).join("");
-  root.querySelectorAll("[data-still]").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.still),a=v05Share.stillIndices||[];if(a.includes(i)){if(a.length===1){toast("사진은 최소 1장이 필요합니다.");return}const p=a.indexOf(i);a.splice(p,1);v05Share.frames.splice(p,1);v05Share.activePhoto=Math.max(0,Math.min(v05Share.activePhoto,a.length-1))}else{if(a.length>=5){toast("공유카드는 사진을 최대 5장까지 넣을 수 있습니다.");return}a.push(i);v05Share.frames=shareDefaultFramesV05(a.length);v05Share.activePhoto=a.length-1}v05Share.stillIndices=a;renderStillPicker(code);renderPhotoOrderV05();syncFreeEditorV05();refreshV05Preview()});
+  root.querySelectorAll("[data-still]").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.still),a=v05Share.stillIndices||[];if(a.includes(i)){if(a.length===1){toast("사진은 최소 1장이 필요합니다.");return}const p=a.indexOf(i);a.splice(p,1);v05Share.frames.splice(p,1);v05Share.activePhoto=Math.max(0,Math.min(v05Share.activePhoto,a.length-1))}else{if(a.length>=5){toast("공유카드는 사진을 최대 5장까지 넣을 수 있습니다.");return}a.push(i);v05Share.frames=shareDefaultFramesV05(a.length);v05Share.activePhoto=a.length-1}v05Share.stillIndices=a;renderStillPicker(code);renderPhotoOrderV05();syncFreeEditorV05();renderGestureStageV05();refreshV05Preview()});
 }
 function renderPhotoOrderV05(){
   const root=document.getElementById("sharePhotoOrder"),media=shareMediaV05(activeMovieCode),a=v05Share.stillIndices||[];if(!root)return;
   document.getElementById("sharePhotoCount").textContent=a.length+" / 5";
   root.innerHTML=a.map((idx,pos)=>'<article class="'+(pos===v05Share.activePhoto?"active":"")+'" data-photo-pos="'+pos+'"><img src="'+(media[idx]||"")+'" alt=""><span>'+(pos+1)+'</span><div><button data-photo-left="'+pos+'" '+(pos===0?"disabled":"")+'>←</button><button data-photo-right="'+pos+'" '+(pos===a.length-1?"disabled":"")+'>→</button><button data-photo-remove="'+pos+'" '+(a.length===1?"disabled":"")+'>×</button></div></article>').join("");
-  root.querySelectorAll("[data-photo-pos]").forEach(el=>el.onclick=e=>{if(e.target.closest("button"))return;v05Share.activePhoto=Number(el.dataset.photoPos);renderPhotoOrderV05();syncFreeEditorV05()});
+  root.querySelectorAll("[data-photo-pos]").forEach(el=>el.onclick=e=>{if(e.target.closest("button"))return;v05Share.activePhoto=Number(el.dataset.photoPos);renderPhotoOrderV05();syncFreeEditorV05();renderGestureStageV05()});
   root.querySelectorAll("[data-photo-left]").forEach(b=>b.onclick=()=>moveSharePhotoV05(Number(b.dataset.photoLeft),-1));
   root.querySelectorAll("[data-photo-right]").forEach(b=>b.onclick=()=>moveSharePhotoV05(Number(b.dataset.photoRight),1));
   root.querySelectorAll("[data-photo-remove]").forEach(b=>b.onclick=()=>removeSharePhotoV05(Number(b.dataset.photoRemove)));
 }
 function moveSharePhotoV05(pos,delta){
-  const to=pos+delta,a=v05Share.stillIndices||[];if(to<0||to>=a.length)return;[a[pos],a[to]]=[a[to],a[pos]];if(v05Share.frames?.length)[v05Share.frames[pos],v05Share.frames[to]]=[v05Share.frames[to],v05Share.frames[pos]];v05Share.activePhoto=to;renderStillPicker(activeMovieCode);renderPhotoOrderV05();syncFreeEditorV05();refreshV05Preview();
+  const to=pos+delta,a=v05Share.stillIndices||[];if(to<0||to>=a.length)return;[a[pos],a[to]]=[a[to],a[pos]];if(v05Share.frames?.length)[v05Share.frames[pos],v05Share.frames[to]]=[v05Share.frames[to],v05Share.frames[pos]];v05Share.activePhoto=to;renderStillPicker(activeMovieCode);renderPhotoOrderV05();syncFreeEditorV05();renderGestureStageV05();refreshV05Preview();
 }
 function removeSharePhotoV05(pos){
-  const a=v05Share.stillIndices||[];if(a.length<=1)return;a.splice(pos,1);v05Share.frames.splice(pos,1);v05Share.frames=shareDefaultFramesV05(a.length);v05Share.activePhoto=Math.max(0,Math.min(pos,a.length-1));renderStillPicker(activeMovieCode);renderPhotoOrderV05();syncFreeEditorV05();refreshV05Preview();
+  const a=v05Share.stillIndices||[];if(a.length<=1)return;a.splice(pos,1);v05Share.frames.splice(pos,1);v05Share.frames=shareDefaultFramesV05(a.length);v05Share.activePhoto=Math.max(0,Math.min(pos,a.length-1));renderStillPicker(activeMovieCode);renderPhotoOrderV05();syncFreeEditorV05();renderGestureStageV05();refreshV05Preview();
 }
 function syncFreeEditorV05(){
   const box=document.getElementById("shareFreeEditor");if(!box)return;box.classList.toggle("open",v05Share.layout==="free");
@@ -182,7 +197,28 @@ function syncFreeEditorV05(){
   document.getElementById("freePhotoLabel").textContent="사진 "+(pos+1)+" 편집";document.getElementById("freeX").value=Math.round(f.x*100);document.getElementById("freeY").value=Math.round(f.y*100);document.getElementById("freeW").value=Math.round(f.w*100);document.getElementById("freeH").value=Math.round(f.h*100);
 }
 function updateFreeFrameV05(){
-  if(v05Share.layout!=="free")return;const pos=v05Share.activePhoto||0,f=clampFrameV05({x:Number(document.getElementById("freeX").value)/100,y:Number(document.getElementById("freeY").value)/100,w:Number(document.getElementById("freeW").value)/100,h:Number(document.getElementById("freeH").value)/100});v05Share.frames[pos]=f;syncFreeEditorV05();debounceV05Preview();
+  if(v05Share.layout!=="free")return;const pos=v05Share.activePhoto||0,f=clampFrameV05({x:Number(document.getElementById("freeX").value)/100,y:Number(document.getElementById("freeY").value)/100,w:Number(document.getElementById("freeW").value)/100,h:Number(document.getElementById("freeH").value)/100});v05Share.frames[pos]=f;syncFreeEditorV05();renderGestureStageV05();debounceV05Preview();
+}
+function renderGestureStageV05(){
+  const root=document.getElementById("shareGestureStage");if(!root||!activeMovieCode)return;const media=shareMediaV05(activeMovieCode),ids=v05Share.stillIndices||[0],frames=v05Share.layout==="free"&&v05Share.frames?.length?v05Share.frames:shareDefaultFramesV05(ids.length);
+  root.innerHTML=ids.map((idx,pos)=>{const f=clampFrameV05(frames[pos]||shareDefaultFramesV05(ids.length)[pos]);return '<article data-gesture-photo="'+pos+'" class="'+(pos===v05Share.activePhoto?"active":"")+'" style="left:'+(f.x*100)+'%;top:'+(f.y*100)+'%;width:'+(f.w*100)+'%;height:'+(f.h*100)+'%"><img draggable="false" src="'+(media[idx]||"")+'" alt=""><span>'+(pos+1)+'</span></article>'}).join("");
+}
+function setGestureFreeV05(pos){
+  if(v05Share.layout!=="free"){v05Share.layout="free";v05Share.frames=shareDefaultFramesV05((v05Share.stillIndices||[0]).length);document.querySelectorAll("[data-share-layout]").forEach(x=>x.classList.toggle("on",x.dataset.shareLayout==="free"))}
+  v05Share.activePhoto=Math.max(0,Math.min(pos,(v05Share.stillIndices||[0]).length-1));syncFreeEditorV05();renderPhotoOrderV05();
+  document.querySelectorAll("#shareGestureStage [data-gesture-photo]").forEach(el=>el.classList.toggle("active",Number(el.dataset.gesturePhoto)===v05Share.activePhoto));
+}
+function bindGestureStageV05(){
+  const stage=document.getElementById("shareGestureStage");if(!stage||stage.dataset.bound)return;stage.dataset.bound="1";
+  const pt=e=>({x:e.clientX,y:e.clientY}),dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),center=(a,b)=>({x:(a.x+b.x)/2,y:(a.y+b.y)/2});
+  stage.addEventListener("pointerdown",e=>{const hit=e.target.closest("[data-gesture-photo]");if(!hit)return;e.preventDefault();let pos=Number(hit.dataset.gesturePhoto);if(shareGestureV05.pointers.size)pos=v05Share.activePhoto;else setGestureFreeV05(pos);try{stage.setPointerCapture?.(e.pointerId)}catch(_){}shareGestureV05.pointers.set(e.pointerId,pt(e));const f={...v05Share.frames[pos]};if(shareGestureV05.pointers.size===1)shareGestureV05.drag={id:e.pointerId,pos,start:pt(e),frame:f};if(shareGestureV05.pointers.size===2){const p=[...shareGestureV05.pointers.values()];shareGestureV05.pinch={pos,dist:Math.max(8,dist(p[0],p[1])),center:center(p[0],p[1]),frame:f};shareGestureV05.drag=null}});
+  stage.addEventListener("pointermove",e=>{if(!shareGestureV05.pointers.has(e.pointerId))return;e.preventDefault();shareGestureV05.pointers.set(e.pointerId,pt(e));const rect=stage.getBoundingClientRect();if(!rect.width||!rect.height)return;let f=null,pos=v05Share.activePhoto;
+    if(shareGestureV05.pointers.size>=2&&shareGestureV05.pinch){const p=[...shareGestureV05.pointers.values()].slice(0,2),s=shareGestureV05.pinch,ratio=dist(p[0],p[1])/s.dist,c=center(p[0],p[1]),dx=(c.x-s.center.x)/rect.width,dy=(c.y-s.center.y)/rect.height,nw=s.frame.w*ratio,nh=s.frame.h*ratio,cx=s.frame.x+s.frame.w/2+dx,cy=s.frame.y+s.frame.h/2+dy;pos=s.pos;f=clampFrameV05({x:cx-nw/2,y:cy-nh/2,w:nw,h:nh})}
+    else if(shareGestureV05.drag){const s=shareGestureV05.drag,p=shareGestureV05.pointers.get(s.id);if(!p)return;pos=s.pos;f=clampFrameV05({...s.frame,x:s.frame.x+(p.x-s.start.x)/rect.width,y:s.frame.y+(p.y-s.start.y)/rect.height})}
+    if(f){v05Share.frames[pos]=f;v05Share.activePhoto=pos;syncFreeEditorV05();renderGestureStageV05();debounceV05Preview()}
+  });
+  const end=e=>{if(!shareGestureV05.pointers.has(e.pointerId))return;shareGestureV05.pointers.delete(e.pointerId);try{stage.releasePointerCapture?.(e.pointerId)}catch(_){}shareGestureV05.pinch=null;if(shareGestureV05.pointers.size===1){const [id,p]=[...shareGestureV05.pointers.entries()][0],pos=v05Share.activePhoto;shareGestureV05.drag={id,pos,start:{...p},frame:{...v05Share.frames[pos]}}}else if(!shareGestureV05.pointers.size)shareGestureV05.drag=null;};
+  stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);stage.addEventListener("lostpointercapture",e=>{if(shareGestureV05.pointers.has(e.pointerId))end(e)});
 }
 async function refreshV05Preview(){
   if(!activeMovieCode)return;const opts=readV05Opts();v05Share={...v05Share,...opts};
