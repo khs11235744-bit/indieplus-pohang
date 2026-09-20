@@ -24,7 +24,7 @@ function renderCineTip(){
   const t=currentCineTip();if(!t)return;
   const saved=cineSaved().includes(t.id),movie=cineTipMovie();
   const cat=document.getElementById("cineTipCategory"),text=document.getElementById("cineTipText"),mission=document.getElementById("cineTipMission"),src=document.getElementById("cineTipSource"),save=document.getElementById("cineTipSave"),apply=document.getElementById("cineTipApply");
-  if(cat)cat.textContent=t.category;if(text)text.textContent=t.tip;if(mission)mission.textContent=t.mission;if(src)src.textContent="RANDOM CINEPHILE 100";if(save)save.textContent=saved?"★ 저장됨":"☆ 저장";
+  if(cat)cat.textContent=t.category;if(text)text.textContent=t.tip;if(mission)mission.textContent=t.mission;if(src)src.textContent="";if(save)save.textContent=saved?"★ 저장됨":"☆ 저장";
   if(apply){
     apply.textContent=movie?movie.movie.title+"에서 찾아보기 →":"현재 상영작에 적용 →";
     apply.onclick=()=>movie&&openMovie(movie.code);
