@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0c">
+<title>INDIE+ POHANG — 포항의 독립영화</title>
+<meta name="description" content="포항의 독립영화 상영, 발견, 기록, 비평을 연결하는 영화 플랫폼 프로토타입">
+<style>
+:root{
+  --bg:#0b0b0c;--panel:#121214;--card:#18181b;--line:#2b2b30;
+  --muted:#9a9aa1;--text:#f7f7f4;--accent:#d6ff3f;--warm:#ff6a47;--r:24px
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,a{font:inherit}button{cursor:pointer}.shell{max-width:1420px;margin:auto;padding:0 28px}
+.eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--accent);font-weight:900}
+header{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav{height:72px;display:flex;align-items:center;gap:28px}.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:-.03em}
+.brandmark{width:35px;height:35px;border-radius:50%;background:var(--accent);color:#090909;display:grid;place-items:center;font-size:10px;box-shadow:0 0 34px rgba(214,255,63,.15)}
+.brand small{color:#777;font-weight:700}.navlinks{display:flex;gap:22px;margin-left:16px}
+.navlinks button{border:0;background:none;color:#aaa;font-weight:750}.navlinks button.active,.navlinks button:hover{color:#fff}
+.actions{margin-left:auto;display:flex;align-items:center;gap:9px}
+.iconbtn,.pill,.secondary{border:1px solid var(--line);background:#151518;color:#fff;border-radius:999px;padding:10px 14px}
+.pill.accent,.primary{border:0;background:var(--accent);color:#080808;border-radius:999px;padding:12px 17px;font-weight:950}
+.hero{padding:46px 0 28px;display:grid;grid-template-columns:1.28fr .72fr;gap:18px}
+.hero-main{min-height:548px;border-radius:30px;overflow:hidden;position:relative;background:radial-gradient(circle at 78% 34%,#6c59a6 0,#302844 28%,#101013 63%)}
+.hero-main:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.93),rgba(0,0,0,.12) 72%),linear-gradient(0deg,rgba(0,0,0,.7),transparent 55%)}
+.screen-art{position:absolute;right:-8%;top:8%;width:57%;height:78%;border-radius:25px 0 0 25px;transform:rotate(4deg);background:linear-gradient(145deg,#d2b5ff,#6e3b91 43%,#21152f);box-shadow:-42px 42px 110px rgba(0,0,0,.5)}
+.screen-art:before{content:"P";font:italic 900 220px/1 Georgia,serif;position:absolute;left:18%;top:18%;color:#fbebff;opacity:.78}
+.screen-art:after{content:"POHANG · CINEMA · 2026";position:absolute;bottom:22px;left:24px;font-size:11px;letter-spacing:.25em}
+.hero-copy{position:absolute;z-index:2;left:42px;bottom:42px;max-width:610px}
+.hero-copy h1{font-size:clamp(43px,6vw,82px);line-height:.95;margin:10px 0 18px;letter-spacing:-.075em}
+.hero-copy p{color:#c9c9ce;line-height:1.68;max-width:520px}.hero-actions{display:flex;gap:9px;margin-top:25px}
+.side-stack{display:grid;grid-template-rows:1fr 1fr;gap:18px}.spot{border:1px solid var(--line);border-radius:30px;padding:25px;background:var(--panel);position:relative;overflow:hidden}
+.spot h3{font-size:27px;line-height:1.15;margin:8px 0}.spot p{color:var(--muted);line-height:1.6;font-size:14px}.spot .big{font-size:64px;font-weight:950;letter-spacing:-.08em}
+.spot.warm{background:linear-gradient(145deg,#38140d,#16100f 63%)}.spot.warm .eyebrow{color:#ff9177}
+.section{padding:34px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.section h2{font-size:31px;margin:4px 0;letter-spacing:-.045em}.muted{color:var(--muted)}
+.date-rail{display:flex;gap:8px;overflow:auto;padding-bottom:8px;scrollbar-width:none}.datebtn{min-width:72px;border:1px solid var(--line);background:#111114;color:#96969d;border-radius:18px;padding:10px;text-align:center}
+.datebtn strong{display:block;font-size:18px;color:#ddd}.datebtn.active{background:var(--accent);border-color:var(--accent);color:#111}.datebtn.active strong{color:#111}
+.schedule{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:18px}.movie{border:1px solid var(--line);background:var(--card);border-radius:var(--r);padding:20px;transition:.22s}
+.movie:hover{transform:translateY(-3px);border-color:#4d4d55}.movie-top{display:flex;justify-content:space-between;gap:14px}.grade{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:10px;font-weight:950;background:#2a2a30}
+.movie h3{margin:10px 0 4px;font-size:21px}.meta{font-size:12px;color:#888891}.times{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.time{border:1px solid #3b3b42;border-radius:999px;padding:8px 11px;background:#111114;color:#ddd}
+.time.soon{border-color:var(--accent);color:var(--accent)}
+.postergrid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.poster{aspect-ratio:2/3;border-radius:18px;overflow:hidden;position:relative;border:1px solid var(--line);background:#222;cursor:pointer}
+.poster .art{position:absolute;inset:0;transition:.3s}.poster:hover .art{transform:scale(1.05)}.poster:nth-child(1) .art{background:linear-gradient(145deg,#593249,#e18e7a)}
+.poster:nth-child(2) .art{background:linear-gradient(160deg,#243a50,#8ab7d0)}.poster:nth-child(3) .art{background:linear-gradient(150deg,#182019,#799154)}
+.poster:nth-child(4) .art{background:linear-gradient(160deg,#523c28,#dfba79)}.poster:nth-child(5) .art{background:linear-gradient(150deg,#3c2858,#a478c7)}
+.poster .art:before{content:"";position:absolute;width:44%;height:44%;border:1px solid rgba(255,255,255,.7);border-radius:50%;left:28%;top:20%}
+.poster:after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.9))}
+.poster-title{position:absolute;inset:auto 14px 14px;z-index:2;text-shadow:0 2px 16px #000}.poster-title small{color:#ddd}.poster-title b{display:block;font-size:18px;margin-top:2px}
+.feature-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:13px}.feature{border-radius:26px;border:1px solid var(--line);background:#121214;padding:28px;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
+.feature.large{background:linear-gradient(130deg,#182321,#0d0e0e 58%)}.quote{font:italic 700 38px/1.2 "Noto Sans KR";max-width:680px}.byline{font-size:13px;color:#92929a;margin-top:16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.chip{border:1px solid #3a3a42;border-radius:999px;padding:8px 11px;font-size:12px;color:#ccc}
+footer{border-top:1px solid var(--line);margin-top:48px;padding:34px 0 100px;color:#777;font-size:12px}.mobile-nav{display:none}
+.overla{position:fixed;inset:0;background:rgba(0,0,0,.76);backdrop-filter:blur(12px);z-index:80;display:none;align-items:flex-end;justify-content:center}.overlay.open{display:flex}
+.sheet{width:min(720px,100%);background:#18181c;border:1px solid #33333a;border-radius:28px 28px 0 0;padding:28px;max-height:88vh;overflow:auto}
+.sheet-head{display:flex;justify-content:space-between;gap:20px}.close{width:40px;height:40px;border-radius:50%;border:1px solid #444;background:#222;color:#fff}.sheet h2{font-size:34px;margin:8px 0}.sheet p{color:#aaa;line-height:1.75}
+.toast{position:fixed;left:50%;bottom:88px;transform:translate(-50%,20px);background:#f5f5ef;color:#111;padding:11px 16px;border-radius:999px;font-size:13px;font-weight:900;opacity:0;pointer-events:none;transition:.25s;z-index:100}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.side-stack{grid-template-columns:1fr 1fr;grid-template-rows:auto}.schedule{grid-template-columns:1fr 1fr}.postergrid{grid-template-columns:repeat(3,1fr)}.feature-grid{grid-template-columns:1fr=.navlinks{display:none}}
+@media(max-width:640px){.shell{padding:0 16px}.nav{height:62px}.actions .iconbtn{display:none}.pill{padding:9px 12px;font-size:12px}.hero{padding-top:18px}.hero-main{min-height:520px;border-radius:24px}.hero-copy{left:22px;bottom:28px;right:22px}.hero-copy h1{font-size:52px}.screen-art{width:72%;opacity:.55}.side-stack{grid-template-columns:1fr}.schedule{grid-template-columns:1fr=.postergrid{grid-template-columns:repeat(2,1fr)}.section{padding:27px 0}.section h2{font-size:27px}.quote{font-size:30px}.mobile-nav{display:flex;position:fixed;z-index:60;left:12px;right:12px;bottom:10px;padding:8px;background:rgba(22,22,24,.9);border:1px solid #333;border-radius:22px;backdrop-filter:blur(18px);justify-content:space-around}.mobile-nav button{border:0;background:none;color:#777;font-size:10px}.mobile-nav button span{display:block;font-size:19px}.mobile-nav button.active{color:var(--accent)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="shell nav">
+    <div class="brand"><div class="brandmark">IP+</div><div>INDIEJ¨<small>POHANG</small></div></div>
+    <nav class="navlinks">
+      <button class="active" data-target="home">홈</button>
+      <button data-target="schedule">상영</button>
+      <button data-target="discover">발견</button>
+      <button data-target="community">커뮤니티</button>
+    </nav>
+    <div class="actions">
+      <button class="iconbtn" id="searchBtn">⌕</button>
+      <button class="pill" id="loginBtn">로그인</button>
+      <button class="pill accent" data-target="schedule">오늘 예매</button>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+<section class="shell hero">
+  <div class="hero-main">
+    <div class="screen-art"></div>
+    <div class="hero-copy">
+      <div class="eyebrow">Tonight in Pohang · 19:30</div>
+      <h1>영화를<br>만나는 방식.</h1>
+      <p>포항에서 오늘 볼 수 있는 독립영화를 발견하고, 예매하고, 본 뒤에는 당신의 문장으로 남겨보세요.</p>
+      <div class="hero-actions">
+        <button class="primary" onclick="openMovie('오늘의 추천','포항에서 오늘 만날 수 있는 독릭영화 큐레이션입니다.')">오늘의 영화 보기</button>
+        <button class="secondary" data-target="schedule">상영시간표 →</button>
+      </div>
+    </div>
+  </div>
+  <div class="side-stack">
+    <article class="spot warm">
+      <div class="eyebrow">Special Program</div><div class="big">GV</div>
+      <h3>영화가 끝난 뒤,<br>이야기가 시작됩니다.</h3>
+      <p>감독·배우와 만나는 관객과의 대화 일정을 한 곳에서 확인하세요.</p>
+    </article>
+    <article class="spot">
+      <div class="eyebrow">Synergy Pick</div>
+      <h3>시너지 회원들이<br>이번 주 고른 영화</h3>
+      <p>취향이 비슷한 지역 관객들의 추천과 짧은 비평을 만나보세요.</p>
+      <div class="chips"><span class="chip">#포항</span><span class="chip">#독릭영화</span><span class="chip">#관객추천</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="shell section" id="schedule">
+  <div class="section-head">
+    <div><div class="eyebrow">Now showing</div><h2>오늘의 상영</h2></div>
+    <div class="muted">2026.09 · INDIE+ POHANG</div>
+  </div>
+  <div class="date-rail" id="dateRail">
+    <button class="datebtn active"><small>오늘</small><strong>20</strong><small>일</small></button>
+    <button class="datebtn"><small>월</small><strong>21</strong><small>일</small></button>
+    <button class="datebtn"><small>화</small><strong>22</strong><small>일</small></button>
+    <button class="datebtn"><small>수</small><strong>23</strong><small>일</small></button>
+    <button class="datebtn"><small>목</small><strong>24</strong><small>일</small></button>
+    <button class="datebtn"><small>금</small><strong>25</strong><small>일</small></button>
+    <button class="datebtn"><small>토</small><strong>26</strong><small>일</small></button>
+  </div>
+  <div class="schedule">
+    <article class="movie">
+      <div class="movie-top"><div><div class="eyebrow">01 · NOW</div><h3>여름이 지나가면</h3><div class="meta">드라마 · 104분 · 한국</div></div><div class="grade">12</div></div>
+      <div class="times"><button class="time">13:20</button><button class="time soon">17:30</button><button class="time">20:10</button></div>
+    </article>
+    <article class="movie">
+      <div class="movie-top"><div><div class="eyebrow">02</div><h3>파도와 우리</h3><div class="meta">다큐멘터리 · 92분 · 한국</div></div><div class="grade">ALL</div></div>
+      <div class="times"><button class="time">15:10</button><button class="time">19:00</button></div>
+    </article>
+    <article class="movie">
+      <div class="movie-top"><div><div class="eyebrow">03 · GV</div><h3>낯선 도시의 밤</h3><div class="meta">드라마 · 118분 · 한국</div></div><div class="grade">15</div></div>
+      <div class="times"><button class="time">16:40</button><button class="time soon">19:30 + GV</button></div>
+    </article>
+  </div>
+</section>
+
+<section class="shell section" id="discover">
+  <div class="section-head"><div><div class="eyebrow">Discover</div><h2>이번 주, 발견할 영화</h2></div><button class="secondary" onclick="toast('전체 영화 DB는 다음 단계에서 연결합니다.')">모두 보기</button></div>
+  <div class="postergrid">
+    <article class="poster" onclick="openMovie('여름이 지나가면','서로 다른 속도로 여름을 통과하는 사람들의 이야기.')"><div class="art"></div><div class="poster-title"><small>DRAMA</small><b>여름이 지나가면</b></div></article>
+    <article class="poster" onclick="openMovie('파도와 우리','도시와 바다 사이에서 살아가는 사람들을 기록한 다큐멘터리.')"><div class="art"></div><div class="poster-title"><small>DOCUMENTARY</small><b>파도와 우리</b></div></article>
+    <article class="poster" onclick="openMovie('낯선 도시의 밤','낯선 도시에서 우연히 얽힌 두 사람의 하룻밤.')"><div class="art"></div><div class="poster-title"><small>GV</small><b>낯선 도시의 밤</b></div></article>
+    <article class="poster" onclick="openMovie('작은 극장','사라져가는 동네 극장을 지키는 사람들의 기록.')"><div class="art"></div><small>일</small></button>
+    <button class="datebtn"><small>화</small><strong>22</strong><small>일</small></button>
+    <button class="datebtn"><small>수</small><strong>23</strong><small>일</small></button>
+    <button class="datebtn"><small>목</small><strong>24</strong><small>일</small></button>
+    <button class="datebtn"><small>금</small><strong>25</strong><small>일</small></button>
+    <button class="datebtn"><small>토</small><strong>26</strong><small>일</small></button>
+  </div>
+  <div class="schedule">
+    <article class="movie">
+      <div class="movie-top"><div><div class="eyebrow">01 · NOW</div><h3>여름이 지나가면</h3><div class="meta">드라마 · 104분 · 한국</div></div><div class="grade">12</div></div>
+      <div class="times"><button class="time">13:20</button><button class="time soon">17:30</button><button class="time">20:10</button></div>
+    </article>
+    <article class="movie">
+      <div class="movie-top"><div><div class="eyebrow">02</div><h3>파도와 우리</h3><div class="meta">다큐멘터리 · 92분 · 한국</div></div><div class="grade">ALL</div></div>
+      <div class="times"><button class="time">15:10</button><button class="time">19:00</button></div>
+    </article>
+    <article class="movie">
+      <div class="movie-top"><div><div class="eyebrow">03 · GV</div><h3>낯선 도시의 밤</h3><div class="meta">드라마 · 118분 · 한국</div></div><div class="grade">15</div></div>
+      <div class="times"><button class="time">16:40</button><button class="time soon">19:30 + GV</button></div>
+    </article>
+  </div>
+</section>
+
+<section class="shell section" id="discover">
+  <div class="section-head"><div><div class="eyebrow">Discover</div><h2>이번 주, 발견할 영화</h2></div><button class="secondary" onclick="toast('전체 영화 DB는 다음 단계에서 연결합니다.')">모두 보기</button></div>
+  <div class="postergrid">
+    <article class="poster" onclick="openMovie('여름이 지나가면','서로 다른 속도로 여름을 통과하는 사람들의 이야기.')"><div class="art"></div><div class="poster-title"><small>DRAMA</small><b>여름이 지나가면</b></div></article>
+    <article class="poster" onclick="openMovie('파도와 우리','도시와 바다 사이에서 살아가는 사람들을 기록한 다큐멘터리.')"><div class="art"></div><div class="poster-title"><small>DOCUMENTARY</small><b>파도와 우리</b></div></article>
+    <article class="poster" onclick="openMovie('낯선 도시의 밤','낯선 도시에서 우연히 얽힌 두 사람의 하룻밤.')"><div class="art"></div><div class="poster-title"><small>GV</small><b>낯선 도시의 밤</b></div></article>
+    <article class="poster" onclick="openMovie('작은 극장','사라져가는 동네 극장을 지키는 사람들의 기록.')"><div class="art"></div><div class="poster-title"><small>LOCAL</small><b>작은 극장</b></div></article>
+    <article class="poster" onclick="openMovie('다음 장면','영화를 만드는 청년들의 시간에 관한 에세이 필름.')"><div class="art"></div><div class="poster-title"><small>ESSAY</small><b>다음 장면</b></div></article>
+  </div>
+</section>
+
+<section class="shell section" id="community">
+  <div class="section-head"><div><div class="eyebrow">Community & Criticism</div><h2>영화를 보고, 문장을 남기다</h2></div><button class="primary" onclick="toast('글쓰기 에디터는 커뮤니티 단계에서 연결합니다.')">+ 비평 쓰기</button></div>
+  <div class="feature-grid">
+    <article class="feature large">
+      <div class="eyebrow">Editor's note · 이번 주 비평</div>
+      <div class="quote">“좋은 독립영화는 낯선 삶을 잠시 나의 기억처럼 만들어 놓는다.”</div>
+      <div class="byline">시너지 회원 · 6분 읽기</div>
+    </article>
+    <article class="feature">
+      <div class="eyebrow">Community pulse</div>
+      <h3 style="font-size:30px;margin:7px 0">포항 관객들이<br>지금 이야기하는 것</h3>
+      <div class="chips"><span class="chip">GV 후기 18</span><span class="chip">이번 주 추천 34</span><span class="chip">긴 글 7</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="shell section">
+  <div class="spot" style="min-height:220px;background:linear-gradient(110deg,#161616,#202517)">
+    <div class="eyebrow">Indie+ Membership</div>
+    <h3 style="font-size:34px">보는 사람에서, 함께 만드는 관객으로.</h3>
+    <p>관람 기록 · 보고 싶은 영화 · 내가 쓴 비평 · 참여한 GV를 MY에서 한 번에 모아보세요.</p>
+    <button class="primary" id="myBtn">MY 시작하기</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="brand"><div class="brandmark">IP+</div>INDIE+ POHANG</div>
+    <p>Prototype v0.1 · 실제 상영정보·예매·회원 기능은 다음 개발 단계에서 연결합니다.</p>
+  </div>
+</footer>
+
+<nav class="mobile-nav">
+  <button class="active" data-target="home"><span>⌂</span>홈</button>
+  <button data-target="schedule"><span>◫</span>상영</button>
+  <button data-target="discover"><span>◇</span>발견</button>
+  <button data-target="community"><span>✦</span>비평</button>
+  <button id="mobileMy"><span>◎</span>MY</button>
+</nav>
+
+<div class="overlay" id="movieOverlay" aria-hidden="true">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div><div class="eyebrow">Movie detail</div><h2 id="sheetTitle">영화 제목</h2></div>
+      <button class="close" onclick="closeMovie()">×</button>
+    </div>
+    <p id="sheetDesc"></p>
+    <div class="chips"><span class="chip">독립영화</span><span class="chip">인디플러스 포항</span><span class="chip">관람 기록 가능</span></div>
+    <div style="display:flex;gap:9px;margin-top:24px">
+      <button class="primary" onclick="toast('실제 예매 링크를 다음 단계에서 연결합니다.')">예매하기</button>
+      <button class="secondary" onclick="toast('보고 싶어요에 저장했습니다.')">♡ 보고 싶어요</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+const qs=(s,p=document)=>p.querySelector(s),qsa=(s,p=document)=>[...p.querySelectorAll(s)];
+function scrollToTarget(id){
+  const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  qsa('.navlinks button,.mobile-nav button').forEach(b=>b.classList.toggle('active',b.dataset.target===id));
+}
+qsa('[data-target]').forEach(b=>b.addEventListener('click',()=>scrollToTarget(b.dataset.target)));
+qsa('.datebtn').forEach(b=>b.addEventListener('click',()=>{
+  qsa('.datebtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+  toast(b.querySelector('strong').textContent+'일 상영시간표로 전환했습니다.');
+}));
+qsa('.time').forEach(b=>b.addEventListener('click',()=>toast(b.textContent.trim()+' 회차를 선택했습니다.')));
+function openMovie(title,desc){
+  qs('#sheetTitle').textContent=title; qs('#sheetDesc').textContent=desc;
+  qs('#movieOverlay').classList.add('open'); qs('#movieOverlay').setAttribute('aria-hidden','false');
+}
+function closeMovie(){qs('#movieOverlay').classList.remove('open');qs('#movieOverlay').setAttribute('aria-hidden','true')}
+qs('#movieOverlay').addEventListener('click',e=>{if(e.target.id==='movieOverlay')closeMovie()});
+let toastTimer;
+function toast(msg){const el=qs('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
+qs('#loginBtn').onclick=()=>toast('간편 로그인은 Firebase 연결 단계에서 활성화합니다.');
+qs('#searchBtn').onclick=()=>toast('영화·감독·배우 통합 검색을 준비 중입니다.');
+qs('#myBtn').onclick=qs('#mobileMy').onclick=()=>toast('MY — 관람 기록과 북마크 화면을 다음 단계에서 연결합니다.');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMovie()});
+</script>
+</body>
+</html>
