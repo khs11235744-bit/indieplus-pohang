@@ -1,0 +1,33 @@
+const targets=await (await fetch("http://127.0.0.1:9232/json")).json();
+const page=targets.find(x=>x.type==="page"&&x.url.includes("127.0.0.1:8909"));
+if(!page)throw new Error("page target not found");
+const ws=new WebSocket(page.webSocketDebuggerUrl);let seq=0;const pending=new Map(),exceptions=[];
+await new Promise((res,rej)=>{ws.onopen=res;ws.onerror=rej});
+ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.id&&pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(m.error):p.resolve(m.result)}if(m.method==="Runtime.exceptionThrown")exceptions.push(m.params.exceptionDetails.text)};
+function call(method,params={}){return new Promise((resolve,reject)=>{const id=++seq;pending.set(id,{resolve,reject});ws.send(JSON.stringify({id,method,params}))})}
+async function ev(expression){const r=await call("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.text);return r.result.value}
+await call("Runtime.enable");await call("Emulation.setDeviceMetricsOverride",{width:390,height:844,deviceScaleFactor:1,mobile:true});
+await ev("['indiePortMagazineV2','indiePortMagazineSeedVersion','indiePortMagazineAdmin','indiePortMagazineOrder','indiePortMagazineAdminOverrides','indiePortMagazineAdminHistory'].forEach(k=>localStorage.removeItem(k));location.reload();true");
+await new Promise(r=>setTimeout(r,4200));
+const out={};
+out.fullCount=await ev("magazineV2().filter(isMagazineLongformV2).length");
+out.browserExists=await ev("!!document.getElementById('v17LibraryBrowser')");
+await ev("document.getElementById('v17LibQuery').value='맨 프럼 어스';v17RenderLibraryList();true");
+out.searchCount=await ev("document.querySelectorAll('#v17LibraryList .v17-library-item').length");
+await ev("document.getElementById('v17LibQuery').value='';setMagAdminEnabled(true);renderMagazineShelfV2();true");
+out.adminRows=await ev("document.querySelectorAll('.mag-admin-library [data-open-mag]').length");
+out.dragEnabled=await ev("[...document.querySelectorAll('#v17LibraryList .v17-library-item')].every(x=>x.draggable)");
+out.orderBefore=await ev("v17LibraryItems().map(x=>x.id).slice(0,2)");
+await ev("v17SaveOrder(['archive-man-from-earth-2026','archive-what-should-we-have-done-2026']);renderMagazineShelfV2();true");
+out.orderAfter=await ev("v17LibraryItems().map(x=>x.id).slice(0,2)");
+await ev("openMagazineStudioV2('archive-what-should-we-have-done-2026');true");await new Promise(r=>setTimeout(r,300));
+out.cropUi=await ev("!!document.getElementById('v17PhotoUpload')");
+out.photoBefore=await ev("document.getElementById('magPhotoUrlsAdmin').value.split(/\\n/).filter(Boolean).length");
+await ev("(async()=>{const img=await loadImage('./assets/share/029204-still1.png');V17_CROP={img,zoom:1.15,x:12,y:-8};document.getElementById('v17CropBox').hidden=false;v17DrawCrop();v17ApplyCrop();return true})()");
+out.photoAfter=await ev("document.getElementById('magPhotoUrlsAdmin').value.split(/\\n/).filter(Boolean).length");
+await ev("enableCardManualV2();MAG_STUDIO.cardEdits[0].textScale=1.25;MAG_STUDIO.cardEdits[0].textX=.1;MAG_STUDIO.cardEdits[0].textY=.1;MAG_STUDIO.cardEdits[0].photoMode='trio';MAG_STUDIO.cardEdits[0].preset='festival';renderCardNewsV2();true");
+out.textControls=await ev("document.querySelectorAll('[data-card-scale]').length");
+out.thumbImgs=await ev("document.querySelectorAll('.cardnews-thumbs article:first-child .card-thumb-media img').length");
+out.cardBlob=await ev("(async()=>{const item=studioItemFromForm(),slides=cardSlideDataV2(item),b=await makeCardSlideBlobV2(item,slides[0],0);return b.size})()");
+out.exceptions=exceptions;
+console.log(JSON.stringify(out,null,2));ws.close();
