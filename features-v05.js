@@ -67,7 +67,7 @@ async function makeShareBlobV05(code,opts={}){
   }
   const pad=Math.round(w*.07),top=imageH+Math.round(h*.035);
   ctx.fillStyle=sty.accent;ctx.font="900 "+Math.round(w*.025)+"px Pretendard, sans-serif";
-  ctx.fillText(magazine?"POHANG CINEMA JOURNAL":ticket?"ADMIT ONE · INDIE+ POHANG":"INDIE+ POHANG · MY CINEMA",pad,top);
+  ctx.fillText(magazine?"INDIE PORT JOURNAL":ticket?"ADMIT ONE · INDIE PORT":"INDIE PORT · from INDIEPLUS POHANG",pad,top);
   ctx.fillStyle=sty.text;ctx.font="900 "+Math.round(w*(magazine?.068:.062))+"px Pretendard, sans-serif";
   const titleLines=wrapLines(ctx,m.title,w-pad*2,2);titleLines.forEach((line,i)=>ctx.fillText(line,pad,top+76+i*72));
   let y=top+76+titleLines.length*72+28;

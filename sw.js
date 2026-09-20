@@ -1,5 +1,5 @@
-const CACHE="indie-pohang-v05";
-const CORE=["./","./index.html","./app.css","./app.js","./features-v04.js","./features-v05.js","./data/live.json","./data/movies.json","./data/programs.json","./data/editorial.json","./data/share-assets.json","./data/providers.json","./data/api-status.json","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png"];
+const CACHE="indie-pohang-v06";
+const CORE=["./","./index.html","./app.css","./app.js","./features-v04.js","./features-v05.js","./features-v06.js","./data/live.json","./data/movies.json","./data/programs.json","./data/editorial.json","./data/share-assets.json","./data/providers.json","./data/api-status.json","./data/news-sources.json","./data/news-weekly.json","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE))));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
 self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;e.respondWith(fetch(e.request).then(r=>{if(r&&r.status===200){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});}return r;}).catch(()=>caches.match(e.request).then(r=>r||caches.match("./index.html"))))});

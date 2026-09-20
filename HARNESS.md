@@ -42,3 +42,13 @@
 - Google/Kakao/Naver는 OAuth 키가 연결되기 전까지 기기 프로필 모드로 유지한다.
 - 다음 서버 단계에서 게시글/댓글/좋아요/프로필을 클라우드 DB로 마이그레이션할 수 있도록 데이터 구조를 유지한다.
 - 제품 개선 기준은 `COMMUNITY_ROADMAP_100.md`를 따른다.
+
+## v0.6 뉴스룸·브랜드
+- 앱 브랜드는 가칭 `INDIE PORT`, 서브 아이덴티티는 `from INDIEPLUS POHANG`으로 유지한다.
+- 주간 뉴스 데이터 갱신 순서: `python scripts/sync_news.py` → `python scripts/build_news_weekly.py`.
+- `data/news-raw.json`은 재생성 가능한 원시 RSS라 Git에 올리지 않는다.
+- `data/news-weekly.json`에는 원문 전문을 복제하지 않고 원문 링크·영문 제목·한국어 제목·1~2문장 요약·태그만 저장한다.
+- 공식 영화제 발표와 신뢰 가능한 해외 독립/예술영화 매체를 우선한다.
+- 번역 대기 항목은 주간 자동 작업에서 한국어 제목·요약·태그를 작성하고 `translationStatus=translated-reviewed`로 변경한다.
+- 뉴스룸 핵심: 영화제/해외 독립·예술/아시아/한국 필터, 공식 소스 배지, 원문 링크, 기사 저장.
+- 기존 v0.4/v0.5 커뮤니티·공유·잡지 기능을 깨뜨리지 않는다.

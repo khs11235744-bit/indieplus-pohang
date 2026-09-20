@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#090a0b">
-<title>INDIE+ POHANG — 포항의 독립영화</title>
+<title>INDIE PORT — independent cinema from Pohang</title>
 <meta name="description" content="포항에서 독립영화를 발견하고, 상영시간을 확인하고, 예매하고, 기록하는 영화 플랫폼">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="preconnect" href="https://img.dtryx.com">
@@ -14,8 +14,8 @@
 <body>
 <header class="topbar">
   <div class="wrap nav">
-    <a class="brand" href="#home"><span class="mark">IP+</span><span>INDIE+ POHANG<small>POHANG INDEPENDENT CINEMA</small></span></a><button class="mobile-search" id="mobileSearchBtn" aria-label="영화 검색">검색</button>
-    <nav class="links"><button data-scroll="schedule">상영</button><button data-scroll="discover">발견</button><button data-scroll="program">GV·기획전</button><button data-scroll="community">비평</button><button data-scroll="my">MY</button></nav>
+    <a class="brand" href="#home"><span class="mark">IP</span><span>INDIE PORT<small>from INDIEPLUS POHANG</small></span></a><button class="mobile-search" id="mobileSearchBtn" aria-label="영화 검색">검색</button>
+    <nav class="links"><button data-scroll="schedule">상영</button><button data-scroll="discover">발견</button><button data-scroll="newsroom">뉴스</button><button data-scroll="program">GV·기획전</button><button data-scroll="community">비평</button><button data-scroll="my">MY</button></nav>
     <div class="nav-actions"><button class="chipbtn" id="searchBtn">검색</button><button class="chipbtn" id="installBtn" hidden>앱 설치</button><a class="primary compact" href="https://www.dtryx.com/reserve/cinema.do?CinemaCd=000057" target="_blank" rel="noopener">예매</a></div>
   </div>
 </header>
@@ -23,7 +23,7 @@
 <section class="wrap hero">
   <article class="hero-card">
     <div class="hero-backdrop" id="heroBackdrop"></div>
-    <div class="hero-copy"><div class="kicker" id="heroMeta">INDIE+ POHANG</div><h1 id="heroTitle">포항에서<br>영화를 발견하다.</h1><p id="heroDesc">실제 상영작과 상영시간을 불러오는 중입니다.</p>
+    <div class="hero-copy"><div class="kicker" id="heroMeta">INDIE PORT</div><h1 id="heroTitle">포항에서<br>영화를 발견하다.</h1><p id="heroDesc">실제 상영작과 상영시간을 불러오는 중입니다.</p>
       <div class="hero-actions"><button class="primary" id="heroInfo">영화정보</button><a class="ghostbtn" id="heroBook" target="_blank" rel="noopener">예매하기</a></div>
     </div>
   </article>
@@ -79,7 +79,7 @@
   <div class="venue-actions"><a class="ghostbtn" href="https://www.dtryx.com/cinema/main.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&BrandCd=indieart&CinemaCd=000057" target="_blank" rel="noopener">극장정보</a><a class="primary" href="https://www.dtryx.com/reserve/cinema.do?CinemaCd=000057" target="_blank" rel="noopener">예매하기</a></div>
 </section>
 </main>
-<footer class="footer"><div class="wrap"><strong>INDIE+ POHANG</strong><p>독립영화 발견 · 상영정보 · 예매 · 기록을 하나로 연결하는 비공식 프로토타입. 상영 및 예매 정보는 연결된 공식 예매 페이지에서 최종 확인하세요.</p></div></footer>
+<footer class="footer"><div class="wrap"><strong>INDIE PORT · from INDIEPLUS POHANG</strong><p>독립영화 발견 · 상영정보 · 예매 · 기록을 하나로 연결하는 비공식 프로토타입. 상영 및 예매 정보는 연결된 공식 예매 페이지에서 최종 확인하세요.</p></div></footer>
 <nav class="mobile-nav"><button data-scroll="home"><span>⌂</span>홈</button><button data-scroll="schedule"><span>◫</span>상영</button><button data-scroll="discover"><span>◇</span>발견</button><button data-scroll="community"><span>✦</span>비평</button><button data-scroll="my"><span>◎</span>MY</button></nav>
 <div class="search-panel" id="searchPanel"><div class="search-box"><button id="closeSearch">×</button><label>영화·감독·배우 검색</label><input id="searchInput" type="search" placeholder="예: 아가미, 정승오, 하윤경"><div class="search-results" id="searchResults"></div></div></div>
 <div class="overlay" id="movieOverlay">
@@ -94,5 +94,6 @@
 <script src="./app.js"></script>
 <script src="./features-v04.js"></script>
 <script src="./features-v05.js"></script>
+<script src="./features-v06.js"></script>
 </body>
 </html>

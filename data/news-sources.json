@@ -1,0 +1,19 @@
+{
+  "officialFestivals": [
+    {"name":"Cannes","country":"France","url":"https://www.festival-cannes.com/en/news/"},
+    {"name":"Berlinale","country":"Germany","url":"https://www.berlinale.de/en/press/press-releases/"},
+    {"name":"Venice","country":"Italy","url":"https://www.labiennale.org/en/cinema"},
+    {"name":"Sundance","country":"USA","url":"https://www.sundance.org/about/press/"},
+    {"name":"Locarno","country":"Switzerland","url":"https://www.locarnofestival.ch/press/press-releases.html"},
+    {"name":"IFFR","country":"Netherlands","url":"https://iffr.com/en/news"},
+    {"name":"TIFF","country":"Canada","url":"https://tiff.net/press"},
+    {"name":"BIFF","country":"Korea","url":"https://www.biff.kr/eng/"}
+  ],
+  "queries": [
+    {"id":"festival_official","category":"영화제","label":"세계 영화제 공식소식","query":"(site:festival-cannes.com OR site:berlinale.de OR site:labiennale.org OR site:sundance.org OR site:locarnofestival.ch OR site:iffr.com OR site:tiff.net OR site:biff.kr) film festival"},
+    {"id":"world_indie","category":"해외 독립·예술","label":"해외 독립·예술영화","query":"independent film OR arthouse cinema OR art house film festival"},
+    {"id":"art_press","category":"해외 독립·예술","label":"해외 예술영화 매체","query":"(site:indiewire.com OR site:screendaily.com OR site:bfi.org.uk OR site:mubi.com OR site:filmcomment.com) independent film OR arthouse OR film festival"},
+    {"id":"asia_indie","category":"아시아","label":"아시아 영화","query":"Asian cinema independent film festival OR auteur film Asia"},
+    {"id":"korea_indie","category":"한국 독립·예술","label":"한국 독립·예술영화","query":"한국 독립영화 예술영화 영화제"}
+  ]
+}

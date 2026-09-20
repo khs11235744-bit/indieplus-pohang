@@ -52,7 +52,7 @@ async function makeShareBlob(code,format="feed",customText=""){
   if(src){try{const img=await loadImage(src);coverDraw(ctx,img,0,0,w,Math.round(h*.63))}catch(e){console.warn(e)}}
   const grad=ctx.createLinearGradient(0,h*.35,0,h);grad.addColorStop(0,"rgba(9,10,11,0)");grad.addColorStop(.35,"rgba(9,10,11,.78)");grad.addColorStop(1,"rgba(9,10,11,1)");ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
   const pad=Math.round(w*.075),baseY=Math.round(h*.61);
-  ctx.fillStyle="#d8ff43";ctx.font="900 "+Math.round(w*.026)+"px Pretendard, sans-serif";ctx.fillText("INDIE+ POHANG · MY CINEMA",pad,baseY);
+  ctx.fillStyle="#d8ff43";ctx.font="900 "+Math.round(w*.026)+"px Pretendard, sans-serif";ctx.fillText("INDIE PORT · from INDIEPLUS POHANG",pad,baseY);
   ctx.fillStyle="#f7f7f2";ctx.font="900 "+Math.round(w*.064)+"px Pretendard, sans-serif";const titleLines=wrapLines(ctx,m.title,w-pad*2,2);titleLines.forEach((line,i)=>ctx.fillText(line,pad,baseY+88+i*74));
   const quote=customText||editorial.oneLiners?.[code]||m.short||"";
   ctx.font="700 "+Math.round(w*.035)+"px Pretendard, sans-serif";ctx.fillStyle="#e2e4df";const qLines=wrapLines(ctx,"“"+quote+"”",w-pad*2,format==="story"?8:5);let qy=baseY+88+titleLines.length*74+46;qLines.forEach((line,i)=>ctx.fillText(line,pad,qy+i*50));
@@ -62,7 +62,7 @@ async function makeShareBlob(code,format="feed",customText=""){
 async function shareMovieCard(code,format="feed",customText=""){
   const blob=await makeShareBlob(code,format,customText),m=MOVIES[code];
   const file=new File([blob],"indie-pohang-"+code+"-"+format+".png",{type:"image/png"});
-  const text=m.title+" — INDIE+ POHANG";
+  const text=m.title+" — INDIE PORT";
   if(navigator.share&&navigator.canShare?.({files:[file]})){try{await navigator.share({title:m.title,text,files:[file]});return}catch(e){if(e.name==="AbortError")return}}
   const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);toast("공유카드를 이미지로 저장했습니다.");
 }
