@@ -28,7 +28,7 @@ def good(x):
 items=[x for x in raw.get("items",[]) if good(x)]
 items.sort(key=lambda x:(x.get("official",False),x.get("score",0),x.get("publishedAt","")),reverse=True)
 
-limits={"영화제":8,"해외 독립·예술":6,"아시아":4,"한국 독립·예술":4}
+limits={"영화제":6,"해외 독립·예술":5,"아시아":3,"국내 영화":6,"한국 독립·예술":5,"예술영화관":5,"지역 예술":6}
 counts={}
 selected=[]
 for x in items:
@@ -53,7 +53,7 @@ for x in items:
         "tags":prev.get("tags",[]),
         "translationStatus":prev.get("translationStatus","pending")
     })
-    if len(selected)>=18: break
+    if len(selected)>=32: break
 
 now=datetime.now(timezone.utc).isoformat()
 out={

@@ -1,5 +1,5 @@
 {
-  "officialFestivals": [
+  "officialFestivals":[
     {"name":"Cannes","country":"France","url":"https://www.festival-cannes.com/en/news/"},
     {"name":"Berlinale","country":"Germany","url":"https://www.berlinale.de/en/press/press-releases/"},
     {"name":"Venice","country":"Italy","url":"https://www.labiennale.org/en/cinema"},
@@ -9,11 +9,33 @@
     {"name":"TIFF","country":"Canada","url":"https://tiff.net/press"},
     {"name":"BIFF","country":"Korea","url":"https://www.biff.kr/eng/"}
   ],
-  "queries": [
+  "officialDomestic":[
+    {"name":"영화진흥위원회","url":"https://www.kofic.or.kr/kofic/business/board/selectBoardList.do?boardNumber=181"},
+    {"name":"KOFIC 웹매거진 한국영화","url":"https://magazine.kofic.or.kr/webzine/web2/index.do"},
+    {"name":"인디그라운드","url":"https://www.indieground.kr/indie/newsrelease.do"},
+    {"name":"한국영상자료원","url":"https://www.koreafilm.or.kr/"}
+  ],
+  "artCinemas":[
+    {"name":"INDIE+ POHANG","region":"포항","url":"https://www.dtryx.com/cinema/main.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&BrandCd=indieart&CinemaCd=000057"},
+    {"name":"시네마테크KOFA","region":"서울","url":"https://www.koreafilm.or.kr/cinematheque/screenings"},
+    {"name":"서울아트시네마","region":"서울","url":"https://www.cinematheque.seoul.kr/"},
+    {"name":"인디스페이스","region":"서울","url":"https://indiespace.kr/"},
+    {"name":"아트나인","region":"서울","url":"https://www.artnine.co.kr/"},
+    {"name":"KT&G 상상마당 시네마","region":"서울","url":"https://sangsangmadang.com/movie/list"},
+    {"name":"에무시네마","region":"서울","url":"https://www.emuartspace.com/"}
+  ],
+  "localArts":[
+    {"name":"포항문화재단","region":"포항","url":"https://ilwol.phcf.or.kr/"},
+    {"name":"포항시립미술관","region":"포항","url":"https://poma.pohang.go.kr/"}
+  ],
+  "queries":[
     {"id":"festival_official","category":"영화제","label":"세계 영화제 공식소식","query":"(site:festival-cannes.com OR site:berlinale.de OR site:labiennale.org OR site:sundance.org OR site:locarnofestival.ch OR site:iffr.com OR site:tiff.net OR site:biff.kr) film festival"},
     {"id":"world_indie","category":"해외 독립·예술","label":"해외 독립·예술영화","query":"independent film OR arthouse cinema OR art house film festival"},
     {"id":"art_press","category":"해외 독립·예술","label":"해외 예술영화 매체","query":"(site:indiewire.com OR site:screendaily.com OR site:bfi.org.uk OR site:mubi.com OR site:filmcomment.com) independent film OR arthouse OR film festival"},
     {"id":"asia_indie","category":"아시아","label":"아시아 영화","query":"Asian cinema independent film festival OR auteur film Asia"},
-    {"id":"korea_indie","category":"한국 독립·예술","label":"한국 독립·예술영화","query":"한국 독립영화 예술영화 영화제"}
+    {"id":"korea_official","category":"국내 영화","label":"국내 영화 공식소식","query":"(site:kofic.or.kr OR site:magazine.kofic.or.kr OR site:indieground.kr OR site:koreafilm.or.kr) 한국영화 독립영화 예술영화"},
+    {"id":"korea_indie","category":"한국 독립·예술","label":"한국 독립·예술영화","query":"(site:indieground.kr OR site:koreafilm.or.kr OR site:biff.kr OR site:jeonjufest.kr) 독립영화 예술영화 GV 기획전"},
+    {"id":"art_cinema","category":"예술영화관","label":"국내 예술영화관 소식","query":"(site:koreafilm.or.kr OR site:cinematheque.seoul.kr OR site:indiespace.kr OR site:artnine.co.kr OR site:sangsangmadang.com OR site:emuartspace.com) 영화 기획전 GV 상영"},
+    {"id":"pohang_art","category":"지역 예술","label":"포항 지역 문화예술","query":"(site:phcf.or.kr OR site:ilwol.phcf.or.kr OR site:poma.pohang.go.kr) 포항 전시 공연 문화 예술 영화 축제"}
   ]
 }

@@ -1,4 +1,4 @@
-let NEWS_WEEKLY=null,NEWS_SOURCES=null,newsFilter="all";
+let NEWS_WEEKLY=null,NEWS_SOURCES=null,BRAND_CONFIG=null,newsFilter="all";
 const newsSaved=()=>JSON.parse(localStorage.getItem("indiePohangNewsSaved")||"[]");
 const saveNewsSaved=a=>localStorage.setItem("indiePohangNewsSaved",JSON.stringify(a));
 
@@ -37,26 +37,46 @@ function renderFestivalTracker(){
   const root=document.getElementById("festivalTracker");if(!root)return;
   root.innerHTML=(NEWS_SOURCES?.officialFestivals||[]).map(f=>'<a href="'+f.url+'" target="_blank" rel="noopener"><b>'+esc(f.name)+'</b><small>'+esc(f.country)+'</small></a>').join("");
 }
+function renderCinemaTracker(){
+  const root=document.getElementById("cinemaTracker");if(!root)return;
+  root.innerHTML=(NEWS_SOURCES?.artCinemas||[]).map(f=>'<a href="'+f.url+'" target="_blank" rel="noopener"><b>'+esc(f.name)+'</b><small>'+esc(f.region||"")+'</small></a>').join("");
+}
+function renderLocalArtsTracker(){
+  const root=document.getElementById("localArtsTracker");if(!root)return;
+  root.innerHTML=(NEWS_SOURCES?.localArts||[]).map(f=>'<a href="'+f.url+'" target="_blank" rel="noopener"><b>'+esc(f.name)+'</b><small>'+esc(f.region||"")+'</small></a>').join("");
+}
 function injectNewsroom(){
   if(document.getElementById("newsroom"))return;
   const discover=document.getElementById("discover");if(!discover)return;
   const sec=document.createElement("section");sec.id="newsroom";sec.className="wrap section newsroom";
-  sec.innerHTML='<div class="section-head"><div><div class="kicker">FESTIVAL / WORLD ART CINEMA</div><h2>영화제·독립예술영화 뉴스룸</h2><p>해외 주요 영화제와 독립·예술영화 소식을 한국어 주간판으로 정리합니다.</p></div><button class="ghostbtn" id="newsSavedBtn">저장한 기사</button></div>'+
+  sec.innerHTML='<div class="section-head"><div><div class="kicker">CINEMA / ARTS / LOCAL CULTURE</div><h2>영화·예술 뉴스룸</h2><p>세계 영화제부터 국내 영화산업, 독립·예술영화관, 포항 지역 문화예술까지 한국어 편집 기사로 묶습니다.</p></div><button class="ghostbtn" id="newsSavedBtn">저장한 기사</button></div>'+
     '<article class="news-digest"><div><div class="kicker">WEEKLY DIGEST</div><h3 id="newsDigestTitle"></h3><p id="newsDigestSummary"></p></div><div class="news-digest-meta"><b id="newsCount"></b><span id="newsGenerated"></span></div></article>'+
-    '<div class="festival-tracker" id="festivalTracker"></div>'+
-    '<div class="news-filter" id="newsFilter"><button data-news="all" class="on">이번 주</button><button data-news="영화제">영화제</button><button data-news="해외 독립·예술">해외 독립·예술</button><button data-news="아시아">아시아</button><button data-news="한국 독립·예술">한국</button></div>'+
+    '<div class="source-tracker-block"><div><span>세계 영화제</span><div class="festival-tracker" id="festivalTracker"></div></div><div><span>예술영화관 네트워크</span><div class="festival-tracker cinema-tracker" id="cinemaTracker"></div></div><div><span>지역 예술 소스</span><div class="festival-tracker local-arts-tracker" id="localArtsTracker"></div></div></div>'+
+    '<div class="news-filter" id="newsFilter"><button data-news="all" class="on">전체</button><button data-news="국내 영화">국내 영화</button><button data-news="한국 독립·예술">한국 독립·예술</button><button data-news="예술영화관">예술영화관</button><button data-news="지역 예술">지역 예술</button><button data-news="영화제">영화제</button><button data-news="해외 독립·예술">해외</button><button data-news="아시아">아시아</button></div>'+
     '<div class="news-grid" id="newsGrid"></div>';
   discover.insertAdjacentElement("afterend",sec);
   document.getElementById("newsSavedBtn").onclick=()=>{newsFilter="saved";sec.querySelectorAll("[data-news]").forEach(x=>x.classList.remove("on"));renderNewsCards()};
   sec.querySelectorAll("[data-news]").forEach(b=>b.onclick=()=>{newsFilter=b.dataset.news;sec.querySelectorAll("[data-news]").forEach(x=>x.classList.toggle("on",x===b));renderNewsCards()});
 }
+function applyBrandConfig(){
+  if(!BRAND_CONFIG)return;
+  const name=BRAND_CONFIG.name||"INDIE PORT",origin=BRAND_CONFIG.origin?.label||"INDIE+ POHANG";
+  const mark=document.getElementById("brandMark"),brand=document.getElementById("brandName"),sub=document.getElementById("brandOrigin"),footer=document.getElementById("brandFooter");
+  if(mark)mark.textContent=name.split(/\s+/).map(x=>x[0]).join("").slice(0,2).toUpperCase();
+  if(brand){const small=brand.querySelector("small");brand.childNodes[0].nodeValue=name;if(small)small.textContent=(BRAND_CONFIG.status==="working-title"?"WORKING TITLE · ":"")+origin;}
+  if(sub)sub.textContent=(BRAND_CONFIG.status==="working-title"?"WORKING TITLE · ":"")+origin;
+  if(footer)footer.textContent=name+(BRAND_CONFIG.status==="working-title"?" · WORKING TITLE":"");
+  document.title=name+" — independent cinema, arts & local culture";
+}
 async function initV06(){
   try{
-    [NEWS_WEEKLY,NEWS_SOURCES]=await Promise.all([
+    [NEWS_WEEKLY,NEWS_SOURCES,BRAND_CONFIG]=await Promise.all([
       fetch("./data/news-weekly.json?v="+Date.now()).then(r=>r.ok?r.json():null),
-      fetch("./data/news-sources.json?v="+Date.now()).then(r=>r.ok?r.json():null)
+      fetch("./data/news-sources.json?v="+Date.now()).then(r=>r.ok?r.json():null),
+      fetch("./data/brand.json?v="+Date.now()).then(r=>r.ok?r.json():null)
     ]);
   }catch(e){console.warn("newsroom data",e)}
+  applyBrandConfig();
   injectNewsroom();
   if(!NEWS_WEEKLY)return;
   const t=document.getElementById("newsDigestTitle"),s=document.getElementById("newsDigestSummary"),c=document.getElementById("newsCount"),g=document.getElementById("newsGenerated");
@@ -64,6 +84,6 @@ async function initV06(){
   if(s)s.textContent=NEWS_WEEKLY.digestSummary||"주간 요약을 준비 중입니다.";
   if(c)c.textContent=(NEWS_WEEKLY.items||[]).filter(x=>x.translationStatus==="translated-reviewed"&&x.titleKo&&x.summaryKo).length+"개 한글 기사";
   if(g)g.textContent=NEWS_WEEKLY.generatedAt?new Intl.DateTimeFormat("ko-KR",{dateStyle:"medium"}).format(new Date(NEWS_WEEKLY.generatedAt)):"";
-  renderFestivalTracker();renderNewsCards();
+  renderFestivalTracker();renderCinemaTracker();renderLocalArtsTracker();renderNewsCards();
 }
 initV06();

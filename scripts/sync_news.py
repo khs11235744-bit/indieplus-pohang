@@ -73,11 +73,18 @@ for x in items:
     if key and key not in dedup: dedup[key]=x
 items=list(dedup.values())
 
-official_domains={source_domain(x["url"]) for x in CFG.get("officialFestivals",[])}
+official_specs=[]
+for key in ("officialFestivals","officialDomestic","artCinemas","localArts"):
+    official_specs.extend(CFG.get(key,[]))
+official_domains={source_domain(x["url"]) for x in official_specs}
 for x in items:
     dom=source_domain(x.get("sourceUrl"))
     x["official"]=any(dom==d or dom.endswith("."+d) for d in official_domains if d)
-    score=(20 if x["official"] else 0)+(6 if x["category"]=="영화제" else 0)+(4 if x["category"]=="해외 독립·예술" else 0)
+    cat=x["category"]
+    score=(20 if x["official"] else 0)
+    score+=8 if cat in ("국내 영화","지역 예술","예술영화관") else 0
+    score+=6 if cat=="영화제" else 0
+    score+=4 if cat in ("해외 독립·예술","한국 독립·예술") else 0
     if x["publishedAt"]:
         try:
             age=max(0,(now-datetime.fromisoformat(x["publishedAt"])).total_seconds()/86400)
