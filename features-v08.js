@@ -5,7 +5,7 @@ let MAG_STUDIO={code:null,id:null,preset:"journal",format:"feed",stills:[0],rati
 function splitReviewForCards(text,max=5){
   const clean=String(text||"").trim();if(!clean)return [];
   const paras=clean.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);
-  if(paras.length>1)return paras.slice(0,max);
+  if(paras.length>1){if(paras.length<=max)return paras;return [...paras.slice(0,max-1),paras.slice(max-1).join("\n\n")];}
   const sents=clean.split(/(?<=[.!?。！？]|다\.)\s+/).map(x=>x.trim()).filter(Boolean);
   const out=[];let buf="";
   for(const s of sents){if((buf+" "+s).length>210&&buf){out.push(buf.trim());buf=s}else buf+=(buf?" ":"")+s;if(out.length>=max-1)break}
@@ -43,16 +43,16 @@ function magazineFromPost(post){
   item.sourcePostId=post.id;upsertMagazineV2(item);return item;
 }
 async function seedMagazineSamples(){
-  if(magazineV2().some(x=>x.sample))return;
+  if(magazineV2().some(x=>x.id==="sample-what-should-we-have-done"))return;
   try{
     const pack=await fetch("./data/sample-magazines.json?v="+Date.now()).then(r=>r.ok?r.json():null);
     if(!pack?.items?.length)return;
-    const list=magazineV2();
+    const list=magazineV2().filter(x=>!x.sample);
     for(const s of pack.items){
       list.push({
-        id:s.id,issue:s.issue||magIssueNo(),code:null,title:s.filmTitle||"영화",filmTitle:s.filmTitle,filmTitleOriginal:s.filmTitleOriginal,
+        id:s.id,issue:s.issue||magIssueNo(),code:s.code||null,title:s.filmTitle||"영화",filmTitle:s.filmTitle,filmTitleOriginal:s.filmTitleOriginal,
         headline:s.headline,deck:s.deck,author:s.author||"",spoiler:!!s.spoiler,lead:s.lead||"",text:s.body||"",continuationNote:s.continuationNote||"",
-        editorialPlan:s.editorialPlan||[],rating:s.rating||0,tags:s.tags||[],stamp:"",stampCustom:"",preset:s.preset||"journal",stillIndices:[],coverMode:s.coverMode||"text",
+        editorialPlan:s.editorialPlan||[],rating:s.rating||0,tags:s.tags||[],stamp:"",stampCustom:"",preset:s.preset||"journal",stillIndices:s.stillIndices||[0],coverMode:s.coverMode||"still",
         slides:splitReviewForCards(s.body||"",5),sample:true,excerptOnly:!!s.excerptOnly,createdAt:s.createdAt||new Date().toISOString(),updatedAt:s.createdAt||new Date().toISOString()
       });
     }
@@ -102,20 +102,19 @@ function debounceMagPreview(){clearTimeout(window.__magv2);window.__magv2=setTim
 function ensureMagazineStudioV2(){
   let panel=document.getElementById("magStudioV2");if(panel)return panel;
   panel=document.createElement("div");panel.id="magStudioV2";panel.className="share-panel mag-studio-v2";
-  panel.innerHTML='<div class="share-sheet mag-studio-sheet"><button class="close" id="closeMagStudio">×</button><div class="kicker">CINEMA JOURNAL STUDIO</div><h2>비평을 잡지 한 면으로</h2><p>비평문을 편집하고, 같은 원고에서 카드뉴스를 자동으로 만듭니다.</p>'+
+  panel.innerHTML='<div class="share-sheet mag-studio-sheet"><button class="close" id="closeMagStudio">×</button><div class="kicker">CARD NEWS STUDIO</div><h2>비평을 카드뉴스로</h2><p>포스터와 스틸을 골라 같은 비평문에서 SNS 카드뉴스를 먼저 만들고, 필요하면 잡지로도 보관합니다.</p><div id="cardNewsStudioV2" class="cardnews-studio-v2"></div>'+
     '<div class="mag-studio-layout"><div class="mag-controls">'+
     '<label>영화<input id="magFilm" maxlength="80"></label><label>제목<input id="magHeadline" maxlength="120"></label><label>부제<input id="magDeck" maxlength="180"></label><label>글쓴이<input id="magAuthor" maxlength="40"></label>'+
     '<label>본문<textarea id="magBody" maxlength="12000"></textarea></label>'+
     '<div class="mag-meta-grid"><label>별점<input id="magRating" type="number" min="0" max="5" step="0.5"></label><label>태그<input id="magTags" placeholder="#영화비평 #시네필"></label><label class="check"><input id="magSpoiler" type="checkbox"> 스포일러</label></div>'+
     '<div class="mag-preset-row" id="magPresetRow"></div><div class="mag-still-row" id="magStillRow"></div>'+
     '<div class="mag-meta-grid"><label>도장<select id="magStamp"><option value="">없음</option><option>관람완료</option><option>강력추천</option><option>GV 참석</option><option>재관람</option><option>ARCHIVE</option></select></label><label>자유 도장<input id="magStampCustom" maxlength="16" placeholder="예: MY FAVORITE"></label></div>'+
-    '<div class="mag-action-row"><button class="primary" id="saveMagV2">잡지에 저장</button><button class="ghostbtn" id="exportMagV2">잡지 1면 이미지</button><button class="ghostbtn" id="openCardNewsV2">카드뉴스 만들기</button></div>'+
-    '</div><div class="mag-preview-wrap"><article id="magPagePreview" class="mag-page-preview"></article></div></div>'+
-    '<div id="cardNewsStudioV2" class="cardnews-studio-v2"></div></div>';
+    '<div class="mag-action-row"><button class="primary" id="openCardNewsV2">카드뉴스 만들기</button><button class="ghostbtn" id="saveMagV2">잡지에 보관</button><button class="ghostbtn" id="exportMagV2">잡지 1면 이미지</button></div>'+
+    '</div><div class="mag-preview-wrap"><article id="magPagePreview" class="mag-page-preview"></article></div></div></div>';
   document.body.appendChild(panel);
   document.getElementById("closeMagStudio").onclick=()=>panel.classList.remove("open");
   panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("open")});
-  const names=[["journal","저널"],["critic","크리틱"],["festival","프로그램"],["zine","진"],["newspaper","신문"],["archive","아카이브"],["noir","누아르"],["postcard","포스트카드"]];
+  const names=[["journal","Film Journal"],["critic","Critic's Note"],["festival","Festival Program"],["zine","Indie Zine"],["newspaper","Cinema Daily"],["archive","Archive"],["noir","Noir File"],["postcard","Movie Postcard"]];
   document.getElementById("magPresetRow").innerHTML=names.map(([k,n])=>'<button data-magpreset="'+k+'">'+n+'</button>').join("");
   panel.querySelectorAll("[data-magpreset]").forEach(b=>b.onclick=()=>{MAG_STUDIO.preset=b.dataset.magpreset;panel.querySelectorAll("[data-magpreset]").forEach(x=>x.classList.toggle("on",x===b));renderMagazinePreviewV2();renderCardNewsV2()});
   ["magFilm","magHeadline","magDeck","magAuthor","magBody","magRating","magTags","magSpoiler","magStamp","magStampCustom"].forEach(id=>document.getElementById(id).addEventListener("input",debounceMagPreview));
@@ -176,28 +175,40 @@ async function exportMagazinePageV2(){
   const item=studioItemFromForm(),blob=await makeMagazinePageBlobV2(item),url=URL.createObjectURL(blob),a=document.createElement("a");
   a.href=url;a.download="indie-port-journal-"+(item.issue||"issue")+".png";a.click();setTimeout(()=>URL.revokeObjectURL(url),1800);toast("잡지 1면 이미지를 저장했습니다.");
 }
+function cardVisualsV2(item){
+  const code=item?.code,a=shareAssets?.[code]||{},stills=(a.stills||[]).filter(Boolean),out=[];
+  const pick=(item?.stillIndices||[])[0];if(Number.isInteger(pick)&&stills[pick])out.push(stills[pick]);
+  if(a.poster&&!out.includes(a.poster))out.push(a.poster);for(const s of stills)if(!out.includes(s))out.push(s);
+  return out.length?out:localStills(code);
+}
 function cardSlideDataV2(item){
-  const chunks=splitReviewForCards(item.text,5),slides=[];
+  const chunks=splitReviewForCards(item.text,4),slides=[];
   slides.push({kind:"cover",title:item.headline,body:item.deck||item.lead||"",index:0});
   chunks.slice(0,4).forEach((body,i)=>slides.push({kind:"body",title:i===0?"비평":"계속 읽기",body,index:i+1}));
   return slides.slice(0,5);
 }
 async function makeCardSlideBlobV2(item,slide,index){
   const p=magPreset(item.preset),w=1080,h=1350,canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;const ctx=canvas.getContext("2d"),pad=74;
-  ctx.fillStyle=p.bg;ctx.fillRect(0,0,w,h);const stills=item.code?localStills(item.code):[];
-  const useStill=stills[(item.stillIndices||[])[index%(item.stillIndices||[0]).length]||0]||stills[0]||"";
-  if(useStill&&index===0){try{const img=await loadImage(useStill);coverDraw(ctx,img,0,0,w,610);const g=ctx.createLinearGradient(0,350,0,710);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,p.bg);ctx.fillStyle=g;ctx.fillRect(0,350,w,370)}catch(e){}}
-  const start=index===0&&useStill?650:120;ctx.fillStyle=p.accent;ctx.font="900 24px Pretendard, sans-serif";ctx.fillText("INDIE PORT · CARD "+String(index+1).padStart(2,"0")+" / "+String(cardSlideDataV2(item).length).padStart(2,"0"),pad,start);
+  ctx.fillStyle=p.bg;ctx.fillRect(0,0,w,h);const stills=item.code?cardVisualsV2(item):[];
+  const useStill=stills[index%stills.length]||stills[0]||"";
+  if(useStill){try{const img=await loadImage(useStill);coverDraw(ctx,img,0,0,w,610);const g=ctx.createLinearGradient(0,350,0,710);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,p.bg);ctx.fillStyle=g;ctx.fillRect(0,350,w,370)}catch(e){}}
+  const start=useStill?650:120;ctx.fillStyle=p.accent;ctx.font="900 24px Pretendard, sans-serif";ctx.fillText("INDIE PORT · CARD "+String(index+1).padStart(2,"0")+" / "+String(cardSlideDataV2(item).length).padStart(2,"0"),pad,start);
   ctx.fillStyle=p.text;ctx.font=(p.serif?"900 58px Georgia, serif":"900 58px Pretendard, sans-serif");const ts=wrapLines(ctx,slide.title||item.headline,w-pad*2,3);ts.forEach((line,i)=>ctx.fillText(line,pad,start+76+i*68));
-  let y=start+76+ts.length*68+40;ctx.font=(p.serif?"28px Georgia, serif":"28px Pretendard, sans-serif");const body=wrapLines(ctx,slide.body||"",w-pad*2,index===0?7:18);body.forEach((line,i)=>ctx.fillText(line,pad,y+i*42));
+  let y=start+76+ts.length*68+40;ctx.font=(p.serif?"28px Georgia, serif":"28px Pretendard, sans-serif");const body=wrapLines(ctx,slide.body||"",w-pad*2,index===0?6:(useStill?10:18));body.forEach((line,i)=>ctx.fillText(line,pad,y+i*42));
   if(item.rating&&index===0){ctx.fillStyle=p.accent;ctx.font="800 26px Pretendard, sans-serif";ctx.fillText("★ "+Number(item.rating).toFixed(1)+" / 5",pad,h-150)}
-  ctx.fillStyle=p.muted;ctx.font="19px Pretendard, sans-serif";ctx.fillText("글 "+(item.author||"")+"   "+(item.tags||[]).slice(0,3).map(t=>"#"+t).join(" "),pad,h-72);
+  const stamp=item.stampCustom||item.stamp;if(stamp){ctx.save();ctx.translate(w-190,h-150);ctx.rotate(-.1);ctx.strokeStyle=p.accent;ctx.lineWidth=4;ctx.strokeRect(-105,-34,210,68);ctx.fillStyle=p.accent;ctx.font="900 22px Pretendard, sans-serif";ctx.textAlign="center";ctx.fillText(stamp,0,7);ctx.restore()}
+  ctx.fillStyle=p.muted;ctx.font="19px Pretendard, sans-serif";ctx.textAlign="left";ctx.fillText("글 "+(item.author||"")+"   "+(item.tags||[]).slice(0,3).map(t=>"#"+t).join(" "),pad,h-72);
   return await new Promise(resolve=>canvas.toBlob(resolve,"image/png",.96));
 }
 function renderCardNewsV2(){
-  const root=document.getElementById("cardNewsStudioV2");if(!root)return;const item=studioItemFromForm(),slides=cardSlideDataV2(item);
-  root.innerHTML='<div class="cardnews-head"><div><div class="kicker">AUTO CARD NEWS</div><h3>같은 비평문으로 '+slides.length+'장 카드뉴스</h3><p>첫 장은 표지, 이후 장은 본문을 자동 분할합니다.</p></div><div><button class="ghostbtn" id="downloadCardsV2">전체 저장</button><button class="primary" id="shareCardsV2">SNS 공유</button></div></div><div class="cardnews-thumbs">'+slides.map((s,i)=>'<article><span>'+(i+1)+'</span><b>'+esc(s.title)+'</b><p>'+esc(s.body).slice(0,90)+'</p></article>').join("")+'</div>';
-  document.getElementById("downloadCardsV2").onclick=()=>exportCardNewsV2(false);document.getElementById("shareCardsV2").onclick=()=>exportCardNewsV2(true);
+  const root=document.getElementById("cardNewsStudioV2");if(!root)return;const item=studioItemFromForm(),slides=cardSlideDataV2(item),thumbs=item.code?cardVisualsV2(item):[];
+  root.innerHTML='<div class="cardnews-head"><div><div class="kicker">AUTO CARD NEWS</div><h3>같은 비평문으로 '+slides.length+'장 카드뉴스</h3><p>첫 장은 표지, 이후 장은 본문을 자동 분할합니다.</p></div><div><button class="ghostbtn" id="downloadCardsV2">전체 저장</button><button class="primary" id="shareCardsV2">SNS 공유</button></div></div><div class="cardnews-thumbs">'+slides.map((s,i)=>'<article>'+(thumbs.length?'<img src="'+thumbs[i%thumbs.length]+'" alt="">':'')+'<span>'+(i+1)+'</span><b>'+esc(s.title)+'</b><p>'+esc(s.body).slice(0,90)+'</p><button class="card-save-one" data-card-save="'+i+'">이 장 저장</button></article>').join("")+'</div>';
+  document.getElementById("downloadCardsV2").onclick=()=>exportCardNewsV2(false);document.getElementById("shareCardsV2").onclick=()=>exportCardNewsV2(true);root.querySelectorAll("[data-card-save]").forEach(b=>b.onclick=()=>exportCardSlideV2(Number(b.dataset.cardSave)));
+}
+async function exportCardSlideV2(index){
+  const item=studioItemFromForm(),slides=cardSlideDataV2(item),slide=slides[index];if(!slide)return;
+  const blob=await makeCardSlideBlobV2(item,slide,index),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="indie-port-card-"+String(index+1).padStart(2,"0")+".png";a.click();setTimeout(()=>URL.revokeObjectURL(url),1800);toast((index+1)+"번 카드를 저장했습니다.");
 }
 async function exportCardNewsV2(share){
   const item=studioItemFromForm(),slides=cardSlideDataV2(item),files=[];
@@ -220,3 +231,4 @@ async function initV08(){
   },100);
 }
 initV08();
+// v0.9 card studio extension

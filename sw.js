@@ -1,4 +1,4 @@
-const CACHE="indie-port-v08";
+const CACHE="indie-port-v09";
 const CORE=["./","./index.html","./app.css","./app.js","./features-v04.js","./features-v05.js","./features-v06.js","./features-v07.js","./features-v08.js","./data/live.json","./data/movies.json","./data/programs.json","./data/editorial.json","./data/share-assets.json","./data/providers.json","./data/api-status.json","./data/news-sources.json","./data/news-weekly.json","./data/cinephile-tips.json","./data/sample-magazines.json","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE))));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));

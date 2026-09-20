@@ -33,7 +33,7 @@ function renderCommunityBoard(){
     return '<article class="board-post"><div class="board-author"><b>'+esc(p.author)+'</b><small>'+new Date(p.createdAt).toLocaleDateString("ko-KR")+'</small></div>'+
       '<div class="board-movie"><img src="'+(m.poster||'')+'" alt=""><div><small>'+esc(p.type||"비평")+'</small><h3>'+esc(m.title||p.title||"영화")+'</h3><div class="rating-line">'+(p.rating?stars(p.rating)+" "+p.rating.toFixed(1):"별점 없음")+'</div></div></div>'+
       '<h4>'+esc(p.title||"")+'</h4><p>'+esc(p.body||"")+'</p><div class="board-tags">'+tags+'</div>'+
-      '<div class="board-actions"><button onclick="togglePostLike(\''+p.id+'\')">'+(p.liked?"♥":"♡")+' '+(p.likes||0)+'</button><button onclick="openCommentPrompt(\''+p.id+'\')">댓글 '+(p.comments?.length||0)+'</button><button onclick="openSharePanelV05(\''+p.code+'\',\''+p.id+'\')">공유</button><button onclick="saveAsMagazine(\''+p.id+'\')">잡지로 보관</button></div>'+
+      '<div class="board-actions"><button onclick="togglePostLike(\''+p.id+'\')">'+(p.liked?"♥":"♡")+' '+(p.likes||0)+'</button><button onclick="openCommentPrompt(\''+p.id+'\')">댓글 '+(p.comments?.length||0)+'</button><button onclick="openMagazineStudioV2(null,postById(\''+p.id+'\'))">공유</button><button onclick="saveAsMagazine(\''+p.id+'\')">잡지로 보관</button></div>'+
       (p.comments?.length?'<div class="comment-list">'+p.comments.slice(-3).map(c=>'<p><b>'+esc(c.author)+'</b> '+esc(c.text)+'</p>').join("")+'</div>':"")+
       '</article>';
   }).join(""):'<div class="empty">첫 글을 남겨보세요. 한줄평, 긴 비평, GV 후기, 추천, 질문 모두 가능합니다.</div>';
@@ -220,7 +220,7 @@ function initV05(){
     if(live&&Object.keys(MOVIES||{}).length&&document.getElementById("community")){
       clearInterval(wait);
       injectCommunityStudio();renderCommunityBoard();renderMagazineArchive();injectProfileLogin();
-      const shareBtn=document.getElementById("detailShare");if(shareBtn)shareBtn.onclick=()=>openSharePanelV05(activeMovieCode);
+      const shareBtn=document.getElementById("detailShare");if(shareBtn)shareBtn.onclick=()=>openMagazineStudioV2(null);
       const saveReviewBtn=document.getElementById("saveReview");
       if(saveReviewBtn&&!saveReviewBtn.dataset.v05){
         saveReviewBtn.dataset.v05="1";
