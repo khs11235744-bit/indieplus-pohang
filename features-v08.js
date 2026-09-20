@@ -1,6 +1,6 @@
 const magazineV2=()=>JSON.parse(localStorage.getItem("indiePortMagazineV2")||"[]");
 const saveMagazineV2=a=>localStorage.setItem("indiePortMagazineV2",JSON.stringify(a));
-let MAG_STUDIO={code:null,id:null,preset:"journal",format:"feed",stills:[0],rating:0,tags:[],stamp:"",stampCustom:"",textAlign:"left",fontScale:1,slides:[]};
+let MAG_STUDIO={code:null,id:null,preset:"journal",format:"feed",stills:[0],rating:0,tags:[],stamp:"",stampCustom:"",textAlign:"left",fontScale:1,slides:[],cardManual:false,cardEdits:[],cardActiveEdit:1};
 let MAGAZINE_COLLECTION_META=null;
 
 function splitReviewForCards(text,max=5){
@@ -54,7 +54,7 @@ async function seedMagazineSamples(){
     const list=existing.filter(x=>!x.sample);
     for(const s of pack.items){
       list.push({
-        id:s.id,issue:s.issue||magIssueNo(),year:s.year||null,sourceDate:s.sourceDate||"",section:s.section||"CRITICISM",recoveryStatus:s.recoveryStatus||"",
+        id:s.id,issue:s.issue||magIssueNo(),year:s.year||null,sourceDate:s.sourceDate||"",section:s.section||"CRITICISM",recoveryStatus:s.recoveryStatus||"",magazineEligible:s.magazineEligible!==false,photos:s.photos||[],
         code:s.code||null,title:s.filmTitle||"영화",filmTitle:s.filmTitle,filmTitleOriginal:s.filmTitleOriginal,
         headline:s.headline,deck:s.deck,author:s.author||"",spoiler:!!s.spoiler,lead:s.lead||"",text:s.body||"",continuationNote:s.continuationNote||"",
         editorialPlan:s.editorialPlan||[],rating:s.rating||0,tags:s.tags||[],stamp:"",stampCustom:"",preset:s.preset||"journal",stillIndices:s.stillIndices||[0],coverMode:s.coverMode||"still",
@@ -65,21 +65,34 @@ async function seedMagazineSamples(){
   }catch(e){console.warn("sample magazines",e)}
 }
 function magazineDisplayTitle(x){return x.headline||x.title||x.filmTitle||"영화 비평"}
+function magazineVisualsV2(x){
+  const own=(x?.photos||[]).filter(Boolean);if(own.length)return own;
+  if(x?.code)return cardVisualsV2(x).filter(Boolean);
+  return [];
+}
+function isMagazineLongformV2(x){
+  return !!x&&x.sample&&x.magazineEligible!==false&&String(x.text||"").trim().length>=800&&magazineVisualsV2(x).length>0;
+}
 function renderMagazineShelfV2(){
   const my=document.getElementById("my");if(!my)return;
   let root=document.getElementById("magazineShelfV2");
   if(!root){root=document.createElement("section");root.id="magazineShelfV2";root.className="magazine-shelf-v2";my.appendChild(root)}
-  const all=magazineV2(),samples=all.filter(x=>x.sample).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||""))),mine=all.filter(x=>!x.sample).slice().reverse();
-  const meta=MAGAZINE_COLLECTION_META||{issue:"VOL. 01",title:"권형석 영화비평 2025–2026",subtitle:"기억, 영화, 사람",author:"권형석"};
-  const annual=samples.length?'<article class="annual-cover-card" id="openAnnualMagazine"><img src="./assets/share/029204-still1.png" alt=""><div class="annual-cover-shade"></div><div class="annual-cover-copy"><div class="mag-v2-issue">'+esc(meta.issue||"VOL. 01")+' · '+samples.length+' ESSAYS</div><div class="kicker">CRITIC ANNUAL 2025–2026</div><h4>'+esc(meta.title||"영화비평 연감")+'</h4><p>'+esc(meta.subtitle||"")+'</p><footer><span>글 '+esc(meta.author||"권형석")+'</span><span>한 권으로 읽기 →</span></footer></div></article>':"";
+  const all=magazineV2(),samples=all.filter(isMagazineLongformV2).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||""))),mine=all.filter(x=>!x.sample).slice().reverse();
+  const meta=MAGAZINE_COLLECTION_META||{issue:"VOL. 01",title:"권형석 영화비평 2025–2026",subtitle:"기억, 영화, 사람",author:"권형석"},coverVisual=samples.length?(magazineVisualsV2(samples[0])[1]||magazineVisualsV2(samples[0])[0]||""):"";
+  const annual=samples.length?'<article class="annual-cover-card" id="openAnnualMagazine"><img src="'+coverVisual+'" alt=""><div class="annual-cover-shade"></div><div class="annual-cover-copy"><div class="mag-v2-issue">'+esc(meta.issue||"VOL. 01")+' · '+samples.length+' ESSAYS</div><div class="kicker">CRITIC ANNUAL 2025–2026</div><h4>'+esc(meta.title||"영화비평 연감")+'</h4><p>'+esc(meta.subtitle||"")+'</p><footer><span>글 '+esc(meta.author||"권형석")+'</span><span>한 권으로 읽기 →</span></footer></div></article>':"";
   root.innerHTML='<div class="mag-v2-head"><div><div class="kicker">MY CINEMA JOURNAL</div><h3>비평 잡지 서재</h3><p>긴 비평은 원문 그대로 잡지에 싣고, 카드뉴스는 핵심 문장만 별도로 만듭니다.</p></div><button class="ghostbtn" id="newBlankMagazine">+ 새 비평</button></div>'+annual+
     (mine.length?'<div class="mag-v2-grid personal-mag-grid">'+mine.map(x=>'<article class="mag-v2-cover preset-'+esc(x.preset||"journal")+'" data-open-mag="'+esc(x.id)+'"><div class="mag-v2-issue">ISSUE '+esc(x.issue||"")+'</div><div class="mag-v2-film">'+esc(x.filmTitle||x.title||"FILM JOURNAL")+'</div><h4>'+esc(magazineDisplayTitle(x))+'</h4><p>'+esc(x.deck||x.lead||"")+'</p><footer><span>'+esc(x.author||userProfile().nickname||"")+'</span><span>'+esc((x.tags||[]).slice(0,2).map(t=>"#"+t).join(" "))+'</span></footer></article>').join("")+'</div>':"");
   document.getElementById("newBlankMagazine").onclick=()=>openMagazineStudioV2(null);
   document.getElementById("openAnnualMagazine")?.addEventListener("click",openMagazineAnnualV2);
   root.querySelectorAll("[data-open-mag]").forEach(el=>el.onclick=()=>openMagazineStudioV2(el.dataset.openMag));
 }
-function annualBodyHtmlV2(text){
-  return String(text||"").split(/\n{2,}/).map(p=>'<p>'+esc(p).replace(/\n/g,"<br>")+'</p>').join("");
+function annualArticleBodyV2(x){
+  const paras=String(x?.text||"").split(/\n{2,}/).map(p=>p.trim()).filter(Boolean),visuals=magazineVisualsV2(x).slice(1,5);
+  if(!paras.length)return "";
+  const marks=visuals.map((_,i)=>Math.min(paras.length-1,Math.max(1,Math.round((i+1)*paras.length/(visuals.length+1)))));
+  let out="";
+  paras.forEach((p,i)=>{out+='<p>'+esc(p).replace(/\n/g,"<br>")+'</p>';marks.forEach((m,j)=>{if(m===i&&visuals[j])out+='<figure class="annual-inline-photo auto-photo-'+(j+1)+'"><img src="'+visuals[j]+'" alt=""><figcaption>AUTO PHOTO · '+esc(x.filmTitle||x.title||"FILM")+'</figcaption></figure>'})});
+  return out;
 }
 function ensureMagazineAnnualV2(){
   let panel=document.getElementById("magAnnualV2");if(panel)return panel;
@@ -88,11 +101,15 @@ function ensureMagazineAnnualV2(){
   document.body.appendChild(panel);document.getElementById("closeAnnualV2").onclick=()=>panel.classList.remove("open");panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("open")});return panel;
 }
 function openMagazineAnnualV2(){
-  const panel=ensureMagazineAnnualV2(),root=document.getElementById("annualReaderContent"),list=magazineV2().filter(x=>x.sample).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||"")));
-  const meta=MAGAZINE_COLLECTION_META||{issue:"VOL. 01",title:"권형석 영화비평 2025–2026",subtitle:"기억, 영화, 사람",author:"권형석"};
+  const panel=ensureMagazineAnnualV2(),root=document.getElementById("annualReaderContent"),list=magazineV2().filter(isMagazineLongformV2).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||"")));
+  const meta=MAGAZINE_COLLECTION_META||{issue:"VOL. 01",title:"권형석 영화비평 2025–2026",subtitle:"기억, 영화, 사람",author:"권형석",note:"장문 원문과 사진을 함께 확보한 글만 수록합니다."};
+  if(!list.length){root.innerHTML='<div class="empty">장문 원문과 사진을 모두 확보한 비평이 아직 없습니다.</div>';panel.classList.add("open");return}
+  const coverVisual=magazineVisualsV2(list[0])[1]||magazineVisualsV2(list[0])[0]||"";
   const toc=list.map((x,i)=>'<button data-annual-jump="'+esc(x.id)+'"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x.filmTitle||x.title||"")+'</b><small>'+esc(x.headline||"")+'</small></button>').join("");
-  const articles=list.map((x,i)=>{const visual=x.code?(cardVisualsV2(x)[i%Math.max(1,cardVisualsV2(x).length)]||""):"";return '<article class="annual-article '+(x.excerptOnly?"excerpt":"full")+'" id="annual-'+esc(x.id)+'">'+(visual?'<img class="annual-article-image" src="'+visual+'" alt="">':'')+'<div class="annual-article-meta"><span>'+esc(x.section||"CRITICISM")+'</span><span>'+esc(x.sourceDate||String(x.year||""))+'</span><span>'+(x.excerptOnly?"회수 원문 발췌":"원문 전문")+'</span></div><h2>'+esc(x.headline||x.filmTitle||"")+'</h2>'+(x.deck?'<h3>'+esc(x.deck)+'</h3>':'')+'<div class="annual-byline">글 '+esc(x.author||"권형석")+(x.rating?' · ★ '+Number(x.rating).toFixed(1)+' / 5':'')+'</div><div class="annual-copy">'+annualBodyHtmlV2(x.text)+'</div>'+(x.excerptOnly?'<div class="annual-recovery-note">확인되지 않은 문단은 새로 만들지 않고, 현재 회수 가능한 실제 문장만 수록했습니다.</div>':'')+'<div class="annual-tags">'+(x.tags||[]).map(t=>'<span>#'+esc(t)+'</span>').join("")+'</div></article>'}).join("");
-  root.innerHTML='<section class="annual-front"><img src="./assets/share/029204-still1.png" alt=""><div class="annual-front-overlay"></div><div class="annual-front-copy"><div class="kicker">INDIE PORT · CRITIC ANNUAL</div><small>'+esc(meta.issue||"VOL. 01")+'</small><h1>'+esc(meta.title||"영화비평 연감")+'</h1><p>'+esc(meta.subtitle||"")+'</p><b>글 '+esc(meta.author||"권형석")+'</b><em>'+list.length+'편 수록 · 긴 글은 전문 그대로</em></div></section><section class="annual-toc"><div class="kicker">CONTENTS</div><h2>차례</h2><div>'+toc+'</div></section><div class="annual-articles">'+articles+'</div>';
+  let lastYear=null,articles="";
+  list.forEach((x,i)=>{const y=x.year||String(x.sourceDate||"").slice(0,4)||"ARCHIVE",visuals=magazineVisualsV2(x);if(y!==lastYear){articles+='<section class="annual-year-divider"><small>CHAPTER</small><h2>'+esc(String(y))+'</h2><p>긴 글과 영화 이미지가 함께 남은 기록.</p></section>';lastYear=y}
+    articles+='<article class="annual-article full" id="annual-'+esc(x.id)+'">'+(visuals[0]?'<img class="annual-article-image" src="'+visuals[0]+'" alt="">':'')+'<div class="annual-article-meta"><span>'+esc(x.section||"CRITICISM")+'</span><span>'+esc(x.sourceDate||String(x.year||""))+'</span><span>LONGFORM · AUTO PHOTO</span></div><h2>'+esc(x.headline||x.filmTitle||"")+'</h2>'+(x.deck?'<h3>'+esc(x.deck)+'</h3>':'')+'<div class="annual-byline">글 '+esc(x.author||"권형석")+(x.rating?' · ★ '+Number(x.rating).toFixed(1)+' / 5':'')+'</div><div class="annual-copy">'+annualArticleBodyV2(x)+'</div><div class="annual-tags">'+(x.tags||[]).map(t=>'<span>#'+esc(t)+'</span>').join("")+'</div></article>'});
+  root.innerHTML='<section class="annual-front"><img src="'+coverVisual+'" alt=""><div class="annual-front-overlay"></div><div class="annual-front-copy"><div class="kicker">INDIE PORT · CRITIC ANNUAL</div><small>'+esc(meta.issue||"VOL. 01")+'</small><h1>'+esc(meta.title||"영화비평 연감")+'</h1><p>'+esc(meta.subtitle||"")+'</p><b>글 '+esc(meta.author||"권형석")+'</b><em>'+list.length+'편 수록 · 장문 원문 + 자동 사진 편집</em></div></section><section class="annual-editor-note"><div class="kicker">EDITOR’S NOTE</div><h2>짧은 메모가 아니라, 끝까지 읽는 비평</h2><p>'+esc(meta.note||"장문 원문과 사진을 함께 확보한 글만 수록합니다.")+'</p></section><section class="annual-toc"><div class="kicker">CONTENTS</div><h2>차례</h2><div>'+toc+'</div></section><div class="annual-articles">'+articles+'</div><section class="annual-afterword"><div class="kicker">AFTERWORD</div><h2>영화가 끝난 뒤에도 남는 문장</h2><p>이 잡지는 짧은 메모를 억지로 늘리지 않는다. 충분한 원문과 영화 이미지가 함께 남은 글만 한 편의 비평으로 편집한다.</p><b>'+esc(meta.author||"권형석")+'</b></section>';
   root.querySelectorAll("[data-annual-jump]").forEach(b=>b.onclick=()=>document.getElementById("annual-"+b.dataset.annualJump)?.scrollIntoView({behavior:"smooth",block:"start"}));
   panel.classList.add("open");panel.querySelector(".annual-reader-sheet").scrollTop=0;
 }
@@ -155,7 +172,7 @@ function openMagazineStudioV2(idOrNull,fromPost=null){
   let x=idOrNull?magazineV2().find(v=>v.id===idOrNull):null;
   if(!x&&fromPost)x=magazineFromPost(fromPost);
   if(!x)x={id:null,issue:magIssueNo(),code:activeMovieCode||null,title:activeMovieCode?MOVIES[activeMovieCode]?.title:"",filmTitle:activeMovieCode?MOVIES[activeMovieCode]?.title:"",headline:activeMovieCode?MOVIES[activeMovieCode]?.title:"새 비평",deck:"",author:userProfile().nickname||"",spoiler:false,text:"",rating:0,tags:[],stamp:"",stampCustom:"",preset:"journal",stillIndices:[0]};
-  MAG_STUDIO={code:x.code||null,id:x.id||null,preset:x.preset||"journal",format:x.cardFormat||"feed",stills:x.stillIndices||[0],rating:x.rating||0,tags:x.tags||[],stamp:x.stamp||"",stampCustom:x.stampCustom||"",textAlign:"left",fontScale:1,slides:x.slides||[]};
+  MAG_STUDIO={code:x.code||null,id:x.id||null,preset:x.preset||"journal",format:x.cardFormat||"feed",stills:x.stillIndices||[0],rating:x.rating||0,tags:x.tags||[],stamp:x.stamp||"",stampCustom:x.stampCustom||"",textAlign:"left",fontScale:1,slides:x.slides||[],cardManual:false,cardEdits:[],cardActiveEdit:1};
   document.getElementById("magFilm").value=x.filmTitle||x.title||"";
   document.getElementById("magHeadline").value=x.headline||"";
   document.getElementById("magDeck").value=x.deck||"";
@@ -213,11 +230,20 @@ function clipCardTextV2(text,max=148){
   const cut=clean.slice(0,max+1),at=Math.max(cut.lastIndexOf(" "),cut.lastIndexOf("다."),cut.lastIndexOf("."));
   return clean.slice(0,at>Math.round(max*.62)?at+1:max).trim()+"…";
 }
-function cardSlideDataV2(item){
+function cardAutoSlidesV2(item){
   const chunks=splitReviewForCards(item.text,4).slice(0,4).map(x=>clipCardTextV2(x,148)),slides=[];
   slides.push({kind:"cover",title:item.headline,body:clipCardTextV2(item.deck||item.lead||"",104),index:0});
   chunks.forEach((body,i)=>slides.push({kind:"body",title:i===0?"비평의 시작":"핵심 문장 "+String(i+1).padStart(2,"0"),body,index:i+1}));
   return slides.slice(0,5);
+}
+function cardSentenceCandidatesV2(text){
+  const clean=String(text||"").trim(),parts=clean.split(/\n{2,}|(?<=[.!?。！？]|다\.)\s+/).map(x=>x.replace(/\s+/g," ").trim()).filter(x=>x.length>=12),out=[];
+  parts.forEach(x=>{const c=clipCardTextV2(x,148);if(c&&!out.includes(c))out.push(c)});
+  return out.slice(0,14);
+}
+function cardSlideDataV2(item){
+  if(MAG_STUDIO.cardManual&&MAG_STUDIO.cardEdits?.length)return MAG_STUDIO.cardEdits.slice(0,5).map((s,i)=>({...s,index:i}));
+  return cardAutoSlidesV2(item);
 }
 function cardFormatDimsV2(format){
   if(format==="square")return [1080,1080];
@@ -265,12 +291,24 @@ async function makeCardSlideBlobV2(item,slide,index){
   ctx.fillStyle=p.muted;ctx.font="21px Pretendard, sans-serif";ctx.textAlign="left";ctx.fillText("글 "+(item.author||"")+"   "+(item.tags||[]).slice(0,3).map(t=>"#"+t).join(" "),pad,h-76);
   return await new Promise(resolve=>canvas.toBlob(resolve,"image/png",.96));
 }
+function enableCardManualV2(){
+  const item=studioItemFromForm();MAG_STUDIO.cardManual=true;MAG_STUDIO.cardEdits=cardAutoSlidesV2(item).map(s=>({...s}));MAG_STUDIO.cardActiveEdit=Math.min(1,MAG_STUDIO.cardEdits.length-1);renderCardNewsV2();
+}
+function moveCardEditV2(pos,delta){
+  const to=pos+delta,a=MAG_STUDIO.cardEdits;if(to<0||to>=a.length)return;[a[pos],a[to]]=[a[to],a[pos]];MAG_STUDIO.cardActiveEdit=to;renderCardNewsV2();
+}
+function setCardCandidateV2(text){
+  if(!MAG_STUDIO.cardManual)return;const i=Math.max(0,Math.min(MAG_STUDIO.cardActiveEdit||0,MAG_STUDIO.cardEdits.length-1));MAG_STUDIO.cardEdits[i].body=text;renderCardNewsV2();
+}
 function renderCardNewsV2(){
   const root=document.getElementById("cardNewsStudioV2");if(!root)return;const item=studioItemFromForm(),slides=cardSlideDataV2(item),thumbs=item.code?cardVisualsV2(item):[],cp=magPreset(item.preset);
-  const formats=[["feed","4:5 피드"],["square","1:1"],["story","9:16 스토리"]];
-  const vars='--cp-bg:'+cp.bg+';--cp-text:'+cp.text+';--cp-muted:'+cp.muted+';--cp-accent:'+cp.accent;
-  root.innerHTML='<div class="cardnews-head"><div><div class="kicker">AUTO CARD NEWS</div><h3>'+slides.length+'장 핵심 카드뉴스</h3><p>긴 원문을 줄이지 않습니다. 카드는 실제 원문에서 뽑은 핵심 문장만 크게 보여주고, 전체 글은 아래 잡지에 그대로 남습니다.</p><div class="card-format-row">'+formats.map(([k,n])=>'<button data-card-format="'+k+'" class="'+(MAG_STUDIO.format===k?"on":"")+'">'+n+'</button>').join("")+'</div></div><div class="cardnews-batch"><button class="ghostbtn" id="downloadCardsV2">'+slides.length+'장 ZIP 저장</button><button class="primary" id="shareCardsV2">'+slides.length+'장 SNS 공유</button></div></div><div class="cardnews-thumbs">'+slides.map((s,i)=>'<article class="card-thumb-v2 preset-'+esc(item.preset||"journal")+'" style="'+vars+'">'+(thumbs.length?'<img src="'+thumbs[i%thumbs.length]+'" alt="카드 '+(i+1)+' 이미지">':'')+'<span>CARD '+String(i+1).padStart(2,"0")+'</span><b>'+esc(s.title)+'</b><p>'+esc(s.body)+'</p><button class="card-save-one" data-card-save="'+i+'">이 장 PNG 저장</button></article>').join("")+'</div>';
-  root.querySelectorAll("[data-card-format]").forEach(b=>b.onclick=()=>{MAG_STUDIO.format=b.dataset.cardFormat;renderCardNewsV2()});
+  const formats=[["feed","4:5 피드"],["square","1:1"],["story","9:16 스토리"]],vars='--cp-bg:'+cp.bg+';--cp-text:'+cp.text+';--cp-muted:'+cp.muted+';--cp-accent:'+cp.accent,candidates=cardSentenceCandidatesV2(item.text);
+  const manual=MAG_STUDIO.cardManual?'<section class="card-manual-editor"><div class="card-manual-head"><div><b>5장 문장 직접편집</b><small>원문 후보를 골라 넣거나 직접 고치고, ↑↓로 순서를 바꿀 수 있습니다.</small></div><button id="cardAutoReset" class="ghostbtn">자동분할로 복귀</button></div><div class="card-candidates">'+candidates.map((c,i)=>'<button data-card-candidate="'+i+'">'+esc(c)+'</button>').join("")+'</div><div class="card-edit-list">'+slides.map((s,i)=>'<article class="'+(i===MAG_STUDIO.cardActiveEdit?"active":"")+'" data-card-edit-row="'+i+'"><div><b>CARD '+String(i+1).padStart(2,"0")+'</b><span><button data-card-up="'+i+'" '+(i===0?"disabled":"")+'>↑</button><button data-card-down="'+i+'" '+(i===slides.length-1?"disabled":"")+'>↓</button></span></div><input data-card-title="'+i+'" value="'+esc(s.title||"")+'"><textarea data-card-body="'+i+'" maxlength="180">'+esc(s.body||"")+'</textarea></article>').join("")+'</div></section>':'';
+  root.innerHTML='<div class="cardnews-head"><div><div class="kicker">CARD NEWS STUDIO</div><h3>'+slides.length+'장 핵심 카드뉴스</h3><p>자동 분할을 그대로 쓰거나, 실제 원문에서 원하는 문장을 직접 골라 5장 순서를 편집할 수 있습니다.</p><div class="card-format-row">'+formats.map(([k,n])=>'<button data-card-format="'+k+'" class="'+(MAG_STUDIO.format===k?"on":"")+'">'+n+'</button>').join("")+'<button id="toggleCardManual" class="'+(MAG_STUDIO.cardManual?"on":"")+'">'+(MAG_STUDIO.cardManual?"직접편집 중":"문장 직접편집")+'</button></div></div><div class="cardnews-batch"><button class="ghostbtn" id="downloadCardsV2">'+slides.length+'장 ZIP 저장</button><button class="primary" id="shareCardsV2">'+slides.length+'장 SNS 공유</button></div></div><div class="cardnews-thumbs">'+slides.map((s,i)=>'<article class="card-thumb-v2 preset-'+esc(item.preset||"journal")+'" style="'+vars+'">'+(thumbs.length?'<img src="'+thumbs[i%thumbs.length]+'" alt="카드 '+(i+1)+' 이미지">':'')+'<span>CARD '+String(i+1).padStart(2,"0")+'</span><b>'+esc(s.title)+'</b><p>'+esc(s.body)+'</p><button class="card-save-one" data-card-save="'+i+'">이 장 PNG 저장</button></article>').join("")+'</div>'+manual;
+  root.querySelectorAll("[data-card-format]").forEach(b=>b.onclick=()=>{MAG_STUDIO.format=b.dataset.cardFormat;renderCardNewsV2()});document.getElementById("toggleCardManual").onclick=()=>MAG_STUDIO.cardManual?(MAG_STUDIO.cardManual=false,MAG_STUDIO.cardEdits=[],renderCardNewsV2()):enableCardManualV2();
+  document.getElementById("cardAutoReset")?.addEventListener("click",()=>{MAG_STUDIO.cardManual=false;MAG_STUDIO.cardEdits=[];renderCardNewsV2()});root.querySelectorAll("[data-card-edit-row]").forEach(el=>el.onclick=e=>{if(e.target.closest("button,input,textarea"))return;MAG_STUDIO.cardActiveEdit=Number(el.dataset.cardEditRow);renderCardNewsV2()});
+  root.querySelectorAll("[data-card-title]").forEach(el=>el.oninput=()=>{const i=Number(el.dataset.cardTitle);MAG_STUDIO.cardEdits[i].title=el.value;const t=root.querySelectorAll(".cardnews-thumbs b")[i];if(t)t.textContent=el.value});root.querySelectorAll("[data-card-body]").forEach(el=>el.oninput=()=>{const i=Number(el.dataset.cardBody);MAG_STUDIO.cardEdits[i].body=el.value;const p=root.querySelectorAll(".cardnews-thumbs p")[i];if(p)p.textContent=el.value});
+  root.querySelectorAll("[data-card-up]").forEach(b=>b.onclick=()=>moveCardEditV2(Number(b.dataset.cardUp),-1));root.querySelectorAll("[data-card-down]").forEach(b=>b.onclick=()=>moveCardEditV2(Number(b.dataset.cardDown),1));root.querySelectorAll("[data-card-candidate]").forEach(b=>b.onclick=()=>setCardCandidateV2(candidates[Number(b.dataset.cardCandidate)]||""));
   document.getElementById("downloadCardsV2").onclick=()=>exportCardNewsV2(false);document.getElementById("shareCardsV2").onclick=()=>exportCardNewsV2(true);root.querySelectorAll("[data-card-save]").forEach(b=>b.onclick=()=>exportCardSlideV2(Number(b.dataset.cardSave)));
 }
 async function exportCardSlideV2(index){

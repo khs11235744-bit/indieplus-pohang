@@ -105,7 +105,7 @@ function enhanceDetailUI(){
   if(!document.getElementById("detailWatched")){
     actions.insertAdjacentHTML("beforeend",'<button class="ghostbtn" id="detailWatched">＋ 봤어요</button><button class="ghostbtn" id="detailShare">공유카드</button>');
     document.getElementById("detailWatched").onclick=()=>activeMovieCode&&markWatched(activeMovieCode);
-    document.getElementById("detailShare").onclick=()=>openSharePanel(activeMovieCode);
+    document.getElementById("detailShare").onclick=()=>activeMovieCode&&(typeof openSharePanelV05==="function"?openSharePanelV05(activeMovieCode):openSharePanel(activeMovieCode));
   }
   const sheet=document.querySelector(".sheet");
   if(!document.getElementById("similarMovies"))sheet.insertAdjacentHTML("beforeend",'<section class="detail-extra"><div><div class="kicker">SIMILAR MOVIES</div><h3>비슷한 영화</h3><div id="similarMovies" class="similar-row"></div></div><div><div class="kicker">DIRECTOR FILMOGRAPHY</div><h3>감독의 전작</h3><div id="directorWorks" class="director-works"></div></div></section>');
