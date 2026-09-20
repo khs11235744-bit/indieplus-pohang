@@ -117,7 +117,7 @@ async function makeShareBlobV05(code,opts={}){
   const review=opts.text||editorial.oneLiners?.[code]||m.short||"";if(review){ctx.fillStyle=sty.text;ctx.font=(serif?"600 ":"700 ")+Math.round(w*.029*reviewScale)+"px "+(serif?'Georgia, "Noto Serif KR", serif':'Pretendard, sans-serif');const lineGap=Math.round(w*.041*reviewScale),reviewLines=wrapLines(ctx,review,maxTextW,format==="story"?9:format==="square"?4:6);reviewLines.forEach((line,i)=>ctx.fillText(line,tx,yy+i*lineGap));yy+=reviewLines.length*lineGap+18}
   const tags=(opts.tags||[]).slice(0,8).map(t=>"#"+String(t).replace(/^#/,"")).join("  ");if(tags){ctx.fillStyle=sty.muted;ctx.font="700 "+Math.round(w*.019)+"px Pretendard, sans-serif";ctx.fillText(tags,tx,Math.min(yy,h-pad*1.7))}
   if(opts.stamp){ctx.save();ctx.translate(w-pad*1.55,h-pad*1.25);ctx.rotate(-.12);ctx.strokeStyle=sty.accent;ctx.lineWidth=6;ctx.strokeRect(-150,-48,300,96);ctx.fillStyle=sty.accent;ctx.font="900 "+Math.round(w*.027)+"px Pretendard, sans-serif";ctx.textAlign="center";ctx.fillText(opts.stamp,0,12);ctx.restore()}
-  ctx.fillStyle=sty.muted;ctx.font="600 "+Math.round(w*.018)+"px Pretendard, sans-serif";ctx.textAlign="left";ctx.fillText("indieplus pohang · cinema diary",pad,h-pad*.55);
+  ctx.fillStyle=sty.muted;ctx.font="600 "+Math.round(w*.018)+"px Pretendard, sans-serif";ctx.textAlign="left";ctx.fillText("INDIE PORT · FILM NOTE",pad,h-pad*.55);
   return await new Promise(resolve=>canvas.toBlob(resolve,"image/png",.96));
 }
 let v05PreviewUrl="";
@@ -127,7 +127,7 @@ function openSharePanelV05(code,postId=""){
   let panel=document.getElementById("sharePanelV05");
   if(!panel){
     panel=document.createElement("div");panel.id="sharePanelV05";panel.className="share-panel";
-    panel.innerHTML='<div class="share-sheet v05"><button class="close" id="closeShareV05">×</button><div class="kicker">SOCIAL CARD STUDIO</div><h2>영화 공유카드 자유편집</h2><p>포스터·스틸컷을 최대 5장까지 고르고, 순서·크기·위치를 직접 편집할 수 있습니다.</p>'+
+    panel.innerHTML='<div class="share-sheet v05"><button class="close" id="closeShareV05">×</button><div class="kicker">SOCIAL CARD STUDIO</div><h2>한줄평을 포스터처럼</h2><p>사진 한 장과 한 문장을 먼저 고르세요. 필요한 경우에만 콜라주와 고급 편집을 더합니다.</p>'+
       '<div class="preset-row" id="presetRow"></div><div class="share-formats" id="formatRow"><button data-format="feed" class="on">4:5 피드</button><button data-format="story">9:16 스토리</button><button data-format="square">1:1</button></div>'+
       '<div class="share-photo-title"><b>사진 선택</b><span id="sharePhotoCount">1 / 5</span></div><div class="still-picker multi" id="stillPicker"></div><div class="share-photo-order" id="sharePhotoOrder"></div>'+
       '<div class="share-layout-row"><button data-share-layout="auto" class="on">자동 콜라주</button><button data-share-layout="free">자유편집</button></div>'+
@@ -139,7 +139,7 @@ function openSharePanelV05(code,postId=""){
     document.body.appendChild(panel);
     document.getElementById("closeShareV05").onclick=()=>panel.classList.remove("open");
     panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("open")});
-    document.getElementById("presetRow").innerHTML=[["cinema","Cinema"],["magazine","Magazine"],["ticket","Ticket"],["filmstrip","Filmstrip"],["minimal","Minimal"],["festival","Festival"],["noir","Noir"],["postcard","Postcard"],["editorial","Editorial"],["contact","Contact Sheet"],["split","Split"],["gallery","Gallery"],["neon","Neon"],["classic","Classic"]].map(([k,n],i)=>'<button data-preset="'+k+'" class="'+(i?"":"on")+'">'+n+'</button>').join("");
+    document.getElementById("presetRow").innerHTML=[["editorial","Editorial Cover"],["cinema","Still + Quote"],["split","Split Review"],["gallery","Gallery Label"],["noir","B&W Note"],["classic","Archive Print"]].map(([k,n],i)=>'<button data-preset="'+k+'" class="'+(i?"":"on")+'">'+n+'</button>').join("");
     panel.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{panel.querySelectorAll("[data-preset]").forEach(x=>x.classList.remove("on"));b.classList.add("on");v05Share.preset=b.dataset.preset;refreshV05Preview()});
     panel.querySelectorAll("[data-format]").forEach(b=>b.onclick=()=>{panel.querySelectorAll("[data-format]").forEach(x=>x.classList.remove("on"));b.classList.add("on");v05Share.format=b.dataset.format;refreshV05Preview()});
     panel.querySelectorAll("[data-share-layout]").forEach(b=>b.onclick=()=>{v05Share.layout=b.dataset.shareLayout;panel.querySelectorAll("[data-share-layout]").forEach(x=>x.classList.toggle("on",x===b));if(v05Share.layout==="free"&&!v05Share.frames.length)v05Share.frames=shareDefaultFramesV05(v05Share.stillIndices.length);syncFreeEditorV05();renderGestureStageV05();refreshV05Preview()});
@@ -155,13 +155,13 @@ function openSharePanelV05(code,postId=""){
     document.getElementById("magazineSaveV05").onclick=()=>{panel.classList.remove("open");openMagazineStudioV2(null)};
   }
   const txt=post?.body||latestReviewText(code)||editorial.oneLiners?.[code]||m.short||"";
-  document.getElementById("shareTitleV05").value=m.title||"";document.getElementById("shareMidV05").value=m.director?("감독 "+m.director):"";document.getElementById("shareTextV05").value=txt;
+  document.getElementById("shareTitleV05").value=m.title||"";document.getElementById("shareMidV05").value="";document.getElementById("shareTextV05").value=txt;
   document.getElementById("shareRating").value=post?.rating||0;document.getElementById("shareRatingValue").textContent=Number(post?.rating||0).toFixed(1);
   document.getElementById("shareTags").value=(post?.tags||[]).map(t=>"#"+t).join(" ");
   document.getElementById("shareStamp").value="";
-  v05Share={preset:"cinema",format:"feed",rating:Number(post?.rating||0),tags:post?.tags||[],stamp:"",stillIndex:0,stillIndices:[0],layout:"auto",activePhoto:0,frames:shareDefaultFramesV05(1),textAlign:"left",titleScale:1,midScale:1,reviewScale:1,copyOffset:0};
-  document.getElementById("shareTitleScale").value=100;document.getElementById("shareMidScale").value=100;document.getElementById("shareReviewScale").value=100;document.getElementById("shareCopyOffset").value=0;
-  panel.querySelectorAll("[data-preset]").forEach(x=>x.classList.toggle("on",x.dataset.preset==="cinema"));panel.querySelectorAll("[data-format]").forEach(x=>x.classList.toggle("on",x.dataset.format==="feed"));
+  v05Share={preset:"editorial",format:"feed",rating:Number(post?.rating||0),tags:post?.tags||[],stamp:"",stillIndex:0,stillIndices:[0],layout:"auto",activePhoto:0,frames:shareDefaultFramesV05(1),textAlign:"left",titleScale:1,midScale:1,reviewScale:1.12,copyOffset:0};
+  document.getElementById("shareTitleScale").value=100;document.getElementById("shareMidScale").value=100;document.getElementById("shareReviewScale").value=112;document.getElementById("shareCopyOffset").value=0;
+  panel.querySelectorAll("[data-preset]").forEach(x=>x.classList.toggle("on",x.dataset.preset==="editorial"));panel.querySelectorAll("[data-format]").forEach(x=>x.classList.toggle("on",x.dataset.format==="feed"));
   panel.querySelectorAll("[data-share-layout]").forEach(x=>x.classList.toggle("on",x.dataset.shareLayout==="auto"));panel.querySelectorAll("[data-text-align]").forEach(x=>x.classList.toggle("on",x.dataset.textAlign==="left"));
   renderStillPicker(code);renderPhotoOrderV05();syncFreeEditorV05();renderGestureStageV05();panel.classList.add("open");refreshV05Preview();
 }

@@ -143,9 +143,11 @@ function hideAdminMagazineV2(){
   saveMagazineV2(magazineV2().filter(x=>x.id!==MAG_STUDIO.id));renderMagazineShelfV2();closePanelV08(document.getElementById("magStudioV2"));toast("이 기기의 잡지 서재에서 숨겼습니다.");
 }
 function renderMagazineShelfV2(){
-  const my=document.getElementById("my");if(!my)return;
+  const discover=document.getElementById("discover");if(!discover)return;
+  let host=document.getElementById("criticism");
+  if(!host){host=document.createElement("section");host.id="criticism";host.className="wrap section criticism-stage";discover.insertAdjacentElement("afterend",host)}
   let root=document.getElementById("magazineShelfV2");
-  if(!root){root=document.createElement("section");root.id="magazineShelfV2";root.className="magazine-shelf-v2";my.appendChild(root)}
+  if(!root){root=document.createElement("div");root.id="magazineShelfV2";root.className="magazine-shelf-v2";host.appendChild(root)}
   const all=magazineV2(),samples=typeof sortMagazineAdminOrderV17==="function"?sortMagazineAdminOrderV17(all.filter(isMagazineLongformV2)):all.filter(isMagazineLongformV2).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||""))),pending=all.filter(x=>x.sample&&x.excerptOnly).sort((a,b)=>String(b.sourceDate||"").localeCompare(String(a.sourceDate||""))),mine=all.filter(x=>!x.sample).slice().reverse();
   const meta=MAGAZINE_COLLECTION_META||{issue:"VOL. 01",title:"INDIE PORT FILM JOURNAL",subtitle:"2026 FILM CRITICISM",author:""},coverVisual=samples.length?(magazineVisualsV2(samples[0])[1]||magazineVisualsV2(samples[0])[0]||""):"";
   const annual=samples.length?'<article class="annual-cover-card" id="openAnnualMagazine"><img src="'+coverVisual+'" alt=""><div class="annual-cover-shade"></div><div class="annual-cover-copy"><div class="mag-v2-issue">'+esc(meta.issue||"VOL. 01")+' · '+samples.length+' FEATURE</div><div class="kicker">FILM JOURNAL</div><h4>'+esc(meta.title||"INDIE PORT FILM JOURNAL")+'</h4><p>'+esc(meta.subtitle||"")+'</p><footer><span>2026 CRITICISM</span><span>한 권으로 읽기 →</span></footer></div></article>':"";
