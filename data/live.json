@@ -1,0 +1,162 @@
+{
+  "updated": "2026-09-20 20:04 KST",
+  "source": "Dtryx 인디플러스 포항 공개 편성",
+  "cinema": {
+    "name": "인디플러스 포항",
+    "code": "000057"
+  },
+  "days": [
+    {
+      "date": "2026-09-23",
+      "sessions": [
+        {
+          "code": "027432",
+          "title": "담요를 입은 사람",
+          "start": "14:00",
+          "end": "15:56",
+          "minutes": 116,
+          "age": "12세",
+          "availableSeats": 262,
+          "showSeq": 1,
+          "bookable": true
+        },
+        {
+          "code": "027030",
+          "title": "콘크리트 녹색섬",
+          "start": "16:20",
+          "end": "18:03",
+          "minutes": 103,
+          "age": "전체",
+          "availableSeats": 262,
+          "showSeq": 2,
+          "bookable": true
+        },
+        {
+          "code": "029552",
+          "title": "나의 사적인 예술가",
+          "start": "19:30",
+          "end": "21:07",
+          "minutes": 97,
+          "age": "15세",
+          "availableSeats": 258,
+          "showSeq": 3,
+          "bookable": true
+        }
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "sessions": [
+        {
+          "code": "029550",
+          "title": "아가미",
+          "start": "10:00",
+          "end": "11:45",
+          "minutes": 105,
+          "age": "15세",
+          "availableSeats": 257,
+          "showSeq": 1,
+          "bookable": true
+        },
+        {
+          "code": "029552",
+          "title": "나의 사적인 예술가",
+          "start": "14:00",
+          "end": "15:37",
+          "minutes": 97,
+          "age": "15세",
+          "availableSeats": 260,
+          "showSeq": 2,
+          "bookable": true
+        },
+        {
+          "code": "026254",
+          "title": "지난 여름",
+          "start": "16:30",
+          "end": "17:46",
+          "minutes": 76,
+          "age": "12세",
+          "availableSeats": 262,
+          "showSeq": 3,
+          "bookable": true
+        }
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "sessions": [
+        {
+          "code": "029204",
+          "title": "어떻게 해야 했을까?",
+          "start": "10:00",
+          "end": "11:41",
+          "minutes": 101,
+          "age": "12세",
+          "availableSeats": 254,
+          "showSeq": 1,
+          "bookable": true
+        },
+        {
+          "code": "029552",
+          "title": "나의 사적인 예술가",
+          "start": "14:00",
+          "end": "15:37",
+          "minutes": 97,
+          "age": "15세",
+          "availableSeats": 261,
+          "showSeq": 2,
+          "bookable": true
+        },
+        {
+          "code": "026254",
+          "title": "지난 여름",
+          "start": "16:30",
+          "end": "17:46",
+          "minutes": 76,
+          "age": "12세",
+          "availableSeats": 262,
+          "showSeq": 3,
+          "bookable": true
+        }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "sessions": [
+        {
+          "code": "027434",
+          "title": "캐리어를 끄는 소녀",
+          "start": "14:00",
+          "end": "15:47",
+          "minutes": 107,
+          "age": "12세",
+          "availableSeats": 262,
+          "showSeq": 1,
+          "bookable": true
+        },
+        {
+          "code": "029131",
+          "title": "지느러미",
+          "start": "16:30",
+          "end": "17:53",
+          "minutes": 83,
+          "age": "15세",
+          "availableSeats": 262,
+          "showSeq": 2,
+          "bookable": true
+        },
+        {
+          "code": "028449",
+          "title": "철들 무렵",
+          "start": "19:30",
+          "end": "21:15",
+          "minutes": 105,
+          "age": "15세",
+          "availableSeats": 261,
+          "showSeq": 3,
+          "bookable": true
+        }
+      ]
+    }
+  ]
+}
