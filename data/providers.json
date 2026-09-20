@@ -1,0 +1,10 @@
+{
+  "priority": ["dtryx", "kmdb", "kobis", "tmdb", "wikimedia"],
+  "providers": {
+    "dtryx": {"enabled": true, "keyRequired": false, "roles": ["schedule","poster","synopsis","cast","director","stills","trailer"]},
+    "kmdb": {"enabled": false, "keyRequired": true, "env": "KMDB_KEY", "roles": ["koreanFilm","poster","plot","staff","keywords"]},
+    "kobis": {"enabled": false, "keyRequired": true, "env": "KOBIS_KEY", "roles": ["movieCode","movieMeta","people","boxOffice"]},
+    "tmdb": {"enabled": false, "keyRequired": true, "env": "TMDB_TOKEN", "roles": ["internationalMeta","images","credits","recommendations"]},
+    "wikimedia": {"enabled": true, "keyRequired": false, "roles": ["directorBio","workContext","knowledgeLink"]}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "kobis": {
+    "configured": false
+  },
+  "kmdb": {
+    "configured": false
+  },
+  "tmdb": {
+    "configured": false
+  },
+  "wikimedia": {
+    "configured": true
+  }
+}

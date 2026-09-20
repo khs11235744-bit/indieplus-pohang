@@ -14,8 +14,8 @@
 <body>
 <header class="topbar">
   <div class="wrap nav">
-    <a class="brand" href="#home"><span class="mark">IP+</span><span>INDIE+ POHANG<small>POHANG INDEPENDENT CINEMA</small></span></a>
-    <nav class="links"><button data-scroll="schedule">상영</button><button data-scroll="discover">발견</button><button data-scroll="community">비평</button><button data-scroll="my">MY</button></nav>
+    <a class="brand" href="#home"><span class="mark">IP+</span><span>INDIE+ POHANG<small>POHANG INDEPENDENT CINEMA</small></span></a><button class="mobile-search" id="mobileSearchBtn" aria-label="영화 검색">검색</button>
+    <nav class="links"><button data-scroll="schedule">상영</button><button data-scroll="discover">발견</button><button data-scroll="program">GV·기획전</button><button data-scroll="community">비평</button><button data-scroll="my">MY</button></nav>
     <div class="nav-actions"><button class="chipbtn" id="searchBtn">검색</button><button class="chipbtn" id="installBtn" hidden>앱 설치</button><a class="primary compact" href="https://www.dtryx.com/reserve/cinema.do?CinemaCd=000057" target="_blank" rel="noopener">예매</a></div>
   </div>
 </header>
@@ -35,6 +35,23 @@
 <section class="wrap">
   <div class="data-strip"><span class="live-dot"></span><strong>실제 상영정보</strong><span>Dtryx 인디플러스 포항 공개 편성 기준</span><span class="right" id="updatedAt">업데이트 확인 중</span></div>
 </section>
+<section class="wrap section daily-board" id="daily">
+  <article class="daily-line">
+    <div class="kicker">TODAY'S CINEMA NOTE</div>
+    <small id="dailyLineMovie">오늘의 영화 한마디</small>
+    <blockquote id="dailyLineText">오늘의 문장을 고르는 중입니다.</blockquote>
+    <button class="text-button" id="dailyLineOpen">이 영화 보기 →</button>
+  </article>
+  <article class="daily-pick">
+    <img id="dailyPickPoster" alt="">
+    <div>
+      <div class="kicker">TODAY'S PICK</div>
+      <h3 id="dailyPickTitle">오늘의 영화추천</h3>
+      <p id="dailyPickReason">상영 일정과 작품 정보를 바탕으로 추천을 준비하고 있습니다.</p>
+      <div class="daily-pick-actions"><button class="ghostbtn" id="dailyPickInfo">영화정보</button><a class="primary compact" id="dailyPickBook" target="_blank" rel="noopener">예매하기</a></div>
+    </div>
+  </article>
+</section>
 <section class="wrap section" id="schedule">
   <div class="section-head"><div><div class="kicker">SCREENING SCHEDULE</div><h2>상영시간표</h2><p>가장 가까운 실제 상영일을 기준으로 보여줍니다.</p></div><a class="textlink" href="https://www.dtryx.com/reserve/cinema.do?CinemaCd=000057" target="_blank" rel="noopener">전체 예매 →</a></div>
   <div class="date-tabs" id="dateTabs"></div>
@@ -44,9 +61,14 @@
   <div class="section-head"><div><div class="kicker">DISCOVER</div><h2>지금 만날 영화</h2><p>포스터만 보지 않아도 영화가 어떤 이야기인지 바로 알 수 있게.</p></div></div>
   <div class="poster-grid" id="posterGrid"></div>
 </section>
+<section class="wrap section" id="program">
+  <div class="section-head"><div><div class="kicker">GV / SPECIAL PROGRAM</div><h2>GV·기획전</h2><p>공개 극장 정보에서 확인되는 특별 프로그램을 별도로 모읍니다.</p></div></div>
+  <article class="program-card"><strong id="programStatus">프로그램 정보를 확인 중입니다.</strong><small id="programUpdated"></small></article>
+</section>
 <section class="wrap section editorial" id="community">
   <article class="feature main"><div class="kicker">SYNERGY / CRITICISM</div><div class="quote">“영화를 본 뒤 남는 것은 장면이고,<br>다시 돌아오게 하는 것은 문장이다.”</div><p>한줄평과 긴 비평, GV 후기를 영화 상세에서 바로 이어 쓰는 커뮤니티를 다음 단계에서 연결합니다.</p><div class="tags"><span>한줄평</span><span>긴 비평</span><span>GV 후기</span><span>스포일러 가리기</span></div></article>
   <article class="feature"><div class="kicker">DESIGN PRINCIPLE</div><h3>영화가 먼저 보이는 앱</h3><p>기능 버튼보다 포스터와 영화 설명, 다음 상영시간을 우선합니다. 공공기관형 메뉴 구조 대신 관객의 관람 흐름을 중심으로 설계합니다.</p></article>
+  <div class="community-feed" id="communityFeed"></div>
 </section>
 <section class="wrap section" id="my">
   <div class="section-head"><div><div class="kicker">MY CINEMA</div><h2>보고 싶어요</h2><p>로그인 전에도 이 기기에서 먼저 저장할 수 있습니다.</p></div></div>
@@ -64,10 +86,12 @@
   <div class="sheet">
     <div class="sheet-top"><img class="sheet-poster" id="detailPoster" alt=""><div><div class="kicker">MOVIE DETAIL</div><h2 id="detailTitle"></h2><div class="eng" id="detailEng"></div><p class="lead" id="detailShort"></p></div><button class="close" id="closeMovie">×</button></div>
     <div class="detail-meta" id="detailNext"></div><p class="people" id="detailPeople"></p><p class="synopsis" id="detailSynopsis"></p>
-    <div class="detail-actions"><a class="primary" id="detailBook" target="_blank" rel="noopener">예매하기</a><button class="ghostbtn" id="detailTrailer">예고편 보기</button></div>
+    <div class="detail-actions"><a class="primary" id="detailBook" target="_blank" rel="noopener">예매하기</a><button class="ghostbtn" id="detailTrailer">예고편 보기</button><button class="ghostbtn watch-detail" id="detailWatch">♡ 보고 싶어요</button></div>
+    <div class="review-compose"><input id="reviewInput" maxlength="240" placeholder="이 영화에 남기고 싶은 한 문장"><button class="primary compact" id="saveReview">한줄평 저장</button></div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
 <script src="./app.js"></script>
+<script src="./features-v04.js"></script>
 </body>
 </html>

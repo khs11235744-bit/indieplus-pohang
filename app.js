@@ -1,39 +1,221 @@
-const MOVIES = {
-"029552":{title:"나의 사적인 예술가",eng:"LATE FAME",director:"켄트 존스",actors:"윌렘 데포 · 그레타 리",short:"한때 시집을 냈던 뉴욕 우체국 직원이 젊은 예술가들의 찬사를 받으며 잊었던 열망과 마주한다.",synopsis:"과거 시집 한 권을 출간했지만 지금은 뉴욕의 우체국에서 일하는 에드. 어느 날 자신의 시에 매료된 젊은 예술 모임의 초대를 받으며 뒤늦은 찬사와 자신의 현실 사이에서 예상치 못한 감정과 마주한다.",poster:"https://img.dtryx.com/poster/2026/08/74BD5DA6-C14B-489F-A52B-AA8DAD2D5428.small.jpg",still:"https://img.dtryx.com/poster/2026/08/0472F1A3-7337-49FB-8FFD-890C5FD9DF9F.Large.jpg",trailer:"https://img.dtryx.com/video/2026/09/C1B53FBF-2B26-48E1-8661-53B65F5A4EDD.mp4"},
-"028449":{title:"철들 무렵",eng:"Coming of Age",director:"정승오",actors:"기주봉 · 하윤경 · 양말복 · 원미원",short:"시한부 아버지, 배우 지망생 딸, 자유를 원하는 엄마가 서로를 책임지며 뒤늦게 어른이 되어간다.",synopsis:"철부지 시한부 아빠, 명배우 지망생 딸, 싱글 라이프를 원하는 엄마. 각자 제 코가 석 자인데도 서로를 책임져야 하는 세 사람이 효도와 독립을 둘러싸고 부딪히는 가족 이야기.",poster:"https://img.dtryx.com/poster/2026/09/9337ABEC-42C4-42F6-9E33-7C3BBC9BE961.small.jpg",still:"https://img.dtryx.com/poster/2026/08/CC074EF0-8C40-4D32-8C22-A6935F4AD5A3.Large.jpg",trailer:"https://img.dtryx.com/video/2026/09/5008156A-67D1-433A-959A-E7C14033A274.mp4"},
-"029550":{title:"아가미",eng:"Gill",director:"안재훈",actors:"정해인 · 강하늘 · 이청아 · 유재명 · 김선영",short:"깊은 물에 던져진 날 아가미가 생긴 아이 ‘곤’과 그의 세계를 이루는 존재들의 눈부신 이야기.",synopsis:"깊은 물속에 던져진 날 아가미가 생겨난 세상에서 유일한 아이 곤. 그를 둘러싼 사람들과 관계를 따라가며 생존과 사랑, 연결의 의미를 그린 작품.",poster:"https://img.dtryx.com/poster/2026/08/F62E50D4-288C-4980-8973-4FCC88836F5B.small.jpg",still:"https://img.dtryx.com/poster/2026/08/E595F31A-AB05-4620-9E76-028A4DCBDED2.Large.jpg",trailer:"https://img.dtryx.com/video/2026/09/697A53D5-2A4E-46E6-B27C-3FE528630BF0.mp4"},
-"027432":{title:"담요를 입은 사람",eng:"Blanket Wearer",director:"박정미",actors:"박정미",short:"돈 없이 살아보기를 선택한 정미가 런던의 낯선 연결 속에서 삶과 집의 의미를 다시 찾는다.",synopsis:"런던에서 생계의 벼랑 끝에 선 정미는 돈 없이 살아보기로 한다. 빈 건물에서 잠들고 버려진 음식으로 배를 채우며 위험과 기적 같은 연결들을 지나, 마음이 머물 수 있는 집의 의미를 찾아간다.",poster:"https://img.dtryx.com/poster/2026/08/013824F5-9B7D-4343-9F53-817DF5F1C1B2.small.jpg",still:"",trailer:""},
-"027434":{title:"캐리어를 끄는 소녀",eng:"Sua's Home",director:"윤심경",actors:"최명빈 · 문승아 · 김태훈 · 유다인",short:"가족이 갖고 싶은 15살 영선이 테니스 파트너로 머문 수아의 집 안으로 들어가기 위해 애쓴다.",synopsis:"양부모에게 버려진 15살 영선은 또래 수아의 테니스 훈련 파트너로 수아네 집에 머문다. 갈 곳이 없는 영선은 이 가족의 일원이 되고 싶어 조용하지만 치열하게 스며들려 한다.",poster:"https://img.dtryx.com/poster/2026/08/A5609EC9-9875-4164-B720-A163AB39735E.small.jpg",still:"https://img.dtryx.com/poster/2026/08/014A84BC-BD5A-4B33-B61C-8B4F28D09CC8.Large.jpg",trailer:"https://img.dtryx.com/video/2026/08/77C9163D-90D0-41F6-8FC4-D5C9509BEED4.mp4"},
-"027030":{title:"콘크리트 녹색섬",eng:"Green Concrete",director:"이성민",actors:"이성민 · 우종영",short:"재개발로 사라질 아파트와 나무를 기록하며 도시의 기억과 녹색 공간의 의미를 되묻는다.",synopsis:"개포주공에서 자란 감독은 재개발로 어린 시절의 공간이 사라진다는 소식을 듣고 사람들의 기억을 기록한다. 모두가 기억하는 단지 속 녹색섬과 나무를 통해 개발과 삶의 흔적을 돌아본다.",poster:"https://img.dtryx.com/poster/2026/08/85FCD28B-1913-4CE4-B5F3-FCCDF4C16596.small.jpg",still:"https://img.dtryx.com/poster/2026/08/DB1274E9-6B31-4ACF-9F5B-737CE8689C6E.Large.jpg",trailer:"https://img.dtryx.com/video/2026/08/76A43B0C-CC25-47EA-B012-2154F72C1164.mp4"},
-"026254":{title:"지난 여름",eng:"Last Summer",director:"최승우",actors:"문영동 · 김민혁",short:"농번기의 작은 농촌 마을에서 민우와 가족, 친구들의 평범한 시간을 차분히 따라간다.",synopsis:"농번기를 맞이한 늦봄의 작은 농촌 마을. 민우는 면사무소에 출근하고 아버지와 농부들은 모를 심는다. 친구 성훈도 아버지의 축사 일을 돕는다. 계절과 노동 속 일상의 시간을 바라본다.",poster:"https://img.dtryx.com/poster/2026/07/F824AF63-B51F-4FDC-BA65-9FD0397C236F.small.png",still:"https://img.dtryx.com/poster/2025/03/B0C33DBD-A8DD-4689-8EAE-FBC87BCE5C99.Large.png",trailer:"https://img.dtryx.com/video/2026/08/B55B6868-703C-4082-AFE1-3111B8D70027.mp4"},
-"029204":{title:"어떻게 해야 했을까?",eng:"What Should We Have Done",director:"",actors:"",short:"20여 년간 침묵해 온 한 가족을 남동생이 카메라로 마주하며 ‘어떻게 해야 했을까’를 묻는다.",synopsis:"스물넷의 누나에게 조현병 증상이 나타난 뒤 가족은 오랫동안 침묵한다. 더는 외면할 수 없었던 남동생은 카메라를 들고 누나와 부모, 자기 자신에게 질문하며 가장 사적인 가족의 시간을 기록한다.",poster:"https://img.dtryx.com/poster/2026/07/3792C9EB-B04A-429F-95DE-A3400669C48F.small.jpg",still:"https://img.dtryx.com/poster/2026/07/31FC70D9-5AA1-488B-9017-962E70A88D38.Large.png",trailer:"https://img.dtryx.com/video/2026/07/5F8A056D-96FC-40AB-9257-668B3AC00A70.mp4"},
-"029131":{title:"지느러미",eng:"The Fin",director:"박세영",actors:"연예지 · 김푸름 · 고우",short:"오염된 근미래에서 지느러미를 가진 ‘오메가’와 그들을 감시하는 인간의 경계를 추적한다.",synopsis:"오염된 바다를 막는 거대한 장벽에 둘러싸인 근미래 통일 대한민국. 유전적 돌연변이로 지느러미가 생긴 오메가가 통제받는 가운데 한 명이 구역을 이탈하고 공무원 수진이 그 뒤를 쫓는다.",poster:"https://img.dtryx.com/poster/2026/07/D7D258D1-7C77-40D0-8534-0264E7F05B25.small.jpg",still:"https://img.dtryx.com/poster/2026/06/E4BDA79D-4DEE-4DE9-A037-141CB5911DFB.Large.jpg",trailer:"https://img.dtryx.com/video/2026/07/696782EE-D9AF-495C-B6AD-2FB0580BA742.mp4"}
-};
-const CINEMA="000057", DTRYX="https://www.dtryx.com";
-let live=null, selectedDate="", deferredInstall=null;
-const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
-const fmtDate=d=>new Intl.DateTimeFormat("ko-KR",{month:"long",day:"numeric",weekday:"short"}).format(new Date(d+"T12:00:00"));
-const bookMovie=code=>`${DTRYX}/reserve/movie.do?CinemaCd=${CINEMA}&MovieCd=${code}`;
+const CINEMA="000057";
+const DTRYX="https://www.dtryx.com";
+let MOVIES={};
+let live=null;
+let programs=null;
+let selectedDate="";
+let activeMovieCode="";
+let deferredInstall=null;
+
+const $=(s,p=document)=>p.querySelector(s);
+const $$=(s,p=document)=>[...p.querySelectorAll(s)];
+const fmtDate=d=>new Intl.DateTimeFormat("ko-KR",{month:"long",day:"numeric",weekday:"short"}).format(new Date(`${d}T12:00:00+09:00`));
 const watch=()=>JSON.parse(localStorage.getItem("indiePohangWatch")||"[]");
 const saveWatch=a=>localStorage.setItem("indiePohangWatch",JSON.stringify(a));
-function toast(msg){const el=$("#toast");el.textContent=msg;el.classList.add("show");clearTimeout(window.__t);window.__t=setTimeout(()=>el.classList.remove("show"),2200)}
-function toggleWatch(code,e){e?.stopPropagation();const a=watch();const i=a.indexOf(code);i>=0?a.splice(i,1):a.push(code);saveWatch(a);renderDiscover();toast(i>=0?"보고 싶어요에서 뺐습니다.":"보고 싶어요에 저장했습니다.")}
-function movieSessions(code){return (live?.days||[]).flatMap(d=>d.sessions.map(s=>({...s,date:d.date}))).filter(s=>s.code===code)}
-function nextSession(code){const all=movieSessions(code).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));return all[0]||null}
-function openMovie(code){const m=MOVIES[code];if(!m)return;const s=nextSession(code);$("#detailPoster").src=m.poster;$("#detailTitle").textContent=m.title;$("#detailEng").textContent=m.eng||"";$("#detailShort").textContent=m.short;$("#detailSynopsis").textContent=m.synopsis;$("#detailPeople").textContent=[m.director&&`감독 ${m.director}`,m.actors&&`출연 ${m.actors}`].filter(Boolean).join(" · ");$("#detailNext").textContent=s?`${fmtDate(s.date)} ${s.start} · ${s.minutes}분 · ${s.age}`:"현재 확인된 상영 회차 없음";$("#detailBook").href=s?sessionBook(s):bookMovie(code);$("#detailTrailer").style.display=m.trailer?"inline-flex":"none";$("#detailTrailer").onclick=()=>m.trailer&&window.open(m.trailer,"_blank","noopener");$("#movieOverlay").classList.add("open")}
-function closeMovie(){$("#movieOverlay").classList.remove("open")}
-function sessionBook(s){const q=new URLSearchParams({CinemaCd:CINEMA,MovieCd:s.code,PlaySDT:s.date,ScreenCd:"01",ShowSeq:String(s.showSeq||1)});return `${DTRYX}/reserve/movie.do?${q}`}
-function renderHero(){const first=(live?.days||[]).flatMap(d=>d.sessions.map(s=>({...s,date:d.date})))[0];if(!first)return;const m=MOVIES[first.code]||{title:first.title,short:"인디플러스 포항 상영작",poster:first.poster};$("#heroBackdrop").style.backgroundImage=`url("${m.still||m.poster||first.poster}")`;$("#heroTitle").textContent=m.title;$("#heroDesc").textContent=m.short||"";$("#heroMeta").textContent=`다음 상영 · ${fmtDate(first.date)} ${first.start} · ${first.minutes}분`;$("#heroInfo").onclick=()=>openMovie(first.code);$("#heroBook").href=sessionBook(first)}
-function renderDates(){const root=$("#dateTabs");root.innerHTML="";(live?.days||[]).forEach((d,i)=>{const btn=document.createElement("button");btn.className="day "+((selectedDate||live.days[0]?.date)===d.date?"active":"");const dt=new Date(d.date+"T12:00:00"), w=new Intl.DateTimeFormat("ko-KR",{weekday:"short"}).format(dt);btn.innerHTML=`<small>${w}</small><strong>${dt.getMonth()+1}/${dt.getDate()}</strong><small>${d.sessions.length}편</small>`;btn.onclick=()=>{selectedDate=d.date;renderDates();renderSessions()};root.appendChild(btn)})}
-function renderSessions(){const day=(live?.days||[]).find(d=>d.date===(selectedDate||live.days[0]?.date));const root=$("#sessions");if(!day){root.innerHTML='<div class="empty">확인된 상영 일정이 없습니다.</div>';return}root.innerHTML=day.sessions.map((s,idx)=>{const m=MOVIES[s.code]||{};const seat=s.availableSeats!=null?` · 잔여 ${s.availableSeats}석`:"";return `<article class="session" onclick="openMovie('${s.code}')"><img class="thumb" loading="lazy" src="${m.poster||s.poster||""}" alt="${s.title} 포스터"><div><div class="micro">${s.age||""} · ${s.minutes||""}분${seat}</div><h3>${s.title}</h3><p>${m.short||"인디플러스 포항 상영작"}</p><div class="session-bottom"><strong>${s.start}</strong><span>→ ${s.end||""}</span><a class="mini book" href="${sessionBook({...s,date:day.date,showSeq:s.showSeq||idx+1})}" target="_blank" rel="noopener" onclick="event.stopPropagation()">예매</a></div></div></article>`}).join("")}
-function renderDiscover(){const root=$("#posterGrid"), saved=watch();root.innerHTML=Object.entries(MOVIES).map(([code,m])=>{const s=nextSession(code);const when=s?`${fmtDate(s.date)} ${s.start}`:"상영정보 확인 중";return `<article class="poster-card" onclick="openMovie('${code}')"><div class="poster-wrap"><img loading="lazy" src="${m.poster}" alt="${m.title} 포스터"><button class="heart ${saved.includes(code)?"on":""}" aria-label="보고 싶어요" onclick="toggleWatch('${code}',event)">♥</button></div><div class="poster-copy"><small>${m.director?"감독 "+m.director:"INDIE+ POHANG"}</small><h3>${m.title}</h3><p>${m.short}</p><div class="poster-next"><span>${when}</span><span>영화정보 →</span></div></div></article>`}).join("")}
-function renderMy(){const ids=watch(), root=$("#myList");root.innerHTML=ids.length?ids.map(code=>`<button onclick="openMovie('${code}')"><img src="${MOVIES[code].poster}" alt=""><span>${MOVIES[code].title}</span></button>`).join(""):'<p class="muted">아직 저장한 영화가 없습니다. 포스터의 ♥를 눌러보세요.</p>'}
-function runSearch(){const q=$("#searchInput").value.trim().toLowerCase();const results=Object.entries(MOVIES).filter(([,m])=>[m.title,m.eng,m.director,m.actors,m.short].join(" ").toLowerCase().includes(q));$("#searchResults").innerHTML=q?results.map(([code,m])=>`<button onclick="openMovie('${code}')"><img src="${m.poster}" alt=""><span><b>${m.title}</b><small>${m.director||m.eng}</small></span></button>`).join(""):""}
-async function boot(){try{const res=await fetch("./data/live.json?v="+Date.now());if(!res.ok)throw new Error("schedule fetch failed");live=await res.json();selectedDate=live.days?.[0]?.date||"";$("#updatedAt").textContent=live.updated?live.updated:"공개 예매정보 기준";renderHero();renderDates();renderSessions();renderDiscover();renderMy()}catch(e){console.error(e);$("#sessions").innerHTML='<div class="empty">상영정보를 불러오지 못했습니다. 예매 페이지에서 최신 일정을 확인해주세요.</div>';renderDiscover()}}
-$("#searchInput")?.addEventListener("input",runSearch);$("#searchBtn")?.addEventListener("click",()=>{$("#searchPanel").classList.toggle("open");if($("#searchPanel").classList.contains("open"))$("#searchInput").focus()});$("#closeSearch")?.addEventListener("click",()=>$("#searchPanel").classList.remove("open"));$("#movieOverlay")?.addEventListener("click",e=>{if(e.target.id==="movieOverlay")closeMovie()});$("#closeMovie")?.addEventListener("click",closeMovie);
-$$("[data-scroll]").forEach(b=>b.addEventListener("click",()=>document.getElementById(b.dataset.scroll)?.scrollIntoView({behavior:"smooth"})));
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").hidden=false});$("#installBtn")?.addEventListener("click",async()=>{if(!deferredInstall)return toast("브라우저 메뉴에서 홈 화면에 추가할 수 있습니다.");deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$("#installBtn").hidden=true});
+const reviews=()=>JSON.parse(localStorage.getItem("indiePohangReviews")||"[]");
+const saveReviews=a=>localStorage.setItem("indiePohangReviews",JSON.stringify(a));
+const esc=s=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+const movieFor=(code,title="")=>MOVIES[code]||{code,title:title||"상영작",short:"Dtryx 공개 영화정보를 불러오지 못했습니다.",synopsis:"",poster:"",director:"",actors:"",trailer:""};
+
+function toast(msg){
+  const el=$("#toast");
+  el.textContent=msg;
+  el.classList.add("show");
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer=setTimeout(()=>el.classList.remove("show"),2200);
+}
+function toggleWatch(code,e){
+  e?.stopPropagation();
+  const saved=watch();
+  const idx=saved.indexOf(code);
+  idx>=0?saved.splice(idx,1):saved.push(code);
+  saveWatch(saved);
+  renderDiscover();
+  renderMy();
+  updateDetailWatch(code);
+  toast(idx>=0?"보고 싶어요에서 뺐습니다.":"보고 싶어요에 저장했습니다.");
+}
+
+function allSessions(){
+  return (live?.days||[]).flatMap(d=>d.sessions.map(s=>({...s,date:d.date})))
+    .sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
+}
+function isUpcoming(s){return new Date(`${s.date}T${s.start}:00+09:00`).getTime()>=Date.now();}
+function movieSessions(code){return allSessions().filter(s=>s.code===code);}
+function nextSession(code){return movieSessions(code).find(isUpcoming)||null;}
+function nextGlobalSession(){return allSessions().find(isUpcoming)||null;}
+
+function sessionBook(s){
+  const q=new URLSearchParams({CinemaCd:CINEMA,MovieCd:s.code,PlaySDT:s.date,ScreenCd:s.screenCode||"01",ShowSeq:String(s.showSeq||1)});
+  return `${DTRYX}/reserve/movie.do?${q}`;
+}
+function bookMovie(code){return `${DTRYX}/reserve/movie.do?CinemaCd=${CINEMA}&MovieCd=${code}`;}
+function updateDetailWatch(code){
+  const btn=$("#detailWatch");
+  if(!btn)return;
+  const on=watch().includes(code);
+  btn.textContent=on?"♥ 보고 싶어요 저장됨":"♡ 보고 싶어요";
+  btn.classList.toggle("on",on);
+}
+
+function openMovie(code,title=""){
+  const m=movieFor(code,title);
+  const s=nextSession(code);
+  activeMovieCode=code;
+  $("#detailPoster").src=m.poster||"";
+  $("#detailPoster").alt=m.poster?`${m.title} 포스터`:"포스터 없음";
+  $("#detailPoster").classList.toggle("missing",!m.poster);
+  $("#detailTitle").textContent=m.title;
+  $("#detailEng").textContent=m.eng||"";
+  $("#detailShort").textContent=m.short||"";
+  $("#detailSynopsis").textContent=m.synopsis||"상세 줄거리 정보가 없습니다.";
+  $("#detailPeople").textContent=[m.director&&`감독 ${m.director}`,m.actors&&`출연 ${m.actors}`].filter(Boolean).join(" · ");
+  $("#detailNext").textContent=s?`${fmtDate(s.date)} ${s.start} · ${s.minutes}분 · ${s.age}`:"현재 공개된 다음 상영 회차 없음";
+  $("#detailBook").href=s?sessionBook(s):bookMovie(code);
+  $("#detailTrailer").hidden=!m.trailer;
+  $("#detailTrailer").onclick=()=>m.trailer&&window.open(m.trailer,"_blank","noopener");
+  $("#reviewInput").value="";
+  updateDetailWatch(code);
+  $("#searchPanel")?.classList.remove("open");
+  $("#movieOverlay").classList.add("open");
+}
+function closeMovie(){$("#movieOverlay").classList.remove("open");}
+function renderHero(){
+  const first=nextGlobalSession();
+  if(!first)return;
+  const m=movieFor(first.code,first.title);
+  $("#heroBackdrop").style.backgroundImage=m.still||m.poster?`url("${m.still||m.poster}")`:"none";
+  $("#heroTitle").textContent=m.title;
+  $("#heroDesc").textContent=m.short||"Dtryx 공개 상영작";
+  $("#heroMeta").textContent=`다음 상영 · ${fmtDate(first.date)} ${first.start} · ${first.minutes}분`;
+  $("#heroInfo").onclick=()=>openMovie(first.code,first.title);
+  $("#heroBook").href=sessionBook(first);
+}
+
+function renderDates(){
+  const root=$("#dateTabs");
+  root.innerHTML="";
+  (live?.days||[]).forEach(d=>{
+    const btn=document.createElement("button");
+    btn.className="day "+((selectedDate||live.days[0]?.date)===d.date?"active":"");
+    const dt=new Date(`${d.date}T12:00:00+09:00`);
+    const weekday=new Intl.DateTimeFormat("ko-KR",{weekday:"short"}).format(dt);
+    btn.innerHTML=`<small>${weekday}</small><strong>${dt.getMonth()+1}/${dt.getDate()}</strong><small>${d.sessions.length}편</small>`;
+    btn.onclick=()=>{selectedDate=d.date;renderDates();renderSessions();};
+    root.appendChild(btn);
+  });
+}
+
+function renderSessions(){
+  const day=(live?.days||[]).find(d=>d.date===(selectedDate||live.days[0]?.date));
+  const root=$("#sessions");
+  if(!day){root.innerHTML='<div class="empty">확인된 상영 일정이 없습니다.</div>';return;}
+  root.innerHTML=day.sessions.map(s=>{
+    const m=movieFor(s.code,s.title);
+    const seat=s.availableSeats!=null?` · 잔여 ${s.availableSeats}석`:"";
+    const poster=m.poster?`<img class="thumb" loading="lazy" src="${m.poster}" alt="${esc(m.title)} 포스터">`:'<div class="thumb poster-empty">NO POSTER</div>';
+    return `<article class="session" onclick="openMovie('${s.code}','${esc(s.title)}')">${poster}<div><div class="micro">${esc(s.age||"")} · ${s.minutes||""}분${seat}</div><h3>${esc(s.title)}</h3><p>${esc(m.short||"Dtryx 공개 상영작")}</p><div class="session-bottom"><strong>${esc(s.start)}</strong><span>→ ${esc(s.end||"")}</span><a class="mini book" href="${sessionBook({...s,date:day.date})}" target="_blank" rel="noopener" onclick="event.stopPropagation()">예매</a></div></div></article>`;
+  }).join("");
+}
+
+function renderDiscover(){
+  const root=$("#posterGrid"), saved=watch();
+  const entries=Object.entries(MOVIES).sort(([a],[b])=>{
+    const sa=nextSession(a), sb=nextSession(b);
+    if(sa&&sb)return (sa.date+sa.start).localeCompare(sb.date+sb.start);
+    if(sa)return -1;if(sb)return 1;return MOVIES[a].title.localeCompare(MOVIES[b].title,"ko");
+  });
+  root.innerHTML=entries.map(([code,m])=>{
+    const s=nextSession(code);
+    const when=s?`${fmtDate(s.date)} ${s.start}`:"현재 공개 회차 없음";
+    const poster=m.poster?`<img loading="lazy" src="${m.poster}" alt="${esc(m.title)} 포스터">`:'<div class="poster-empty large">NO POSTER</div>';
+    return `<article class="poster-card" onclick="openMovie('${code}')"><div class="poster-wrap">${poster}<button class="heart ${saved.includes(code)?"on":""}" aria-label="보고 싶어요" onclick="toggleWatch('${code}',event)">♥</button></div><div class="poster-copy"><small>${esc(m.director?"감독 "+m.director:"Dtryx 공개 영화정보")}</small><h3>${esc(m.title)}</h3><p>${esc(m.short||"")}</p><div class="poster-next"><span>${esc(when)}</span><span>영화정보 →</span></div></div></article>`;
+  }).join("");
+}
+fetch("./data/movies.json?v="+Date.now()).then(r=>r.ok?r.json():null).then(pack=>{if(!pack?.movies)return;for(const [code,m] of Object.entries(pack.movies)){const keepShort=MOVIES[code]?.short||m.short;MOVIES[code]={...(MOVIES[code]||{}),...m,short:keepShort}}if(live){renderHero();renderDiscover();renderMy()}}).catch(()=>{});
+function renderMy(){
+  const ids=watch(), root=$("#myList");
+  root.innerHTML=ids.length?ids.map(code=>{
+    const m=movieFor(code);
+    return `<button onclick="openMovie('${code}')">${m.poster?`<img src="${m.poster}" alt="">`:""}<span>${esc(m.title)}</span></button>`;
+  }).join(""):'<p class="muted">아직 저장한 영화가 없습니다. 포스터의 ♥를 눌러보세요.</p>';
+}
+
+function renderCommunity(){
+  const root=$("#communityFeed");
+  if(!root)return;
+  const items=reviews().slice().reverse().slice(0,6);
+  root.innerHTML=items.length?items.map(r=>{
+    const m=movieFor(r.code);
+    return `<article class="review-line"><small>${esc(m.title)} · ${esc(r.at)}</small><p>${esc(r.text)}</p></article>`;
+  }).join(""):'<div class="empty compact-empty">아직 이 기기에 저장된 관객 문장이 없습니다.</div>';
+}
+
+function saveCurrentReview(){
+  const text=$("#reviewInput").value.trim();
+  if(!activeMovieCode||!text)return toast("한 줄 감상을 입력해주세요.");
+  const list=reviews();
+  list.push({code:activeMovieCode,text:text.slice(0,240),at:new Intl.DateTimeFormat("ko-KR",{month:"numeric",day:"numeric"}).format(new Date())});
+  saveReviews(list.slice(-50));
+  $("#reviewInput").value="";
+  renderCommunity();
+  toast("이 기기에 관객 문장을 저장했습니다.");
+}
+
+function runSearch(){
+  const q=$("#searchInput").value.trim().toLowerCase();
+  const results=Object.entries(MOVIES).filter(([,m])=>[m.title,m.eng,m.director,m.actors,m.short].join(" ").toLowerCase().includes(q));
+  $("#searchResults").innerHTML=q?results.map(([code,m])=>`<button onclick="openMovie('${code}')">${m.poster?`<img src="${m.poster}" alt="">`:""}<span><b>${esc(m.title)}</b><small>${esc(m.director||m.eng||"")}</small></span></button>`).join(""):"";
+}
+function renderPrograms(){
+  const status=$("#programStatus"), updated=$("#programUpdated");
+  if(status)status.textContent=programs?.note||"Dtryx 공개 극장 메인 페이지의 프로그램 정보를 확인 중입니다.";
+  if(updated)updated.textContent=programs?.updated?`확인 ${programs.updated}`:"";
+}
+
+async function fetchJson(url,required=true){
+  const res=await fetch(`${url}?v=${Date.now()}`);
+  if(!res.ok){if(required)throw new Error(`${url} ${res.status}`);return null;}
+  return res.json();
+}
+
+async function boot(){
+  try{
+    const [scheduleData,movieData,programData]=await Promise.all([
+      fetchJson("./data/live.json"),fetchJson("./data/movies.json"),fetchJson("./data/programs.json",false)
+    ]);
+    live=scheduleData;
+    MOVIES=movieData?.movies||{};
+    programs=programData;
+    selectedDate=live.days?.[0]?.date||"";
+    $("#updatedAt").textContent=live.updated||"공개 예매정보 기준";
+    renderHero();renderDates();renderSessions();renderDiscover();renderMy();renderCommunity();renderPrograms();
+  }catch(e){
+    console.error(e);
+    $("#sessions").innerHTML='<div class="empty">실제 상영정보를 불러오지 못했습니다. 공식 예매 페이지에서 최신 일정을 확인해주세요.</div>';
+    $("#posterGrid").innerHTML='<div class="empty">영화정보 동기화에 실패했습니다.</div>';
+  }
+}
+$("#searchInput")?.addEventListener("input",runSearch);
+$("#searchBtn")?.addEventListener("click",()=>{
+  $("#searchPanel").classList.toggle("open");
+  if($("#searchPanel").classList.contains("open"))$("#searchInput").focus();
+});
+$("#closeSearch")?.addEventListener("click",()=>$("#searchPanel").classList.remove("open"));
+$("#movieOverlay")?.addEventListener("click",e=>{if(e.target.id==="movieOverlay")closeMovie();});
+$("#closeMovie")?.addEventListener("click",closeMovie);
+$("#detailWatch")?.addEventListener("click",()=>activeMovieCode&&toggleWatch(activeMovieCode));
+$("#saveReview")?.addEventListener("click",saveCurrentReview);
+$$('[data-scroll]').forEach(b=>b.addEventListener("click",()=>document.getElementById(b.dataset.scroll)?.scrollIntoView({behavior:"smooth"})));
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){closeMovie();$("#searchPanel")?.classList.remove("open");}
+});
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();deferredInstall=e;$("#installBtn").hidden=false;
+});
+$("#installBtn")?.addEventListener("click",async()=>{
+  if(!deferredInstall)return toast("브라우저 메뉴에서 홈 화면에 추가할 수 있습니다.");
+  deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$("#installBtn").hidden=true;
+});
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
 boot();
-const __renderSessions=renderSessions;
-renderSessions=function(){__renderSessions();const day=(live?.days||[]).find(d=>d.date===(selectedDate||live?.days?.[0]?.date));if(!day)return;$$(".session",$("#sessions")).forEach((card,i)=>{const s=day.sessions[i],btn=$(".mini",card);if(s?.bookable===false&&btn){btn.removeAttribute("href");btn.textContent="예매준비";btn.classList.remove("book");btn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();toast("아직 예매가 열리지 않은 회차입니다.")})}})}
