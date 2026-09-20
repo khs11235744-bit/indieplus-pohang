@@ -10,7 +10,7 @@ function toggleNewsSave(id){
   const a=newsSaved(),i=a.indexOf(id);i>=0?a.splice(i,1):a.push(id);saveNewsSaved(a);renderNewsCards();
 }
 function newsItems(){
-  const all=NEWS_WEEKLY?.items||[];
+  const all=(NEWS_WEEKLY?.items||[]).filter(x=>x.translationStatus==="translated-reviewed"&&x.titleKo&&x.summaryKo);
   if(newsFilter==="all")return all;
   if(newsFilter==="saved")return all.filter(x=>newsSaved().includes(x.id));
   return all.filter(x=>x.category===newsFilter);
@@ -24,9 +24,12 @@ function renderNewsCards(){
     return '<article class="news-card">'+
       '<div class="news-card-top"><span class="news-cat">'+esc(x.category)+'</span>'+(x.official?'<span class="news-official">OFFICIAL</span>':'')+'<button onclick="toggleNewsSave(\''+x.id+'\')">'+(saved.includes(x.id)?"★":"☆")+'</button></div>'+
       '<small>'+esc(x.source)+' · '+esc(newsDate(x.publishedAt))+'</small>'+
-      '<h3>'+esc(title)+'</h3><p>'+esc(summary)+'</p>'+
-      '<div class="news-original">'+esc(x.titleOriginal)+'</div><div class="news-tags">'+tags+'</div>'+
-      '<div class="news-actions"><a href="'+x.url+'" target="_blank" rel="noopener">원문 보기 ↗</a><span>'+(x.translationStatus==="translated-reviewed"?"한국어 편집완료":"번역 대기")+'</span></div>'+
+      '<div class="news-korean-label">한글 요약기사</div><h3>'+esc(title)+'</h3><p class="news-summary-ko">'+esc(summary)+'</p>'+
+      (x.whyItMatters?'<div class="news-why"><b>왜 주목할까</b><p>'+esc(x.whyItMatters)+'</p></div>':'')+
+      ((x.keyPoints||[]).length?'<div class="news-keypoints">'+x.keyPoints.slice(0,3).map(v=>'<span>'+esc(v)+'</span>').join('')+'</div>':'')+
+      '<div class="news-tags">'+tags+'</div>'+
+      '<details class="news-source-details"><summary>출처·원문 확인</summary><div class="news-original"><b>원문 제목</b><span>'+esc(x.titleOriginal)+'</span></div><a href="'+x.url+'" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a></details>'+
+      '<div class="news-actions"><span>'+(x.translationStatus==="translated-reviewed"?"한국어 편집완료":"번역 대기")+'</span></div>'+
       '</article>';
   }).join(""):'<div class="empty">이 필터에 해당하는 소식이 없습니다.</div>';
 }
@@ -59,7 +62,7 @@ async function initV06(){
   const t=document.getElementById("newsDigestTitle"),s=document.getElementById("newsDigestSummary"),c=document.getElementById("newsCount"),g=document.getElementById("newsGenerated");
   if(t)t.textContent=NEWS_WEEKLY.digestTitle||"이번 주 영화뉴스";
   if(s)s.textContent=NEWS_WEEKLY.digestSummary||"주간 요약을 준비 중입니다.";
-  if(c)c.textContent=(NEWS_WEEKLY.items?.length||0)+"개 기사";
+  if(c)c.textContent=(NEWS_WEEKLY.items||[]).filter(x=>x.translationStatus==="translated-reviewed"&&x.titleKo&&x.summaryKo).length+"개 한글 기사";
   if(g)g.textContent=NEWS_WEEKLY.generatedAt?new Intl.DateTimeFormat("ko-KR",{dateStyle:"medium"}).format(new Date(NEWS_WEEKLY.generatedAt)):"";
   renderFestivalTracker();renderNewsCards();
 }

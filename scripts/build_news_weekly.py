@@ -48,6 +48,8 @@ for x in items:
         "titleOriginal":core,
         "titleKo":prev.get("titleKo",""),
         "summaryKo":prev.get("summaryKo",""),
+        "whyItMatters":prev.get("whyItMatters",""),
+        "keyPoints":prev.get("keyPoints",[]),
         "tags":prev.get("tags",[]),
         "translationStatus":prev.get("translationStatus","pending")
     })
