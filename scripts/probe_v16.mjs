@@ -1,0 +1,30 @@
+const targets=await (await fetch("http://127.0.0.1:9231/json")).json();
+const page=targets.find(x=>x.type==="page"&&x.url.includes("127.0.0.1:8908"));if(!page)throw new Error("page target not found");
+const ws=new WebSocket(page.webSocketDebuggerUrl);let seq=0;const pending=new Map(),exceptions=[];
+await new Promise((res,rej)=>{ws.onopen=res;ws.onerror=rej});
+ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.id&&pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(m.error):p.resolve(m.result)}if(m.method==="Runtime.exceptionThrown")exceptions.push(m.params.exceptionDetails.text)};
+function call(method,params={}){return new Promise((resolve,reject)=>{const id=++seq;pending.set(id,{resolve,reject});ws.send(JSON.stringify({id,method,params}))})}
+async function ev(expression){const r=await call("Runtime.evaluate",{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.text);return r.result.value}
+await call("Runtime.enable");await call("Emulation.setDeviceMetricsOverride",{width:390,height:844,deviceScaleFactor:1,mobile:true});
+await ev("['indiePortMagazineV2','indiePortMagazineSeedVersion','indiePortMagazineAdminOverrides','indiePortMagazineAdminHistory','indiePortMagazineAdmin'].forEach(k=>localStorage.removeItem(k));location.reload();true");
+await new Promise(r=>setTimeout(r,4200));
+const out={};
+out.full=await ev("magazineV2().filter(isMagazineLongformV2).map(x=>({id:x.id,title:x.filmTitle,len:x.text.length,photos:(x.photos||[]).length}))");
+out.pending=await ev("magazineV2().filter(x=>x.excerptOnly).length");
+out.coverHasOwner=await ev("(document.querySelector('.annual-cover-copy')?.textContent||'').includes('권형석')");
+await ev("setMagAdminEnabled(true);renderMagazineShelfV2();true");
+out.adminLibrary=await ev("document.querySelectorAll('.mag-admin-library [data-open-mag]').length");
+await ev("openMagazineStudioV2('archive-what-should-we-have-done-2026');true");await new Promise(r=>setTimeout(r,350));
+out.how={body:await ev("document.getElementById('magBody').value.length"),photos:await ev("document.querySelectorAll('#magStillRow [data-magstill]').length"),adminVisible:await ev("!document.getElementById('magAdminPanel').hidden"),photoUrls:await ev("document.getElementById('magPhotoUrlsAdmin').value.split(/\\n/).filter(Boolean).length")};
+await ev("document.getElementById('magHeadline').value='관리자 테스트 제목';saveAdminMagazineV2();true");await new Promise(r=>setTimeout(r,120));
+out.adminSaved=await ev("adminOverrideFor('archive-what-should-we-have-done-2026')?.headline");
+out.historyCount=await ev("(magAdminHistory()['archive-what-should-we-have-done-2026']||[]).length");
+await ev("restoreAdminHistoryV2();true");await new Promise(r=>setTimeout(r,180));
+out.restored=await ev("document.getElementById('magHeadline').value");
+await ev("enableCardManualV2();MAG_STUDIO.cardEdits[1].imageIndex=2;MAG_STUDIO.cardEdits[1].photoMode='trio';MAG_STUDIO.cardEdits[1].preset='noir';renderCardNewsV2();true");await new Promise(r=>setTimeout(r,120));
+out.cardControls={images:await ev("document.querySelectorAll('[data-card-image]').length"),modes:await ev("document.querySelectorAll('[data-card-mode]').length"),presets:await ev("document.querySelectorAll('[data-card-preset]').length"),thumbTrio:await ev("document.querySelectorAll('.cardnews-thumbs article:nth-child(2) .card-thumb-media img').length"),thumbPreset:await ev("document.querySelector('.cardnews-thumbs article:nth-child(2)')?.className")};
+out.cardBlob=await ev("(async()=>{const item=studioItemFromForm(),slides=cardSlideDataV2(item),b=await makeCardSlideBlobV2(item,slides[1],1);return b.size})()");
+await ev("closePanelV08(document.getElementById('magStudioV2'));openMagazineStudioV2('archive-man-from-earth-2026');true");await new Promise(r=>setTimeout(r,250));
+out.man={body:await ev("document.getElementById('magBody').value.length"),photos:await ev("document.querySelectorAll('#magStillRow [data-magstill]').length"),headline:await ev("document.getElementById('magHeadline').value")};
+out.exceptions=exceptions;
+console.log(JSON.stringify(out,null,2));ws.close();

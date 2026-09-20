@@ -1,5 +1,5 @@
 {
-    "version":  8,
+    "version":  10,
     "collection":  {
                        "id":  "critic-annual-2025-2026",
                        "issue":  "VOL. 01",
@@ -10,74 +10,6 @@
                        "note":  "원문 전체가 회수된 글은 잡지 본문에 수록하고, 일부만 회수된 글은 2026 비평 인덱스에서 원문 회수 중으로 표시한다."
                    },
     "items":  [
-                  {
-                      "id":  "sample-what-should-we-have-done",
-                      "issue":  "SAMPLE 001",
-                      "year":  2026,
-                      "sourceDate":  "2026-09-17",
-                      "section":  "COVER / CARD NEWS",
-                      "code":  "029204",
-                      "sample":  true,
-                      "filmTitle":  "어떻게 해야 했을까?",
-                      "filmTitleOriginal":  "What Should We Have Done",
-                      "headline":  "어떻게 해야 했을까?",
-                      "deck":  "사랑과 잘못은 서로 반대말이 아니다",
-                      "author":  "권형석",
-                      "spoiler":  true,
-                      "preset":  "journal",
-                      "rating":  0,
-                      "tags":  [
-                                   "어떻게해야했을까",
-                                   "영화비평",
-                                   "다큐멘터리",
-                                   "가족",
-                                   "기억"
-                               ],
-                      "lead":  "불꽃놀이에서 시작해 마지막 동의의 질문까지, 한 가족의 침묵과 기록을 따라가는 비평.",
-                      "excerptOnly":  true,
-                      "recoveryStatus":  "verified-excerpt",
-                      "body":  "어둠 속에서 불꽃이 터진다.\n\n사랑과 잘못은 서로 반대말이 아니다.\n\n가족의 역사와 누나의 이야기를 따라가지만, 영화가 오래 바라보는 것은 감독 자신의 회피와 귀환이기도 하다. 그는 가족에게서 멀어졌다가 다시 그 기억과 침묵을 마주하러 돌아온다.\n\n다큐멘터리의 투박한 화면, 어둠, 아날로그의 지지직거리는 노이즈는 단순한 기록의 결함이 아니라 감독의 감정과 기억의 질감처럼 남는다.\n\n이 영화는 너무 늦게 도착한 사람이 쓰는 반성문처럼 보인다.\n\n마지막에 요양원의 아버지에게 공개의 동의를 구하는 장면은 영화 전체의 질문을 다시 돌려준다. “이 이야기를 해도 될까.” 질문을 던지는 사람 자신 역시 질문의 대상이 되는 자리다.",
-                      "continuationNote":  "현재 회수 가능한 실제 원고 문장만 수록. 확인되지 않은 문단은 새로 만들지 않음.",
-                      "coverMode":  "still",
-                      "stillIndices":  [
-                                           0,
-                                           1,
-                                           2,
-                                           3
-                                       ],
-                      "magazineEligible":  false
-                  },
-                  {
-                      "id":  "sample-man-from-earth-2026",
-                      "issue":  "RECOVERING",
-                      "year":  2026,
-                      "sourceDate":  "2026-09-11",
-                      "section":  "2026 CRITICISM INDEX",
-                      "sample":  true,
-                      "filmTitle":  "맨 프럼 어스",
-                      "headline":  "보여주지 않던 영화가 마지막에 보여준 것",
-                      "deck":  "〈맨 프럼 어스〉 — 허구의 힘과, 그 힘을 스스로 내려놓는 순간",
-                      "author":  "권형석",
-                      "spoiler":  true,
-                      "preset":  "archive",
-                      "rating":  0,
-                      "tags":  [
-                                   "맨프럼어스",
-                                   "영화비평",
-                                   "허구",
-                                   "증거",
-                                   "판단"
-                               ],
-                      "lead":  "영화의 초반, 이삿짐 상자들 사이에서 동료 하나가 그림 한 점을 알아본다.",
-                      "excerptOnly":  true,
-                      "recoveryStatus":  "conversation-recovered-partial",
-                      "body":  "영화의 초반, 이삿짐 상자들 사이에서 동료 하나가 그림 한 점을 알아본다. 반 고흐가 아니냐는 물음에 존 올드먼은 선물로 받은 것이라고만 답한다. 진품이라면 그의 정체를 증명할 물건이고, 위작이라면 그의 이야기 전체를 의심하게 할 물건이다. 그러나 영화는 어느 쪽도 확인해 주지 않고 그림을 다시 짐 속에 묻는다.",
-                      "continuationNote":  "2026-09-11 장문 비평의 전체 원문은 현재 파일로 회수되지 않아 확인 가능한 실제 문장만 보존. 전체본 회수 시 그대로 교체.",
-                      "stillIndices":  [
 
-                                       ],
-                      "coverMode":  "text",
-                      "magazineEligible":  false
-                  }
               ]
 }
