@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-21 03:02 KST",
+  "updated": "2026-09-21 14:41 KST",
   "source": "Dtryx 인디플러스 포항 공개 편성",
   "cinema": {
     "name": "인디플러스 포항",
@@ -16,7 +16,7 @@
           "end": "15:56",
           "minutes": 116,
           "age": "12세",
-          "availableSeats": 262,
+          "availableSeats": 261,
           "showSeq": 1,
           "screenCode": "01",
           "screenName": "1관",
@@ -42,7 +42,7 @@
           "end": "21:07",
           "minutes": 97,
           "age": "15세",
-          "availableSeats": 258,
+          "availableSeats": 260,
           "showSeq": 3,
           "screenCode": "01",
           "screenName": "1관",

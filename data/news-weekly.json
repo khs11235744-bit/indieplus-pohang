@@ -1,354 +1,41 @@
 {
-  "generatedAt": "2026-09-20T17:22:22.011294+00:00",
+  "generatedAt": "2026-09-21T05:41:36.281929+00:00",
   "periodLabel": "최근 2주 / 주간 편집본",
-  "translationPolicy": "영문 원문을 기본 노출하지 않고, 사실 확인 후 4~7문장 한국어 기사형 요약·왜 주목할까·핵심 포인트를 제공한다.",
-  "digestTitle": "이번 주 영화·예술 뉴스",
-  "digestSummary": "이번 주 뉴스룸은 해외 영화제뿐 아니라 국내 영화정책과 독립영화 유통, 예술영화관의 큐레이션, 포항의 공연·전시까지 범위를 넓혔다. 영화진흥위원회는 플랫폼 시대 거버넌스와 중예산 제작지원 등 산업 구조를 다루고 있고, 시네마테크KOFA는 공간을 축으로 한 기획전을 준비한다. 포항에서는 국제음악제와 전시, 생활권 영화 프로그램이 이어지며 영화와 지역예술을 하나의 문화생활 흐름으로 묶을 수 있는 기반이 보인다.",
+  "translationPolicy": "원문 전문을 복제하지 않고 제목·핵심 내용만 한국어로 번역·요약",
+  "digestTitle": "이번 주 세계 독립·예술영화 뉴스",
+  "digestSummary": "",
   "items": [
     {
-      "id": "seed-adc6f8e49d",
-      "category": "국내 영화",
-      "source": "영화진흥위원회",
-      "official": true,
-      "publishedAt": "2026-09-11T00:00:00+09:00",
-      "url": "https://www.kofic.or.kr/kofic/business/board/selectBoardDetail.do?boardNumber=181&boardSeqNumber=75403",
-      "sourceUrl": "https://www.kofic.or.kr/",
-      "titleOriginal": "역대 최대 257억 7천만 원 지원, 2026년 추경 중예산 한국영화 제작지원작 16편 선정",
-      "titleKo": "중예산 한국영화 16편에 257억7천만 원 추가 지원",
-      "summaryKo": "영화진흥위원회가 2026년 추가경정예산을 통해 중예산 한국영화 제작지원작 16편을 선정하고 총 257억7천만 원을 지원한다. 본예산 198억 원에 이어 추가 지원이 이뤄지면서 중예산 영화 제작지원 규모가 크게 확대됐다. 선정작 가운데 신인감독 작품은 8편으로 전체의 절반을 차지한다. 사업은 대규모 상업영화와 저예산 독립영화 사이에서 축소돼온 중간 규모 제작을 활성화하고 민간 투자를 끌어내는 것을 목표로 한다. 어떤 작품들이 실제 제작과 개봉까지 이어지는지가 향후 한국영화 라인업 다양성을 가늠할 지표가 될 전망이다.",
-      "whyItMatters": "한국영화의 ‘허리’에 해당하는 중예산 작품이 다시 늘어날 수 있을지 가늠하는 직접적인 제작지원 정책이다.",
-      "keyPoints": [
-        "추경 지원 257억7천만 원",
-        "선정작 16편",
-        "신인감독 작품 8편"
-      ],
-      "tags": [
-        "KOFIC",
-        "중예산영화",
-        "제작지원",
-        "한국영화"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-c225c178c3",
-      "category": "국내 영화",
-      "source": "영화진흥위원회",
-      "official": true,
-      "publishedAt": "2026-09-15T00:00:00+09:00",
-      "url": "https://m.kofic.or.kr/kofic/business/noti/findNewsList.do",
-      "sourceUrl": "https://www.kofic.or.kr/",
-      "titleOriginal": "지역에서도 다양한 영화를 만날 수 있도록! 2026 작은영화관 기획전 개막",
-      "titleKo": "전국 25개 작은영화관에서 11월까지 기획전 이어진다",
-      "summaryKo": "영화진흥위원회가 주관하는 2026 작은영화관 기획전이 제주 한림작은영화관을 시작으로 전국 25개 작은영화관에서 순차적으로 열린다. 프로그램은 11월까지 이어지며 지역 관객이 상업 멀티플렉스 중심 편성에서 만나기 어려운 작품을 접할 수 있도록 기획됐다. 첫 행사에서는 정지영 감독의 〈부러진 화살〉 상영과 함께 배우 안성기의 필모그래피를 돌아보는 시네토크가 진행됐다. 작은영화관이 단순 상영시설을 넘어 지역 영화문화의 프로그램 거점으로 기능하는 사례라는 점에서 주목할 만하다.",
-      "whyItMatters": "포항을 넘어 다른 지역의 작은 영화관·예술영화관 네트워크를 앱에 연결해야 하는 이유를 보여주는 정책 사례다.",
-      "keyPoints": [
-        "전국 25개 작은영화관",
-        "11월까지 순차 개최",
-        "상영+시네토크 프로그램"
-      ],
-      "tags": [
-        "작은영화관",
-        "지역영화문화",
-        "기획전",
-        "KOFIC"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-1ceb96afb5",
-      "category": "국내 영화",
-      "source": "영화진흥위원회",
-      "official": true,
-      "publishedAt": "2026-09-18T00:00:00+09:00",
-      "url": "https://m.kofic.or.kr/kofic/business/noti/findNewsList.do",
-      "sourceUrl": "https://www.kofic.or.kr/",
-      "titleOriginal": "한국영화 지속발전 특별위원회 「영상 콘텐츠 거버넌스 공청회」 개최",
-      "titleKo": "플랫폼 시대의 영화정책, ‘영상 콘텐츠 거버넌스’ 공청회 열린다",
-      "summaryKo": "영화진흥위원회 한국영화 지속발전 특별위원회가 플랫폼 시대의 영상 콘텐츠 정책과 거버넌스를 논의하는 공청회를 연다. 공청회는 영화·방송·플랫폼 산업의 경계가 빠르게 흐려지는 상황에서 기존 영화정책 체계가 어떤 방향으로 바뀌어야 하는지 논의하는 자리다. 미디어 연구자들의 발제에 이어 영화·방송·플랫폼 현장 전문가들이 종합토론에 참여하고 방청객 질의응답도 진행한다. 최근 한국영화 산업 위기 논의가 제작지원뿐 아니라 플랫폼 유통과 정책 거버넌스 문제로 확장되고 있다는 점에서 의미가 있다.",
-      "whyItMatters": "영화 제작과 극장 정책만이 아니라 스트리밍·방송까지 포함한 ‘한국영화 생태계’를 어떤 제도로 묶을지 논의하는 흐름이다.",
-      "keyPoints": [
-        "한국영화 지속발전 특별위원회 공청회",
-        "영화·방송·플랫폼 전문가 종합토론",
-        "플랫폼 시대 정책·거버넌스 논의"
-      ],
-      "tags": [
-        "KOFIC",
-        "한국영화",
-        "영화정책",
-        "플랫폼"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-bbc821ef14",
-      "category": "한국 독립·예술",
-      "source": "인디그라운드",
-      "official": true,
-      "publishedAt": "2026-09-03T00:00:00+09:00",
-      "url": "https://www.indieground.kr/indie/newsrelease.do",
-      "sourceUrl": "https://www.indieground.kr/",
-      "titleOriginal": "'2026 독립영화 매칭 워크숍 퍼스트링크' 성황리 마무리",
-      "titleKo": "독립영화 창작과 배급을 잇는 ‘퍼스트링크’ 2026 마무리",
-      "summaryKo": "인디그라운드가 독립영화 창작자와 유통·배급 관계자를 연결하는 2026 독립영화 매칭 워크숍 ‘퍼스트링크’를 마무리했다. 이 프로그램은 아직 배급사가 정해지지 않은 독립영화가 실제 배급 관계자와 만날 수 있도록 비즈니스 미팅과 워크숍을 제공한다. 독립영화가 영화제 상영 이후 관객에게 도달하기까지 가장 큰 병목 가운데 하나인 유통·배급 단계에 직접 개입하는 사업이다. 완성작의 발견뿐 아니라 제작 이후의 경로를 함께 보여준다는 점에서 국내 독립영화 생태계를 이해하는 데 중요한 소식이다.",
-      "whyItMatters": "좋은 독립영화가 만들어지는 것과 실제 관객에게 도달하는 것은 별개의 문제이며, 퍼스트링크는 그 사이를 연결하는 프로그램이다.",
-      "keyPoints": [
-        "독립영화-배급 관계자 매칭",
-        "배급사 미정 작품 대상",
-        "유통·배급 단계 지원"
-      ],
-      "tags": [
-        "인디그라운드",
-        "독립영화",
-        "배급",
-        "퍼스트링크"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-b8128e3281",
-      "category": "예술영화관",
-      "source": "시네마테크KOFA",
-      "official": true,
-      "publishedAt": "2026-09-20T00:00:00+09:00",
-      "url": "https://www.koreafilm.or.kr/cinematheque/programs/PI_01655",
-      "sourceUrl": "https://www.koreafilm.or.kr/",
-      "titleOriginal": "영화와 공간: 뉴욕 Part 1",
-      "titleKo": "시네마테크KOFA, 뉴욕의 공간을 영화로 읽는 13편 기획전",
-      "summaryKo": "시네마테크KOFA가 9월29일부터 10월14일까지 ‘영화와 공간: 뉴욕 Part 1’을 연다. 기획전은 고전 경찰 수사극과 범죄영화, 컬트, 로맨틱 코미디, 초자연적 모험극, 콘서트 영화 등 서로 다른 장르가 뉴욕이라는 도시를 어떻게 바라보는지 묶어 보여준다. 〈네이키드 시티〉, 〈뜨거운 오후〉, 〈25시〉, 〈다이 하드 3〉, 〈고스트버스터즈〉 등 13편이 포함됐다. 한 감독이나 장르가 아니라 ‘공간’을 큐레이션의 축으로 삼아 도시의 다층적 초상을 만드는 프로그램이다. 다른 예술영화관의 기획전을 함께 모아보는 네트워크형 뉴스탭과 잘 맞는 사례다.",
-      "whyItMatters": "예술영화관의 가치는 개별 상영작뿐 아니라 작품을 서로 연결하는 큐레이션에 있다는 점을 잘 보여준다.",
-      "keyPoints": [
-        "9월29일~10월14일",
-        "뉴욕을 다룬 13편",
-        "공간 중심 큐레이션"
-      ],
-      "tags": [
-        "KOFA",
-        "시네마테크",
-        "기획전",
-        "뉴욕"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-b6bf78d074",
-      "category": "예술영화관",
-      "source": "KT&G 상상마당 시네마",
-      "official": true,
-      "publishedAt": "2026-09-21T00:00:00+09:00",
-      "url": "https://sangsangmadang.com/movie/list",
-      "sourceUrl": "https://sangsangmadang.com/",
-      "titleOriginal": "KT&G 상상마당 시네마 현재 상영작",
-      "titleKo": "상상마당 시네마, 9월 말 독립·예술영화 15편 편성",
-      "summaryKo": "KT&G 상상마당 시네마가 9월 말 독립·예술영화 중심의 현재 상영작 15편을 공개했다. 편성에는 〈어떻게 해야 했을까?〉, 〈철들 무렵〉, 〈아가미〉, 〈환희의 얼굴〉, 〈해피엔드〉와 함께 〈최악의 하루〉 기획전 등 국내외 작품이 섞여 있다. 일반 상영과 기획전이 한 화면에 함께 배치돼 있어 한 예술영화관의 큐레이션 흐름을 살펴보기 좋다. INDIE+ POHANG 편성과 나란히 보면 같은 시기에 지역과 서울의 독립·예술영화관이 어떤 작품을 선택하는지 비교할 수 있다. 앞으로 예술영화관 탭에서는 이런 편성 차이를 극장별로 묶어 보여주는 기능으로 확장할 수 있다.",
-      "whyItMatters": "한 극장의 현재 편성을 기사처럼 요약하면 ‘어디서 무엇을 상영하나’를 넘어 예술영화관별 큐레이션 성격을 비교할 수 있다.",
-      "keyPoints": [
-        "현재 상영작 15편",
-        "〈어떻게 해야 했을까?〉·〈해피엔드〉 등",
-        "독립·예술영화+기획전 편성"
-      ],
-      "tags": [
-        "상상마당",
-        "예술영화관",
-        "독립영화",
-        "상영정보"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-5e5bb0e5b4",
-      "category": "지역 예술",
-      "source": "포항문화재단",
-      "official": true,
-      "publishedAt": "2026-09-20T00:00:00+09:00",
-      "url": "https://ilwol.phcf.or.kr/",
-      "sourceUrl": "https://ilwol.phcf.or.kr/",
-      "titleOriginal": "2026 포항국제음악제",
-      "titleKo": "11월 포항국제음악제, 일주일간 도시 곳곳에서 열린다",
-      "summaryKo": "2026 포항국제음악제가 11월5일부터 11일까지 포항문화예술회관과 포항 시내 여러 공간에서 열린다. 개막공연 ‘흐름’을 시작으로 오로라, 키아로스쿠로 콰르텟, ‘과거에서 현재로’, 포항시립교향악단 협연, 선우예권 공연과 폐막공연 ‘경계 너머’까지 연속 프로그램이 예정돼 있다. 하나의 공연만 소개하기보다 일주일 동안 도시 전체에서 이어지는 음악축제라는 점이 특징이다. 영화 뉴스룸 옆에 지역 공연·전시·축제 소식을 함께 배치하면 앱이 향후 지역 문화예술 매거진으로 확장될 수 있는 대표 사례다.",
-      "whyItMatters": "영화관 정보에 머물지 않고 지역의 음악·공연까지 연결하는 ‘지역 문화생활 플랫폼’ 확장에 가장 적합한 행사다.",
-      "keyPoints": [
-        "11월5일~11일",
-        "포항문화예술회관·포항 시내",
-        "공연 연속 편성"
-      ],
-      "tags": [
-        "포항",
-        "음악제",
-        "공연",
-        "지역예술"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-9be41ea201",
-      "category": "지역 예술",
-      "source": "포항문화재단",
-      "official": true,
-      "publishedAt": "2026-09-20T00:00:00+09:00",
-      "url": "https://festival.phcf.or.kr/",
-      "sourceUrl": "https://festival.phcf.or.kr/",
-      "titleOriginal": "2026 지역전시 활성화사업 <아침놀>",
-      "titleKo": "동빈문화창고1969에서 지역전시 활성화사업 〈아침놀〉 진행",
-      "summaryKo": "포항문화재단의 2026 지역전시 활성화사업 〈아침놀〉이 9월29일까지 동빈문화창고1969에서 열린다. 지역의 전시 공간과 예술 활동을 연결해 시민이 일상 가까이에서 시각예술을 만날 수 있도록 하는 프로그램이다. 포항의 문화예술 소식을 영화 상영정보와 같은 앱 안에서 함께 보여줄 경우 ‘오늘 볼 영화’와 ‘오늘 갈 전시’를 같은 문화생활 흐름으로 묶을 수 있다. 향후 지역예술 탭에서 전시·공연·축제·문학을 유형별로 분리하는 구조의 첫 사례로 활용할 수 있다.",
-      "whyItMatters": "지역 영화관 사용자에게 같은 도시의 전시 정보를 자연스럽게 연결할 수 있는 실제 콘텐츠다.",
-      "keyPoints": [
-        "9월29일까지",
-        "동빈문화창고1969",
-        "지역전시 활성화사업"
-      ],
-      "tags": [
-        "포항",
-        "전시",
-        "동빈문화창고1969",
-        "지역예술"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "seed-c398a4b4d3",
-      "category": "지역 예술",
-      "source": "포항문화재단",
-      "official": true,
-      "publishedAt": "2026-09-20T00:00:00+09:00",
-      "url": "https://ilwol.phcf.or.kr/",
-      "sourceUrl": "https://ilwol.phcf.or.kr/",
-      "titleOriginal": "문화가 있는 날 <수요 있는 영화 생활>",
-      "titleKo": "포항 ‘수요 있는 영화 생활’, 연말까지 이어지는 생활권 영화 프로그램",
-      "summaryKo": "포항문화재단의 문화가 있는 날 프로그램 〈수요 있는 영화 생활〉이 12월30일까지 인디플러스 포항과 중앙아트홀에서 이어진다. 일회성 행사보다 정기적으로 영화를 만나는 생활문화 프로그램에 가깝다는 점이 특징이다. 지역예술 탭에서는 이처럼 영화와 지역문화 정책이 겹치는 프로그램을 ‘영화’와 ‘지역예술’ 양쪽에서 발견할 수 있게 연결할 필요가 있다. 장기적으로는 상영 일정, 프로그램 기사, 관람 기록을 하나의 사용자 경험으로 엮는 핵심 콘텐츠가 될 수 있다.",
-      "whyItMatters": "인디플러스 포항을 앱의 출발점으로 유지하면서도 지역 문화예술 전체로 넓히는 연결고리가 되는 프로그램이다.",
-      "keyPoints": [
-        "12월30일까지",
-        "인디플러스 포항·중앙아트홀",
-        "문화가 있는 날 정기 프로그램"
-      ],
-      "tags": [
-        "포항",
-        "인디플러스",
-        "문화가있는날",
-        "지역영화"
-      ],
-      "translationStatus": "translated-reviewed"
-    },
-    {
-      "id": "12cbaaecead888",
+      "id": "d03374b671c094",
       "category": "영화제",
-      "source": "tiff.net",
+      "source": "BUSAN International Film Festival",
       "official": true,
-      "publishedAt": "2026-09-09T14:23:32+00:00",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE83WVFGM2x3MHo4QVRpTVBOMENLUjlYbXYtMURZQmJDWkRMaFNRT0ZKRVpFMkVjMERPRjBBRUZCTmtrOURlTi1wSm1sVHhBSXIxWWUtQl8xMVR5RkNzckNJVGE2NWM3WUUtY19VRA?oc=5",
+      "publishedAt": "2026-09-21T05:04:36+00:00",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBhWHZLLWZvcmlpbTNfY0EyZzJTTk5ncEFVcE5wUlJqT2daaGlLVF9hR2QtNGZSRWVTU193QkxOSUoxaWVlOHB1UjNWUkJyQWV6WGUyZjNmQzAwa1FXQjI0MFprU25PVFZGTDMtMjFUZw?oc=5",
+      "sourceUrl": "https://www.biff.kr",
+      "titleOriginal": "BIFF Ticket Box Place & Operating Hours",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
+    },
+    {
+      "id": "9f14cd2780d3b8",
+      "category": "영화제",
+      "source": "TIFF - Toronto International Film Festival",
+      "official": true,
+      "publishedAt": "2026-09-20T16:48:41+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9kQm5TNWstYnRQaWFjWV9HUTNELVFza214TXM4X1B5UGM1dDFVYnBJTUZRM2FwcTAzbkJ3RkxRa3NKYVU2MDJPYTdUcnVlajBNQ08xQ3hSZVU4YmVISkZpOEhQQVVmV3NxWFQtV1J3?oc=5",
       "sourceUrl": "https://tiff.net",
-      "titleOriginal": "Expected talent coming to TIFF ’26",
-      "titleKo": "TIFF 2026, 영화제를 찾을 주요 게스트 공개",
-      "summaryKo": "토론토국제영화제가 TIFF 2026에 참석할 예정인 주요 영화인과 게스트 정보를 공개했다. 영화제는 세계 각지의 감독, 배우, 제작자들이 상영과 관객 행사, 산업 프로그램에 참여할 예정이라고 밝혔다. TIFF는 북미 배급과 시상식 시즌의 중요한 출발점이어서 어떤 창작자가 현장을 찾는지 자체가 작품 홍보와 거래에 영향을 준다. 이번 명단은 영화제 프로그램이 단순한 상영을 넘어 감독과 배우의 대화, 업계 미팅, 프리미어 이벤트를 중심으로 작동한다는 점을 보여준다. 실제 참석 여부는 일정에 따라 변동될 수 있어 개별 행사는 공식 일정 확인이 필요하다.",
-      "tags": [
-        "TIFF",
-        "게스트",
-        "토론토"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "TIFF의 게스트 라인업은 작품의 북미 공개 전략과 관객 대화, 산업 관심도를 읽는 단서가 된다.",
-      "keyPoints": [
-        "TIFF 2026 주요 게스트 발표",
-        "관객 행사·산업 프로그램 연계",
-        "참석 일정은 변동 가능"
-      ]
-    },
-    {
-      "id": "46634792879411",
-      "category": "영화제",
-      "source": "La Biennale di Venezia",
-      "official": true,
-      "publishedAt": "2026-09-12T13:31:56+00:00",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPYUxHdE1HR3A2a29xclVkcHhOS1MwS05aYm8tVHE4enVLaE56Q05IcEhFTl9Ba1JRZDBxUVFhTlU1U3FTcVZvaWowaTBBYVA1UXlQYlF5OE91ekZaSXpwUWFhaDJ2NDNTanpjaUdXcjFXOEJyUTlRWjFqT083cEFXZVNHV1VQLTVzYW54a0lDejhYVkxr?oc=5",
-      "sourceUrl": "https://www.labiennale.org",
-      "titleOriginal": "Biennale Cinema 2026 | Official awards of the 83rd Venice International Film Festival",
-      "titleKo": "제83회 베니스국제영화제 공식 수상 결과 발표",
-      "summaryKo": "제83회 베니스국제영화제가 공식 경쟁 부문 수상 결과를 발표했다. 황금사자상은 메이 엘투키 감독의 〈Woman Unknown〉이 받았고, 심사위원대상은 이창동 감독의 〈Possible Love〉에 돌아갔다. 감독상은 〈DAU〉의 일리야 흐르자노프스키가 수상했다. 이번 심사위원단은 배우·감독 매기 질렌할이 이끌었다. 수상 결과는 2026~2027년 예술영화 배급과 각국 시상식 레이스에서 어떤 작품들이 중심에 설지 가늠할 수 있는 중요한 출발점이다.",
-      "tags": [
-        "Venice",
-        "수상작",
-        "2026"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "베니스 수상작은 이후 국제 배급과 비평 담론, 시상식 시즌의 흐름을 크게 좌우한다.",
-      "keyPoints": [
-        "황금사자 〈Woman Unknown〉",
-        "심사위원대상 이창동 〈Possible Love〉",
-        "감독상 일리야 흐르자노프스키"
-      ]
-    },
-    {
-      "id": "e3fadc50f987d8",
-      "category": "영화제",
-      "source": "La Biennale di Venezia",
-      "official": true,
-      "publishedAt": "2026-09-13T12:39:19+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOUmF2NFJZdUxtT0k0ZXNWUXh6UU9IMnhyaHdsR1lDODZ1bk5aRlRvLUFpZkJVY0o0RnJGSTdqYV85WkNOYjMydTY1b2pKblUxMzBreXFVN0dZbXV4VHFpd1hBOExJM1Y5UUZVZ0FXU0VzQjMtMldEVWFxaGFkc1JEclEycG1Vb0hmZUE?oc=5",
-      "sourceUrl": "https://www.labiennale.org",
-      "titleOriginal": "Biennale Cinema 2026 | Figures for the 83rd Venice International Film Festival",
-      "titleKo": "제83회 베니스국제영화제 결산 수치 공개",
-      "summaryKo": "제83회 베니스국제영화제가 2026년 행사 운영과 관객 지표를 공개했다. 공식 발표에 따르면 유료 관람권은 약 11만7천656장으로 전년보다 14% 늘었다. 영화제 등록 인원은 약 1만4천 명, 산업 프로그램인 Venice Production Bridge에는 약 3천 명이 참여했다. 온라인에서도 3천730만 회가 넘는 조회와 73만 건 이상의 상호작용을 기록하며 현장 관객과 디지털 확산이 함께 증가했다. 예술영화 중심의 전통적인 영화제가 여전히 대규모 관객과 산업 관계자를 동시에 끌어들이고 있다는 점이 이번 수치의 핵심이다.",
-      "tags": [
-        "Venice",
-        "영화제결산",
-        "관객"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "예술영화 영화제가 극장 관객과 산업 네트워크, 온라인 확산을 동시에 유지하고 있음을 수치로 확인할 수 있다.",
-      "keyPoints": [
-        "유료 관람권 약 11만7천656장",
-        "전년 대비 티켓 판매 14% 증가",
-        "Venice Production Bridge 약 3천 명"
-      ]
-    },
-    {
-      "id": "f3935f86a954c3",
-      "category": "영화제",
-      "source": "sundance.org",
-      "official": true,
-      "publishedAt": "2026-09-14T23:14:45+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOcnYtV0RvWlNPRjVuOTQ1a0ZpYWlJYTg1aEE3NW42WWJKaWlIQUNYXzJxYUs2eG5vOUpjM1A1dFAtY2JyTXZlSjFsRTR0UnpSa0pmZ1hyNkFDRHMyWkJJanNoXzFwRFNVeTYxRW0yd3VCN2ZtUmpKVGtXNEpYSklOUG91V21sQ0JjX3l3T0VTQXBtTTA1WHBIT1paMkhmMHA3V3FhVnR4WWVxbkR6dWxXbDVmRldKTk9NaVhvZ1V4OW9sWXAtdkduUS1iQzdJbWVhMzhXbjgwVnRFNHM?oc=5",
-      "sourceUrl": "https://www.sundance.org",
-      "titleOriginal": "Film Festival Watch: 8 Sundance Institute–Supported Films to See at the 2026 Toronto International Film Festival",
-      "titleKo": "2026 토론토영화제에서 만날 선댄스 지원작 8편",
-      "summaryKo": "선댄스 인스티튜트가 2026 토론토국제영화제에서 만날 수 있는 지원작 8편을 묶어 소개했다. 이 목록에는 선댄스의 각종 랩과 제작지원 프로그램을 거친 신작들이 포함돼, 한 기관의 지원이 실제 국제영화제 진출로 어떻게 이어지는지를 보여준다. 소개작에는 〈Bedford Park〉, 〈Josephine〉, 〈Ha-Chan Shake Your Booty!〉, 〈Once Upon a Time in Harlem〉, 〈Seventeen〉, 〈Elephants in the Fog〉, 〈The Only Living Pickpocket in New York〉 등이 포함됐다. 선댄스는 단순히 자국 영화제 프로그램을 소개하는 데서 그치지 않고, 지원작이 다른 국제영화제에서 어떤 경로로 관객을 만나는지도 계속 추적하고 있다. TIFF에서 새 목소리를 찾는 관객이라면 좋은 사전 큐레이션으로 활용할 만하다.",
-      "tags": [
-        "TIFF",
-        "Sundance",
-        "추천작"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "선댄스 랩·지원 시스템이 실제 국제영화제 라인업으로 연결되는 흐름을 한눈에 볼 수 있다.",
-      "keyPoints": [
-        "TIFF 2026 선댄스 지원작 8편",
-        "랩·제작지원 출신 작품 중심",
-        "국제영화제 간 창작자 이동 경로"
-      ]
-    },
-    {
-      "id": "f05d6a64009c98",
-      "category": "영화제",
-      "source": "sundance.org",
-      "official": true,
-      "publishedAt": "2026-09-17T17:21:05+00:00",
-      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxORjN2LUpJZVNJanlsZ0N3RHFYWkJoYkdnNW1Xa3RSeUg1MDdBNHVvYWFCMlpvWHNHbG5FcVQ3Y25TbnlIS0cxNVY0WmtPYnNzM3RYMjdXYkZkZFMxbUlQV2plSlRYNVcxbDJSUE14U0ZXdHRUcndtS3JGMDFfZzNjVENXcXVMWndqSXB1THNqZHBGa2NTaVNqOTJId01Eamo4MTQyTFhPVFJrMldBR0tGTmEzQkFlR20zS0hvQVVEb2M5VENiaTNWc3ptaEVxV05rUXU5T0FlYlpNRTBHTUx0VU9BWlRnMGZFbGpDalB3TWljXzRIUXNfZFVYenNCTlJXMG1YTUJfUQ?oc=5",
-      "sourceUrl": "https://www.sundance.org",
-      "titleOriginal": "Sundance Institute and The Walt Disney Studios Announce the Next Cycles of the Project Advancement and Completion Fund and the Artist Fellowship",
-      "titleKo": "선댄스와 월트디즈니 스튜디오, 제작지원 기금·아티스트 펠로십 차기 지원 발표",
-      "summaryKo": "선댄스 인스티튜트와 월트디즈니 스튜디오가 독립 창작자를 위한 제작지원 프로그램의 다음 주기를 발표했다. 프로젝트 진전·완성 기금은 선정 프로젝트에 2만5천 달러의 제한 없는 지원금을 제공하고, 아티스트 펠로십은 창작자 개인에게 1만5천 달러를 지원한다. 지원금은 특정 제작 항목에만 묶이지 않아 후반작업, 개발, 생활비 등 창작자가 가장 필요한 지점에 활용할 수 있다. 대형 스튜디오와 독립영화 지원기관이 장기 파트너십을 통해 작품 개발 단계부터 완성 단계까지 지원한다는 점이 핵심이다. 영화제 상영 이전의 창작 생태계를 어떻게 유지할 것인가에 대한 선댄스의 역할도 다시 확인된다.",
-      "tags": [
-        "Sundance",
-        "제작지원",
-        "펠로십"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "상영작 뉴스보다 한 단계 앞선 ‘어떤 독립영화가 만들어질 수 있는가’를 좌우하는 제작지원 소식이다.",
-      "keyPoints": [
-        "프로젝트 지원금 2만5천 달러",
-        "아티스트 펠로십 1만5천 달러",
-        "선댄스·디즈니 공동 창작자 지원"
-      ]
+      "titleOriginal": "TIFF announces 2026 award winners - TIFF",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
     },
     {
       "id": "bcdc6896435b9b",
@@ -361,234 +48,170 @@
       "titleOriginal": "Inside the 2027 Sundance Film Festival Venues: Chautauqua Auditorium Welcomes a New Era of Film",
       "titleKo": "2027 선댄스의 새 영화제 공간, 셔토쿼 오디토리엄이 여는 새로운 시대",
       "summaryKo": "2027 선댄스영화제가 콜로라도 볼더에서 사용할 주요 상영 공간 가운데 셔토쿼 오디토리엄을 소개했다. 1898년에 세워진 이 역사적 공연장은 볼더에서 최초의 영화 상영이 이뤄졌던 장소이기도 하다. 영화제를 앞두고 지열 냉난방, 접근성 개선, 화장실·편의시설 정비, 화재 안전과 구조 보강 등 대규모 개선이 진행되고 있다. 선댄스는 이 공간을 새 개최지의 상징적인 극장으로 활용하면서 영화제의 이동이 단순한 장소 변경이 아니라 새로운 관람 문화를 만드는 과정임을 강조하고 있다. 오래된 장소의 기억과 현대적인 영화제 운영이 만나는 지점이라는 점에서 2027년 선댄스의 분위기를 미리 보여주는 소식이다.",
-      "tags": [
-        "Sundance",
-        "영화제공간",
-        "2027"
-      ],
-      "translationStatus": "translated-reviewed",
       "whyItMatters": "선댄스의 개최지 이동이 실제 관람 경험과 영화제 정체성을 어떻게 바꿀지 보여주는 첫 구체 사례다.",
       "keyPoints": [
         "1898년 개관한 셔토쿼 오디토리엄",
         "접근성·지열 냉난방·안전 설비 개선",
         "2027 선댄스의 핵심 상영 공간"
-      ]
-    },
-    {
-      "id": "1a742481861559",
-      "category": "해외 독립·예술",
-      "source": "IndieWire",
-      "official": false,
-      "publishedAt": "2026-09-18T00:00:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPbzljaGxaMG42ckhJUmdhR2FvWGFYYjVyRU1UWVF3LV84SVBsM0FMWlRTdFBCQVdIRmNMOC1ua1dZaWZkbGNHT1hYREZtUWQyOHJQYTJOYTAxVm93b285bDc5T2ttWnI1LW9GNjNCT29KQTJwbjVIc0RwZWxKazBiNg?oc=5",
-      "sourceUrl": "https://www.indiewire.com",
-      "titleOriginal": "‘Up Against It’ Review: An Uneven Medical Dramedy Relies on Sincerity to Mask Its Flaws",
-      "titleKo": "〈Up Against It〉 리뷰: 진정성에 기대는 불균형한 메디컬 드라메디",
-      "summaryKo": "IndieWire가 메디컬 드라메디 〈Up Against It〉을 리뷰하며 작품의 장점과 한계를 함께 짚었다. 리뷰는 영화가 인물과 상황을 대하는 진정성에는 호의적이지만, 장르의 톤과 에피소드 구성에서는 고르지 못한 부분이 있다고 평가한다. 코미디와 드라마가 교차하는 작품일수록 웃음과 감정의 균형이 중요하지만, 이 영화는 그 연결이 항상 매끄럽지는 않다는 지적이다. 그럼에도 배우와 인물에 대한 호감, 감정의 솔직함이 약점을 일정 부분 상쇄한다고 본다. 영화제 신작이 공개 직후 어떤 비평적 평가를 받는지 확인할 수 있는 초기 반응 중 하나다.",
-      "tags": [
-        "리뷰",
-        "독립영화",
-        "IndieWire"
       ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "호의와 비판이 동시에 존재하는 리뷰를 통해 영화제 화제작을 홍보 문구가 아니라 실제 비평 관점에서 볼 수 있다.",
-      "keyPoints": [
-        "메디컬 드라메디 신작 리뷰",
-        "진정성은 강점",
-        "톤·완성도의 기복은 약점"
-      ]
-    },
-    {
-      "id": "436258d2a8fb4e",
-      "category": "해외 독립·예술",
-      "source": "screendaily.com",
-      "official": false,
-      "publishedAt": "2026-09-18T04:18:32+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPQXRuTFdKbk9Zbzgxbi1UT1E4eko5N0ozWTNvUVR6Sk0tMUZzeW9XTTNxRFVKRHNTakMxamVnRTIxVUgyV000VFU3YzFHT19ZdVJNQ29NNGQtNFNnSnhWYWZVaG9hSFlIUmNxRFV4ZzA4SlZzOFRvbU84SnlvQWw4akc4UlZPMGhkYmY3MFdlVUZ1MUxqN1dTdEZtdUo2VzFaRjNYbjREMFo4Vk1zYk92UF9JWjlFNm0xY09oVWp2MEdEb3NxTkctaWo5VVZMNWpHR3hNNERlREkwMzA?oc=5",
-      "sourceUrl": "https://www.screendaily.com",
-      "titleOriginal": "Killer Films co-heads talk mid-budget films, Todd Haynes, and their director golden rule at TIFF",
-      "titleKo": "Killer Films 공동대표가 말하는 중간예산 영화와 토드 헤인즈, 그리고 감독 선택의 원칙",
-      "summaryKo": "Killer Films 공동대표 크리스틴 버천과 파멜라 코플러가 TIFF 마켓에서 현재 독립제작 환경을 이야기했다. 두 사람은 성인 관객을 겨냥한 중간예산 드라마를 제작하고 극장에 올리는 일이 여전히 어렵다고 진단했다. 동시에 최근 〈Materialists〉 같은 작품의 성과를 예로 들며 관객이 사라진 것이 아니라 적절한 작품과 배급 방식이 필요하다고 설명했다. 감독을 선택할 때는 아이디어의 규모와 제작 가능성뿐 아니라 실제 협업 관계를 만들 수 있는 사람인가를 중요하게 본다는 원칙도 언급했다. 토드 헤인즈와 장기간 작업해온 Killer Films의 경험을 통해 독립제작사가 감독과 어떤 방식으로 관계를 구축하는지 확인할 수 있는 대담이다.",
       "tags": [
-        "TIFF",
-        "KillerFilms",
-        "제작"
+        "Sundance",
+        "영화제공간",
+        "2027"
       ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "중간예산 영화가 줄어드는 시장에서 독립 제작사가 어떤 기준으로 프로젝트와 감독을 선택하는지 직접 들을 수 있다.",
-      "keyPoints": [
-        "중간예산 드라마 제작의 어려움",
-        "감독과의 지속 가능한 협업 중시",
-        "Killer Films의 TIFF 산업 대담"
-      ]
+      "translationStatus": "translated-reviewed"
     },
     {
-      "id": "4b6dfc07bbbe84",
-      "category": "해외 독립·예술",
-      "source": "screendaily.com",
-      "official": false,
-      "publishedAt": "2026-09-18T08:47:10+00:00",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNcDROaDJjOVE5OUx1dHRmMnlfYzlBbFp5a1ZERnFMSUtUcDZmeHFSTEVCZ0xjS2UtamhIcmNuUU9JRVVySmswcmZkeFlvRi1HeWxqcmpYTUc4S081RU81TVlfRUowYm1uVlBnQUNFZlZWMFljLW9td3praFpTbjBvYjI2V1NNNHN5UURQYkwxZE0xMDhsR2k0bjVCdURCN0JLLThEbXVHblNqRWlDcGxGOENsdlpTdGxBUnpIXzJybmpIZkRfc0V6ZjBFa0g?oc=5",
-      "sourceUrl": "https://www.screendaily.com",
-      "titleOriginal": "UK-Ireland box office preview: Can Zach Cregger’s ‘Resident Evil’ reach ‘Weapons’ heights?",
-      "titleKo": "영국·아일랜드 박스오피스 전망: 신작 〈Resident Evil〉의 흥행 가능성",
-      "summaryKo": "Screen Daily가 영국·아일랜드 주말 박스오피스를 앞두고 주요 신작의 출발 조건을 정리했다. 관심작 가운데 하나는 잭 크레거의 〈Resident Evil〉로, 전작 〈Weapons〉의 흥행 수준에 접근할 수 있을지가 관전 포인트로 제시됐다. 가족 관객을 겨냥한 〈Shaun the Sheep: Beast of Mossy Bottom〉도 647개 상영관 규모로 개봉하며 시장을 나눠 가진다. 프리뷰 매출과 상영관 수, 기존 시리즈 성적을 함께 비교해 주말 성적을 전망하는 산업 기사다. 예술영화 중심 뉴스와는 결이 다르지만, 독립·중간예산 작품이 실제 배급 시장에서 어떤 경쟁 환경을 만나는지 이해하는 참고 자료가 된다.",
+      "id": "f05d6a64009c98",
+      "category": "영화제",
+      "source": "sundance.org",
+      "official": true,
+      "publishedAt": "2026-09-17T17:21:05+00:00",
+      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxORjN2LUpJZVNJanlsZ0N3RHFYWkJoYkdnNW1Xa3RSeUg1MDdBNHVvYWFCMlpvWHNHbG5FcVQ3Y25TbnlIS0cxNVY0WmtPYnNzM3RYMjdXYkZkZFMxbUlQV2plSlRYNVcxbDJSUE14U0ZXdHRUcndtS3JGMDFfZzNjVENXcXVMWndqSXB1THNqZHBGa2NTaVNqOTJId01Eamo4MTQyTFhPVFJrMldBR0tGTmEzQkFlR20zS0hvQVVEb2M5VENiaTNWc3ptaEVxV05rUXU5T0FlYlpNRTBHTUx0VU9BWlRnMGZFbGpDalB3TWljXzRIUXNfZFVYenNCTlJXMG1YTUJfUQ?oc=5",
+      "sourceUrl": "https://www.sundance.org",
+      "titleOriginal": "Sundance Institute and The Walt Disney Studios Announce the Next Cycles of the Project Advancement and Completion Fund and the Artist Fellowship",
+      "titleKo": "선댄스와 월트디즈니 스튜디오, 제작지원 기금·아티스트 펠로십 차기 지원 발표",
+      "summaryKo": "선댄스 인스티튜트와 월트디즈니 스튜디오가 독립 창작자를 위한 제작지원 프로그램의 다음 주기를 발표했다. 프로젝트 진전·완성 기금은 선정 프로젝트에 2만5천 달러의 제한 없는 지원금을 제공하고, 아티스트 펠로십은 창작자 개인에게 1만5천 달러를 지원한다. 지원금은 특정 제작 항목에만 묶이지 않아 후반작업, 개발, 생활비 등 창작자가 가장 필요한 지점에 활용할 수 있다. 대형 스튜디오와 독립영화 지원기관이 장기 파트너십을 통해 작품 개발 단계부터 완성 단계까지 지원한다는 점이 핵심이다. 영화제 상영 이전의 창작 생태계를 어떻게 유지할 것인가에 대한 선댄스의 역할도 다시 확인된다.",
+      "whyItMatters": "상영작 뉴스보다 한 단계 앞선 ‘어떤 독립영화가 만들어질 수 있는가’를 좌우하는 제작지원 소식이다.",
+      "keyPoints": [
+        "프로젝트 지원금 2만5천 달러",
+        "아티스트 펠로십 1만5천 달러",
+        "선댄스·디즈니 공동 창작자 지원"
+      ],
       "tags": [
-        "박스오피스",
-        "영국영화시장",
-        "ScreenDaily"
+        "Sundance",
+        "제작지원",
+        "펠로십"
       ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "영화의 평가와 별개로 실제 배급 규모와 경쟁작이 흥행을 어떻게 좌우하는지 볼 수 있다.",
-      "keyPoints": [
-        "〈Resident Evil〉 흥행 전망",
-        "〈Shaun the Sheep〉 647개관 개봉",
-        "영국·아일랜드 주말 시장 분석"
-      ]
+      "translationStatus": "translated-reviewed"
     },
     {
-      "id": "7b92ba0970cded",
-      "category": "해외 독립·예술",
-      "source": "IndieWire",
-      "official": false,
-      "publishedAt": "2026-09-18T18:05:42+00:00",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNc3VFMndEcmdBZzR0V1hlN25BMHE3TTVUTGlKMm4zRzR4eFByajFVbWFWLXlSWXRlcDAxYTZ6RjN4WmM3R1BTUFNqNjBLcWhuZFRwSFllNW5XaUZqMFpaUW16OVV6aVdRTjdjcEM0cWJEdEVfRExMT09vSkQwSHBRWmx3TW41OTh5a1Zxcg?oc=5",
-      "sourceUrl": "https://www.indiewire.com",
-      "titleOriginal": "‘NAZA,’ Israeli Military Doc from ‘No Other Land’ Directors, Sets Speedy Fall Release in U.S.",
-      "titleKo": "〈노 아더 랜드〉 감독들의 군사 다큐 〈NAZA〉, 미국 가을 개봉 확정",
-      "summaryKo": "〈노 아더 랜드〉 공동연출진이 참여한 이스라엘 군사 다큐멘터리 〈NAZA〉가 미국 극장 개봉 일정을 확정했다. 작품에는 이스라엘 정보기관·군 관련 인물 24명의 인터뷰가 포함돼 군사 시스템 내부의 증언을 전면에 내세운다. 베니스에서 심사위원특별상을 받은 뒤 뉴욕영화제에서 공개되고, 9월30일 뉴욕 IFC 센터를 시작으로 10월9일 로스앤젤레스와 주요 도시, 이후 전국으로 확대될 예정이다. 〈노 아더 랜드〉의 유발 아브라함 등 관련 창작진이 다시 정치적 현실과 기록의 윤리를 다룬다는 점에서 관심이 크다. 조너선 글레이저가 총괄프로듀서로 참여했고, 영화제 화제작이 빠르게 미국 배급으로 이어지는 사례이기도 하다.",
-      "tags": [
-        "NAZA",
-        "다큐멘터리",
-        "배급"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "국제영화제의 정치 다큐가 짧은 시간 안에 미국 극장 배급으로 연결되는 흐름과 제작진의 연속성을 함께 볼 수 있다.",
+      "id": "f3935f86a954c3",
+      "category": "영화제",
+      "source": "sundance.org",
+      "official": true,
+      "publishedAt": "2026-09-14T23:14:45+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOcnYtV0RvWlNPRjVuOTQ1a0ZpYWlJYTg1aEE3NW42WWJKaWlIQUNYXzJxYUs2eG5vOUpjM1A1dFAtY2JyTXZlSjFsRTR0UnpSa0pmZ1hyNkFDRHMyWkJJanNoXzFwRFNVeTYxRW0yd3VCN2ZtUmpKVGtXNEpYSklOUG91V21sQ0JjX3l3T0VTQXBtTTA1WHBIT1paMkhmMHA3V3FhVnR4WWVxbkR6dWxXbDVmRldKTk9NaVhvZ1V4OW9sWXAtdkduUS1iQzdJbWVhMzhXbjgwVnRFNHM?oc=5",
+      "sourceUrl": "https://www.sundance.org",
+      "titleOriginal": "Film Festival Watch: 8 Sundance Institute–Supported Films to See at the 2026 Toronto International Film Festival",
+      "titleKo": "2026 토론토영화제에서 만날 선댄스 지원작 8편",
+      "summaryKo": "선댄스 인스티튜트가 2026 토론토국제영화제에서 만날 수 있는 지원작 8편을 묶어 소개했다. 이 목록에는 선댄스의 각종 랩과 제작지원 프로그램을 거친 신작들이 포함돼, 한 기관의 지원이 실제 국제영화제 진출로 어떻게 이어지는지를 보여준다. 소개작에는 〈Bedford Park〉, 〈Josephine〉, 〈Ha-Chan Shake Your Booty!〉, 〈Once Upon a Time in Harlem〉, 〈Seventeen〉, 〈Elephants in the Fog〉, 〈The Only Living Pickpocket in New York〉 등이 포함됐다. 선댄스는 단순히 자국 영화제 프로그램을 소개하는 데서 그치지 않고, 지원작이 다른 국제영화제에서 어떤 경로로 관객을 만나는지도 계속 추적하고 있다. TIFF에서 새 목소리를 찾는 관객이라면 좋은 사전 큐레이션으로 활용할 만하다.",
+      "whyItMatters": "선댄스 랩·지원 시스템이 실제 국제영화제 라인업으로 연결되는 흐름을 한눈에 볼 수 있다.",
       "keyPoints": [
-        "베니스 심사위원특별상",
-        "미국 9월30일부터 순차 개봉",
-        "군·정보기관 관련 24명 인터뷰"
-      ]
-    },
-    {
-      "id": "7cffa9b49c9100",
-      "category": "해외 독립·예술",
-      "source": "IndieWire",
-      "official": false,
-      "publishedAt": "2026-09-18T18:05:52+00:00",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPX0F5d3M2MFo2T0gya3hZQXM5a2JsTmw5cTkydDZvaEZxbUlwZUlwUHZRb3c2cDl4dXpRd0xMcDJiaXZpWVlLTUJLZUlCNVdXdzd1M1RLTDB1NWsyYzRrRTdNdWFUOEpYckx2WkhhTkxyRldTR0M4aDE5Z0c5MTljQXhRY3pUbzM5ZXpwY1ZqdmQtMElNSUVxdktTTkUtTXBwQ3pFaVlYdWdwX3hjdzAw?oc=5",
-      "sourceUrl": "https://www.indiewire.com",
-      "titleOriginal": "'Tender Loving Care' Director Mike Leigh Breaks Down His Process",
-      "titleKo": "마이크 리 감독이 밝힌 〈Tender Loving Care〉의 작업 방식",
-      "summaryKo": "마이크 리 감독이 신작 〈Tender Loving Care〉를 계기로 자신의 작업 방식을 설명했다. 그는 오랫동안 완성된 각본을 배우에게 그대로 전달하기보다 인물과 상황을 배우들과 함께 발전시키는 독특한 제작 방식으로 알려져 있다. 이번 인터뷰도 결과물보다 인물의 행동과 장면이 어떻게 만들어지는지, 배우와의 협업이 연출 과정에서 어떤 역할을 하는지에 초점을 맞춘다. 마이크 리 영화의 자연스러운 대화와 생활감이 즉흥처럼 보이지만 실제로는 긴 개발과 리허설을 거쳐 만들어진다는 점을 이해하는 데 도움이 된다. 신작 자체뿐 아니라 한 감독의 창작 방법론을 들여다볼 수 있는 기사다.",
-      "tags": [
-        "MikeLeigh",
-        "감독론",
-        "IndieWire"
+        "TIFF 2026 선댄스 지원작 8편",
+        "랩·제작지원 출신 작품 중심",
+        "국제영화제 간 창작자 이동 경로"
       ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "완성된 영화 뒤에 있는 배우·감독 협업 과정을 이해하면 마이크 리의 연출을 훨씬 구체적으로 볼 수 있다.",
-      "keyPoints": [
-        "마이크 리 신작 작업 과정",
-        "배우와 인물·장면을 발전시키는 방식",
-        "연출 방법론 중심 인터뷰"
-      ]
-    },
-    {
-      "id": "0210d251a70f0d",
-      "category": "해외 독립·예술",
-      "source": "IndieWire",
-      "official": false,
-      "publishedAt": "2026-09-19T13:00:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPM2h6ZF9FWUl0LVFNT1ZiZjZCbzZ4N0VpSnIzZDFPN2FCVEpMb05Db1F3cm44UWlMUkRfSFVQajdlMmo1aGVZYUlodlRoNVh3T1FMWkVEclFzTG5ycnQ2TG1rbFlnUG1XVHE2QjBtWC0wUENveXZBTmI3ZmdGc3kwYmZhaXlOcFdCcUNHYUR5QQ?oc=5",
-      "sourceUrl": "https://www.indiewire.com",
-      "titleOriginal": "'The Daughters of Abraham' Review: Cultures Collide in TIFF Premiere",
-      "titleKo": "〈The Daughters of Abraham〉 리뷰: TIFF 프리미어에서 충돌하는 문화들",
-      "summaryKo": "IndieWire가 TIFF에서 처음 공개된 〈The Daughters of Abraham〉을 리뷰했다. 이 글은 작품의 중심에 놓인 서로 다른 문화와 가치 체계의 충돌이 인물 관계를 어떻게 흔드는지에 주목한다. 단순한 ‘문화 차이’의 소개보다, 각 인물이 자신의 배경과 가족·사회적 기대를 어떤 방식으로 협상하는지가 영화의 주요 긴장으로 읽힌다. 리뷰는 영화가 문화적 차이를 쉽게 화해시키기보다 충돌의 불편함을 드러내는 지점을 중심으로 평가한다. TIFF에서 새롭게 공개된 독립영화의 비평적 반응을 빠르게 확인할 수 있는 기사다.",
       "tags": [
         "TIFF",
-        "리뷰",
-        "문화"
+        "Sundance",
+        "추천작"
       ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "국제영화제에서 문화적 정체성을 다루는 신작이 어떤 비평 언어로 읽히는지 살펴볼 수 있다.",
-      "keyPoints": [
-        "TIFF 프리미어 리뷰",
-        "문화와 가치의 충돌에 주목",
-        "독립영화 신작 비평 반응"
-      ]
+      "translationStatus": "translated-reviewed"
     },
     {
-      "id": "6c6407be8d2584",
-      "category": "아시아",
-      "source": "Indian Television Dot Com",
-      "official": false,
-      "publishedAt": "2026-09-07T16:52:01+00:00",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOakE0Z29ZS0Y5NEZER1lJc1ZXSmhteGVqZ1AxbFhnYWNYS3RwTy1SSUNkbnRObm45cmVzSFdrdWZMOHJQMEM4dWUzN2YzYUd5NDBaT0RnV012REkzNy1tWTN5ME9yaWtJUE5MZURtYTJOX2NubXRNZjFLUEhWdHNMaDBHUGNMMy1ZZVgtSDNCU1NmVDdzWGJ5TTNDODl0dw?oc=5",
-      "sourceUrl": "https://indiantelevision.com",
-      "titleOriginal": "Tokyo Film Festival adds new awards and Asia-focused section",
-      "titleKo": "도쿄국제영화제, 새 시상 부문과 아시아 중심 섹션 신설",
-      "summaryKo": "도쿄국제영화제가 제39회 행사를 앞두고 시상과 프로그램 구성을 확대한다. 일본영화를 소개하는 Nippon Cinema Now에는 작품상과 심사위원특별상 등 새로운 상이 마련된다. 동시에 동남아시아 영화를 집중 조명하는 신규 섹션이 추가돼 아시아 지역 프로그램의 범위가 넓어진다. 영화문화에 기여한 여성 창작자와 인물을 조명하는 새로운 시상도 도입될 예정이다. 경쟁부문 중심의 전통적인 영화제 구조에서 벗어나 일본영화와 동남아시아, 영화문화의 다양성을 보다 적극적으로 드러내려는 변화로 읽힌다.",
-      "tags": [
-        "TIFF Tokyo",
-        "아시아영화",
-        "신설부문"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "도쿄영화제가 자국영화 소개와 동남아시아 영화 발굴, 다양성 시상을 동시에 강화하고 있다는 구조적 변화다.",
+      "id": "e3fadc50f987d8",
+      "category": "영화제",
+      "source": "La Biennale di Venezia",
+      "official": true,
+      "publishedAt": "2026-09-13T12:39:19+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOUmF2NFJZdUxtT0k0ZXNWUXh6UU9IMnhyaHdsR1lDODZ1bk5aRlRvLUFpZkJVY0o0RnJGSTdqYV85WkNOYjMydTY1b2pKblUxMzBreXFVN0dZbXV4VHFpd1hBOExJM1Y5UUZVZ0FXU0VzQjMtMldEVWFxaGFkc1JEclEycG1Vb0hmZUE?oc=5",
+      "sourceUrl": "https://www.labiennale.org",
+      "titleOriginal": "Biennale Cinema 2026 | Figures for the 83rd Venice International Film Festival",
+      "titleKo": "제83회 베니스국제영화제 결산 수치 공개",
+      "summaryKo": "제83회 베니스국제영화제가 2026년 행사 운영과 관객 지표를 공개했다. 공식 발표에 따르면 유료 관람권은 약 11만7천656장으로 전년보다 14% 늘었다. 영화제 등록 인원은 약 1만4천 명, 산업 프로그램인 Venice Production Bridge에는 약 3천 명이 참여했다. 온라인에서도 3천730만 회가 넘는 조회와 73만 건 이상의 상호작용을 기록하며 현장 관객과 디지털 확산이 함께 증가했다. 예술영화 중심의 전통적인 영화제가 여전히 대규모 관객과 산업 관계자를 동시에 끌어들이고 있다는 점이 이번 수치의 핵심이다.",
+      "whyItMatters": "예술영화 영화제가 극장 관객과 산업 네트워크, 온라인 확산을 동시에 유지하고 있음을 수치로 확인할 수 있다.",
       "keyPoints": [
-        "Nippon Cinema Now 신규 시상",
-        "동남아시아 중심 새 섹션",
-        "여성 영화문화 기여자 시상 신설"
-      ]
-    },
-    {
-      "id": "74973f5e3c32f2",
-      "category": "아시아",
-      "source": "indiatodayne.in",
-      "official": false,
-      "publishedAt": "2026-09-12T05:50:51+00:00",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQY2I3a2ZmVTFGdzhMN2MwQUU5d29QY040WHdWbmQ0LWNETTFaZUNoNjJ6b1JDMTM4SVZGRjUzMkdrTFlVZDZUZlNRVDB5Ync2MDFfS1pxLU1BZHVMUWFMQlJJNXRJQTZjSGw0ZnloRGw0MEh5RS0xaHFqWXhzR3BBdFVhdG5kdndwcVl4QUVtY0xHUlo2bzFGZW5kUjlBemd0dkN2ZWF6aEUwb2xRUXVRXzJJT01OTGlvMFhRN21MdnF5cVdiblZN0gHMAUFVX3lxTE0taVNBNlZMRlFWNVN0R1A5U1JVNjBmdWpnSGktOFI1LUNkNE5EdDl4ZFo0QmxDbnlyb000emtzYmJJa2lSc2czVWJXWF9tYi0tYWhhR3dvMWRrdU5lUmVXQ2FYeUFaLTRybFhTMEc5TUFDcXk2b0tKS21RRUdKdG84Vm1qNjJDb1c5TDJaeW1nNGVJdHdXd3pSajhnSF9hbW1jYUdoZ01OZmdDdUNmSzhWWXpmQnJOZjh4TU93LXdDM0RsNzl1cmhuSGl1Yg?oc=5",
-      "sourceUrl": "https://www.indiatodayne.in",
-      "titleOriginal": "Assam filmmaker Bobby Sarma Baruah joins Venice jury for Asian cinema",
-      "titleKo": "아삼 감독 보비 사르마 바루아, 아시아영화 관련 베니스 심사위원 참여",
-      "summaryKo": "인도 아삼 출신 감독 보비 사르마 바루아가 베니스영화제의 아시아영화 관련 NETPAC 심사위원단에 참여했다. 심사위원단은 필리핀의 에드 레자노와 키르기스스탄의 아셀 셰르니야조바 등 세 명으로 구성됐다. NETPAC은 아시아 영화를 국제무대에서 발굴하고 소개해온 네트워크로, 심사위원 구성 자체가 각 지역 영화계의 연결을 보여준다. 인도 북동부처럼 국제 배급에서 상대적으로 덜 조명된 지역의 영화인이 베니스 심사에 참여한다는 점도 의미가 있다. 아시아 영화가 하나의 단일한 시장이 아니라 서로 다른 지역과 언어권의 네트워크라는 사실을 환기하는 소식이다.",
+        "유료 관람권 약 11만7천656장",
+        "전년 대비 티켓 판매 14% 증가",
+        "Venice Production Bridge 약 3천 명"
+      ],
       "tags": [
         "Venice",
-        "아시아영화",
-        "인도영화"
+        "영화제결산",
+        "관객"
       ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "국제영화제의 ‘아시아 영화’가 어떤 지역 전문가들의 시선으로 평가되는지 보여주는 사례다.",
-      "keyPoints": [
-        "보비 사르마 바루아 NETPAC 심사 참여",
-        "3인 국제 심사위원단",
-        "아시아 지역영화 네트워크"
-      ]
+      "translationStatus": "translated-reviewed"
     },
     {
-      "id": "f6ae0dd13235d3",
-      "category": "아시아",
-      "source": "The Korea Times",
+      "id": "d960435095683a",
+      "category": "해외 독립·예술",
+      "source": "IndieWire",
       "official": false,
-      "publishedAt": "2026-09-16T02:05:03+00:00",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNVjZRNFZUOWFrOFZLYXYwQXFoSy1udzJNbEVVSjhDT0UzbVBDUnBIa2YzeUl2WWVBaU9hZG1wa29PUU1DQnNCcDNfRlJnVnZkTXViaHg1X19sSXR1aTEwSTZIc1h0a2xHUC04RXB2ZWZpS1Z1U0t6aHQzaFo0TVdUTVlRT2JaR2tzdHhpQ2xzZlVkdFNEZjI2VFp3czFLaEpxcWVKYk55VFpxZ3Y2dU0waVM5aG0zSmk3Um0zREFDM0lsYXgtbXfSAcsBQVVfeXFMT0V1TkNKQmZLZlg1OXVtRVBGQ0p1MjN4bDJaQndGZG9BZnB4M3hmVTBLNDZTZDFGSnlBRFhYdDA0X2pheWF1VzU0MjAyYjhwZVZOTFJZSlVocjRSbFFfMEJraTlGbEJ5MVVlQktWLVRwWXdaUWh0cDRkUmNVVGVhQ0RnZkl6NnV2d1ItV2s0UjRaRkEzc2tEMzYwRG14alFud3IxbGp2bVNtaG55RUZsVWhUOWdScFp6TUlVSWZYOGRzU0VXcTE1R1I5eGc?oc=5",
-      "sourceUrl": "https://www.koreatimes.co.kr",
-      "titleOriginal": "Busan film fest, Netflix expand Creative Asia workshop to record scale",
-      "titleKo": "부산국제영화제·넷플릭스, ‘Creative Asia’ 워크숍 역대 최대 규모로 확대",
-      "summaryKo": "부산국제영화제와 넷플릭스가 아시아 창작자 지원 프로그램 ‘Creative Asia’의 규모를 역대 최대로 확대한다. 올해 프로그램은 10월10일 동서대학교 센텀캠퍼스에서 열리며 AFCNet, 미국영화협회(MPA) 등과 협력한다. 촬영, 스토리텔링, 로케이션 스카우팅 관련 마스터클래스와 제작 예산·AI를 다루는 세션이 포함된다. 특히 넷플릭스 콘텐츠 실무자와 함께하는 실습형 워크숍이 처음 도입돼 단순 강연보다 실제 제작 과정에 가까운 프로그램으로 확장됐다. BIFF가 상영 중심 영화제를 넘어 아시아 신진 창작자의 교육·산업 네트워크까지 넓히고 있다는 점이 핵심이다.",
-      "tags": [
-        "BIFF",
-        "Netflix",
-        "CreativeAsia"
-      ],
-      "translationStatus": "translated-reviewed",
-      "whyItMatters": "아시아 독립 창작자에게 국제영화제와 글로벌 플랫폼이 실제 제작 교육과 네트워크를 제공하는 방식이 구체화되고 있다.",
-      "keyPoints": [
-        "10월10일 동서대 센텀캠퍼스",
-        "넷플릭스 실습형 워크숍 신설",
-        "촬영·스토리·예산·AI 세션"
-      ]
+      "publishedAt": "2026-09-21T02:06:57+00:00",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxORnRrTU00b2MyTVV0UXRib293bmFBTHZQMk53TU5mQnREWC01UFR4SzV4c1djTVNLcjQ4WTRBNGZmeG0zU2l5c0NWYTgtdG1xN1QzY280bW5oWTFRd3VYUG5DRWlLUVdXcV9MTWUwNkhNZHpBejl3VlBtSDBiY2VHN2liajFzZ0MtektGSi1PNVRwNXhTY1dtemlR?oc=5",
+      "sourceUrl": "https://www.indiewire.com",
+      "titleOriginal": "‘Paradise Lost’ Review: ‘Train to Busan’ Director Yeon Sang-ho Returns with a Limp and Lurid Grief Drama About Virtual Reality",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
+    },
+    {
+      "id": "fd35cded29a0dd",
+      "category": "해외 독립·예술",
+      "source": "Screen Daily",
+      "official": false,
+      "publishedAt": "2026-09-20T21:59:40+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPaXBFS1Z1b0QtcGVfVkJvd1hES25aazBwaE11amxrTUZJVXcydHpVSmtuZGVHTkttTGRLNDV6V1N3ekNNLVJWWG9iVFl1SlN2bjFhX1VJeUY0MjZaWEpEa3ZXNkxORGhBTVZieUpEMXU5bnd3NlBtLTREdmNLOGZTVXh2bnJWUjJmdEFtd2s0UF9xRnlCcXhhdFozS3RRa3JCREZFWFdqZ2FGQm4xbHQzczZOYw?oc=5",
+      "sourceUrl": "https://www.screendaily.com",
+      "titleOriginal": "‘La Bola Negra’ wins TIFF audience award, ‘Angh’ triumphs in Platform",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
+    },
+    {
+      "id": "8ef5610e793b79",
+      "category": "해외 독립·예술",
+      "source": "IndieWire",
+      "official": false,
+      "publishedAt": "2026-09-20T18:30:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNcG04bG4yMnlpd3ZpUktNbExNdk51c2p4b3Bmd21YcExxaDV3enh5QUx2S0t5ajZGLTlfSkZhRU92VDlOV2JKMVpzMmJmZFlqa1Q3WWFXeDlTckJUT2pmb2kwVU1ySDI3NDgtUUJaLWdubjZ1NGthU0F3MWhwNEJQUEc4SWNoZDAxbTNjaFdzUXpnZ19Ma3FOWnplNDA0cEJkYWMtTnRJRTc2eEh1cExFNUJLVHVpWHh2Nnd4MmJ3?oc=5",
+      "sourceUrl": "https://www.indiewire.com",
+      "titleOriginal": "Which Fall Festival Favorites Are Now in the Oscar Race?",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
+    },
+    {
+      "id": "f24178a3014ef2",
+      "category": "해외 독립·예술",
+      "source": "IndieWire",
+      "official": false,
+      "publishedAt": "2026-09-20T17:11:43+00:00",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPRzFFXzNJX2ZrYmhiRXppYk93ZG9WOWFIZ25DN1RMWEJIQnRDZHl5RV8ydEpHOV9uLUlvbHZGUjJkZmZ1T1dVV2FSY25fUWtJc3JrdmR2N0JqTmM2aFhrbldHZVdPT18zMGRlRUZQY2RwR1Q3bWRrLWpnNkpFS1BJem53RzE0MktNOWpmckk1M2U5cXI5QUNHVUNuSUNaSjRfUld2R3lKaw?oc=5",
+      "sourceUrl": "https://www.indiewire.com",
+      "titleOriginal": "Duncan Jones on Why It's 'Harder Than Ever' to Make His Kind of Movies",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
+    },
+    {
+      "id": "a556a4cb49c66a",
+      "category": "해외 독립·예술",
+      "source": "IndieWire",
+      "official": false,
+      "publishedAt": "2026-09-20T15:00:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPWE5xN1B0ZXlqNlQ5b2FVV0dDelZCMnVyLTJINlQ2LXdaOUw2MlVwQ3RNTEs3c3JjVXVJWDFTaElNMTNiWENXMllMWGNKNUM4Y3VwM25LMWlXZldwSjFQQVB3ZEhiMGJvejRnM01hN240TGNRcUR3STdkekN1UnY4UU5VSHVNUnpCbzgzZGdQRmc?oc=5",
+      "sourceUrl": "https://www.indiewire.com",
+      "titleOriginal": "‘La Bola Negra’ Wins the 2026 Toronto International Film Festival People’s Choice Award",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
     },
     {
       "id": "5f71c522b1c85e",
@@ -601,18 +224,58 @@
       "titleOriginal": "Indian Cinema Takes Centre Stage At The 31st Busan International Film Festival",
       "titleKo": "제31회 부산국제영화제에서 주목받는 인도 영화",
       "summaryKo": "제31회 부산국제영화제에서 인도 영화와 영화인들의 존재감이 확대되고 있다는 현지 매체의 보도다. 기사에서는 인도 영화가 단순한 지역 소개를 넘어 아시아 영화 프로그램과 국제 교류의 한 축으로 자리 잡고 있다는 흐름을 강조한다. 부산은 오랫동안 아시아 신인 감독과 다양한 지역영화를 발굴해온 영화제인 만큼, 인도 독립영화의 참여 확대는 프로그램의 지리적 폭을 보여주는 지표이기도 하다. 인도 영화산업 내부에서도 상업영화와 별개로 독립·지역 영화가 국제영화제를 통해 관객을 넓히는 경로가 중요해지고 있다. 구체적인 상영작과 행사 일정은 BIFF 공식 프로그램에서 최종 확인하는 것이 좋다.",
-      "tags": [
-        "BIFF",
-        "인도영화",
-        "아시아영화"
-      ],
-      "translationStatus": "translated-reviewed",
       "whyItMatters": "한국 관객이 인도영화를 대형 상업영화 밖의 독립·지역 영화 흐름으로 만날 수 있는 통로를 보여준다.",
       "keyPoints": [
         "제31회 BIFF 인도영화 조명",
         "아시아 영화 교류 확대",
         "상영작은 BIFF 공식 일정 확인 필요"
-      ]
+      ],
+      "tags": [
+        "BIFF",
+        "인도영화",
+        "아시아영화"
+      ],
+      "translationStatus": "translated-reviewed"
+    },
+    {
+      "id": "f6ae0dd13235d3",
+      "category": "아시아",
+      "source": "The Korea Times",
+      "official": false,
+      "publishedAt": "2026-09-16T02:05:03+00:00",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNVjZRNFZUOWFrOFZLYXYwQXFoSy1udzJNbEVVSjhDT0UzbVBDUnBIa2YzeUl2WWVBaU9hZG1wa29PUU1DQnNCcDNfRlJnVnZkTXViaHg1X19sSXR1aTEwSTZIc1h0a2xHUC04RXB2ZWZpS1Z1U0t6aHQzaFo0TVdUTVlRT2JaR2tzdHhpQ2xzZlVkdFNEZjI2VFp3czFLaEpxcWVKYk55VFpxZ3Y2dU0waVM5aG0zSmk3Um0zREFDM0lsYXgtbXfSAcsBQVVfeXFMT0V1TkNKQmZLZlg1OXVtRVBGQ0p1MjN4bDJaQndGZG9BZnB4M3hmVTBLNDZTZDFGSnlBRFhYdDA0X2pheWF1VzU0MjAyYjhwZVZOTFJZSlVocjRSbFFfMEJraTlGbEJ5MVVlQktWLVRwWXdaUWh0cDRkUmNVVGVhQ0RnZkl6NnV2d1ItV2s0UjRaRkEzc2tEMzYwRG14alFud3IxbGp2bVNtaG55RUZsVWhUOWdScFp6TUlVSWZYOGRzU0VXcTE1R1I5eGc?oc=5",
+      "sourceUrl": "https://www.koreatimes.co.kr",
+      "titleOriginal": "Busan film fest, Netflix expand Creative Asia workshop to record scale",
+      "titleKo": "부산국제영화제·넷플릭스, ‘Creative Asia’ 워크숍 역대 최대 규모로 확대",
+      "summaryKo": "부산국제영화제와 넷플릭스가 아시아 창작자 지원 프로그램 ‘Creative Asia’의 규모를 역대 최대로 확대한다. 올해 프로그램은 10월10일 동서대학교 센텀캠퍼스에서 열리며 AFCNet, 미국영화협회(MPA) 등과 협력한다. 촬영, 스토리텔링, 로케이션 스카우팅 관련 마스터클래스와 제작 예산·AI를 다루는 세션이 포함된다. 특히 넷플릭스 콘텐츠 실무자와 함께하는 실습형 워크숍이 처음 도입돼 단순 강연보다 실제 제작 과정에 가까운 프로그램으로 확장됐다. BIFF가 상영 중심 영화제를 넘어 아시아 신진 창작자의 교육·산업 네트워크까지 넓히고 있다는 점이 핵심이다.",
+      "whyItMatters": "아시아 독립 창작자에게 국제영화제와 글로벌 플랫폼이 실제 제작 교육과 네트워크를 제공하는 방식이 구체화되고 있다.",
+      "keyPoints": [
+        "10월10일 동서대 센텀캠퍼스",
+        "넷플릭스 실습형 워크숍 신설",
+        "촬영·스토리·예산·AI 세션"
+      ],
+      "tags": [
+        "BIFF",
+        "Netflix",
+        "CreativeAsia"
+      ],
+      "translationStatus": "translated-reviewed"
+    },
+    {
+      "id": "87bf8351460d5e",
+      "category": "아시아",
+      "source": "India Today NE",
+      "official": false,
+      "publishedAt": "2026-09-12T05:50:51+00:00",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQY2I3a2ZmVTFGdzhMN2MwQUU5d29QY040WHdWbmQ0LWNETTFaZUNoNjJ6b1JDMTM4SVZGRjUzMkdrTFlVZDZUZlNRVDB5Ync2MDFfS1pxLU1BZHVMUWFMQlJJNXRJQTZjSGw0ZnloRGw0MEh5RS0xaHFqWXhzR3BBdFVhdG5kdndwcVl4QUVtY0xHUlo2bzFGZW5kUjlBemd0dkN2ZWF6aEUwb2xRUXVRXzJJT01OTGlvMFhRN21MdnF5cVdiblZN0gHMAUFVX3lxTE0taVNBNlZMRlFWNVN0R1A5U1JVNjBmdWpnSGktOFI1LUNkNE5EdDl4ZFo0QmxDbnlyb000emtzYmJJa2lSc2czVWJXWF9tYi0tYWhhR3dvMWRrdU5lUmVXQ2FYeUFaLTRybFhTMEc5TUFDcXk2b0tKS21RRUdKdG84Vm1qNjJDb1c5TDJaeW1nNGVJdHdXd3pSajhnSF9hbW1jYUdoZ01OZmdDdUNmSzhWWXpmQnJOZjh4TU93LXdDM0RsNzl1cmhuSGl1Yg?oc=5",
+      "sourceUrl": "https://www.indiatodayne.in",
+      "titleOriginal": "Assam filmmaker Bobby Sarma Baruah joins Venice jury for Asian cinema",
+      "titleKo": "",
+      "summaryKo": "",
+      "whyItMatters": "",
+      "keyPoints": [],
+      "tags": [],
+      "translationStatus": "pending"
     }
   ]
 }
