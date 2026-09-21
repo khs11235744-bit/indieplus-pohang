@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-09-21T05:37:38.710539+00:00",
+  "stages": [
+    {
+      "stage": "validation",
+      "startedAt": "2026-09-21T05:37:39.150342+00:00",
+      "finishedAt": "2026-09-21T05:37:40.011290+00:00",
+      "duration": 0.861,
+      "status": "SUCCESS",
+      "changedFiles": [],
+      "errorSummary": null,
+      "counts": {}
+    }
+  ],
+  "status": "SUCCESS",
+  "finishedAt": "2026-09-21T05:37:40.013598+00:00"
+}
