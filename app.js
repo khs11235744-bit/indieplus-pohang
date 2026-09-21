@@ -84,7 +84,7 @@ function renderHero(){
   const first=nextGlobalSession();
   if(!first)return;
   const m=movieFor(first.code,first.title);
-  $("#heroBackdrop").style.backgroundImage=m.still||m.poster?`url("${m.still||m.poster}")`:"none";
+  $("#heroBackdrop").style.backgroundImage=m.poster||m.still?`url("${m.poster||m.still}")`:"none";
   $("#heroTitle").textContent=m.title;
   $("#heroDesc").textContent=m.short||"Dtryx 공개 상영작";
   $("#heroMeta").textContent=`다음 상영 · ${fmtDate(first.date)} ${first.start} · ${first.minutes}분`;
