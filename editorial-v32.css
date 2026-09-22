@@ -219,3 +219,57 @@ body{
   .annual-subhead{font-size:23px!important;margin-top:2.3em!important}
   .mobile-nav{left:8px!important;right:8px!important;bottom:8px!important}
 }
+
+/* v36 criticism image rhythm / credits */
+.annual-article-hero{
+  margin:0 0 30px;
+  break-inside:avoid;
+}
+.annual-article-hero .annual-article-image{
+  display:block;
+  width:100%;
+  margin:0;
+  box-shadow:none;
+}
+.annual-article-hero figcaption,
+.annual-inline-photo figcaption{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:7px;
+  padding-top:7px;
+  border-top:1px solid rgba(70,64,57,.22);
+  font:500 9px/1.5 Pretendard,sans-serif;
+  letter-spacing:.01em;
+  color:#7a7369;
+}
+.annual-article-hero figcaption span,
+.annual-inline-photo figcaption span{
+  min-width:0;
+}
+.annual-article-hero figcaption a,
+.annual-inline-photo figcaption a{
+  flex:0 0 auto;
+  color:#6c3b32;
+  text-decoration:none;
+}
+.annual-inline-photo{
+  margin-top:44px!important;
+  margin-bottom:48px!important;
+}
+.annual-inline-photo img{
+  object-position:center;
+}
+@media(max-width:620px){
+  .annual-article-hero{margin-bottom:22px}
+  .annual-article-hero figcaption,
+  .annual-inline-photo figcaption{
+    gap:8px;
+    font-size:8px;
+  }
+  .annual-inline-photo{
+    margin-top:32px!important;
+    margin-bottom:36px!important;
+  }
+}

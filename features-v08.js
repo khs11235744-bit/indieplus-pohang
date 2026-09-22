@@ -93,7 +93,7 @@ async function seedMagazineSamples(){
     for(const s of items){
       const photos=(s.photos||[]).filter(Boolean),fullEnough=String(s.body||"").trim().length>=Number(rules.minChars||800),photoEnough=photos.length>=Number(rules.minPhotos||3),eligible=s.magazineEligible===false?false:(fullEnough&&photoEnough&&!s.excerptOnly);
       const base={
-        id:s.id,issue:s.issue||magIssueNo(),year:s.year||null,sourceDate:s.sourceDate||"",section:s.section||"CRITICISM",recoveryStatus:s.recoveryStatus||"",magazineEligible:eligible,photos,
+        id:s.id,issue:s.issue||magIssueNo(),year:s.year||null,sourceDate:s.sourceDate||"",section:s.section||"CRITICISM",recoveryStatus:s.recoveryStatus||"",magazineEligible:eligible,photos,photoCredits:s.photoCredits||[],
         code:s.code||null,title:s.filmTitle||"영화",filmTitle:s.filmTitle,filmTitleOriginal:s.filmTitleOriginal,tmdbId:s.tmdbId||null,assetSlug:s.assetSlug||"",
         headline:s.headline,deck:s.deck,author:s.author||"",spoiler:!!s.spoiler,lead:s.lead||"",text:s.body||"",continuationNote:s.continuationNote||"",
         editorialPlan:s.editorialPlan||[],rating:s.rating||0,tags:s.tags||[],stamp:"",stampCustom:"",preset:s.preset||"journal",stillIndices:s.stillIndices||[0],coverMode:s.coverMode||"still",
@@ -164,13 +164,40 @@ function renderMagazineShelfV2(){
   document.getElementById("openAnnualMagazine")?.addEventListener("click",openMagazineAnnualV2);
   root.querySelectorAll("[data-open-mag]").forEach(el=>el.onclick=()=>openMagazineStudioV2(el.dataset.openMag));
 }
+function annualPhotoCreditHtmlV2(x,index){
+  const c=(x?.photoCredits||[])[index],label=esc(c?.label||x?.filmTitle||x?.title||"");
+  if(!c)return label;
+  const meta=[c.creator,c.license].filter(Boolean).map(esc).join(" · "),src=String(c.source||"");
+  return '<span>'+label+(meta?' · '+meta:'')+'</span>'+(src.startsWith("http")?'<a href="'+esc(src)+'" target="_blank" rel="noopener">출처 ↗</a>':'');
+}
+function annualPhotoAltV2(x,index){
+  const c=(x?.photoCredits||[])[index];
+  return c?.label||((x?.filmTitle||x?.title||"영화")+" 관련 이미지");
+}
+function annualPhotoMarksV2(paras,count){
+  const valid=paras.map((p,i)=>({p,i})).filter(x=>x.i>0&&x.i<paras.length-1&&!/^#{2,3}\s/.test(x.p)).map(x=>x.i);
+  if(!valid.length||!count)return [];
+  const ratios=[.23,.47,.70,.86].slice(0,count),used=[];
+  for(const ratio of ratios){
+    const desired=Math.round((paras.length-1)*ratio);
+    let candidates=valid.filter(i=>!used.some(u=>Math.abs(u-i)<2));
+    if(!candidates.length)candidates=valid;
+    const best=candidates.slice().sort((a,b)=>Math.abs(a-desired)-Math.abs(b-desired))[0];
+    used.push(best);
+  }
+  return used;
+}
+function annualHeroVisualV2(x,src){
+  if(!src)return "";
+  return '<figure class="annual-article-hero"><img class="annual-article-image" src="'+esc(src)+'" alt="'+esc(annualPhotoAltV2(x,0))+'"><figcaption>'+annualPhotoCreditHtmlV2(x,0)+'</figcaption></figure>';
+}
 function annualArticleBodyV2(x){
   const paras=String(x?.text||"").split(/\n{2,}/).map(p=>p.trim()).filter(Boolean),visuals=magazineVisualsV2(x).slice(1,5);
   if(!paras.length)return "";
-  const marks=visuals.map((_,i)=>Math.min(paras.length-1,Math.max(1,Math.round((i+1)*paras.length/(visuals.length+1)))));
+  const marks=annualPhotoMarksV2(paras,visuals.length);
   let out="";
-  const pull=paras.find(p=>p.length>=18&&p.length<=95)||"";
-  paras.forEach((p,i)=>{const h3=p.match(/^##\s+(.+)$/s),h4=p.match(/^###\s+(.+)$/s);if(h3)out+='<h3 class="annual-subhead">'+esc(h3[1])+'</h3>';else if(h4)out+='<h4 class="annual-minorhead">'+esc(h4[1])+'</h4>';else out+='<p>'+esc(p).replace(/\n/g,"<br>")+'</p>';if(i===1&&pull&&!/^#{2,3}\s/.test(p))out+='<aside class="annual-pullquote">“'+esc(pull)+'”</aside>';marks.forEach((m,j)=>{if(m===i&&visuals[j])out+='<figure class="annual-inline-photo photo-'+(j+1)+'"><img src="'+visuals[j]+'" alt=""><figcaption>'+esc(x.filmTitle||x.title||"")+'</figcaption></figure>'})});
+  const pull=paras.find(p=>!/^#{2,3}\s/.test(p)&&p.length>=30&&p.length<=110)||"";
+  paras.forEach((p,i)=>{const h3=p.match(/^##\s+(.+)$/s),h4=p.match(/^###\s+(.+)$/s);if(h3)out+='<h3 class="annual-subhead">'+esc(h3[1])+'</h3>';else if(h4)out+='<h4 class="annual-minorhead">'+esc(h4[1])+'</h4>';else out+='<p>'+esc(p).replace(/\n/g,"<br>")+'</p>';if(i===1&&pull&&!/^#{2,3}\s/.test(p))out+='<aside class="annual-pullquote">“'+esc(pull)+'”</aside>';marks.forEach((m,j)=>{if(m===i&&visuals[j])out+='<figure class="annual-inline-photo photo-'+(j+1)+'"><img src="'+esc(visuals[j])+'" alt="'+esc(annualPhotoAltV2(x,j+1))+'" loading="lazy"><figcaption>'+annualPhotoCreditHtmlV2(x,j+1)+'</figcaption></figure>'})});
   return out;
 }
 function ensureMagazineAnnualV2(){
@@ -222,7 +249,7 @@ function openMagazineAnnualV2(){
   const toc=list.map((x,i)=>'<button data-annual-jump="'+esc(x.id)+'"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x.filmTitle||x.title||"")+'</b><small>'+esc(x.headline||"")+'</small></button>').join("");
   let lastYear=null,articles="";
   list.forEach((x,i)=>{const y=x.year||String(x.sourceDate||"").slice(0,4)||"ARCHIVE",visuals=magazineVisualsV2(x);if(y!==lastYear){articles+='<section class="annual-year-divider"><small>CHAPTER</small><h2>'+esc(String(y))+'</h2><p>긴 글과 영화 이미지가 함께 남은 기록.</p></section>';lastYear=y}
-    articles+='<article class="annual-article full'+(x.example?" example":"")+'" id="annual-'+esc(x.id)+'">'+(visuals[0]?'<img class="annual-article-image" src="'+visuals[0]+'" alt="">':'')+'<div class="annual-running-head"><b>INDIE PORT FILM JOURNAL</b><span>'+String(i+1).padStart(2,"0")+'</span></div><div class="annual-article-meta"><span>'+(x.example?"MAGAZINE SAMPLE":esc(x.section||"CRITICISM"))+'</span><span>'+esc(x.sourceDate||String(x.year||""))+'</span></div><h2>'+esc(x.headline||x.filmTitle||"")+'</h2>'+(x.deck?'<h3>'+esc(x.deck)+'</h3>':'')+(!x.example&&x.author?'<div class="annual-byline">'+esc(x.author)+(x.rating?' · ★ '+Number(x.rating).toFixed(1)+' / 5':'')+'</div>':'')+'<div class="annual-copy">'+annualArticleBodyV2(x)+'</div><div class="annual-tags">'+(x.tags||[]).map(t=>'<span>#'+esc(t)+'</span>').join("")+'</div><div class="annual-folio">'+String(i+1).padStart(2,"0")+'</div></article>'});
+    articles+='<article class="annual-article full'+(x.example?" example":"")+'" id="annual-'+esc(x.id)+'">'+annualHeroVisualV2(x,visuals[0])+'<div class="annual-running-head"><b>INDIE PORT FILM JOURNAL</b><span>'+String(i+1).padStart(2,"0")+'</span></div><div class="annual-article-meta"><span>'+(x.example?"MAGAZINE SAMPLE":esc(x.section||"CRITICISM"))+'</span><span>'+esc(x.sourceDate||String(x.year||""))+'</span></div><h2>'+esc(x.headline||x.filmTitle||"")+'</h2>'+(x.deck?'<h3>'+esc(x.deck)+'</h3>':'')+(!x.example&&x.author?'<div class="annual-byline">'+esc(x.author)+(x.rating?' · ★ '+Number(x.rating).toFixed(1)+' / 5':'')+'</div>':'')+'<div class="annual-copy">'+annualArticleBodyV2(x)+'</div><div class="annual-tags">'+(x.tags||[]).map(t=>'<span>#'+esc(t)+'</span>').join("")+'</div><div class="annual-folio">'+String(i+1).padStart(2,"0")+'</div></article>'});
   root.innerHTML='<section class="annual-front"><img src="'+coverVisual+'" alt=""><div class="annual-front-overlay"></div><div class="annual-front-copy"><div class="annual-cover-mast">INDIE PORT</div><div class="kicker">FILM JOURNAL · EDITORIAL SAMPLE</div><small>'+esc(meta.issue||"SAMPLE 01")+'</small><h1>'+esc(meta.title||"INDIE PORT FILM JOURNAL")+'</h1><p>'+esc(meta.subtitle||"")+'</p><em>'+list.length+' FEATURE · EDITORIAL SAMPLE</em></div></section><section class="annual-editor-note"><div class="kicker">EDITOR’S NOTE</div><h2>짧은 메모가 아니라, 끝까지 읽는 비평</h2><p>'+esc(meta.note||"장문 원문과 서로 다른 영화 이미지가 함께 확보된 경우에만 편집합니다.")+'</p></section><section class="annual-toc"><div class="kicker">CONTENTS</div><h2>차례</h2><div>'+toc+'</div></section><div class="annual-articles">'+articles+'</div><section class="annual-afterword"><div class="kicker">END NOTE</div><h2>한 편의 글을 한 권의 리듬으로</h2><p>이 페이지는 잡지 편집 예시입니다. 짧은 메모를 억지로 늘리지 않고, 장문과 서로 다른 이미지가 함께 확보된 경우에만 수록합니다.</p></section>';
   root.querySelectorAll("[data-annual-jump]").forEach(b=>b.onclick=()=>goAnnualTargetV2(b.dataset.annualJump));
   openPanelV08(panel);ANNUAL_VIEW.page=0;prepareAnnualPagesV2();setAnnualViewModeV2(ANNUAL_VIEW.mode);panel.querySelector(".annual-reader-sheet").scrollTop=0;

@@ -1,7 +1,7 @@
 /* INDI+P mobile edition 34. Presentation only; existing auth, editor and data owners remain unchanged. */
 (() => {
   'use strict';
-  const VERSION='mobile-35', media=matchMedia('(max-width:760px)');
+  const VERSION='mobile-36', media=matchMedia('(max-width:760px)');
   const S=window.INDIP_MOBILE_EDITION={version:VERSION,ready:false};
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
