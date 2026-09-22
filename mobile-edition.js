@@ -1,7 +1,7 @@
 /* INDI+P mobile edition 34. Presentation only; existing auth, editor and data owners remain unchanged. */
 (() => {
   'use strict';
-  const VERSION='mobile-34', media=matchMedia('(max-width:760px)');
+  const VERSION='mobile-35', media=matchMedia('(max-width:760px)');
   const S=window.INDIP_MOBILE_EDITION={version:VERSION,ready:false};
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -76,8 +76,8 @@
     $('.m33-portrait',panel)?.remove();
     panel.classList.toggle('m33-has-portrait',!!p);panel.dataset.portraitFor=name;
     if(!p)return;
-    const fig=document.createElement('figure');fig.className='m33-portrait';
-    fig.innerHTML='<img src="'+esc(safeUrl(p.path))+'" alt="'+esc($('b',body)?.textContent||name)+'" width="480" height="580" loading="lazy"><figcaption><a href="'+esc(safeUrl(p.source))+'" target="_blank" rel="noopener">사진: '+esc(p.creator||name)+' · '+esc(p.license)+'</a></figcaption>';
+    const kind=p.kind==='signature'?'signature':'photo';const fig=document.createElement('figure');fig.className='m33-portrait m33-'+kind;
+    const mediaLabel=kind==='signature'?'서명':'사진';fig.innerHTML='<img src="'+esc(safeUrl(p.path))+'" alt="'+esc($('b',body)?.textContent||name)+(kind==='signature'?' 서명':' 사진')+'" width="480" height="580" loading="lazy"><figcaption><a href="'+esc(safeUrl(p.source))+'" target="_blank" rel="noopener">'+mediaLabel+': '+esc(p.creator||name)+' · '+esc(p.license)+'</a></figcaption>';
     body.before(fig);
   }
   function localizeCulture(){
