@@ -1,5 +1,5 @@
 import json, re, html, hashlib
-import subprocess, sys
+import subprocess, sys, os, shutil
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -13,6 +13,20 @@ VENV_PY=ROOT/"functions"/"venv"/"Scripts"/"python.exe"
 if not VENV_PY.exists():
     subprocess.run([sys.executable,"-m","venv",str(ROOT/"functions"/"venv")],check=True)
     subprocess.run([str(VENV_PY),"-m","pip","install","-r",str(ROOT/"functions"/"requirements.txt")],check=True)
+DEPLOY_MARKER=ROOT/"functions"/".scheduled-functions-deployed"
+if not DEPLOY_MARKER.exists():
+    firebase=shutil.which("firebase.cmd") or shutil.which("firebase")
+    if not firebase:
+        raise RuntimeError("firebase.cmd not found for one-time Functions deploy")
+    env=os.environ.copy()
+    env["NODE_OPTIONS"]="--no-deprecation"
+    proc=subprocess.run([firebase,"deploy","--project","indieplus-pohang-khs","--only","functions"],cwd=ROOT,env=env,text=True,capture_output=True)
+    print(proc.stdout)
+    if proc.stderr:
+        print(proc.stderr)
+    if proc.returncode!=0:
+        raise RuntimeError(f"one-time Firebase Functions deploy failed: exit={proc.returncode}")
+    DEPLOY_MARKER.write_text("ok\n",encoding="utf-8")
 CFG=json.loads((ROOT/"data"/"news-sources.json").read_text(encoding="utf-8"))
 OUT=ROOT/"data"/"news-raw.json"
 UA={"User-Agent":"Mozilla/5.0 INDIE+POHANG-News/0.6"}
