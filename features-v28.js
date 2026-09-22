@@ -1,7 +1,7 @@
 // INDI+P v28 — dense community home: screening rooms, prompts, filters and reading density.
 (() => {
   const V28 = window.INDIP_V28 = window.INDIP_V28 || {};
-  V28.version = '28.0.0';
+  V28.version = '28.0.1';
   V28.movieFilter = '';
   V28.longOnly = false;
   V28.limit = 12;
@@ -103,7 +103,7 @@
 
   function ensureShell(){
     const hub = E('#community');
-    if(!hub) return null;
+    if(!hub || !hub.classList.contains('v20-community-hub')) return null;
     hub.classList.remove('v20-hide-legacy');
     hub.dataset.v28Density = V28.density;
 
@@ -457,7 +457,7 @@
     tick();
     let n=0;
     const fast=setInterval(()=>{tick();if(++n>40)clearInterval(fast)},300);
-    setInterval(tick,2500);
+    setInterval(tick,1200);
   }
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
