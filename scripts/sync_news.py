@@ -1,4 +1,5 @@
 import json, re, html, hashlib
+import subprocess, sys
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -7,6 +8,11 @@ from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone, timedelta
 
 ROOT=Path(__file__).resolve().parents[1]
+# One-time self-healing bootstrap for Firebase Python Functions deployment.
+VENV_PY=ROOT/"functions"/"venv"/"Scripts"/"python.exe"
+if not VENV_PY.exists():
+    subprocess.run([sys.executable,"-m","venv",str(ROOT/"functions"/"venv")],check=True)
+    subprocess.run([str(VENV_PY),"-m","pip","install","-r",str(ROOT/"functions"/"requirements.txt")],check=True)
 CFG=json.loads((ROOT/"data"/"news-sources.json").read_text(encoding="utf-8"))
 OUT=ROOT/"data"/"news-raw.json"
 UA={"User-Agent":"Mozilla/5.0 INDIE+POHANG-News/0.6"}

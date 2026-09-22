@@ -224,7 +224,7 @@ def build_news_payload():
         item["score"] = round(score, 2)
 
     items.sort(key=lambda x: (x.get("score", 0), x.get("publishedAt", "")), reverse=True)
-    old_doc = DB.collection("public").document("news-weekly").get()
+    old_doc = DB.collection("public").document("newsWeekly").get()
     previous = {}
     if old_doc.exists:
         previous = {x.get("id"): x for x in (old_doc.to_dict() or {}).get("items", []) if x.get("id")}
@@ -296,7 +296,7 @@ def sync_cinema(event: scheduler_fn.ScheduledEvent) -> None:
 def sync_news(event: scheduler_fn.ScheduledEvent) -> None:
     try:
         payload = build_news_payload()
-        DB.collection("public").document("news-weekly").set(payload)
+        DB.collection("public").document("newsWeekly").set(payload)
         detail = f"{len(payload['items'])} selected articles"
         set_status("news", True, detail)
         logger.info(f"news sync complete: {detail}")
