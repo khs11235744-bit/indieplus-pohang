@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "rules": {
     "minChars": 800,
     "minPhotos": 3,
@@ -467,7 +467,7 @@
         "./assets/critique-film/memories-poster.jpg",
         "./assets/critique-film/memories-still1.jpg",
         "./assets/critique-film/memories-still2.jpg",
-        "./assets/critique-film/memories-still3.jpg"
+        "./assets/critique-film/memories-still4.jpg"
       ],
       "assetSlug": "memories-of-murder",
       "example": false,
@@ -491,10 +491,12 @@
           "source": "https://www.themoviedb.org/movie/11423/images"
         },
         {
-          "label": "〈살인의 추억〉 스틸 3",
+          "label": "〈살인의 추억〉 · 터널의 끝",
           "creator": "TMDB media",
           "license": "작품 스틸 · 권리 각 원저작권자",
-          "source": "https://www.themoviedb.org/movie/11423/images"
+          "source": "https://www.themoviedb.org/movie/11423/images/backdrops",
+          "sourceImage": "https://image.tmdb.org/t/p/w1280/1IW1zv35kh7ArR9oF0k1OcpErha.jpg",
+          "kind": "film-still"
         }
       ],
       "tmdbId": 11423
@@ -526,7 +528,7 @@
         "./assets/critique-film/oldboy-poster.jpg",
         "./assets/critique-film/oldboy-still1.jpg",
         "./assets/critique-film/oldboy-still2.jpg",
-        "./assets/critique-film/oldboy-still3.jpg"
+        "./assets/critique-film/oldboy-still4.jpg"
       ],
       "assetSlug": "oldboy",
       "example": false,
@@ -550,10 +552,12 @@
           "source": "https://www.themoviedb.org/movie/670/images"
         },
         {
-          "label": "〈올드보이〉 스틸 3",
+          "label": "〈올드보이〉 · 길 위의 두 인물",
           "creator": "TMDB media",
           "license": "작품 스틸 · 권리 각 원저작권자",
-          "source": "https://www.themoviedb.org/movie/670/images"
+          "source": "https://www.themoviedb.org/movie/670/images/backdrops",
+          "sourceImage": "https://image.tmdb.org/t/p/w1280/sdwjQEM869JFwMytTmvr6ggvaUl.jpg",
+          "kind": "film-still"
         }
       ],
       "tmdbId": 670
@@ -644,7 +648,7 @@
         "./assets/critique-film/handmaiden-poster.jpg",
         "./assets/critique-film/handmaiden-still1.jpg",
         "./assets/critique-film/handmaiden-still2.jpg",
-        "./assets/critique-film/handmaiden-still3.jpg"
+        "./assets/critique-film/handmaiden-still4.jpg"
       ],
       "assetSlug": "handmaiden",
       "example": false,
@@ -668,10 +672,12 @@
           "source": "https://www.themoviedb.org/movie/290098/images"
         },
         {
-          "label": "〈아가씨〉 스틸 3",
+          "label": "〈아가씨〉 · 저택의 복도",
           "creator": "TMDB media",
           "license": "작품 스틸 · 권리 각 원저작권자",
-          "source": "https://www.themoviedb.org/movie/290098/images"
+          "source": "https://www.themoviedb.org/movie/290098/images/backdrops",
+          "sourceImage": "https://image.tmdb.org/t/p/w1280/9DpPn8mKW9hduyBIcp5cGo2nUsL.jpg",
+          "kind": "film-still"
         }
       ],
       "tmdbId": 290098

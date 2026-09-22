@@ -1,6 +1,6 @@
 ﻿{
     "release":  "mobile-39",
-    "verifiedAt":  "2026-09-22T15:37:43.3852530Z",
+    "verifiedAt":  "2026-09-22T15:38:38.3807413Z",
     "baseCommit":  "79a52f0dd0f42edbc00684c2d46dc9d411d0c0c1",
     "localTests":  [
                        {
@@ -48,7 +48,7 @@
                    ],
     "staticTests":  {
                         "pass":  true,
-                        "checkedAt":  "2026-09-22T15:37:42.804Z",
+                        "checkedAt":  "2026-09-22T15:38:38.260Z",
                         "checks":  {
                                        "jsParsed":  18,
                                        "jsonParsed":  19,
@@ -132,7 +132,6 @@
     "localBrowserExternalRequests":  "blocked for isolated UI checks; Firebase discovery 404 expected locally; live verification follows deployment",
     "sourceHashes":  {
                          "features-v08.js":  "2124DFAA9739EA88C5D6B323E2713272D81C32E0A2AEAD457911B87319143557",
-                         "index.html":  "128D06D4DAD071363F70BE9101B73C3A701BB15B83903EC2FFCEB27E5F878991",
                          "features-v30.js":  "33E8636561F07F97A06C3AAB9D351FC6A11F2D077587CADB9FCECA1C8F6478B3",
                          "editorial-v38.css":  "3C3C784B5F01231F94815F06ACCECB5AAC11B0BD9428B540B14DDEED51248626",
                          "scripts/enrich-culture-v38.py":  "8C4DC77B7C10257186EADEFC951BD4512996F5D6F904B96122C4871DAC715331",
@@ -141,6 +140,11 @@
                          "mobile-edition.js":  "74454950C73DFB9C5ACCE7BCFC81B514B86A7E40389C171BD15ABFC116B55710",
                          "data/ui-release.json":  "973953B1FCE35648B435406C29CD7482F1EA59197B24719EDED9C221E46C0728",
                          "scripts/validate-editorial-v39.cjs":  "E6BC4BCC04E241CEEA96D0046C60496A54A48E94ACF88A8E50D2A0944DE4FAC7",
+                         "data/criticism-library.json":  "3118474B23D815CBB18C7B8E2917130D15EA85BC19478BA7E0370106D77F4C34",
+                         "assets/critique-film/handmaiden-still4.jpg":  "B54CA4E8CC68DCFCEB00AA9EEE84A2C7B89B27DBE2EB73801445AB358E8DE56A",
+                         "assets/critique-film/memories-still4.jpg":  "6F77AB378CB968CF94B6499F5DAC98EA66CF5A68E63BD93A554680F4CDA8ECA0",
+                         "assets/critique-film/oldboy-still4.jpg":  "8E38B02A3B8EF63C813A401B3E0AFAAB6BEFED0D3757A4856300F3BBCDB454AE",
+                         "index.html":  "3CE1E14ADF2D58C6FE7653B427C8CABAA69AB32D0C04E505C1DA7F57ABE7B0C9",
                          "sw.js":  "5FC316B2A88209E3A708312DC8DA1EDC192054AC5156921DF53010DF9C0E7A95"
                      }
 }
