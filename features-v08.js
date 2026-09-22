@@ -170,7 +170,7 @@ function annualArticleBodyV2(x){
   const marks=visuals.map((_,i)=>Math.min(paras.length-1,Math.max(1,Math.round((i+1)*paras.length/(visuals.length+1)))));
   let out="";
   const pull=paras.find(p=>p.length>=18&&p.length<=95)||"";
-  paras.forEach((p,i)=>{out+='<p>'+esc(p).replace(/\n/g,"<br>")+'</p>';if(i===1&&pull)out+='<aside class="annual-pullquote">“'+esc(pull)+'”</aside>';marks.forEach((m,j)=>{if(m===i&&visuals[j])out+='<figure class="annual-inline-photo photo-'+(j+1)+'"><img src="'+visuals[j]+'" alt=""><figcaption>'+esc(x.filmTitle||x.title||"")+'</figcaption></figure>'})});
+  paras.forEach((p,i)=>{const h3=p.match(/^##\s+(.+)$/s),h4=p.match(/^###\s+(.+)$/s);if(h3)out+='<h3 class="annual-subhead">'+esc(h3[1])+'</h3>';else if(h4)out+='<h4 class="annual-minorhead">'+esc(h4[1])+'</h4>';else out+='<p>'+esc(p).replace(/\n/g,"<br>")+'</p>';if(i===1&&pull&&!/^#{2,3}\s/.test(p))out+='<aside class="annual-pullquote">“'+esc(pull)+'”</aside>';marks.forEach((m,j)=>{if(m===i&&visuals[j])out+='<figure class="annual-inline-photo photo-'+(j+1)+'"><img src="'+visuals[j]+'" alt=""><figcaption>'+esc(x.filmTitle||x.title||"")+'</figcaption></figure>'})});
   return out;
 }
 function ensureMagazineAnnualV2(){

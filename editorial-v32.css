@@ -1,0 +1,221 @@
+/* INDI+P v32 — editorial anti-slop pass */
+:root{
+  --editorial-rule:#3a3d40;
+  --editorial-paper:#efeadf;
+  --editorial-ink:#181714;
+  --editorial-muted:#8d918e;
+}
+html{background:#090a0b}
+body{
+  background:
+    linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.01) 1px,transparent 1px),
+    #090a0b!important;
+  background-size:32px 32px,32px 32px,auto!important;
+}
+.wrap{width:min(1180px,calc(100% - 48px))!important}
+.section{padding:62px 0!important}
+.section-head{
+  align-items:flex-start!important;
+  padding-top:15px!important;
+  margin-bottom:26px!important;
+  border-top:1px solid var(--editorial-rule);
+}
+.section-head>div{max-width:760px}
+.section h2,.v30-section-title h3,.v28-section-head h3{
+  font-family:"Iowan Old Style","Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-weight:650!important;
+  letter-spacing:-.045em!important;
+}
+.section h2{font-size:clamp(33px,4vw,52px)!important;line-height:1.05!important}
+.section-head p{font-size:12px!important;line-height:1.7!important;max-width:640px}
+.kicker,.v28-eyebrow,.v30-section-title>div>span,.v30-lab-head>div>.kicker{
+  letter-spacing:.14em!important;
+  font-size:9px!important;
+  font-weight:800!important;
+}
+.chipbtn,.ghostbtn,.primary{
+  border-radius:4px!important;
+  min-height:42px;
+  box-shadow:none!important;
+}
+.primary{padding-inline:17px!important}
+.topbar{background:rgba(9,10,11,.93)!important;backdrop-filter:blur(12px)!important}
+.mark{border-radius:3px!important}
+.hero{grid-template-columns:minmax(0,1.65fr) minmax(230px,.35fr)!important;gap:10px!important;padding-top:20px!important}
+.hero-card{
+  border-radius:6px!important;
+  min-height:620px!important;
+  box-shadow:none!important;
+  border-color:#383a3d!important;
+}
+.hero-backdrop{filter:saturate(.78) contrast(1.03)}
+.hero-backdrop:after{
+  background:
+    linear-gradient(90deg,rgba(5,6,7,.96) 0,rgba(5,6,7,.72) 48%,rgba(5,6,7,.12) 82%),
+    linear-gradient(0deg,rgba(5,6,7,.7),transparent 50%)!important;
+}
+.hero-copy{left:34px!important;bottom:34px!important}
+.hero h1{
+  font-family:"Iowan Old Style","Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-size:clamp(50px,6.6vw,88px)!important;
+  font-weight:650!important;
+  letter-spacing:-.065em!important;
+  line-height:.98!important;
+}
+.stat-stack{gap:10px!important}
+.stat{
+  border-radius:5px!important;
+  box-shadow:none!important;
+  background:#111315!important;
+  border-color:#34373a!important;
+}
+.stat.warm{background:#18120f!important}
+.stat .big{font-family:Georgia,serif;font-weight:500!important}
+.data-strip{border-radius:3px!important;background:#0d0f11!important}
+.day{border-radius:3px!important;background:#0f1113!important}
+.session,.poster-card,.program-card,.feature,.daily-line,.daily-pick,.venue,
+.review-line,.diary-card,.account-panel{
+  border-radius:5px!important;
+  box-shadow:none!important;
+}
+.session,.poster-card,.program-card,.review-line,.diary-card{
+  background:#101214!important;
+}
+.poster-grid{gap:10px!important}
+.poster-card{grid-template-columns:40% 60%!important}
+.poster-card:hover,.session:hover{transform:none!important;border-color:#60656a!important}
+.poster-wrap img,.thumb,.diary-card img,.sheet-poster,.similar-row img{border-radius:2px!important}
+.poster-copy{padding:16px!important}
+.poster-copy h3,.session h3,.program-card h3{
+  font-family:"Iowan Old Style","Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-weight:650!important;
+}
+.tags span,.mini,.badge-real,.badge-beta,.social-login-row button,.share-formats button{
+  border-radius:3px!important;
+}
+.editorial{gap:10px!important}
+.feature{padding:24px!important}
+.feature.main{background:#121713!important}
+.quote{
+  font-family:"Iowan Old Style","Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-weight:600!important;
+  line-height:1.32!important;
+}
+.v30-culture-lab{padding-top:70px!important}
+.v30-lab-head{
+  border-top:1px solid var(--editorial-rule)!important;
+  padding-top:18px!important;
+}
+.v30-music-special,.v30-master,.v30-dictionary,.v30-phcf,.v28-now,.v28-question,.v28-empty-guide{
+  border-radius:6px!important;
+  box-shadow:none!important;
+}
+.v30-music-special,.v30-master,.v30-dictionary{background:#0f1113!important}
+.v30-music-card,.v28-room-card{
+  border-radius:3px!important;
+  background:#0b0d0f!important;
+}
+.v30-music-card>b{font-weight:400!important;color:#303438!important}
+.v30-question,.v28-question{border-radius:4px!important}
+.v30-phcf{background:#e8e1d5!important}
+.v30-phcf-card{transition:none!important}
+.v30-phcf-card:hover{background:#ddd4c6!important}
+#community .board-filter button,
+.v28-feed-modes button,.v28-feed-meta button,.v28-context button,
+.v30-phcf-tabs button,.v28-room-copy button{
+  border-radius:3px!important;
+}
+#community .v21-board-post{
+  border-radius:5px!important;
+  background:#0f1113!important;
+}
+#community .v21-board-post .board-movie img{border-radius:2px!important}
+.v17-library-browser{
+  border-top:1px solid var(--editorial-rule)!important;
+  padding-top:18px!important;
+}
+.v17-library-item{
+  border-radius:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  background:transparent!important;
+}
+.annual-reader-sheet{
+  background:#e9e3d8!important;
+  color:#1c1a17!important;
+  border-radius:0!important;
+}
+.annual-article{
+  max-width:860px!important;
+  margin:0 auto!important;
+}
+.annual-article h2{
+  font-family:"Iowan Old Style","Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-size:clamp(34px,5vw,60px)!important;
+  line-height:1.05!important;
+  letter-spacing:-.05em!important;
+}
+.annual-article h3:not(.annual-subhead){font-weight:500!important;color:#514b44!important}
+.annual-copy{
+  max-width:720px!important;
+  margin:28px auto 0!important;
+}
+.annual-copy p{
+  font-family:"Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-size:16px!important;
+  line-height:2!important;
+  color:#2a2723!important;
+  letter-spacing:-.01em;
+  margin:0 0 1.45em!important;
+}
+.annual-subhead{
+  font-family:"Iowan Old Style","Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-size:26px!important;
+  line-height:1.25!important;
+  letter-spacing:-.035em!important;
+  margin:2.8em 0 .9em!important;
+  padding-top:14px!important;
+  border-top:1px solid #9d968a!important;
+  color:#181714!important;
+}
+.annual-minorhead{
+  font-size:18px!important;
+  margin:2em 0 .75em!important;
+  color:#2b2925!important;
+}
+.annual-pullquote{
+  border:0!important;
+  border-left:3px solid #1a1916!important;
+  background:transparent!important;
+  padding:4px 0 4px 18px!important;
+  margin:36px 0!important;
+  font-family:"Iowan Old Style","Noto Serif KR","Nanum Myeongjo",Georgia,serif!important;
+  font-size:23px!important;
+  line-height:1.55!important;
+  color:#191814!important;
+}
+.share-sheet,.sheet,.search-box{border-radius:6px 6px 0 0!important}
+.empty{border-radius:3px!important}
+.mobile-nav{border-radius:4px!important}
+@media(max-width:1080px){
+  .hero{grid-template-columns:1fr!important}
+}
+@media(max-width:720px){
+  .wrap{width:min(100% - 28px,1180px)!important}
+  .section{padding:46px 0!important}
+  .section-head{margin-bottom:18px!important}
+  .section h2{font-size:34px!important}
+  .hero{padding-top:10px!important}
+  .hero-card{min-height:520px!important;border-radius:3px!important}
+  .hero-copy{left:20px!important;right:20px!important;bottom:24px!important}
+  .hero h1{font-size:48px!important}
+  .poster-card{grid-template-columns:36% 64%!important}
+  .v30-music-card{flex-basis:86%!important}
+  .annual-reader-sheet{padding:18px!important}
+  .annual-article h2{font-size:38px!important}
+  .annual-copy{margin-top:18px!important}
+  .annual-copy p{font-size:15.5px!important;line-height:1.9!important}
+  .annual-subhead{font-size:23px!important;margin-top:2.3em!important}
+  .mobile-nav{left:8px!important;right:8px!important;bottom:8px!important}
+}
