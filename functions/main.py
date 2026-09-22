@@ -12,7 +12,19 @@ from firebase_admin import firestore, initialize_app
 from firebase_functions import logger, scheduler_fn
 
 initialize_app()
-DB = firestore.client()
+_DB_CLIENT = None
+
+def get_db():
+    global _DB_CLIENT
+    if _DB_CLIENT is None:
+        _DB_CLIENT = firestore.client()
+    return _DB_CLIENT
+
+class _LazyFirestore:
+    def __getattr__(self, name):
+        return getattr(get_db(), name)
+
+DB = _LazyFirestore()
 KST = timezone(timedelta(hours=9))
 
 CINEMA = "000057"
