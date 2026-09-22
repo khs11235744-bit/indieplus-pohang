@@ -157,6 +157,7 @@
     const app=appmod.getApps().length?appmod.getApp():appmod.initializeApp(config),auth=authmod.getAuth(app),db=fs.getFirestore(app);
     await authmod.setPersistence(auth,authmod.browserLocalPersistence).catch(()=>{});
     V21.firebase={app,auth,db,authmod,fs};
+    try{await authmod.getRedirectResult(auth)}catch(e){setTimeout(()=>authMessage(authErrorMessage(e)),0);}
     authmod.onAuthStateChanged(auth,async user=>{V21.user=user;V21.profile=await loadProfile(user);updateAuthUI();renderRemoteBoard();});
     fs.onSnapshot(fs.query(fs.collection(db,'posts'),fs.orderBy('createdAt','desc'),fs.limit(80)),snap=>{V21.posts=snap.docs.map(d=>({id:d.id,...d.data()}));renderRemoteBoard();renderV21Stats();},err=>{console.warn('community snapshot',err);showCommunityNotice('커뮤니티 서버 연결을 확인 중입니다.')});
     return true;
@@ -177,13 +178,13 @@
     const b=document.createElement('button');b.id='communityAuthBtnV21';b.className='chipbtn v21-auth-top';b.onclick=openCommunityAuthV21;nav.prepend(b);updateAuthUI();
   }
 
-  function authErrorMessage(e){const c=e?.code||'';if(c.includes('operation-not-allowed'))return 'Firebase Authentication에서 이메일/비밀번호 또는 익명 로그인을 먼저 활성화해야 합니다.';if(c.includes('invalid-credential'))return '이메일 또는 비밀번호를 확인해주세요.';if(c.includes('email-already-in-use'))return '이미 가입된 이메일입니다.';if(c.includes('weak-password'))return '비밀번호는 6자 이상으로 입력해주세요.';return e?.message||'로그인 처리 중 오류가 발생했습니다.'}
+  function authErrorMessage(e){const c=e?.code||'';if(c.includes('operation-not-allowed'))return 'Firebase Authentication에서 선택한 로그인 제공자를 활성화해야 합니다.';if(c.includes('unauthorized-domain'))return '현재 공개 도메인(indip.web.app)을 Firebase Authentication 승인 도메인에 등록해야 합니다.';if(c.includes('popup-blocked'))return '브라우저가 Google 로그인 팝업을 차단했습니다. 리디렉션 로그인을 시도합니다.';if(c.includes('invalid-credential'))return '이메일 또는 비밀번호를 확인해주세요.';if(c.includes('email-already-in-use'))return '이미 가입된 이메일입니다.';if(c.includes('weak-password'))return '비밀번호는 6자 이상으로 입력해주세요.';return e?.message||'로그인 처리 중 오류가 발생했습니다.'}
 
   function ensureAuthPanel(){
     let p=document.getElementById('communityAuthPanelV21');if(p)return p;p=document.createElement('div');p.id='communityAuthPanelV21';p.className='share-panel';
-    p.innerHTML='<div class="share-sheet v21-auth-sheet"><button class="close" id="closeAuthV21">×</button><div class="kicker">COMMUNITY ACCOUNT</div><h2>INDI+P 커뮤니티 로그인</h2><p>글쓰기·댓글·좋아요는 로그인 후 여러 기기에서 이어집니다. Google/Kakao/Naver 소셜 로그인은 사용하지 않습니다.</p><div id="v21AuthSignedOut"><label>닉네임<input id="v21AuthNickname" maxlength="24" placeholder="커뮤니티에서 보일 이름"></label><label>이메일<input id="v21AuthEmail" type="email" autocomplete="email" placeholder="name@example.com"></label><label>비밀번호<input id="v21AuthPassword" type="password" minlength="6" autocomplete="current-password" placeholder="6자 이상"></label><div class="v21-auth-actions"><button class="primary" id="v21Login">로그인</button><button class="ghostbtn" id="v21Signup">회원가입</button><button class="ghostbtn" id="v21Guest">게스트로 시작</button><button class="text-button" id="v21Reset">비밀번호 재설정</button></div></div><div id="v21AuthSignedIn" hidden><div class="v21-account-card"><b id="v21AccountIdentity"></b><small id="v21AccountMode"></small></div><label>커뮤니티 닉네임<input id="v21ProfileNickname" maxlength="24"></label><label>한줄소개<input id="v21ProfileBio" maxlength="100"></label><div class="v21-auth-actions"><button class="primary" id="v21SaveProfile">프로필 저장</button><button class="ghostbtn" id="v21ImportLocal">이 기기의 기존 글 가져오기</button><button class="ghostbtn danger" id="v21Logout">로그아웃</button></div></div><div class="v21-auth-message" id="v21AuthMessage"></div></div>';
+    p.innerHTML='<div class="share-sheet v21-auth-sheet"><button class="close" id="closeAuthV21">×</button><div class="kicker">COMMUNITY ACCOUNT</div><h2>INDI+P 커뮤니티 로그인</h2><p>글쓰기·댓글·좋아요는 로그인 후 여러 기기에서 이어집니다. Google 로그인과 이메일·게스트 로그인을 지원합니다.</p><div id="v21AuthSignedOut"><button class="v21-google-login" id="v21Google" type="button"><span aria-hidden="true">G</span>Google로 계속하기</button><div class="v21-auth-divider"><span>또는</span></div><label>닉네임<input id="v21AuthNickname" maxlength="24" placeholder="커뮤니티에서 보일 이름"></label><label>이메일<input id="v21AuthEmail" type="email" autocomplete="email" placeholder="name@example.com"></label><label>비밀번호<input id="v21AuthPassword" type="password" minlength="6" autocomplete="current-password" placeholder="6자 이상"></label><div class="v21-auth-actions"><button class="primary" id="v21Login">로그인</button><button class="ghostbtn" id="v21Signup">회원가입</button><button class="ghostbtn" id="v21Guest">게스트로 시작</button><button class="text-button" id="v21Reset">비밀번호 재설정</button></div></div><div id="v21AuthSignedIn" hidden><div class="v21-account-card"><b id="v21AccountIdentity"></b><small id="v21AccountMode"></small></div><label>커뮤니티 닉네임<input id="v21ProfileNickname" maxlength="24"></label><label>한줄소개<input id="v21ProfileBio" maxlength="100"></label><div class="v21-auth-actions"><button class="primary" id="v21SaveProfile">프로필 저장</button><button class="ghostbtn" id="v21ImportLocal">이 기기의 기존 글 가져오기</button><button class="ghostbtn danger" id="v21Logout">로그아웃</button></div></div><div class="v21-auth-message" id="v21AuthMessage"></div></div>';
     document.body.appendChild(p);p.querySelector('#closeAuthV21').onclick=()=>p.classList.remove('open');p.onclick=e=>{if(e.target===p)p.classList.remove('open')};
-    p.querySelector('#v21Login').onclick=loginV21;p.querySelector('#v21Signup').onclick=signupV21;p.querySelector('#v21Guest').onclick=guestV21;p.querySelector('#v21Reset').onclick=resetPasswordV21;p.querySelector('#v21Logout').onclick=logoutV21;p.querySelector('#v21SaveProfile').onclick=saveProfileV21;p.querySelector('#v21ImportLocal').onclick=importLocalPostsV21;return p;
+    p.querySelector('#v21Google').onclick=googleV21;p.querySelector('#v21Login').onclick=loginV21;p.querySelector('#v21Signup').onclick=signupV21;p.querySelector('#v21Guest').onclick=guestV21;p.querySelector('#v21Reset').onclick=resetPasswordV21;p.querySelector('#v21Logout').onclick=logoutV21;p.querySelector('#v21SaveProfile').onclick=saveProfileV21;p.querySelector('#v21ImportLocal').onclick=importLocalPostsV21;return p;
   }
 
   function updateAuthUI(){
@@ -195,6 +196,27 @@
   function openCommunityAuthV21(){const p=ensureAuthPanel();updateAuthUI();p.classList.add('open')}
   window.openCommunityAuthV21=openCommunityAuthV21;
   function authMessage(t,ok=false){const e=document.getElementById('v21AuthMessage');if(e){e.textContent=t;e.classList.toggle('ok',ok)}}
+  async function googleV21(){
+    if(!V21.firebase)return authMessage('Firebase 연결을 확인 중입니다.');
+    const {auth,authmod}=V21.firebase;
+    const provider=new authmod.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+    try{
+      authMessage('Google 로그인 창을 여는 중입니다.');
+      await authmod.signInWithPopup(auth,provider);
+      authMessage('Google로 로그인되었습니다.',true);
+    }catch(e){
+      const code=e?.code||'';
+      const mobile=globalThis.matchMedia?.('(max-width: 760px)')?.matches||/Android|iPhone|iPad|iPod/i.test(navigator.userAgent||'');
+      const redirectable=code.includes('popup-blocked')||code.includes('operation-not-supported-in-this-environment')||code.includes('web-storage-unsupported')||code.includes('cancelled-popup-request')||(mobile&&!code.includes('popup-closed-by-user')&&!code.includes('operation-not-allowed')&&!code.includes('unauthorized-domain'));
+      if(redirectable){
+        authMessage('Google 로그인 화면으로 이동합니다.');
+        try{await authmod.signInWithRedirect(auth,provider)}catch(re){authMessage(authErrorMessage(re))}
+        return;
+      }
+      authMessage(authErrorMessage(e));
+    }
+  }
   async function loginV21(){if(!V21.firebase)return authMessage('Firebase 연결을 확인 중입니다.');const p=ensureAuthPanel(),email=p.querySelector('#v21AuthEmail').value.trim(),pw=p.querySelector('#v21AuthPassword').value;try{await V21.firebase.authmod.signInWithEmailAndPassword(V21.firebase.auth,email,pw);authMessage('로그인되었습니다.',true)}catch(e){authMessage(authErrorMessage(e))}}
   async function signupV21(){if(!V21.firebase)return authMessage('Firebase 연결을 확인 중입니다.');const p=ensureAuthPanel(),email=p.querySelector('#v21AuthEmail').value.trim(),pw=p.querySelector('#v21AuthPassword').value,nick=p.querySelector('#v21AuthNickname').value.trim()||email.split('@')[0];try{const c=await V21.firebase.authmod.createUserWithEmailAndPassword(V21.firebase.auth,email,pw);await V21.firebase.authmod.updateProfile(c.user,{displayName:nick});await V21.firebase.fs.setDoc(V21.firebase.fs.doc(V21.firebase.db,'profiles',c.user.uid),{uid:c.user.uid,nickname:nick,bio:'영화를 보고 문장을 남깁니다.',createdAt:V21.firebase.fs.serverTimestamp()},{merge:true});authMessage('회원가입이 완료되었습니다.',true)}catch(e){authMessage(authErrorMessage(e))}}
   async function guestV21(){try{await V21.firebase.authmod.signInAnonymously(V21.firebase.auth);authMessage('게스트로 로그인되었습니다.',true)}catch(e){authMessage(authErrorMessage(e))}}
