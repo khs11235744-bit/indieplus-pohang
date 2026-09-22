@@ -1,38 +1,52 @@
 {
-  "firestore": {
-    "rules": "firestore.rules"
-  },
-  "hosting": {
-    "public": ".",
-    "ignore": [
-      "firebase.json",
-      ".firebaserc",
-      "firestore.rules",
-      "firebase-debug.log",
-      "**/.*",
-      "**/node_modules/**",
-      "**/*.md",
-      "scripts/**",
-      "reports/**",
-      ".chrome-*/**",
-      ".env*",
-      "data/news-raw.json"
-    ],
-    "cleanUrls": true,
-    "trailingSlash": false,
-    "headers": [
-      {
-        "source": "/sw.js",
-        "headers": [
-          { "key": "Cache-Control", "value": "no-cache" }
-        ]
-      },
-      {
-        "source": "/data/**",
-        "headers": [
-          { "key": "Cache-Control", "value": "public,max-age=300" }
-        ]
-      }
-    ]
-  }
+    "functions":  {
+                      "source":  "functions",
+                      "runtime":  "python313"
+                  },
+    "firestore":  {
+                      "rules":  "firestore.rules"
+                  },
+    "hosting":  {
+                    "public":  ".",
+                    "ignore":  [
+                                   "firebase.json",
+                                   "firestore.rules",
+                                   "**/.*",
+                                   "**/node_modules/**",
+                                   "functions/**",
+                                   "scripts/**",
+                                   "reports/**",
+                                   "*.md",
+                                   ".env*",
+                                   "firebase-config.example.json",
+                                   "data/news-raw.json"
+                               ],
+                    "headers":  [
+                                    {
+                                        "source":  "**/*.@(js|css)",
+                                        "headers":  [
+                                                        {
+                                                            "key":  "Cache-Control",
+                                                            "value":  "public,max-age=300,must-revalidate"
+                                                        }
+                                                    ]
+                                    },
+                                    {
+                                        "source":  "data/**",
+                                        "headers":  [
+                                                        {
+                                                            "key":  "Cache-Control",
+                                                            "value":  "public,max-age=60,must-revalidate"
+                                                        }
+                                                    ]
+                                    }
+                                ],
+                    "target":  "public"
+                },
+    "auth":  {
+                 "providers":  {
+                                   "anonymous":  true,
+                                   "emailPassword":  true
+                               }
+             }
 }

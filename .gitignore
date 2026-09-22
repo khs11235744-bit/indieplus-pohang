@@ -13,6 +13,9 @@ dom-*.html
 tablet-*.png 
 .harness.lock 
 firebase-debug.log
-scripts/enable_firebase_services.ps1
 data/news-raw.json
 .firebase/
+
+firebase-config.json
+functions/venv/
+functions/__pycache__/

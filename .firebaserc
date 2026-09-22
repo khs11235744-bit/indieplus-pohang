@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "indieplus-pohang-khs"
-  }
+  },
+  "targets": {
+    "indieplus-pohang-khs": {
+      "hosting": {
+        "public": [
+          "indip"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

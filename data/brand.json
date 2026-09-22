@@ -1,8 +1,8 @@
 {
-  "name":"INDIE PORT",
-  "status":"working-title",
-  "tagline":"Independent Cinema · Art · Local Culture",
-  "origin":{"label":"INDIE+ POHANG","role":"origin-cinema"},
-  "scope":["film","film-festival","arthouse-cinema","local-art","culture-magazine"],
-  "note":"상위 브랜드명은 추후 교체 가능. 인디플러스 포항은 출발점/상영관 모듈로만 유지."
+  "name": "INDI+P",
+  "status": "active",
+  "tagline": "Cinema · Criticism · Community",
+  "origin": {"label": "Pohang · independent cinema", "role": "origin-cinema"},
+  "scope": ["film", "film-festival", "arthouse-cinema", "criticism", "community", "local-art"],
+  "note": "Public-facing brand. Firebase project resources remain in the existing backend project."
 }

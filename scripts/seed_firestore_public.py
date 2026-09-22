@@ -1,6 +1,9 @@
 from __future__ import annotations
 import json
 import pathlib
+import subprocess
+import sys
+import time
 import urllib.request
 import urllib.error
 
@@ -37,7 +40,19 @@ def fv(v):
 def fields(obj):
     return {str(k): fv(v) for k, v in obj.items()}
 
+def refresh_cli_token_if_needed():
+    cfg = json.loads(CONFIG.read_text(encoding="utf-8")) if CONFIG.exists() else {}
+    tokens = cfg.get("tokens") or {}
+    expires_at = float(tokens.get("expires_at") or 0)
+    # firebase-tools persists a refresh token; ask the CLI to refresh its cached
+    # access token before scheduled REST publishing when expiry is near.
+    if expires_at > (time.time() * 1000) + 5 * 60 * 1000 and tokens.get("access_token"):
+        return
+    cmd = ["cmd", "/c", "npx.cmd", "--yes", "firebase-tools", "projects:list", "--json"] if sys.platform == "win32" else ["npx", "--yes", "firebase-tools", "projects:list", "--json"]
+    subprocess.run(cmd, cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=90, check=True)
+
 def main():
+    refresh_cli_token_if_needed()
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
     token = ((cfg.get("tokens") or {}).get("access_token") or "").strip()
     if not token:

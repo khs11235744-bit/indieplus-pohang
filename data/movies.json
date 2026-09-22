@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-21 14:41 KST",
+  "updated": "2026-09-22 14:31 KST",
   "source": "Dtryx 공개 영화 상세 페이지",
   "movies": {
     "029552": {
@@ -28,15 +28,7 @@
         "드라마,독립예술",
         "97분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029552",
-      "external": {
-        "wikimedia": {
-          "title": "켄트",
-          "description": "위키백과 동음이의어 문서",
-          "extract": "켄트의 다른 뜻은 다음과 같다.",
-          "url": "https://ko.wikipedia.org/wiki/%EC%BC%84%ED%8A%B8"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029552"
     },
     "028449": {
       "code": "028449",
@@ -65,15 +57,7 @@
         "드라마,가족,독립예술",
         "105분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=028449",
-      "external": {
-        "wikimedia": {
-          "title": "2026년 대한민국의 영화 목록",
-          "description": "위키미디어 목록 항목",
-          "extract": "다음은 2026년에 개봉 예정인 대한민국의 영화 목록이다.",
-          "url": "https://ko.wikipedia.org/wiki/2026%EB%85%84_%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%EC%9D%98_%EC%98%81%ED%99%94_%EB%AA%A9%EB%A1%9D"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=028449"
     },
     "029550": {
       "code": "029550",
@@ -102,15 +86,7 @@
         "애니메이션,독립예술",
         "105분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029550",
-      "external": {
-        "wikimedia": {
-          "title": "안재훈 (애니메이터)",
-          "description": "",
-          "extract": "안재훈(Jae Hunn Ahn)은 대한민국의 애니메이션 감독이다. 제작사는 연필로 명상하기이다.",
-          "url": "https://ko.wikipedia.org/wiki/%EC%95%88%EC%9E%AC%ED%9B%88_(%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%84%B0)"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029550"
     },
     "027432": {
       "code": "027432",
@@ -130,15 +106,7 @@
         "다큐멘터리,독립예술",
         "116분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=027432",
-      "external": {
-        "wikimedia": {
-          "title": "말아톤",
-          "description": "2005년 한국영화",
-          "extract": "《말아톤》은 자폐성 장애를 가진 청년이 마라톤을 통해 사회와 소통해 나가는 과정을 그린 영화로 2005년에 개봉하였다.",
-          "url": "https://ko.wikipedia.org/wiki/%EB%A7%90%EC%95%84%ED%86%A4"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=027432"
     },
     "027434": {
       "code": "027434",
@@ -167,15 +135,7 @@
         "드라마,독립예술",
         "107분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=027434",
-      "external": {
-        "wikimedia": {
-          "title": "2026년 대한민국의 영화 목록",
-          "description": "위키미디어 목록 항목",
-          "extract": "다음은 2026년에 개봉 예정인 대한민국의 영화 목록이다.",
-          "url": "https://ko.wikipedia.org/wiki/2026%EB%85%84_%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%EC%9D%98_%EC%98%81%ED%99%94_%EB%AA%A9%EB%A1%9D"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=027434"
     },
     "027030": {
       "code": "027030",
@@ -204,15 +164,7 @@
         "다큐멘터리,독립예술",
         "103분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=027030",
-      "external": {
-        "wikimedia": {
-          "title": "이성민 (배우)",
-          "description": "대한민국의 배우",
-          "extract": "이성민(1968년 12월 4일 ~ )은 대한민국의 배우이다.",
-          "url": "https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%84%B1%EB%AF%BC_(%EB%B0%B0%EC%9A%B0)"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=027030"
     },
     "026254": {
       "code": "026254",
@@ -240,15 +192,7 @@
         "드라마,독립예술",
         "76분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=026254",
-      "external": {
-        "wikimedia": {
-          "title": "2026년 대한민국의 영화 목록",
-          "description": "위키미디어 목록 항목",
-          "extract": "다음은 2026년에 개봉 예정인 대한민국의 영화 목록이다.",
-          "url": "https://ko.wikipedia.org/wiki/2026%EB%85%84_%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%EC%9D%98_%EC%98%81%ED%99%94_%EB%AA%A9%EB%A1%9D"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=026254"
     },
     "029204": {
       "code": "029204",
@@ -275,8 +219,7 @@
         "다큐멘터리,독립예술",
         "101분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029204",
-      "external": {}
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029204"
     },
     "029131": {
       "code": "029131",
@@ -305,15 +248,7 @@
         "독립예술,SF,스릴러",
         "83분"
       ],
-      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029131",
-      "external": {
-        "wikimedia": {
-          "title": "박세영 (배우)",
-          "description": "대한민국의 배우",
-          "extract": "박세영(朴世榮, 1988년 7월 30일 ~ )은 대한민국의 배우다.",
-          "url": "https://ko.wikipedia.org/wiki/%EB%B0%95%EC%84%B8%EC%98%81_(%EB%B0%B0%EC%9A%B0)"
-        }
-      }
+      "sourceUrl": "https://www.dtryx.com/movie/view.do?MovieCd=029131"
     }
   }
 }

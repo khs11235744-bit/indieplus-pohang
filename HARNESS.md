@@ -71,3 +71,8 @@
 - 카드뉴스 직접편집: 카드별 사진 선택/사진 없음, 1·2·3·4컷 콜라주, 카드별 프리셋, 문장/순서 편집, 4:5·1:1·9:16, 개별 PNG, 전체 ZIP, Web Share.
 - 회귀검사는 scripts/probe_v16.mjs 기준으로 수행한다.
 - 다음 우선순위는 MAGAZINE_EDITOR_WORKSHOP_100.md 미완료 항목을 따른다.
+## Firebase 데이터 전환
+- 웹앱은 Firestore `public/live`, `public/movies`, `public/programs`, `public/news-weekly`을 우선 읽고 실패하면 기존 JSON으로 자동 복귀한다.
+- `sync_cinema`는 30분, `sync_news`는 6시간 주기로 실행한다.
+- Dtryx/뉴스 외부접속 실패 시 Firestore의 마지막 정상 문서를 덮어쓰지 않는다.
+- 배포 전 `python -m py_compile functions/main.py`, `node --check app.js`, `node --check features-v06.js`, `node --check sw.js`, `git diff --check`를 확인한다.

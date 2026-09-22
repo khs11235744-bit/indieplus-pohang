@@ -10,7 +10,7 @@ function toggleNewsSave(id){
   const a=newsSaved(),i=a.indexOf(id);i>=0?a.splice(i,1):a.push(id);saveNewsSaved(a);renderNewsCards();
 }
 function newsItems(){
-  const all=(NEWS_WEEKLY?.items||[]).filter(x=>x.translationStatus==="translated-reviewed"&&x.titleKo&&x.summaryKo);
+  const all=(NEWS_WEEKLY?.items||[]).filter(x=>x.titleKo||x.titleOriginal);
   if(newsFilter==="all")return all;
   if(newsFilter==="saved")return all.filter(x=>newsSaved().includes(x.id));
   return all.filter(x=>x.category===newsFilter);
@@ -19,7 +19,7 @@ function renderNewsCards(){
   const root=document.getElementById("newsGrid");if(!root)return;
   const saved=newsSaved(),items=newsItems();
   root.innerHTML=items.length?items.map(x=>{
-    const title=x.titleKo||x.titleOriginal,summary=x.summaryKo||"한국어 요약을 준비 중입니다.";
+    const title=x.titleKo||x.titleOriginal,summary=x.summaryKo||x.descriptionOriginal||"원문 링크에서 자세한 내용을 확인하세요.";
     const tags=(x.tags||[]).map(t=>'<span>#'+esc(t)+'</span>').join("");
     return '<article class="news-card">'+
       '<div class="news-card-top"><span class="news-cat">'+esc(x.category)+'</span>'+(x.official?'<span class="news-official">OFFICIAL</span>':'')+'<button onclick="toggleNewsSave(\''+x.id+'\')">'+(saved.includes(x.id)?"★":"☆")+'</button></div>'+
@@ -68,6 +68,10 @@ function applyBrandConfig(){
   if(footer)footer.textContent=name+(BRAND_CONFIG.status==="working-title"?" · WORKING TITLE":"");
   document.title=name+" — independent cinema, arts & local culture";
 }
+async function loadNewsWeeklyV06(){
+  if(window.indieData?.publicDoc)return window.indieData.publicDoc("news-weekly","./data/news-weekly.json",false);
+  return fetch("./data/news-weekly.json?v="+Date.now()).then(r=>r.ok?r.json():null);
+}
 async function initV06(){
   try{
     [NEWS_WEEKLY,NEWS_SOURCES,BRAND_CONFIG]=await Promise.all([
@@ -82,7 +86,7 @@ async function initV06(){
   const t=document.getElementById("newsDigestTitle"),s=document.getElementById("newsDigestSummary"),c=document.getElementById("newsCount"),g=document.getElementById("newsGenerated");
   if(t)t.textContent=NEWS_WEEKLY.digestTitle||"이번 주 영화뉴스";
   if(s)s.textContent=NEWS_WEEKLY.digestSummary||"주간 요약을 준비 중입니다.";
-  if(c)c.textContent=(NEWS_WEEKLY.items||[]).filter(x=>x.translationStatus==="translated-reviewed"&&x.titleKo&&x.summaryKo).length+"개 한글 기사";
+  if(c)c.textContent=(NEWS_WEEKLY.items||[]).length+"개 선별 기사";
   if(g)g.textContent=NEWS_WEEKLY.generatedAt?new Intl.DateTimeFormat("ko-KR",{dateStyle:"medium"}).format(new Date(NEWS_WEEKLY.generatedAt)):"";
   renderFestivalTracker();renderCinemaTracker();renderLocalArtsTracker();renderNewsCards();
 }

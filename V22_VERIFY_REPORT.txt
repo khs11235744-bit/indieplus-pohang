@@ -1,0 +1,23 @@
+=== INDI+P v22 VERIFY ===
+Time: 2026-09-22 14:33:52
+Repo: C:\Users\권형석\Documents\indieplus-pohang
+Project: indieplus-pohang-khs
+Site: https://indip.web.app
+features-v20.js          OK
+features-v21.js          OK
+features-v22.js          OK
+v20.css                  OK
+v21.css                  OK
+v22.css                  OK
+firestore.rules          OK
+firebase.json            OK
+node check: OK
+functions:list: OK
+{
+  "status": "success",
+  "result": []
+}
+site HTTP: 200
+index v22 marker: MISSING
+features-v22.js HTTP: 200
+firebase init HTTP: 200

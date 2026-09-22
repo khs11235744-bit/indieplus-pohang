@@ -1,7 +1,7 @@
 {
-"name":"INDIE PORT","short_name":"INDIE PORT","description":"독립·예술영화, 예술영화관, 지역 문화예술, 비평과 기록을 연결하는 문화 플랫폼 — working title","lang":"ko","start_url":"./","scope":"./","display":"standalone","background_color":"#090a0b","theme_color":"#090a0b",
-"icons":[
-{"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-{"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
-]
+  "name":"INDI+P","short_name":"INDI+P","description":"독립·예술영화, 비평, 커뮤니티, 상영·예매 정보를 연결하는 영화 플랫폼","lang":"ko","start_url":"./","scope":"./","display":"standalone","background_color":"#090a0b","theme_color":"#090a0b",
+  "icons":[
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
 }
