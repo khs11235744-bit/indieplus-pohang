@@ -1,7 +1,7 @@
 // INDI+P v30 — Cinema Culture Lab + Pohang Cultural Foundation live feed.
 (() => {
   const V30 = window.INDIP_V30 = window.INDIP_V30 || {};
-  V30.version = '37.0.0';
+  V30.version = '38.0.0';
   V30.culture = null;
   V30.musicOffset = 0;
   V30.phcf = null;
@@ -113,12 +113,14 @@
     const root=E('#v30MusicGrid'); if(!root) return;
     const items=musicItems();
     root.innerHTML=items.map((x,i)=>{
-      const image=x.image?'<img class="v37-music-image" src="'+esc(x.image)+'" alt="" loading="lazy">':'';
-      const meta=[x.film,x.year,x.composer].filter(Boolean).join(' · ');
+      const image=x.image?'<figure class="v37-music-visual"><img class="v37-music-image" src="'+esc(x.image)+'" alt="'+esc((x.filmTitleKo||x.film||x.title||"영화")+' 포스터')+'" loading="lazy"><figcaption>'+(x.imageCredit?.label?esc(x.imageCredit.label):'작품 이미지')+(x.sourceUrl?' · <a href="'+esc(x.sourceUrl)+'" target="_blank" rel="noopener">작품 정보 ↗</a>':'')+'</figcaption></figure>':'';
+      const meta=[x.filmTitleKo||x.film,x.year,x.composer].filter(Boolean).join(' · ');
       const foot=x.listen||x.note||'';
+      const links=(x.listenLinks||[]).slice(0,3).map(l=>'<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.label)+'</a>').join('');
       return '<article class="v30-music-card v37-sound-card" data-key="'+esc(x.id||String(i))+'">'+image+
         '<span>'+esc(x.type||'SOUND & CINEMA')+'</span><b>0'+(i+1)+'</b><h4>'+esc(x.title||x.film||'')+'</h4>'+
-        (meta?'<small>'+esc(meta)+'</small>':'')+'<p>'+esc(x.body||'')+'</p>'+(foot?'<em>'+esc(foot)+'</em>':'')+'</article>';
+        (meta?'<small>'+esc(meta)+'</small>':'')+'<p>'+esc(x.body||'')+'</p>'+(foot?'<em>'+esc(foot)+'</em>':'')+
+        (links?'<nav class="v38-listen-links">'+links+'</nav>':'')+'</article>';
     }).join('');
     const meta=E('#v37MusicMeta'),c=V30.culture;
     if(meta)meta.textContent=c?'365일 편성 DB · OST '+(c.soundPools?.ost?.length||0)+' · 비하인드 '+(c.soundPools?.story?.length||0)+' · 앨범노트 '+(c.soundPools?.album?.length||0)+' · 조합 '+(c.days?.length||0)+'일':'기본 편집 데이터';

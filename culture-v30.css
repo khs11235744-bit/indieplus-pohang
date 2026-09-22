@@ -139,3 +139,17 @@
     margin:-14px -16px 12px 0;
   }
 }
+
+/* v38 soundtrack source/listen affordances */
+.v37-music-visual{width:calc(100% + 36px);margin:-18px -18px 14px}
+.v37-music-visual .v37-music-image{width:100%;height:210px;margin:0;object-fit:cover;object-position:center 28%;display:block}
+.v37-music-visual figcaption{display:flex;justify-content:space-between;gap:8px;padding:6px 2px 0;color:#687078;font-size:8px;line-height:1.4}
+.v37-music-visual figcaption a{color:#9ca4aa;text-decoration:none}
+.v38-listen-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid #2a2f33}
+.v38-listen-links a{min-height:34px;display:inline-flex;align-items:center;padding:0 9px;border:1px solid #3b4146;border-radius:3px;color:#d9dedf;text-decoration:none;font-size:8px}
+@media(max-width:760px){
+ .v37-music-visual{width:calc(100% + 16px);margin:-14px -16px 12px 0}
+ .v37-music-visual .v37-music-image{height:180px}
+ .v38-listen-links{gap:5px}
+ .v38-listen-links a{min-height:36px}
+}
