@@ -37,6 +37,9 @@ DTRYX = "https://www.dtryx.com"
 DTRYX_MAIN = f"{DTRYX}/cinema/main.do?cgid={CGID}&BrandCd={BRAND}&CinemaCd={CINEMA}"
 UA = {"User-Agent": "Mozilla/5.0 INDI-P-FirebaseSync/2.0"}
 NEWS_SEED_URL = "https://raw.githubusercontent.com/khs11235744-bit/indieplus-pohang/main/data/news-weekly.json"
+PHCF = "https://www.phcf.or.kr"
+PHCF_BOARD_URL = f"{PHCF}/api/phcf/main/getBoardList.do?prjId=phcf"
+PHCF_EVENT_URL = f"{PHCF}/api/phcf/main/getEventList.do?prjId=phcf&limit=30&offset=0&event_category=ALL"
 
 NEWS_QUERIES = [
     ("festival_official", "영화제", "(site:festival-cannes.com OR site:berlinale.de OR site:labiennale.org OR site:sundance.org OR site:locarnofestival.ch OR site:iffr.com OR site:tiff.net OR site:biff.kr) film festival"),
@@ -283,6 +286,113 @@ def build_news_payload():
     }
 
 
+
+def _phcf_board_url(item: dict, category: str) -> str:
+    if category == "타기관 소식":
+        seq = item.get("seq")
+        return f"{PHCF}/phcf/other_news/detail.do?seq={seq}" if seq else PHCF
+    prj = item.get("prj_id") or "phcf"
+    menu = item.get("menu_site_id") or "notice"
+    seq = item.get("brd_seq")
+    return f"{PHCF}/{prj}/{menu}/detail.do?BRD_SEQ={seq}" if seq else PHCF
+
+
+def _phcf_event_url(item: dict) -> str:
+    content_id = str(item.get("content_id") or "")
+    event_category = str(item.get("event_category") or "").upper()
+    content_type = str(item.get("content_type") or "").upper()
+    if not content_id:
+        return f"{PHCF}/phcf/culture_performance/view.do"
+    if content_type == "FESTIVAL":
+        return f"{PHCF}/phcf/festival_detail/view.do?festivalId={content_id}"
+    if event_category == "REGION":
+        return f"{PHCF}/phcf/region_detail/view.do?eventId={content_id}"
+    return f"{PHCF}/phcf/performance_detail/view.do?eventId={content_id}"
+
+
+def _phcf_ms_iso(value) -> str:
+    try:
+        return datetime.fromtimestamp(float(value) / 1000, KST).isoformat()
+    except Exception:
+        return ""
+
+
+def build_phcf_payload():
+    board = json.loads(get_text(PHCF_BOARD_URL))
+    events_raw = json.loads(get_text(PHCF_EVENT_URL))
+    if not board.get("success"):
+        raise RuntimeError("PHCF board API returned success=false")
+    if not events_raw.get("success"):
+        raise RuntimeError("PHCF event API returned success=false")
+
+    board_specs = [
+        ("board_tab_1", "공지사항"),
+        ("board_tab_4", "공모·모집"),
+        ("board_tab_6", "보도자료"),
+        ("board_tab_7", "타기관 소식"),
+    ]
+    notices = []
+    for key, category in board_specs:
+        for item in (board.get(key) or [])[:5]:
+            title = clean(str(item.get("brd_ttl") or ""))
+            if not title:
+                continue
+            notices.append({
+                "id": f"{category}:{item.get('brd_seq') or item.get('seq') or hashlib.sha1(title.encode('utf-8')).hexdigest()[:10]}",
+                "category": category,
+                "title": title,
+                "date": clean(str(item.get("crte_dt") or "")),
+                "author": clean(str(item.get("usr_nm") or item.get("user_id") or item.get("site_nm") or "")),
+                "siteName": clean(str(item.get("site_nm") or "포항문화재단")),
+                "url": _phcf_board_url(item, category),
+                "externalUrl": clean(str(item.get("lnk_url") or "")),
+                "official": category != "타기관 소식",
+            })
+
+    notices.sort(key=lambda x: x.get("date", ""), reverse=True)
+
+    events = []
+    for item in (events_raw.get("data") or [])[:30]:
+        title = clean(str(item.get("title") or ""))
+        if not title:
+            continue
+        file_seq = item.get("thumbnail_file_seq") or item.get("poster_file_seq")
+        category = clean(str(item.get("event_category") or "OTHER")).upper()
+        tags = []
+        joined = title.lower()
+        if re.search(r"인디플러스|영화|cinema|시네마|ost", joined, re.I):
+            tags.append("film")
+        if re.search(r"음악|콘서트|피아노|오케스트라|밴드|music", joined, re.I):
+            tags.append("music")
+        events.append({
+            "id": str(item.get("content_id") or hashlib.sha1(title.encode("utf-8")).hexdigest()[:12]),
+            "title": title,
+            "category": category,
+            "contentType": clean(str(item.get("content_type") or "EVENT")).upper(),
+            "startAt": _phcf_ms_iso(item.get("start_date")),
+            "endAt": _phcf_ms_iso(item.get("end_date")),
+            "venue": clean(str(item.get("event_venue") or item.get("location_name") or "")),
+            "location": clean(str(item.get("location_name") or "")),
+            "status": clean(str(item.get("event_status") or "")),
+            "imageUrl": f"{PHCF}/common/downloadImage.do?fileSeq={file_seq}" if file_seq else "",
+            "url": _phcf_event_url(item),
+            "tags": tags,
+        })
+
+    events.sort(key=lambda x: x.get("startAt") or "9999")
+    generated = datetime.now(KST).isoformat()
+    return {
+        "generatedAt": generated,
+        "source": "포항문화재단 공식 메인 API",
+        "sourceUrl": f"{PHCF}/view/index.do",
+        "noticeUrl": f"{PHCF}/phcf/notice/view.do",
+        "eventUrl": f"{PHCF}/phcf/culture_performance/view.do",
+        "syncPolicy": "기존 3시간 뉴스 동기화에 포함 · 이미지/PDF는 복사하지 않고 공식 링크만 사용",
+        "notices": notices[:20],
+        "events": events[:20],
+    }
+
+
 def set_status(kind: str, ok: bool, detail: str):
     DB.collection("public").document("sync-status").set({
         kind: {"ok": ok, "detail": detail, "at": datetime.now(timezone.utc).isoformat()}
@@ -309,6 +419,7 @@ def sync_cinema(event: scheduler_fn.ScheduledEvent) -> None:
 
 @scheduler_fn.on_schedule(schedule="every 3 hours")
 def sync_news(event: scheduler_fn.ScheduledEvent) -> None:
+    errors = []
     try:
         payload = build_news_payload()
         DB.collection("public").document("newsWeekly").set(payload)
@@ -316,6 +427,20 @@ def sync_news(event: scheduler_fn.ScheduledEvent) -> None:
         set_status("news", True, detail)
         logger.info(f"news sync complete: {detail}")
     except Exception as exc:
+        errors.append(f"news: {exc}")
         set_status("news", False, str(exc)[:500])
         logger.error(f"news sync failed: {exc}")
-        raise
+
+    try:
+        phcf = build_phcf_payload()
+        DB.collection("public").document("phcf").set(phcf)
+        detail = f"{len(phcf['notices'])} notices / {len(phcf['events'])} events"
+        set_status("phcf", True, detail)
+        logger.info(f"phcf sync complete: {detail}")
+    except Exception as exc:
+        errors.append(f"phcf: {exc}")
+        set_status("phcf", False, str(exc)[:500])
+        logger.error(f"phcf sync failed: {exc}")
+
+    if errors:
+        raise RuntimeError(" | ".join(errors))
