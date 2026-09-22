@@ -1,7 +1,7 @@
 /* INDI+P mobile edition 34. Presentation only; existing auth, editor and data owners remain unchanged. */
 (() => {
   'use strict';
-  const VERSION='mobile-38', media=matchMedia('(max-width:760px)');
+  const VERSION='mobile-39', media=matchMedia('(max-width:760px)');
   const S=window.INDIP_MOBILE_EDITION={version:VERSION,ready:false};
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -23,7 +23,7 @@
     const main=$('#home');if(!main)return;
     const front=document.createElement('section');front.id='m33Front';front.className='m33-front';front.setAttribute('aria-label','모바일 매거진 첫 화면');
     const date=new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-    front.innerHTML='<div class="m33-edition"><span>포항에서 시작하는 영화와 비평</span><small>모바일판 34</small></div><div id="m33Cover" aria-busy="true"><p class="m33-loading">이번 호의 비평을 불러옵니다.</p></div><nav class="m33-shortcuts" aria-label="자주 찾는 코너"><button data-m33-go="schedule">상영시간표<span aria-hidden="true">↗</span></button><button data-m33-go="criticism">비평집<span aria-hidden="true">↗</span></button><button data-m33-go="v30Dictionary">영화사전<span aria-hidden="true">↗</span></button><button data-m33-go="v30Phcf">문화소식<span aria-hidden="true">↗</span></button></nav><div class="m33-date">'+esc(date)+'</div>';
+    front.innerHTML='<div class="m33-edition"><span>포항에서 시작하는 영화와 비평</span><small>모바일판 39</small></div><div id="m33Cover" aria-busy="true"><p class="m33-loading">이번 호의 비평을 불러옵니다.</p></div><nav class="m33-shortcuts" aria-label="자주 찾는 코너"><button data-m33-go="schedule">상영시간표<span aria-hidden="true">↗</span></button><button data-m33-go="criticism">비평집<span aria-hidden="true">↗</span></button><button data-m33-go="v30Dictionary">영화사전<span aria-hidden="true">↗</span></button><button data-m33-go="v30Phcf">문화소식<span aria-hidden="true">↗</span></button></nav><div class="m33-date">'+esc(date)+'</div>';
     main.prepend(front);
   }
   function renderCover(){

@@ -47,7 +47,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/539",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "버나드 허먼",
+        "searchTerms": "버나드 허먼 버나드허먼"
       },
       {
         "id": "ost-02",
@@ -84,7 +86,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/426",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "버나드 허먼",
+        "searchTerms": "버나드 허먼 버나드허먼"
       },
       {
         "id": "ost-03",
@@ -121,7 +125,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/429",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "엔니오 모리코네",
+        "searchTerms": "엔니오 모리코네"
       },
       {
         "id": "ost-04",
@@ -158,7 +164,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/335",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "엔니오 모리코네",
+        "searchTerms": "엔니오 모리코네"
       },
       {
         "id": "ost-05",
@@ -195,7 +203,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/11216",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "엔니오 모리코네 안드레아 모리코네",
+        "searchTerms": "엔니오 모리코네"
       },
       {
         "id": "ost-06",
@@ -232,7 +242,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/78",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "반젤리스",
+        "searchTerms": "반젤리스"
       },
       {
         "id": "ost-07",
@@ -269,7 +281,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/11948",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "사카모토 류이치 류이치 사카모토",
+        "searchTerms": "류이치 사카모토 사카모토 류이치"
       },
       {
         "id": "ost-08",
@@ -306,7 +320,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/746",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "사카모토 류이치 데이비드 번 콩수",
+        "searchTerms": "류이치 사카모토 사카모토 류이치"
       },
       {
         "id": "ost-09",
@@ -343,7 +359,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/129",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "히사이시 조 조 히사이시",
+        "searchTerms": "조 히사이시 히사이시 조"
       },
       {
         "id": "ost-10",
@@ -380,7 +398,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/128",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "히사이시 조 조 히사이시",
+        "searchTerms": "조 히사이시 히사이시 조"
       },
       {
         "id": "ost-11",
@@ -417,7 +437,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/37799",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "트렌트 레즈너 애티커스 로스",
+        "searchTerms": "트렌트 레즈너 애티커스 로스"
       },
       {
         "id": "ost-12",
@@ -454,7 +476,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/210577",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "트렌트 레즈너 애티커스 로스",
+        "searchTerms": "트렌트 레즈너 애티커스 로스"
       },
       {
         "id": "ost-13",
@@ -491,7 +515,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/7345",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "조니 그린우드",
+        "searchTerms": "조니 그린우드"
       },
       {
         "id": "ost-14",
@@ -528,7 +554,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/400617",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "조니 그린우드",
+        "searchTerms": "조니 그린우드"
       },
       {
         "id": "ost-15",
@@ -565,7 +593,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/97370",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "미카 레비",
+        "searchTerms": "미카 레비"
       },
       {
         "id": "ost-16",
@@ -602,7 +632,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/467244",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "미카 레비",
+        "searchTerms": "미카 레비"
       },
       {
         "id": "ost-17",
@@ -639,7 +671,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/258480",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "카터 버웰",
+        "searchTerms": "카터 버웰"
       },
       {
         "id": "ost-18",
@@ -676,7 +710,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/275",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "카터 버웰",
+        "searchTerms": "카터 버웰"
       },
       {
         "id": "ost-19",
@@ -713,7 +749,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/376867",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "니컬러스 브리텔 니콜라스 브리텔",
+        "searchTerms": "니컬러스 브리텔 니콜라스 브리텔"
       },
       {
         "id": "ost-20",
@@ -750,7 +788,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/465914",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "니컬러스 브리텔 니콜라스 브리텔",
+        "searchTerms": "니컬러스 브리텔 니콜라스 브리텔"
       },
       {
         "id": "ost-21",
@@ -787,7 +827,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/4512",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "닉 케이브 워런 엘리스",
+        "searchTerms": "닉 케이브 워런 엘리스"
       },
       {
         "id": "ost-22",
@@ -824,7 +866,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/713",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "마이클 나이먼",
+        "searchTerms": "마이클 나이먼"
       },
       {
         "id": "ost-23",
@@ -861,7 +905,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/11314",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "필립 글래스",
+        "searchTerms": "필립 글래스"
       },
       {
         "id": "ost-24",
@@ -898,7 +944,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/27064",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "필립 글래스",
+        "searchTerms": "필립 글래스"
       },
       {
         "id": "ost-25",
@@ -935,7 +983,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/578",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "존 윌리엄스",
+        "searchTerms": "존 윌리엄스"
       },
       {
         "id": "ost-26",
@@ -972,7 +1022,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/601",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "존 윌리엄스",
+        "searchTerms": "존 윌리엄스"
       },
       {
         "id": "ost-27",
@@ -1009,7 +1061,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/11",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "존 윌리엄스",
+        "searchTerms": "존 윌리엄스"
       },
       {
         "id": "ost-28",
@@ -1046,7 +1100,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/5967",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "미셸 르그랑",
+        "searchTerms": "미셸 르그랑"
       },
       {
         "id": "ost-29",
@@ -1083,7 +1139,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/1923",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "안젤로 바달라멘티",
+        "searchTerms": "안젤로 바달라멘티"
       },
       {
         "id": "ost-30",
@@ -1120,7 +1178,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/655",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "라이 쿠더",
+        "searchTerms": "라이 쿠더"
       },
       {
         "id": "ost-31",
@@ -1157,7 +1217,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/11906",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "고블린",
+        "searchTerms": "고블린"
       },
       {
         "id": "ost-32",
@@ -1194,7 +1256,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/872585",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "루드비히 고란손 루드비그 괴란손",
+        "searchTerms": "루드비히 고란손 고런슨"
       },
       {
         "id": "ost-33",
@@ -1231,7 +1295,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/496243",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "정재일",
+        "searchTerms": "정재일"
       },
       {
         "id": "ost-34",
@@ -1268,7 +1334,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/670",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "조영욱",
+        "searchTerms": "조영욱"
       },
       {
         "id": "ost-35",
@@ -1305,7 +1373,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/290098",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "조영욱",
+        "searchTerms": "조영욱"
       },
       {
         "id": "ost-36",
@@ -1342,7 +1412,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/1050035",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "사카모토 류이치 류이치 사카모토",
+        "searchTerms": "류이치 사카모토 사카모토 류이치"
       },
       {
         "id": "ost-37",
@@ -1379,7 +1451,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/705996",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "조영욱",
+        "searchTerms": "조영욱"
       },
       {
         "id": "ost-38",
@@ -1416,7 +1490,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/758866",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "이시바시 에이코",
+        "searchTerms": "이시바시 에이코"
       },
       {
         "id": "ost-39",
@@ -1453,7 +1529,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/666277",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "크리스토퍼 베어 대니얼 로슨",
+        "searchTerms": "크리스토퍼 베어 다니엘 로슨"
       },
       {
         "id": "ost-40",
@@ -1490,7 +1568,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/965150",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "올리버 코츠",
+        "searchTerms": "올리버 코츠"
       },
       {
         "id": "ost-41",
@@ -1527,7 +1607,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/600583",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "조니 그린우드",
+        "searchTerms": "조니 그린우드"
       },
       {
         "id": "ost-42",
@@ -1564,7 +1646,9 @@
           "label": "작품 포스터 · 음반 커버 아님",
           "source": "https://www.themoviedb.org/movie/466420",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있으며 오픈 라이선스 이미지로 분류하지 않습니다."
-        }
+        },
+        "composerKo": "로비 로버트슨",
+        "searchTerms": "로비 로버트슨"
       }
     ],
     "story": [
@@ -1724,11 +1808,11 @@
       {
         "id": "story-10",
         "type": "COMPOSER STORY",
-        "title": "BURWELL × COENS",
+        "title": "〈파고〉의 장중한 선율은 어디에서 왔을까",
         "composer": "Carter Burwell",
-        "body": "카터 버웰은 코언 형제의 장편 데뷔작 〈블러드 심플〉부터 함께하며 장르적 농담과 비극 사이의 미묘한 거리를 음악으로 조율해왔다.",
+        "body": "카터 버웰은 촬영 전 스칸디나비아 민요를 조사하다 찬송가로 불리던 「The Lost Sheep」을 발견했다. 이 선율을 필름 누아르풍 관현악으로 확장해 영화의 도입부에 사용했다고 자신의 작업 노트에서 설명한다.",
         "editorialBy": "INDI+P",
-        "contentKind": "editorial-commentary",
+        "contentKind": "source-based-paraphrase",
         "image": "./assets/soundtrack-posters/275.jpg",
         "imageKind": "related-film-poster",
         "imageCredit": {
@@ -1736,16 +1820,17 @@
           "source": "https://www.themoviedb.org/movie/275",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있습니다."
         },
-        "sourceUrl": "https://www.themoviedb.org/movie/275"
+        "sourceUrl": "https://www.carterburwell.com/projects/Fargo.shtml",
+        "sourceLabel": "작곡가가 쓴 작업 노트"
       },
       {
         "id": "story-11",
         "type": "COMPOSER STORY",
-        "title": "GLASS × REGGIO",
+        "title": "〈코야니스카시〉, 말 대신 이어지는 이미지와 음악",
         "composer": "Philip Glass",
-        "body": "〈코야니스카시〉에서 필립 글래스의 반복 음악은 내레이션을 대신한다. 이미지의 속도와 음악의 패턴만으로 문명에 대한 논평을 만드는 드문 협업이다.",
+        "body": "필립 글래스의 공식 작품 안내는 1982년의 이 작업을 자연과 도시의 풍경을 이미지·음악·생각으로 연결한 비언어적 영화로 소개한다. 음악을 따로 들은 뒤 영화를 다시 보면 반복과 편집의 호흡에 집중하기 좋다.",
         "editorialBy": "INDI+P",
-        "contentKind": "editorial-commentary",
+        "contentKind": "source-based-paraphrase",
         "image": "./assets/soundtrack-posters/11314.jpg",
         "imageKind": "related-film-poster",
         "imageCredit": {
@@ -1753,7 +1838,8 @@
           "source": "https://www.themoviedb.org/movie/11314",
           "rights": "영화 포스터. 저작권은 각 권리자에게 있습니다."
         },
-        "sourceUrl": "https://www.themoviedb.org/movie/11314"
+        "sourceUrl": "https://philipglass.com/compositions/koyaanisqatsi/",
+        "sourceLabel": "필립 글래스 공식 작품 안내"
       },
       {
         "id": "story-12",
@@ -1762,15 +1848,7 @@
         "composer": "Michael Nyman",
         "body": "피터 그리너웨이와 마이클 나이먼의 초기 협업은 반복 구조와 바로크적 질서를 영화의 화면 구성과 맞물리게 했다. 음악과 미장센이 서로 비슷한 규칙을 공유한다.",
         "editorialBy": "INDI+P",
-        "contentKind": "editorial-commentary",
-        "image": "./assets/soundtrack-posters/713.jpg",
-        "imageKind": "related-film-poster",
-        "imageCredit": {
-          "label": "관련 작품 포스터 · 음반 커버 아님",
-          "source": "https://www.themoviedb.org/movie/713",
-          "rights": "영화 포스터. 저작권은 각 권리자에게 있습니다."
-        },
-        "sourceUrl": "https://www.themoviedb.org/movie/713"
+        "contentKind": "editorial-commentary"
       },
       {
         "id": "story-13",
@@ -2462,15 +2540,7 @@
         "film": "〈The Cook, the Thief, His Wife & Her Lover〉",
         "body": "화면의 대칭과 반복을 음악의 구조와 맞물리게 한 형식주의적 협업.",
         "editorialBy": "INDI+P",
-        "contentKind": "editorial-commentary",
-        "image": "./assets/soundtrack-posters/713.jpg",
-        "imageKind": "related-film-poster",
-        "imageCredit": {
-          "label": "관련 작품 포스터 · 음반 커버 아님",
-          "source": "https://www.themoviedb.org/movie/713",
-          "rights": "영화 포스터. 저작권은 각 권리자에게 있습니다."
-        },
-        "sourceUrl": "https://www.themoviedb.org/movie/713"
+        "contentKind": "editorial-commentary"
       },
       {
         "id": "pair-13",
@@ -7331,5 +7401,35 @@
     "masters": 26,
     "terms": 65,
     "days": 365
-  }
+  },
+  "openReadings": [
+    {
+      "id": "ansani-2020-soundtracks",
+      "title": "음악이 달라지면, 같은 장면도 다르게 보일까",
+      "titleOriginal": "How Soundtracks Shape What We See: Analyzing the Influence of Music on Visual Scenes Through Self-Assessment, Eye Tracking, and Pupillometry",
+      "authors": "Alessandro Ansani · Marco Marini · Francesca D’Errico · Isabella Poggi",
+      "year": 2020,
+      "journal": "Frontiers in Psychology",
+      "body": "같은 영화 장면에 서로 다른 음악을 붙인 두 실험에서, 인물에 대한 공감과 장면 해석이 달라졌다. OST가 감상을 이끄는 방식을 살펴보는 연구다.",
+      "source": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.02242/full",
+      "doi": "10.3389/fpsyg.2020.02242",
+      "license": "CC BY",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "adaptation": "초록을 바탕으로 작성한 한국어 소개 · 본문 전체 번역 아님"
+    },
+    {
+      "id": "eerola-2016-sad-music",
+      "title": "처음 듣는 슬픈 음악에도 감동하는 이유",
+      "titleOriginal": "Being Moved by Unfamiliar Sad Music Is Associated with High Empathy",
+      "authors": "Tuomas Eerola · Jonna K. Vuoskoski · Hannu Kautiainen",
+      "year": 2016,
+      "journal": "Frontiers in Psychology",
+      "body": "연구는 익숙하지 않은 슬픈 기악곡을 들을 때의 반응을 편안함·감동·불안으로 구분하고, 감동을 동반한 슬픔과 공감 성향의 관련성을 살핀다. 관련성이 곧 인과관계를 뜻하지는 않는다.",
+      "source": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2016.01176/full",
+      "doi": "10.3389/fpsyg.2016.01176",
+      "license": "CC BY",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "adaptation": "초록을 바탕으로 작성한 한국어 소개 · 본문 전체 번역 아님"
+    }
+  ]
 }

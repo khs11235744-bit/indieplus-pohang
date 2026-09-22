@@ -175,30 +175,41 @@ function annualPhotoAltV2(x,index){
   return c?.label||((x?.filmTitle||x?.title||"영화")+" 관련 이미지");
 }
 function annualPhotoMarksV2(paras,count){
-  const valid=paras.map((p,i)=>({p,i})).filter(x=>x.i>0&&x.i<paras.length-1&&!/^#{2,3}\s/.test(x.p)).map(x=>x.i);
-  if(!valid.length||!count)return [];
-  const ratios=[.23,.47,.70,.86].slice(0,count),used=[];
+  const prose=paras.map(p=>/^#{2,3}\s/.test(p)?0:p.length);
+  const cumulative=[];prose.reduce((sum,n,i)=>(cumulative[i]=sum+n),0);
+  const total=cumulative[cumulative.length-1]||1;
+  const ratios=({1:[.48],2:[.3,.65],3:[.26,.50,.74],4:[.18,.40,.62,.82]})[Math.min(count,4)]||[];
+  const valid=paras.map((p,i)=>i).filter(i=>i>0&&i<paras.length-1&&prose[i]>0&&cumulative[i]/total<.92);
+  const used=[];
   for(const ratio of ratios){
-    const desired=Math.round((paras.length-1)*ratio);
-    let candidates=valid.filter(i=>!used.some(u=>Math.abs(u-i)<2));
-    if(!candidates.length)candidates=valid;
-    const best=candidates.slice().sort((a,b)=>Math.abs(a-desired)-Math.abs(b-desired))[0];
-    used.push(best);
+    const candidates=valid.filter(i=>!used.includes(i)&&(used.length===0||i>used[used.length-1]));
+    if(!candidates.length)break;
+    candidates.sort((a,b)=>{
+      const score=i=>Math.abs(cumulative[i]/total-ratio)-( /^#{2,3}\s/.test(paras[i+1]||'')?.025:0);
+      return score(a)-score(b);
+    });used.push(candidates[0]);
   }
   return used;
 }
 function annualHeroVisualV2(x,src){
-  if(!src)return "";
-  return '<figure class="annual-article-hero"><img class="annual-article-image" src="'+esc(src)+'" alt="'+esc(annualPhotoAltV2(x,0))+'"><figcaption>'+annualPhotoCreditHtmlV2(x,0)+'</figcaption></figure>';
+  if(!src)return '';
+  const poster=/poster/i.test(src+' '+((x.photoCredits||[])[0]?.label||''));
+  return '<figure class="annual-article-hero'+(poster?' annual-poster-hero':'')+'"><img class="annual-article-image" src="'+esc(src)+'" alt="'+esc(annualPhotoAltV2(x,0))+'" decoding="async"><figcaption>'+annualPhotoCreditHtmlV2(x,0)+'</figcaption></figure>';
 }
 function annualArticleBodyV2(x){
-  const paras=String(x?.text||"").split(/\n{2,}/).map(p=>p.trim()).filter(Boolean),visuals=magazineVisualsV2(x).slice(1,5);
-  if(!paras.length)return "";
+  const paras=String(x?.text||'').split(/\n{2,}/).map(p=>p.trim()).filter(Boolean),visuals=magazineVisualsV2(x).slice(1,5);
+  if(!paras.length)return '';
   const marks=annualPhotoMarksV2(paras,visuals.length);
-  let out="";
-  const pull=paras.find(p=>!/^#{2,3}\s/.test(p)&&p.length>=30&&p.length<=110)||"";
-  paras.forEach((p,i)=>{const h3=p.match(/^##\s+(.+)$/s),h4=p.match(/^###\s+(.+)$/s);if(h3)out+='<h3 class="annual-subhead">'+esc(h3[1])+'</h3>';else if(h4)out+='<h4 class="annual-minorhead">'+esc(h4[1])+'</h4>';else out+='<p>'+esc(p).replace(/\n/g,"<br>")+'</p>';if(i===1&&pull&&!/^#{2,3}\s/.test(p))out+='<aside class="annual-pullquote">“'+esc(pull)+'”</aside>';marks.forEach((m,j)=>{if(m===i&&visuals[j])out+='<figure class="annual-inline-photo photo-'+(j+1)+'"><img src="'+esc(visuals[j])+'" alt="'+esc(annualPhotoAltV2(x,j+1))+'" loading="lazy"><figcaption>'+annualPhotoCreditHtmlV2(x,j+1)+'</figcaption></figure>'})});
-  return out;
+  let out='';const total=paras.filter(p=>!/^#{2,3}\s/.test(p)).reduce((n,p)=>n+p.length,0)||1;let progress=0;
+  paras.forEach((p,i)=>{
+    const h3=p.match(/^##\s+(.+)$/s),h4=p.match(/^###\s+(.+)$/s);
+    if(h3)out+='<h3 class="annual-subhead">'+esc(h3[1])+'</h3>';
+    else if(h4)out+='<h4 class="annual-minorhead">'+esc(h4[1])+'</h4>';
+    else{progress+=p.length;out+='<p>'+esc(p).replace(/\n/g,'<br>')+'</p>';}
+    // Emphasis is editorial, not an arbitrary repeated quotation extracted from prose.
+    if(i===1&&x.pullQuote)out+='<aside class="annual-pullquote">'+esc(x.pullQuote)+'</aside>';
+    marks.forEach((m,j)=>{if(m===i&&visuals[j])out+='<figure class="annual-inline-photo photo-'+(j+1)+'" data-reading-progress="'+(progress/total).toFixed(3)+'"><img src="'+esc(visuals[j])+'" alt="'+esc(annualPhotoAltV2(x,j+1))+'" loading="lazy" decoding="async"><figcaption>'+annualPhotoCreditHtmlV2(x,j+1)+'</figcaption></figure>';});
+  });return out;
 }
 function ensureMagazineAnnualV2(){
   let panel=document.getElementById("magAnnualV2");if(panel)return panel;

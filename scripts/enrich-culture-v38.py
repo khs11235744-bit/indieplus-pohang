@@ -113,7 +113,7 @@ def enrich():
         'HERRMANN × HITCHCOCK':'Psycho','MORRICONE × LEONE':'Once Upon a Time in the West','WILLIAMS × SPIELBERG':'Jaws',
         'HISAISHI × MIYAZAKI':'Spirited Away','SAKAMOTO × OSHIMA':'Merry Christmas, Mr. Lawrence','SAKAMOTO × KORE-EDA':'Monster',
         'GREENWOOD × PTA':'There Will Be Blood','REZNOR/ROSS × FINCHER':'The Social Network','BADALAMENTI × LYNCH':'Twin Peaks: Fire Walk with Me',
-        'BURWELL × COENS':'Fargo','GLASS × REGGIO':'Koyaanisqatsi','NYMAN × GREENAWAY':'The Piano','JO YEONG-WOOK × PARK':'Oldboy',
+        'BURWELL × COENS':'Fargo','GLASS × REGGIO':'Koyaanisqatsi','NYMAN × GREENAWAY':None,'JO YEONG-WOOK × PARK':'Oldboy',
         'JUNG JAE-IL × BONG':'Parasite','MICA LEVI × GLAZER':'Under the Skin','BRITELL × JENKINS':'Moonlight',
         'CAVE/ELLIS × DOMINIK':'The Assassination of Jesse James by the Coward Robert Ford'
     }
@@ -123,7 +123,7 @@ def enrich():
         'Nagisa Oshima × Ryuichi Sakamoto':'Merry Christmas, Mr. Lawrence','Hirokazu Kore-eda × Ryuichi Sakamoto':'Monster',
         'Paul Thomas Anderson × Jonny Greenwood':'Phantom Thread','David Fincher × Reznor/Ross':'Gone Girl',
         'David Lynch × Angelo Badalamenti':'Twin Peaks: Fire Walk with Me','Coen Brothers × Carter Burwell':'Fargo',
-        'Godfrey Reggio × Philip Glass':'Koyaanisqatsi','Peter Greenaway × Michael Nyman':'The Piano',
+        'Godfrey Reggio × Philip Glass':'Koyaanisqatsi','Peter Greenaway × Michael Nyman':None,
         'Park Chan-wook × Jo Yeong-wook':'The Handmaiden','Bong Joon-ho × Jung Jae-il':'Parasite',
         'Jonathan Glazer × Mica Levi':'The Zone of Interest','Barry Jenkins × Nicholas Britell':'If Beale Street Could Talk',
         'Andrew Dominik × Cave/Ellis':'The Assassination of Jesse James by the Coward Robert Ford'
