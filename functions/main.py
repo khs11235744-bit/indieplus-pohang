@@ -276,6 +276,32 @@ def build_news_payload():
             break
 
     category_summary = " · ".join(f"{key} {value}" for key, value in counts.items() if value)
+
+    # Never replace the live newsroom with an empty automated result.
+    # If upstream RSS discovery returns zero usable items, keep the most recent
+    # non-empty Firestore edit; if that is unavailable, restore the repository seed.
+    if not selected:
+        fallback = {}
+        if old_doc.exists:
+            current = old_doc.to_dict() or {}
+            if current.get("items"):
+                fallback = current
+        if not fallback:
+            try:
+                seed = json.loads(get_text(NEWS_SEED_URL))
+                if seed.get("items"):
+                    fallback = seed
+            except Exception as exc:
+                logger.warn(f"news empty-result fallback unavailable: {exc}")
+        if fallback:
+            fallback = dict(fallback)
+            fallback["generatedAt"] = now.isoformat()
+            fallback["periodLabel"] = "자동 수집 결과 없음 · 기존 편집본 유지"
+            fallback["translationPolicy"] = "자동 수집이 비었을 때 마지막 비어있지 않은 편집본을 유지"
+            fallback["fallbackActive"] = True
+            logger.warn(f"news discovery returned 0 items; preserved {len(fallback.get('items', []))} fallback items")
+            return fallback
+
     return {
         "generatedAt": now.isoformat(),
         "periodLabel": "최근 2주 / Firebase 자동 편집본",
@@ -283,6 +309,7 @@ def build_news_payload():
         "digestTitle": "이번 주 세계 독립·예술영화 뉴스",
         "digestSummary": f"최근 2주 주요 소식을 자동 선별했습니다. {category_summary}",
         "items": selected,
+        "fallbackActive": False,
     }
 
 
