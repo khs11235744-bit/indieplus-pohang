@@ -115,6 +115,9 @@ function magazineVisualsV2(x){
 function isMagazineLongformV2(x){
   return !!x&&x.sample&&x.magazineEligible!==false&&String(x.text||"").trim().length>=800&&magazineVisualsV2(x).length>0;
 }
+function isCriticismLongformV2(x){
+  return !!x&&x.sample&&!x.excerptOnly&&String(x.text||"").trim().length>=800;
+}
 function toggleMagazineAdminV2(){
   const on=!magAdminEnabled();setMagAdminEnabled(on);renderMagazineShelfV2();
   toast(on?"관리자 모드 ON · 이 기기에서 수동 편집 가능":"관리자 모드 OFF");
@@ -148,7 +151,7 @@ function renderMagazineShelfV2(){
   if(!host){host=document.createElement("section");host.id="criticism";host.className="wrap section criticism-stage";discover.insertAdjacentElement("afterend",host)}
   let root=document.getElementById("magazineShelfV2");
   if(!root){root=document.createElement("div");root.id="magazineShelfV2";root.className="magazine-shelf-v2";host.appendChild(root)}
-  const all=magazineV2(),samples=typeof sortMagazineAdminOrderV17==="function"?sortMagazineAdminOrderV17(all.filter(isMagazineLongformV2)):all.filter(isMagazineLongformV2).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||""))),pending=all.filter(x=>x.sample&&x.excerptOnly).sort((a,b)=>String(b.sourceDate||"").localeCompare(String(a.sourceDate||""))),mine=all.filter(x=>!x.sample).slice().reverse();
+  const all=magazineV2(),samples=typeof sortMagazineAdminOrderV17==="function"?sortMagazineAdminOrderV17(all.filter(isCriticismLongformV2)):all.filter(isCriticismLongformV2).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||""))),pending=all.filter(x=>x.sample&&x.excerptOnly).sort((a,b)=>String(b.sourceDate||"").localeCompare(String(a.sourceDate||""))),mine=all.filter(x=>!x.sample).slice().reverse();
   const meta=MAGAZINE_COLLECTION_META||{issue:"VOL. 01",title:"INDIE PORT FILM JOURNAL",subtitle:"2026 FILM CRITICISM",author:""},coverVisual=samples.length?(magazineVisualsV2(samples[0])[1]||magazineVisualsV2(samples[0])[0]||""):"";
   const annual=samples.length?'<article class="annual-cover-card" id="openAnnualMagazine"><img src="'+coverVisual+'" alt=""><div class="annual-cover-shade"></div><div class="annual-cover-copy"><div class="mag-v2-issue">'+esc(meta.issue||"VOL. 01")+' · '+samples.length+' FEATURE</div><div class="kicker">FILM JOURNAL</div><h4>'+esc(meta.title||"INDIE PORT FILM JOURNAL")+'</h4><p>'+esc(meta.subtitle||"")+'</p><footer><span>2026 CRITICISM</span><span>한 권으로 읽기 →</span></footer></div></article>':"";
   const pendingHtml=pending.length?'<section class="mag-recovery-index"><div class="kicker">2026 CRITICISM INDEX</div><h4>원문 회수 중</h4><p>실제로 작성한 비평이 확인되지만 전체 원문 파일이 아직 회수되지 않은 글입니다. 확인 가능한 실제 문장만 보존하고 새 문장은 만들지 않습니다.</p><div>'+pending.map(x=>'<article data-open-mag="'+esc(x.id)+'"><small>'+esc(x.sourceDate||"2026")+' · RECOVERING</small><b>'+esc(x.headline||x.filmTitle||"")+'</b><span>'+esc(x.filmTitle||"")+'</span></article>').join("")+'</div></section>':"";
@@ -212,7 +215,7 @@ function printAnnualV2(kind="pdf"){
   toast(kind==="pdf"?"인쇄창에서 ‘PDF로 저장’을 선택하면 한 권으로 저장됩니다.":"인쇄판 레이아웃을 준비했습니다.");setTimeout(()=>window.print(),120);
 }
 function openMagazineAnnualV2(){
-  const panel=ensureMagazineAnnualV2(),root=document.getElementById("annualReaderContent"),list=typeof sortMagazineAdminOrderV17==="function"?sortMagazineAdminOrderV17(magazineV2().filter(isMagazineLongformV2)):magazineV2().filter(isMagazineLongformV2).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||"")));
+  const panel=ensureMagazineAnnualV2(),root=document.getElementById("annualReaderContent"),list=typeof sortMagazineAdminOrderV17==="function"?sortMagazineAdminOrderV17(magazineV2().filter(isCriticismLongformV2)):magazineV2().filter(isCriticismLongformV2).sort((a,b)=>String(a.sourceDate||"").localeCompare(String(b.sourceDate||"")));
   const meta=MAGAZINE_COLLECTION_META||{issue:"SAMPLE 01",title:"INDIE PORT FILM JOURNAL",subtitle:"영화비평 잡지 편집 예시",author:"",note:"장문 원문과 서로 다른 영화 이미지가 함께 확보된 경우에만 잡지 예시로 편집합니다."};
   if(!list.length){root.innerHTML='<div class="empty">장문 원문과 사진을 모두 확보한 비평이 아직 없습니다.</div>';openPanelV08(panel);return}
   const coverVisual=magazineVisualsV2(list[0])[1]||magazineVisualsV2(list[0])[0]||"";

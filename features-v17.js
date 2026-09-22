@@ -36,7 +36,7 @@ function v17ApplyCrop(){
 }
 
 function v17LibraryItems(){
-  return sortMagazineAdminOrderV17(magazineV2().filter(isMagazineLongformV2));
+  return sortMagazineAdminOrderV17(magazineV2().filter(isCriticismLongformV2));
 }
 function v17InjectLibraryTools(){
   const shelf=document.getElementById("magazineShelfV2");if(!shelf)return;
