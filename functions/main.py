@@ -64,6 +64,11 @@ def get_text(url: str) -> str:
         return response.read().decode("utf-8", "replace")
 
 
+def get_news_seed():
+    cache_buster = int(datetime.now(timezone.utc).timestamp())
+    return json.loads(get_text(f"{NEWS_SEED_URL}?v={cache_buster}"))
+
+
 def clean(raw: str = "") -> str:
     raw = re.sub(r"<br\s*/?>", " ", raw or "", flags=re.I)
     raw = re.sub(r"<[^>]+>", " ", raw)
@@ -261,7 +266,7 @@ def build_news_payload():
     old_doc = DB.collection("public").document("newsWeekly").get()
     seed_previous = {}
     try:
-        seed = json.loads(get_text(NEWS_SEED_URL))
+        seed = get_news_seed()
         seed_previous = {x.get("id"): x for x in seed.get("items", []) if x.get("id")}
         logger.info(f"news seed loaded from GitHub: {len(seed_previous)} cached edits")
     except Exception as exc:
@@ -319,7 +324,7 @@ def build_news_payload():
                 fallback = current
         if not fallback:
             try:
-                seed = json.loads(get_text(NEWS_SEED_URL))
+                seed = get_news_seed()
                 if seed.get("items"):
                     fallback = seed
             except Exception as exc:
