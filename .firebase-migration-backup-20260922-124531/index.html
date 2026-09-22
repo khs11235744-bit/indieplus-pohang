@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f0f0d">
+<title>INDIE PORT — cinema, criticism & local arts</title>
+<meta name="description" content="독립·예술영화, 비평, 영화관 뉴스와 지역 문화예술을 연결하는 에디토리얼 플랫폼">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="preconnect" href="https://img.dtryx.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="./app.css">
+<link rel="stylesheet" href="./editorial-v18.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#home"><span class="mark" id="brandMark">IP</span><span id="brandName">INDIE PORT<small id="brandOrigin">WORKING TITLE · from INDIE+ POHANG</small></span></a><button class="mobile-search" id="mobileSearchBtn" aria-label="영화 검색">검색</button>
+    <nav class="links"><button data-scroll="discover">영화</button><button data-scroll="criticism">비평집</button><button data-scroll="newsroom">뉴스</button><button data-scroll="program">GV·기획전</button><button data-scroll="community">커뮤니티</button><button data-scroll="my">MY</button></nav>
+    <div class="nav-actions"><button class="chipbtn" id="searchBtn">검색</button><button class="chipbtn" id="installBtn" hidden>앱 설치</button><a class="primary compact" href="https://www.dtryx.com/reserve/cinema.do?CinemaCd=000057" target="_blank" rel="noopener">예매</a></div>
+  </div>
+</header>
+<main id="home">
+<section class="wrap hero">
+  <article class="hero-card">
+    <div class="hero-backdrop" id="heroBackdrop"></div>
+    <div class="hero-copy"><div class="kicker" id="heroMeta">INDIE PORT</div><h1 id="heroTitle">포항에서<br>영화를 발견하다.</h1><p id="heroDesc">실제 상영작과 상영시간을 불러오는 중입니다.</p>
+      <div class="hero-actions"><button class="primary" id="heroInfo">영화정보</button><a class="ghostbtn" id="heroBook" target="_blank" rel="noopener">예매하기</a></div>
+    </div>
+  </article>
+  <aside class="stat-stack">
+    <article class="stat warm"><div><div class="kicker warm">NOW / NEXT</div><div class="big">LIVE</div></div><div><h3>오늘이 아니어도,<br>다음 영화를 바로.</h3><p>현재 편성이 없는 날에는 가장 가까운 다음 상영일을 먼저 보여줍니다.</p></div></article>
+    <article class="stat"><div class="kicker">CINEMA DATA</div><div><h3>포스터부터 예매까지<br>한 화면에서.</h3><p>Dtryx 공개 상영정보를 바탕으로 실제 포스터와 회차를 연결합니다.</p></div></article>
+  </aside>
+</section>
+<section class="wrap">
+  <div class="data-strip"><span class="live-dot"></span><strong>실제 상영정보</strong><span>Dtryx 인디플러스 포항 공개 편성 기준</span><span class="right" id="updatedAt">업데이트 확인 중</span></div>
+</section>
+<section class="wrap section daily-board" id="daily">
+  <article class="daily-line">
+    <div class="kicker">TODAY'S CINEMA NOTE</div>
+    <small id="dailyLineMovie">오늘의 영화 한마디</small>
+    <blockquote id="dailyLineText">오늘의 문장을 고르는 중입니다.</blockquote>
+    <button class="text-button" id="dailyLineOpen">이 영화 보기 →</button>
+  </article>
+  <article class="daily-pick">
+    <img id="dailyPickPoster" alt="">
+    <div>
+      <div class="kicker">TODAY'S PICK</div>
+      <h3 id="dailyPickTitle">오늘의 영화추천</h3>
+      <p id="dailyPickReason">상영 일정과 작품 정보를 바탕으로 추천을 준비하고 있습니다.</p>
+      <div class="daily-pick-actions"><button class="ghostbtn" id="dailyPickInfo">영화정보</button><a class="primary compact" id="dailyPickBook" target="_blank" rel="noopener">예매하기</a></div>
+    </div>
+  </article>
+</section>
+<section class="wrap section" id="schedule">
+  <div class="section-head"><div><div class="kicker">SCREENING SCHEDULE</div><h2>상영시간표</h2><p>가장 가까운 실제 상영일을 기준으로 보여줍니다.</p></div><a class="textlink" href="https://www.dtryx.com/reserve/cinema.do?CinemaCd=000057" target="_blank" rel="noopener">전체 예매 →</a></div>
+  <div class="date-tabs" id="dateTabs"></div>
+  <div class="sessions" id="sessions"><div class="empty skeleton">상영정보를 불러오는 중입니다.</div></div>
+</section>
+<section class="wrap section" id="discover">
+  <div class="section-head"><div><div class="kicker">DISCOVER</div><h2>지금 만날 영화</h2><p>포스터만 보지 않아도 영화가 어떤 이야기인지 바로 알 수 있게.</p></div></div>
+  <div class="poster-grid" id="posterGrid"></div>
+</section>
+<section class="wrap section" id="program">
+  <div class="section-head"><div><div class="kicker">GV / SPECIAL PROGRAM</div><h2>GV·기획전</h2><p>공개 극장 정보에서 확인되는 특별 프로그램을 별도로 모읍니다.</p></div></div>
+  <article class="program-card"><strong id="programStatus">프로그램 정보를 확인 중입니다.</strong><small id="programUpdated"></small></article>
+</section>
+<section class="wrap section editorial" id="community">
+  <article class="feature main"><div class="kicker">SYNERGY / CRITICISM</div><div class="quote">“영화를 본 뒤 남는 것은 장면이고,<br>다시 돌아오게 하는 것은 문장이다.”</div><p>한줄평과 긴 비평, GV 후기를 영화 상세에서 바로 이어 쓰는 커뮤니티를 다음 단계에서 연결합니다.</p><div class="tags"><span>한줄평</span><span>긴 비평</span><span>GV 후기</span><span>스포일러 가리기</span></div></article>
+  <article class="feature"><div class="kicker">DESIGN PRINCIPLE</div><h3>영화가 먼저 보이는 앱</h3><p>기능 버튼보다 포스터와 영화 설명, 다음 상영시간을 우선합니다. 공공기관형 메뉴 구조 대신 관객의 관람 흐름을 중심으로 설계합니다.</p></article>
+  <div class="community-feed" id="communityFeed"></div>
+</section>
+<section class="wrap section" id="my">
+  <div class="section-head"><div><div class="kicker">MY CINEMA</div><h2>보고 싶어요</h2><p>로그인 전에도 이 기기에서 먼저 저장할 수 있습니다.</p></div></div>
+  <div class="my-list" id="myList"></div>
+</section>
+<section class="wrap section venue">
+  <div><div class="kicker">ORIGIN CINEMA · INDIE+ POHANG</div><h3>포항문화예술회관 · 인디플러스 포항</h3><p>경상북도 포항시 남구 희망대로 850 1층(대도동, 포항문화예술회관) · 054-289-7943<br>실제 예매는 Dtryx 인디플러스 포항 예매 시스템으로 연결됩니다.</p></div>
+  <div class="venue-actions"><a class="ghostbtn" href="https://www.dtryx.com/cinema/main.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&BrandCd=indieart&CinemaCd=000057" target="_blank" rel="noopener">극장정보</a><a class="primary" href="https://www.dtryx.com/reserve/cinema.do?CinemaCd=000057" target="_blank" rel="noopener">예매하기</a></div>
+</section>
+</main>
+<footer class="footer"><div class="wrap"><strong id="brandFooter">INDIE PORT · WORKING TITLE</strong><p>독립·예술영화, 영화관, 지역 문화예술, 비평과 기록을 연결하는 비공식 프로토타입. 상영·예매·행사 정보는 연결된 공식 페이지에서 최종 확인하세요.</p></div></footer>
+<nav class="mobile-nav"><button data-scroll="home"><span>⌂</span>홈</button><button data-scroll="discover"><span>◇</span>영화</button><button data-scroll="criticism"><span>≡</span>비평집</button><button data-scroll="newsroom"><span>▤</span>뉴스</button><button data-scroll="community"><span>✦</span>커뮤니티</button><button data-scroll="my"><span>◎</span>MY</button></nav>
+<div class="search-panel" id="searchPanel"><div class="search-box"><button id="closeSearch">×</button><label>영화·감독·배우 검색</label><input id="searchInput" type="search" placeholder="예: 아가미, 정승오, 하윤경"><div class="search-results" id="searchResults"></div></div></div>
+<div class="overlay" id="movieOverlay">
+  <div class="sheet">
+    <div class="sheet-top"><img class="sheet-poster" id="detailPoster" alt=""><div><div class="kicker">MOVIE DETAIL</div><h2 id="detailTitle"></h2><div class="eng" id="detailEng"></div><p class="lead" id="detailShort"></p></div><button class="close" id="closeMovie">×</button></div>
+    <div class="detail-meta" id="detailNext"></div><p class="people" id="detailPeople"></p><p class="synopsis" id="detailSynopsis"></p>
+    <div class="detail-actions"><a class="primary" id="detailBook" target="_blank" rel="noopener">예매하기</a><button class="ghostbtn" id="detailTrailer">예고편 보기</button><button class="ghostbtn watch-detail" id="detailWatch">♡ 보고 싶어요</button></div>
+    <div class="review-compose"><input id="reviewInput" maxlength="240" placeholder="이 영화에 남기고 싶은 한 문장"><button class="primary compact" id="saveReview">한줄평 저장</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="./firebase-client.js"></script>
+<script src="./firebase-loader.js"></script>
+<script src="./app.js"></script>
+<script src="./features-v04.js"></script>
+<script src="./features-v05.js"></script>
+<script src="./features-v06.js"></script>
+<script src="./features-v07.js"></script>
+<script src="./features-v08.js"></script>
+<script src="./features-v17.js"></script>
+</body>
+</html>
