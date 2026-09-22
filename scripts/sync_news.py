@@ -20,6 +20,7 @@ if not DEPLOY_MARKER.exists():
         raise RuntimeError("firebase.cmd not found for one-time Functions deploy")
     env=os.environ.copy()
     env["NODE_OPTIONS"]="--no-deprecation"
+    env["FUNCTIONS_DISCOVERY_TIMEOUT"]="60"
     proc=subprocess.run([firebase,"deploy","--project","indieplus-pohang-khs","--only","functions"],cwd=ROOT,env=env,text=True,capture_output=True)
     deploy_log="returncode="+str(proc.returncode)+"\n--- STDOUT ---\n"+(proc.stdout or "")+"\n--- STDERR ---\n"+(proc.stderr or "")
     (ROOT/"functions"/"deploy-last.log").write_text(deploy_log,encoding="utf-8")
