@@ -8,10 +8,13 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
-from firebase_admin import firestore, initialize_app
+from firebase_admin import firestore, get_app, initialize_app
 from firebase_functions import logger, scheduler_fn
 
-initialize_app()
+try:
+    get_app()
+except ValueError:
+    initialize_app()
 _DB_CLIENT = None
 
 def get_db():
