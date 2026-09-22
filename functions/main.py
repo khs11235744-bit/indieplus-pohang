@@ -1,6 +1,7 @@
 import hashlib
 import html as html_lib
 import json
+import os
 import re
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -37,6 +38,7 @@ DTRYX = "https://www.dtryx.com"
 DTRYX_MAIN = f"{DTRYX}/cinema/main.do?cgid={CGID}&BrandCd={BRAND}&CinemaCd={CINEMA}"
 UA = {"User-Agent": "Mozilla/5.0 INDI-P-FirebaseSync/2.0"}
 NEWS_SEED_URL = "https://raw.githubusercontent.com/khs11235744-bit/indieplus-pohang/main/data/news-weekly.json"
+LOCAL_NEWS_SEED = os.path.join(os.path.dirname(__file__), "news-seed.json")
 PHCF = "https://www.phcf.or.kr"
 PHCF_BOARD_URL = f"{PHCF}/api/phcf/main/getBoardList.do?prjId=phcf"
 PHCF_EVENT_URL = f"{PHCF}/api/phcf/main/getEventList.do?prjId=phcf&limit=30&offset=0&event_category=ALL"
@@ -65,8 +67,25 @@ def get_text(url: str) -> str:
 
 
 def get_news_seed():
-    cache_buster = int(datetime.now(timezone.utc).timestamp())
-    return json.loads(get_text(f"{NEWS_SEED_URL}?v={cache_buster}"))
+    local_seed = {}
+    try:
+        with open(LOCAL_NEWS_SEED, "r", encoding="utf-8") as handle:
+            local_seed = json.load(handle)
+    except Exception as exc:
+        logger.warn(f"local news seed unavailable: {exc}")
+
+    remote_seed = {}
+    try:
+        cache_buster = int(datetime.now(timezone.utc).timestamp())
+        remote_seed = json.loads(get_text(f"{NEWS_SEED_URL}?v={cache_buster}"))
+    except Exception as exc:
+        logger.warn(f"remote news seed unavailable: {exc}")
+
+    if remote_seed.get("items") and remote_seed.get("generatedAt", "") >= local_seed.get("generatedAt", ""):
+        return remote_seed
+    if local_seed.get("items"):
+        return local_seed
+    return remote_seed
 
 
 def clean(raw: str = "") -> str:
@@ -170,6 +189,12 @@ def source_domain(url: str = "") -> str:
 
 def norm_title(title: str) -> str:
     return re.sub(r"[^0-9a-zA-Z가-힣]+", "", (title or "").lower())
+
+
+def news_editorial_key(item: dict) -> str:
+    title = re.sub(r"\s+-\s+[^-]+$", "", item.get("titleOriginal", "") or "").strip()
+    domain = source_domain(item.get("sourceUrl", ""))
+    return f"{norm_title(title)}|{domain}" if title else ""
 
 
 def skip_news_item(title: str = "") -> bool:
@@ -290,6 +315,12 @@ def build_news_payload():
                 merged["translationStatus"] = base["translationStatus"]
             previous[item_id] = merged
 
+    previous_by_key = {}
+    for cached in previous.values():
+        key = news_editorial_key(cached)
+        if key and key not in previous_by_key:
+            previous_by_key[key] = cached
+
     limits = {"영화제": 6, "해외 독립·예술": 5, "아시아": 3, "국내 영화": 6, "한국 독립·예술": 5, "예술영화관": 5, "지역 예술": 6}
     counts, selected = {}, []
     for item in items:
@@ -298,6 +329,8 @@ def build_news_payload():
             continue
         counts[category] = counts.get(category, 0) + 1
         prev = previous.get(item["id"], {})
+        if not prev:
+            prev = previous_by_key.get(news_editorial_key(item), {})
         core_title = re.sub(r"\s+-\s+[^-]+$", "", item.get("titleOriginal", "")).strip()
         selected.append({
             "id": item["id"], "category": category, "source": item.get("source", ""),
