@@ -1,7 +1,7 @@
 /* INDI+P mobile edition 34. Presentation only; existing auth, editor and data owners remain unchanged. */
 (() => {
   'use strict';
-  const VERSION='mobile-36', media=matchMedia('(max-width:760px)');
+  const VERSION='mobile-37', media=matchMedia('(max-width:760px)');
   const S=window.INDIP_MOBILE_EDITION={version:VERSION,ready:false};
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -86,7 +86,7 @@
     if(head){const text=media.matches?'영화의 곁':head.dataset.m33Original;if(head.textContent!==text)head.textContent=text;}
     const p=$('#cultureLab .v30-lab-head p');
     if(p&&!p.dataset.m33Original)p.dataset.m33Original=p.textContent;
-    if(p){const text=media.matches?'감독의 작업 노트, 영화사전, 그리고 포항의 문화소식.':p.dataset.m33Original;if(p.textContent!==text)p.textContent=text;}
+    if(p){const text=media.matches?'오늘의 OST, 음악감독 이야기, 감독의 작업 노트, 영화사전, 포항의 문화소식.':p.dataset.m33Original;if(p.textContent!==text)p.textContent=text;}
     const master=$('#v30MasterBody');
     if(master&&!masterObserved){masterObserved=true;new MutationObserver(decoratePortrait).observe(master,{childList:true});}
     decoratePortrait();

@@ -167,6 +167,20 @@ def norm_title(title: str) -> str:
     return re.sub(r"[^0-9a-zA-Z가-힣]+", "", (title or "").lower())
 
 
+def skip_news_item(title: str = "") -> bool:
+    text = (title or "").lower()
+    noise = (
+        "biennale college architettura",
+        "programme coordinator",
+        "program coordinator",
+        "job opening",
+        "vacancy",
+        "careers",
+        "recruitment",
+    )
+    return any(token in text for token in noise)
+
+
 def parse_feed(query: str):
     params = {"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"}
     raw = get_text("https://news.google.com/rss/search?" + urlencode(params))
@@ -207,6 +221,8 @@ def build_news_payload():
             logger.warn(f"news query failed {query_id}: {exc}")
             continue
         for row in rows:
+            if skip_news_item(row.get("titleOriginal", "")):
+                continue
             if row["publishedAt"]:
                 try:
                     if datetime.fromisoformat(row["publishedAt"]) < cutoff:
@@ -243,16 +259,31 @@ def build_news_payload():
 
     items.sort(key=lambda x: (x.get("score", 0), x.get("publishedAt", "")), reverse=True)
     old_doc = DB.collection("public").document("newsWeekly").get()
-    previous = {}
+    seed_previous = {}
+    try:
+        seed = json.loads(get_text(NEWS_SEED_URL))
+        seed_previous = {x.get("id"): x for x in seed.get("items", []) if x.get("id")}
+        logger.info(f"news seed loaded from GitHub: {len(seed_previous)} cached edits")
+    except Exception as exc:
+        logger.warn(f"news seed unavailable: {exc}")
+
+    previous = dict(seed_previous)
     if old_doc.exists:
-        previous = {x.get("id"): x for x in (old_doc.to_dict() or {}).get("items", []) if x.get("id")}
-    else:
-        try:
-            seed = json.loads(get_text(NEWS_SEED_URL))
-            previous = {x.get("id"): x for x in seed.get("items", []) if x.get("id")}
-            logger.info(f"news seed loaded from GitHub: {len(previous)} cached edits")
-        except Exception as exc:
-            logger.warn(f"news seed unavailable: {exc}")
+        current_items = {
+            x.get("id"): x
+            for x in (old_doc.to_dict() or {}).get("items", [])
+            if x.get("id")
+        }
+        editorial_fields = ("titleKo", "summaryKo", "whyItMatters", "keyPoints", "tags")
+        for item_id, current in current_items.items():
+            base = previous.get(item_id, {})
+            merged = {**base, **current}
+            for field in editorial_fields:
+                if not current.get(field) and base.get(field):
+                    merged[field] = base[field]
+            if current.get("translationStatus", "pending") in ("", "pending") and base.get("translationStatus") not in ("", "pending", None):
+                merged["translationStatus"] = base["translationStatus"]
+            previous[item_id] = merged
 
     limits = {"영화제": 6, "해외 독립·예술": 5, "아시아": 3, "국내 영화": 6, "한국 독립·예술": 5, "예술영화관": 5, "지역 예술": 6}
     counts, selected = {}, []

@@ -1,7 +1,9 @@
 // INDI+P v30 — Cinema Culture Lab + Pohang Cultural Foundation live feed.
 (() => {
   const V30 = window.INDIP_V30 = window.INDIP_V30 || {};
-  V30.version = '30.0.0';
+  V30.version = '37.0.0';
+  V30.culture = null;
+  V30.musicOffset = 0;
   V30.phcf = null;
   V30.tab = 'notice';
 
@@ -53,6 +55,31 @@
     const start=new Date(d.getFullYear(),0,0);
     return (Math.floor((d-start)/86400000)+offset)%len;
   }
+  async function loadCultureYear(){
+    try{
+      const r=await fetch('./data/culture-year.json',{cache:'no-store'});
+      if(r.ok){V30.culture=await r.json();return V30.culture}
+    }catch(e){console.warn('culture-year',e)}
+    return null;
+  }
+  function cultureDay(offset=0){
+    const days=V30.culture?.days||[];
+    if(!days.length)return null;
+    return days[(dayIndex(days.length)+offset+days.length)%days.length];
+  }
+  function masterPool(){return V30.culture?.masters?.length?V30.culture.masters:MASTER_NOTES}
+  function termPool(){return V30.culture?.terms?.length?V30.culture.terms:TERMS}
+  function musicItems(offset=V30.musicOffset){
+    const pools=V30.culture?.soundPools,base=cultureDay(offset);
+    if(!pools||!base)return MUSIC_ROOMS.map(x=>({type:x.label,title:x.title,body:x.body,composer:'',film:'',listen:''}));
+    const n=(arr,i,step)=>arr[(i+offset*step+arr.length)%arr.length];
+    return [
+      n(pools.ost,base.sound.ost,7),
+      n(pools.story,base.sound.story,11),
+      n(pools.album,base.sound.album,13),
+      n(pools.pair,base.sound.pair,17)
+    ].filter(Boolean);
+  }
 
   function fmtDate(v){
     if(!v) return '';
@@ -69,7 +96,7 @@
     sec.className='wrap section v30-culture-lab';
     sec.innerHTML=
       '<div class="v30-lab-head"><div><div class="kicker">CINEMA CULTURE LAB</div><h2>영화를 보고 난 뒤에도, 계속 이어지는 것들</h2><p>영화음악·감독의 작업론·영화 용어·포항의 문화소식을 매일 한 조각씩 엮습니다.</p></div><span>EDITORIAL + LOCAL LIVE</span></div>'+
-      '<section class="v30-music-special"><div class="v30-section-title"><div><span>EDITORIAL SPECIAL</span><h3>SOUND & CINEMA</h3><p>영화음악을 듣는 네 개의 방</p></div><button class="ghostbtn" data-v30-share="music">스토리 공유</button></div><div class="v30-music-grid" id="v30MusicGrid"></div></section>'+
+      '<section class="v30-music-special"><div class="v30-section-title"><div><span>DAILY SOUNDTRACK EDIT</span><h3>SOUND & CINEMA</h3><p>OST 추천 · 음악감독 비하인드 · 앨범 노트 · 감독×작곡가</p></div><div class="v37-music-actions"><button class="ghostbtn" id="v30NextMusic">다른 음악 보기</button><button class="ghostbtn" data-v30-share="music">스토리 공유</button></div></div><div class="v30-music-grid" id="v30MusicGrid"></div><div class="v37-music-meta" id="v37MusicMeta"></div></section>'+
       '<div class="v30-note-dict-grid">'+
         '<section class="v30-master" id="v30Master"><div class="v30-section-title"><div><span>MASTER NOTE</span><h3>거장의 한마디</h3></div><button class="ghostbtn" data-v30-share="master">스토리 공유</button></div><div id="v30MasterBody"></div><button class="v30-next" id="v30NextMaster">다른 거장 보기 →</button></section>'+
         '<section class="v30-dictionary" id="v30Dictionary"><div class="v30-section-title"><div><span>DAILY GLOSSARY</span><h3>오늘의 영화사전</h3></div><button class="ghostbtn" data-v30-share="term">스토리 공유</button></div><div id="v30TermBody"></div><div class="v30-dict-actions"><button class="v30-next" id="v30NextTerm">다른 용어 →</button><button class="v30-next" id="v30ToggleDict">사전 전체 보기</button></div><div class="v30-term-list" id="v30TermList" hidden></div></section>'+
@@ -84,12 +111,24 @@
 
   function renderMusic(){
     const root=E('#v30MusicGrid'); if(!root) return;
-    root.innerHTML=MUSIC_ROOMS.map((x,i)=>'<article class="v30-music-card" data-key="'+x.key+'"><span>'+esc(x.label)+'</span><b>0'+(i+1)+'</b><h4>'+esc(x.title)+'</h4><p>'+esc(x.body)+'</p><button data-v30-term="'+esc(x.term)+'">영화사전에서 보기 →</button></article>').join('');
+    const items=musicItems();
+    root.innerHTML=items.map((x,i)=>{
+      const image=x.image?'<img class="v37-music-image" src="'+esc(x.image)+'" alt="" loading="lazy">':'';
+      const meta=[x.film,x.year,x.composer].filter(Boolean).join(' · ');
+      const foot=x.listen||x.note||'';
+      return '<article class="v30-music-card v37-sound-card" data-key="'+esc(x.id||String(i))+'">'+image+
+        '<span>'+esc(x.type||'SOUND & CINEMA')+'</span><b>0'+(i+1)+'</b><h4>'+esc(x.title||x.film||'')+'</h4>'+
+        (meta?'<small>'+esc(meta)+'</small>':'')+'<p>'+esc(x.body||'')+'</p>'+(foot?'<em>'+esc(foot)+'</em>':'')+'</article>';
+    }).join('');
+    const meta=E('#v37MusicMeta'),c=V30.culture;
+    if(meta)meta.textContent=c?'365일 편성 DB · OST '+(c.soundPools?.ost?.length||0)+' · 비하인드 '+(c.soundPools?.story?.length||0)+' · 앨범노트 '+(c.soundPools?.album?.length||0)+' · 조합 '+(c.days?.length||0)+'일':'기본 편집 데이터';
   }
 
-  function masterAt(i=dayIndex(MASTER_NOTES.length)){
-    V30.masterIndex=(i+MASTER_NOTES.length)%MASTER_NOTES.length;
-    return MASTER_NOTES[V30.masterIndex];
+  function masterAt(i){
+    const pool=masterPool(),base=V30.culture?cultureDay()?.master:dayIndex(pool.length);
+    const idx=Number.isInteger(i)?i:(Number.isInteger(V30.masterIndex)?V30.masterIndex:base||0);
+    V30.masterIndex=(idx+pool.length)%pool.length;
+    return pool[V30.masterIndex];
   }
   function renderMaster(i){
     const m=masterAt(Number.isInteger(i)?i:V30.masterIndex);
@@ -97,9 +136,11 @@
     root.innerHTML='<span class="v30-master-tag">'+esc(m.tag)+'</span><blockquote>“'+esc(m.note)+'”</blockquote><div><b>'+esc(m.ko)+'</b><small>'+esc(m.name)+' · '+esc(m.source)+' · '+esc(m.disclaimer)+'</small></div>';
   }
 
-  function termAt(i=dayIndex(TERMS.length)){
-    V30.termIndex=(i+TERMS.length)%TERMS.length;
-    return TERMS[V30.termIndex];
+  function termAt(i){
+    const pool=termPool(),base=V30.culture?cultureDay()?.term:dayIndex(pool.length);
+    const idx=Number.isInteger(i)?i:(Number.isInteger(V30.termIndex)?V30.termIndex:base||0);
+    V30.termIndex=(idx+pool.length)%pool.length;
+    return pool[V30.termIndex];
   }
   function renderTerm(i){
     const t=termAt(Number.isInteger(i)?i:V30.termIndex);
@@ -109,7 +150,7 @@
   }
   function renderTermList(){
     const root=E('#v30TermList');if(!root)return;
-    root.innerHTML=TERMS.map((t,i)=>'<button data-index="'+i+'"><span>'+esc(t.category)+'</span><b>'+esc(t.term)+'</b><small>'+esc(t.eng)+'</small></button>').join('');
+    root.innerHTML=termPool().map((t,i)=>'<button data-index="'+i+'"><span>'+esc(t.category)+'</span><b>'+esc(t.term)+'</b><small>'+esc(t.eng)+'</small></button>').join('');
   }
 
   async function loadStaticPhcf(){
@@ -205,7 +246,7 @@
     }else if(kind==='term'){
       const t=termAt(V30.termIndex);title=t.term;subtitle='오늘의 영화사전 · '+t.eng;body=t.definition;footer=t.category+' · INDI+P';
     }else{
-      const m=MUSIC_ROOMS[dayIndex(MUSIC_ROOMS.length)];title='SOUND & CINEMA';subtitle='영화음악을 듣는 네 개의 방';body=m.title+' — '+m.body;footer='EDITORIAL SPECIAL · INDI+P';
+      const m=musicItems()[0]||{};title='SOUND & CINEMA';subtitle=m.type||'오늘의 OST';body=(m.title||m.film||'')+' — '+(m.body||'');footer=[m.composer,m.film,'INDI+P'].filter(Boolean).join(' · ');
     }
     const blob=await storyBlob(title,subtitle,body,footer);if(!blob)return;
     const file=new File([blob],'indip-story.png',{type:'image/png'});
@@ -219,10 +260,11 @@
     document.addEventListener('click',e=>{
       const share=e.target.closest('[data-v30-share]');if(share){shareStory(share.dataset.v30Share);return}
       const term=e.target.closest('[data-v30-term]');if(term){
-        const idx=TERMS.findIndex(x=>x.term===term.dataset.v30Term);if(idx>=0){renderTerm(idx);E('#v30Dictionary')?.scrollIntoView({behavior:'smooth',block:'center'})}return;
+        const idx=termPool().findIndex(x=>x.term===term.dataset.v30Term);if(idx>=0){renderTerm(idx);E('#v30Dictionary')?.scrollIntoView({behavior:'smooth',block:'center'})}return;
       }
-      if(e.target.closest('#v30NextMaster')){renderMaster((V30.masterIndex+1)%MASTER_NOTES.length);return}
-      if(e.target.closest('#v30NextTerm')){renderTerm((V30.termIndex+1)%TERMS.length);return}
+      if(e.target.closest('#v30NextMusic')){V30.musicOffset=Math.floor(Math.random()*365);renderMusic();return}
+      if(e.target.closest('#v30NextMaster')){renderMaster((V30.masterIndex+1)%masterPool().length);return}
+      if(e.target.closest('#v30NextTerm')){renderTerm((V30.termIndex+1)%termPool().length);return}
       if(e.target.closest('#v30ToggleDict')){const list=E('#v30TermList');if(list){list.hidden=!list.hidden;e.target.textContent=list.hidden?'사전 전체 보기':'사전 닫기'}return}
       const dict=e.target.closest('#v30TermList button');if(dict){renderTerm(Number(dict.dataset.index));E('#v30TermBody')?.scrollIntoView({behavior:'smooth',block:'center'});return}
       const tab=e.target.closest('#v30PhcfTabs [data-tab]');if(tab){V30.tab=tab.dataset.tab;EA('#v30PhcfTabs button').forEach(x=>x.classList.toggle('on',x===tab));renderPhcf();return}
@@ -230,8 +272,8 @@
     },true);
   }
 
-  function init(){
-    ensureSection();renderMusic();renderTermList();renderMaster();renderTerm();bind();refreshPhcf();
+  async function init(){
+    ensureSection();await loadCultureYear();renderMusic();renderTermList();renderMaster();renderTerm();bind();refreshPhcf();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

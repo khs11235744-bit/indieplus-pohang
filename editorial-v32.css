@@ -273,3 +273,13 @@ body{
     margin-bottom:36px!important;
   }
 }
+
+/* v37 compact editorial labels */
+.v30-master-tag,#v30TermBody>span{
+  border-radius:2px!important;
+  padding:4px 6px!important;
+  border-color:#42474c!important;
+  background:transparent!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase;
+}

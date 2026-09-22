@@ -91,3 +91,51 @@
   .v30-phcf-card img,.v30-phcf-noimg{width:70px;height:99px}
   .v30-phcf-card h4{font-size:16px}
 }
+/* v37 — Sound & Cinema annual editorial database */
+.v37-music-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.v37-music-meta{margin-top:12px;padding-top:10px;border-top:1px solid #2d3237;color:#687078;font-size:9px;letter-spacing:.02em}
+.v37-sound-card{
+  min-height:310px;
+  border-radius:5px!important;
+  padding:18px!important;
+  background:#0d0f11!important;
+  border:0!important;
+  border-top:1px solid #353b40!important;
+  border-bottom:1px solid #202428!important;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.v37-sound-card:first-child{grid-column:span 2;min-height:340px;background:#111410!important}
+.v37-sound-card>span{position:relative;z-index:2;color:#8b949c!important;font-size:8px!important;letter-spacing:.14em!important}
+.v37-sound-card>b{right:10px!important;top:7px!important;font-size:46px!important;color:#20252a!important}
+.v37-sound-card h4{margin:34px 0 8px!important;font-size:22px!important;max-width:92%}
+.v37-sound-card:first-child h4{font-size:30px!important;max-width:760px}
+.v37-sound-card small{display:block;color:#737b82;font-size:9px;line-height:1.55;margin-bottom:9px}
+.v37-sound-card p{font-size:11.5px!important;line-height:1.78!important;color:#b9bec3!important;margin:0 0 14px}
+.v37-sound-card em{margin-top:auto;padding-top:12px;border-top:1px solid #2a2f33;color:#d8d1c4;font-style:normal;font-size:9.5px;line-height:1.55}
+.v37-music-image{width:calc(100% + 36px);height:160px;object-fit:cover;margin:-18px -18px 14px;filter:saturate(.72) contrast(1.03)}
+.v37-sound-card:first-child .v37-music-image{height:210px}
+@media(max-width:760px){
+  .v37-music-actions{width:100%;justify-content:flex-start;margin-top:10px}
+  .v37-music-actions .ghostbtn{min-height:38px!important;font-size:9px!important}
+  .v37-music-meta{font-size:8px;line-height:1.55}
+  .v30-music-grid{align-items:stretch}
+  .v37-sound-card,.v37-sound-card:first-child{
+    grid-column:auto;
+    flex:0 0 84%!important;
+    min-height:330px!important;
+    border-radius:0!important;
+    border-left:0!important;
+    border-right:1px solid #30353a!important;
+    background:transparent!important;
+    padding:14px 16px 14px 0!important;
+    margin-right:16px!important;
+  }
+  .v37-sound-card h4,.v37-sound-card:first-child h4{font-size:23px!important;margin-top:28px!important}
+  .v37-music-image,.v37-sound-card:first-child .v37-music-image{
+    width:calc(100% + 16px);
+    height:155px;
+    margin:-14px -16px 12px 0;
+  }
+}
