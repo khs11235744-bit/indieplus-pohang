@@ -19,3 +19,6 @@ data/news-raw.json
 firebase-config.json
 functions/venv/
 functions/__pycache__/
+
+functions/deploy-last.log
+functions/.scheduled-functions-deployed
