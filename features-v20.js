@@ -123,7 +123,8 @@
       });
     }
     if (studio.parentElement !== hub) hub.appendChild(studio);
-    legacy?.classList.add('v20-hide-legacy');
+    if (legacy && legacy !== hub && !legacy.classList.contains('v20-community-hub')) legacy.classList.add('v20-hide-legacy');
+    hub.classList.remove('v20-hide-legacy');
     renderCommunityStats();
     return true;
   }

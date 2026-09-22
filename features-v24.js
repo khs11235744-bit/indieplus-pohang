@@ -36,7 +36,10 @@
 
   function markCommunityReady(){
     const hub = document.getElementById('community');
-    if(hub) hub.dataset.communityState = window.INDIP_V21?.firebase ? 'live' : 'loading';
+    if(hub){
+      hub.classList.remove('v20-hide-legacy');
+      hub.dataset.communityState = window.INDIP_V21?.firebase ? 'live' : 'loading';
+    }
   }
 
   function tick(){
