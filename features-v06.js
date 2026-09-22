@@ -71,7 +71,7 @@ function applyBrandConfig(){
 async function initV06(){
   try{
     [NEWS_WEEKLY,NEWS_SOURCES,BRAND_CONFIG]=await Promise.all([
-      fetch("./data/news-weekly.json?v="+Date.now()).then(r=>r.ok?r.json():null),
+      (window.fetchIndiePublicData?window.fetchIndiePublicData("newsWeekly","./data/news-weekly.json",false):fetch("./data/news-weekly.json?v="+Date.now()).then(r=>r.ok?r.json():null)),
       fetch("./data/news-sources.json?v="+Date.now()).then(r=>r.ok?r.json():null),
       fetch("./data/brand.json?v="+Date.now()).then(r=>r.ok?r.json():null)
     ]);

@@ -132,7 +132,7 @@ function renderDiscover(){
     return `<article class="poster-card" onclick="openMovie('${code}')"><div class="poster-wrap">${poster}<button class="heart ${saved.includes(code)?"on":""}" aria-label="보고 싶어요" onclick="toggleWatch('${code}',event)">♥</button></div><div class="poster-copy"><small>${esc(m.director?"감독 "+m.director:"Dtryx 공개 영화정보")}</small><h3>${esc(m.title)}</h3><p>${esc(m.short||"")}</p><div class="poster-next"><span>${esc(when)}</span><span>영화정보 →</span></div></div></article>`;
   }).join("");
 }
-fetch("./data/movies.json?v="+Date.now()).then(r=>r.ok?r.json():null).then(pack=>{if(!pack?.movies)return;for(const [code,m] of Object.entries(pack.movies)){const keepShort=MOVIES[code]?.short||m.short;MOVIES[code]={...(MOVIES[code]||{}),...m,short:keepShort}}if(live){renderHero();renderDiscover();renderMy()}}).catch(()=>{});
+fetchCloudFirst("movies","./data/movies.json",false).then(pack=>{if(!pack?.movies)return;for(const [code,m] of Object.entries(pack.movies)){const keepShort=MOVIES[code]?.short||m.short;MOVIES[code]={...(MOVIES[code]||{}),...m,short:keepShort}}if(live){renderHero();renderDiscover();renderMy()}}).catch(()=>{});
 function renderMy(){
   const ids=watch(), root=$("#myList");
   root.innerHTML=ids.length?ids.map(code=>{
@@ -179,10 +179,33 @@ async function fetchJson(url,required=true){
   return res.json();
 }
 
+async function fetchFirestorePublic(docId,timeoutMs=3500){
+  try{
+    if(!window.indieFirebaseReady)return null;
+    const fb=await Promise.race([
+      window.indieFirebaseReady,
+      new Promise(resolve=>setTimeout(()=>resolve(null),timeoutMs))
+    ]);
+    if(!fb?.db)return null;
+    const snap=await fb.db.collection("public").doc(docId).get();
+    return snap.exists?snap.data():null;
+  }catch(e){
+    console.warn("[INDIE Firebase] public read fallback",docId,e);
+    return null;
+  }
+}
+
+async function fetchCloudFirst(docId,url,required=true){
+  const cloud=await fetchFirestorePublic(docId);
+  if(cloud)return cloud;
+  return fetchJson(url,required);
+}
+window.fetchIndiePublicData=fetchCloudFirst;
+
 async function boot(){
   try{
     const [scheduleData,movieData,programData]=await Promise.all([
-      fetchJson("./data/live.json"),fetchJson("./data/movies.json"),fetchJson("./data/programs.json",false)
+      fetchCloudFirst("live","./data/live.json"),fetchCloudFirst("movies","./data/movies.json"),fetchCloudFirst("programs","./data/programs.json",false)
     ]);
     live=scheduleData;
     MOVIES=movieData?.movies||{};

@@ -13,6 +13,6 @@ dom-*.html
 tablet-*.png 
 .harness.lock 
 firebase-debug.log
-firebase.json
 scripts/enable_firebase_services.ps1
 data/news-raw.json
+.firebase/

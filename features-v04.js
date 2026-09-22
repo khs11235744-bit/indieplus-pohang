@@ -148,7 +148,7 @@ function renderAccountPanel(){
 async function initV04(){
   try{
     const [e,a]=await Promise.all([
-      fetch("./data/editorial.json?v="+Date.now()).then(r=>r.ok?r.json():{}),
+      (window.fetchIndiePublicData?window.fetchIndiePublicData("editorial","./data/editorial.json",false):fetch("./data/editorial.json?v="+Date.now()).then(r=>r.ok?r.json():{})),
       fetch("./data/share-assets.json?v="+Date.now()).then(r=>r.ok?r.json():{})
     ]);
     editorial=e||{};shareAssets=a||{};

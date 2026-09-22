@@ -13,7 +13,7 @@ from harness_common import ROOT, atomic_bytes, health, now, read_json, safe_erro
 LOCK = ROOT / '.harness.lock'
 STATE = ROOT / '.harness-state.json'
 REPORT = ROOT / 'reports/harness-latest.json'
-JS = ['app.js', *[f'features-v{x}.js' for x in ('04', '05', '06', '07', '08', '17')], 'sw.js']
+JS = ['app.js', *[f'features-v{x}.js' for x in ('04', '05', '06', '07', '08', '17')], 'firebase-client.js', 'firebase-loader.js', 'sw.js']
 
 
 def alive(pid):
@@ -186,6 +186,9 @@ def main():
             if not args.data_only:
                 stages += [('sync_news', 300), ('build_news_weekly', 30)]
         stages += [('validation', 120)]
+        # Publish only after all local data/code validation has completed.
+        if not args.validate_only:
+            stages += [('seed_firestore_public', 180)]
         for name, timeout in stages:
             if name == 'build_news_weekly' and report['stages'][-1]['status'] in ('FAILED', 'TIMEOUT'):
                 stamp = now()
