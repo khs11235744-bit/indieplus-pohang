@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const V42=window.INDIP_V42={version:'43.0.0',portraits:{},wikiCache:{},masterObserver:null};
+const V42=window.INDIP_V42={version:'44.0.0',portraits:{},wikiCache:{},masterObserver:null};
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -163,13 +163,31 @@ function wrap(c,text,x,y,max,line){
 async function directorStoryBlob(name,ko,tag,note,source,portrait){
   const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;const c=canvas.getContext('2d');
   c.fillStyle='#0c0d0c';c.fillRect(0,0,1080,1920);
-  if(portrait?.path){try{const img=await loadImg(portrait.path);c.save();c.globalAlpha=.92;drawCover(c,img,0,0,1080,850);c.restore();const g=c.createLinearGradient(0,420,0,1000);g.addColorStop(0,'rgba(12,13,12,0)');g.addColorStop(1,'#0c0d0c');c.fillStyle=g;c.fillRect(0,360,1080,700)}catch{}}
+  let hasPhoto=false,hasSignature=false;
+  if(portrait?.path){
+    try{
+      const img=await loadImg(portrait.path);
+      if(portrait.kind==='signature'){
+        hasSignature=true;
+        const maxW=650,maxH=210,s=Math.min(maxW/img.width,maxH/img.height),w=img.width*s,h=img.height*s;
+        c.save();c.globalAlpha=.84;c.drawImage(img,116,330,w,h);c.restore();
+      }else{
+        hasPhoto=true;
+        c.save();c.globalAlpha=.94;drawCover(c,img,0,0,1080,820);c.restore();
+        const g=c.createLinearGradient(0,390,0,980);g.addColorStop(0,'rgba(12,13,12,0)');g.addColorStop(1,'#0c0d0c');c.fillStyle=g;c.fillRect(0,350,1080,650);
+        const credit=[portrait.creator,portrait.license].filter(Boolean).join(' · ');
+        if(credit){c.fillStyle='rgba(242,239,231,.78)';c.font='500 19px sans-serif';c.textAlign='right';c.fillText('사진: '+credit,1004,790);c.textAlign='left'}
+      }
+    }catch(e){console.warn('director story portrait',name,e)}
+  }
   c.fillStyle='#d8ff43';c.fillRect(76,80,8,1760);
   c.fillStyle='#f2efe7';c.font='700 32px sans-serif';c.fillText('INDI+P · DIRECTOR NOTE',116,145);
-  c.fillStyle='#9da39b';c.font='600 28px sans-serif';c.fillText(tag||'감독의 작업 노트',116,930);
-  c.fillStyle='#fff';c.font='800 72px sans-serif';let y=wrap(c,ko||name,116,1040,850,88);
+  const tagY=hasPhoto?900:(hasSignature?650:360);
+  c.fillStyle='#9da39b';c.font='600 28px sans-serif';c.fillText(tag||'감독의 작업 노트',116,tagY);
+  c.fillStyle='#fff';c.font='800 72px sans-serif';let y=wrap(c,ko||name,116,tagY+110,850,88);
   c.fillStyle='#d7d2c9';c.font='500 39px sans-serif';y=wrap(c,note,116,y+60,850,58);
-  c.fillStyle='#858d85';c.font='500 25px sans-serif';wrap(c,(source||'')+' · INDI+P 편집 해설',116,1700,850,38);
+  if(!hasPhoto&&!hasSignature){c.fillStyle='#30342f';c.font='500 24px sans-serif';c.fillText('OPEN PORTRAIT NOT AVAILABLE · TEXT EDITION',116,285)}
+  c.fillStyle='#858d85';c.font='500 25px sans-serif';wrap(c,(source||'감독의 작업 노트')+' · INDI+P 편집 해설',116,1700,850,38);
   c.fillStyle='#d8ff43';c.font='800 30px sans-serif';c.fillText('indip.web.app',116,1810);
   return await new Promise(res=>canvas.toBlob(res,'image/png',.94));
 }

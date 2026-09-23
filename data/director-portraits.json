@@ -1,5 +1,5 @@
-﻿{
-    "version":  2,
+{
+    "version":  3,
     "portraits":  {
                       "Alfred Hitchcock":  {
                                                "path":  "./assets/editorial/portrait-hitchcock.jpg",
@@ -55,6 +55,17 @@
                                              "credit":  "Traced from 1961 letter to Michel de Saint Pierre: https://memoiredencres.com/product/robert-bresson-a-michel-de-saint-pierre-sur-son-nouveau-roman/",
                                              "displayTreatment":  "Public-domain signature fallback used because a reliable open-license portrait was not found.",
                                              "bytes":  12133
+                                         },
+                      "Lee Chang-dong":  {
+                                             "kind":  "portrait",
+                                             "path":  "./assets/editorial/portrait-lee-chang-dong.jpg",
+                                             "source":  "https://commons.wikimedia.org/wiki/File:Lee_Chang-dong.jpg",
+                                             "creator":  "Republic of Korea / Korea.net",
+                                             "license":  "CC BY-SA 4.0",
+                                             "licenseUrl":  "https://creativecommons.org/licenses/by-sa/4.0",
+                                             "credit":  "Korea.net / Korean Culture and Information Service",
+                                             "displayTreatment":  "Resized to 960px width; canvas crop for story card. Attribution and license retained.",
+                                             "bytes":  169586
                                          }
                   }
 }
