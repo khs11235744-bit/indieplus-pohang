@@ -1,7 +1,7 @@
 /* INDI+P mobile edition 34. Presentation only; existing auth, editor and data owners remain unchanged. */
 (() => {
   'use strict';
-  const VERSION='mobile-39', media=matchMedia('(max-width:760px)');
+  const VERSION=document.querySelector('meta[name="app-release"]')?.content||'desktop-41', media=matchMedia('(max-width:760px)');
   const S=window.INDIP_MOBILE_EDITION={version:VERSION,ready:false};
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -104,13 +104,13 @@
     const strip=$('.data-strip')?.parentElement;if(strip)strip.classList.add('m33-sync-strip');
     markLocation();
   }
-  function applyMode(){document.body.classList.toggle('mobile-edition',media.matches);document.body.dataset.uiRelease=VERSION;localizeCulture();markLocation();}
+  function applyMode(){document.body.classList.toggle('mobile-edition',media.matches);document.body.dataset.uiRelease=VERSION;localizeCulture();markLocation();if(!media.matches)$('#m33Update')?.remove();}
   function revealUpdate(){
     if($('#m33Update'))return;
     const n=document.createElement('aside');n.id='m33Update';n.className='m33-update';n.setAttribute('role','status');n.innerHTML='<span>새 화면이 준비되었습니다.</span><button type="button">적용하기</button>';
     $('button',n).onclick=()=>{const draft=$$('.share-panel.open textarea,.overlay.open textarea').some(x=>x.value.trim());if(draft){$('span',n).textContent='작성 중인 글을 저장한 뒤 새로고침해 주세요.';return;}location.reload();};document.body.append(n);
   }
-  async function checkRelease(){try{const r=await fetch('./data/ui-release.json',{cache:'no-store'});if(r.ok){const v=await r.json();if(v.id&&v.id!==VERSION)revealUpdate();}}catch{/* Offline: preserve the current screen and drafts. */}}
+  async function checkRelease(){if(!media.matches){$('#m33Update')?.remove();return;}try{const r=await fetch('./data/ui-release.json',{cache:'no-store'});if(r.ok){const v=await r.json();if(v.id&&v.id!==VERSION)revealUpdate();else $('#m33Update')?.remove();}}catch{/* Offline: preserve the current screen and drafts. */}}
   function init(){
     if(booted)return;booted=true;makeFront();applyMode();scan();
     let retries=0;const boot=setInterval(()=>{scan();if(++retries>=32)clearInterval(boot)},350);
