@@ -1,0 +1,111 @@
+/* INDI+P v40 — desktop share studio ergonomics
+   Scoped to #sharePanelV05 so the rest of the site is unaffected. */
+
+#sharePanelV05{overscroll-behavior:contain}
+#sharePanelV05 .v40-share-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:2px 0 14px;border-bottom:1px solid #30363e;margin-bottom:14px}
+#sharePanelV05 .v40-share-toolbar h3{margin:2px 0 0;font:700 19px/1.3 Pretendard,sans-serif;color:#f3f4f4;letter-spacing:-.02em}
+#sharePanelV05 .v40-share-toolbar p{margin:5px 0 0;font:11px/1.55 Pretendard,sans-serif;color:#89919a}
+#sharePanelV05 .v40-share-quicknav{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+#sharePanelV05 .v40-share-quicknav button{min-height:38px;padding:7px 10px;border:1px solid #39414a;background:#11151a;color:#c5cbd0;border-radius:8px;font:600 10px/1 Pretendard,sans-serif;cursor:pointer}
+#sharePanelV05 .v40-share-quicknav button:hover{border-color:#6d7781;color:#fff}
+#sharePanelV05 .v40-section-head{display:flex;align-items:center;gap:9px;margin:20px 0 8px}
+#sharePanelV05 .v40-section-head span{display:grid;place-items:center;width:24px;height:24px;border:1px solid #444b53;border-radius:50%;color:var(--lime);font:800 9px/1 Pretendard,sans-serif}
+#sharePanelV05 .v40-section-head h4{margin:0;font:700 13px/1.3 Pretendard,sans-serif;color:#e9ecee;letter-spacing:-.01em}
+#sharePanelV05 .v40-section-head small{margin-left:auto;color:#777f88;font:9px/1.4 Pretendard,sans-serif}
+#sharePanelV05 .v40-advanced{margin:10px 0;border:1px solid #303740;background:#0e1114;border-radius:12px;overflow:hidden}
+#sharePanelV05 .v40-advanced>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;cursor:pointer;color:#d5dae0;font:650 11px/1.4 Pretendard,sans-serif}
+#sharePanelV05 .v40-advanced>summary::-webkit-details-marker{display:none}
+#sharePanelV05 .v40-advanced>summary::after{content:"＋";font-size:15px;color:#89929b}
+#sharePanelV05 .v40-advanced[open]>summary::after{content:"−"}
+#sharePanelV05 .v40-advanced>.v40-advanced-body{padding:0 12px 12px}
+#sharePanelV05 .v40-char-count{float:right;margin-left:8px;color:#77818b;font:500 9px/1.4 Pretendard,sans-serif}
+#sharePanelV05 .v40-range-value{float:right;color:#aeb6bd;font:600 9px/1.4 Pretendard,sans-serif}
+#sharePanelV05 .v40-preview-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+#sharePanelV05 .v40-preview-head b{font:700 12px/1.4 Pretendard,sans-serif;color:#e8ebed}
+#sharePanelV05 .v40-format-badge{display:inline-flex;align-items:center;min-height:28px;padding:5px 8px;border:1px solid #414952;border-radius:7px;color:#9fa8b0;font:700 9px/1 Pretendard,sans-serif}
+#sharePanelV05 .v40-preview-help{font:9px/1.55 Pretendard,sans-serif;color:#737d86;margin:8px 0 0}
+#sharePanelV05 .v40-live{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+#sharePanelV05 :is(button,input,textarea,select,summary):focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+#sharePanelV05 button{touch-action:manipulation}
+#sharePanelV05 input[type=range]{accent-color:var(--lime)}
+#sharePanelV05 textarea,#sharePanelV05 input[type=text],#sharePanelV05 select{font-size:14px;line-height:1.5}
+#sharePanelV05 .preset-row,#sharePanelV05 .share-formats,#sharePanelV05 .share-layout-row,#sharePanelV05 .v20-layout-presets{scrollbar-width:thin;overscroll-behavior-inline:contain}
+#sharePanelV05 .still-picker,#sharePanelV05 .share-photo-order{scrollbar-width:thin;overscroll-behavior-inline:contain}
+#sharePanelV05 .share-photo-title{margin-top:8px}
+#sharePanelV05 .share-photo-title b{font-size:12px}
+#sharePanelV05 .share-copy-editor label,#sharePanelV05 .share-options label,#sharePanelV05 .share-text-tools label{line-height:1.45}
+#sharePanelV05 .share-copy-editor textarea{max-height:240px}
+#sharePanelV05 .share-options{grid-template-columns:minmax(140px,.8fr) minmax(220px,1.5fr) minmax(130px,.8fr)}
+#sharePanelV05 .v20-color-panel{grid-template-columns:repeat(3,minmax(90px,1fr)) auto}
+#sharePanelV05 .close{z-index:20;display:grid;place-items:center;min-width:44px!important;width:44px!important;height:44px!important;border-radius:12px!important}
+html.v40-share-open,html.v40-share-open body{overflow:hidden!important}
+
+@media(min-width:961px){
+  #sharePanelV05{align-items:center!important;justify-content:center!important;padding:clamp(16px,2.2vw,32px)!important}
+  #sharePanelV05 .share-sheet.v05{width:min(1380px,calc(100vw - 32px))!important;height:min(900px,calc(100dvh - 32px))!important;max-height:none!important;border-radius:20px!important;padding:0!important;overflow:hidden!important;box-shadow:0 32px 100px rgba(0,0,0,.58)}
+  #sharePanelV05 .share-sheet.v05>.close{position:absolute!important;top:12px!important;right:12px!important}
+  #sharePanelV05 .v20-share-grid{height:100%!important;max-height:none!important;display:grid!important;grid-template-columns:minmax(520px,1fr) minmax(360px,440px)!important;gap:0!important;overflow:hidden!important}
+  #sharePanelV05 .v20-share-controls{min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-gutter:stable;padding:24px 28px 88px!important;overscroll-behavior:contain}
+  #sharePanelV05 .v40-share-toolbar{position:sticky;top:0;z-index:8;background:linear-gradient(#171a1e 82%,rgba(23,26,30,.92));padding-top:2px}
+  #sharePanelV05 .v20-share-preview-pane{min-height:0!important;overflow:hidden!important;border-left:1px solid #30363e!important;background:#121519;padding:22px 20px 18px!important;display:grid!important;grid-template-rows:auto minmax(0,1fr) auto auto!important;align-items:start}
+  #sharePanelV05 .v40-preview-head{grid-row:1}
+  #sharePanelV05 .v20-share-preview-pane .share-preview{grid-row:2;position:relative!important;top:auto!important;bottom:auto!important;width:100%!important;max-width:410px!important;max-height:calc(100dvh - 255px)!important;margin:0 auto!important;overflow:auto!important;display:flex;align-items:flex-start;justify-content:center;background:#090a0b;border-radius:12px!important;box-shadow:0 14px 40px rgba(0,0,0,.34)}
+  #sharePanelV05 .v20-share-preview-pane .share-preview img{display:block!important;width:auto!important;max-width:100%!important;height:auto!important;max-height:calc(100dvh - 255px)!important;object-fit:contain!important}
+  #sharePanelV05 .v20-share-preview-pane .share-actions{grid-row:3;position:static!important;bottom:auto!important;background:none!important;padding:12px 0 0!important;margin:0!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;z-index:auto!important}
+  #sharePanelV05 .v20-share-preview-pane .share-actions .primary{grid-column:auto!important}
+  #sharePanelV05 .v20-share-preview-pane .share-actions button{min-height:48px!important;padding:9px 8px!important;font-size:11px!important;white-space:normal;line-height:1.25}
+  #sharePanelV05 .v20-share-preview-pane>small{grid-row:4;margin-top:8px!important;padding:0!important;font-size:9px!important;line-height:1.55!important;color:#747d86!important}
+  #sharePanelV05 .share-gesture-stage{max-height:390px}
+  #sharePanelV05 .preset-row{flex-wrap:nowrap!important;overflow-x:auto!important;padding:6px 0 10px!important;margin:4px 0 10px!important}
+  #sharePanelV05 .preset-row button{flex:0 0 auto!important;min-height:38px}
+  #sharePanelV05 .share-formats{margin:8px 0 12px!important}
+  #sharePanelV05 .share-formats button,#sharePanelV05 .share-layout-row button,#sharePanelV05 .v20-layout-presets button,#sharePanelV05 .share-text-tools button{min-height:40px}
+  #sharePanelV05 .still-picker.multi button{min-width:88px!important;width:88px!important;height:68px!important;min-height:68px!important}
+  #sharePanelV05 .share-photo-order article{flex-basis:112px!important}
+  #sharePanelV05 .share-photo-order img{height:58px!important}
+  #sharePanelV05 .share-free-editor{margin-bottom:0}
+  #sharePanelV05 .share-copy-editor{margin:8px 0 10px}
+}
+
+@media(min-width:961px) and (max-width:1180px){
+  #sharePanelV05 .v20-share-grid{grid-template-columns:minmax(480px,1fr) minmax(330px,390px)!important}
+  #sharePanelV05 .v20-share-controls{padding-inline:22px!important}
+  #sharePanelV05 .v20-share-preview-pane{padding-inline:16px!important}
+}
+
+@media(min-width:961px) and (max-height:780px){
+  #sharePanelV05 .share-sheet.v05{height:calc(100dvh - 20px)!important}
+  #sharePanelV05{padding:10px!important}
+  #sharePanelV05 .v20-share-controls{padding-top:16px!important;padding-bottom:70px!important}
+  #sharePanelV05 .v20-share-preview-pane{padding-top:14px!important;padding-bottom:12px!important}
+  #sharePanelV05 .v20-share-preview-pane .share-preview,
+  #sharePanelV05 .v20-share-preview-pane .share-preview img{max-height:calc(100dvh - 215px)!important}
+  #sharePanelV05 .v20-share-preview-pane .share-actions button{min-height:44px!important}
+  #sharePanelV05 .v40-share-toolbar{margin-bottom:10px;padding-bottom:10px}
+}
+
+@media(max-width:960px){
+  #sharePanelV05 .share-sheet.v05{overflow-y:auto!important;overscroll-behavior:contain!important;padding-bottom:max(24px,env(safe-area-inset-bottom))!important}
+  #sharePanelV05 .v20-share-grid{display:block!important;max-height:none!important;overflow:visible!important}
+  #sharePanelV05 .v20-share-controls{overflow:visible!important;padding:0!important}
+  #sharePanelV05 .v20-share-preview-pane{overflow:visible!important;padding:12px 0 0!important;border-left:0!important}
+  #sharePanelV05 .v40-share-toolbar{display:block}
+  #sharePanelV05 .v40-share-quicknav{justify-content:flex-start;margin-top:10px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  #sharePanelV05 .v40-share-quicknav button{flex:0 0 auto}
+  #sharePanelV05 .share-options{grid-template-columns:1fr!important}
+  #sharePanelV05 .v20-color-panel{grid-template-columns:repeat(3,1fr)!important}
+  #sharePanelV05 .v20-color-panel button{grid-column:1/-1}
+  #sharePanelV05 .share-actions{position:static!important;bottom:auto!important;z-index:auto;background:none;padding:14px 0 max(8px,env(safe-area-inset-bottom));margin-bottom:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #sharePanelV05 *,#sharePanelV05 *::before,#sharePanelV05 *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
+/* v40.1 preview loading stability + mobile action sizing */
+#sharePanelV05 .share-preview{min-height:220px;background:#090a0b}
+#sharePanelV05 .share-preview:has(img:not([src])),#sharePanelV05 .share-preview:has(img[src=""]){background:linear-gradient(110deg,#0b0d0f 30%,#14181c 45%,#0b0d0f 60%);background-size:220% 100%}
+@media(max-width:960px){
+  #sharePanelV05 .share-actions{display:grid!important;grid-template-columns:1fr!important;gap:7px!important}
+  #sharePanelV05 .share-actions button{width:100%!important;min-height:48px!important;height:auto!important;padding:12px!important;flex:none!important}
+  #sharePanelV05 .share-preview{min-height:260px}
+}
