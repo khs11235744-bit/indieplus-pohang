@@ -143,3 +143,14 @@
   #v30Master .v42-director-portrait{min-height:230px}
   #v30Master .v42-director-portrait img{min-height:230px;max-height:320px}
 }
+
+
+/* v42 realtime-session-and-synopsis */
+.session.past{opacity:.55}
+.session.past .book.disabled{pointer-events:none;cursor:not-allowed;filter:saturate(.35)}
+.session-state{display:inline-flex;align-items:center;margin-left:.45rem;padding:.12rem .42rem;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:-.02em}
+.session-state.soon{background:rgba(216,255,67,.16);color:#d8ff43;border:1px solid rgba(216,255,67,.34)}
+.session-state.past{background:rgba(255,255,255,.07);color:#a6aaa3;border:1px solid rgba(255,255,255,.10)}
+.synopsis.synopsis-collapsed{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+.synopsis-toggle{margin:.45rem 0 1rem;padding:0;border:0;background:transparent;color:#d8ff43;font:700 .88rem/1.4 Pretendard,sans-serif;cursor:pointer}
+.synopsis-toggle:hover{text-decoration:underline}

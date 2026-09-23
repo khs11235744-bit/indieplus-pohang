@@ -40,7 +40,14 @@ function allSessions(){
   return (live?.days||[]).flatMap(d=>d.sessions.map(s=>({...s,date:d.date})))
     .sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
 }
-function isUpcoming(s){return new Date(`${s.date}T${s.start}:00+09:00`).getTime()>=Date.now();}
+function sessionTime(s,date=s.date){return new Date(`${date}T${s.start}:00+09:00`).getTime();}
+function isUpcoming(s){return sessionTime(s)>=Date.now();}
+function sessionState(s,date=s.date){
+  const diff=sessionTime(s,date)-Date.now();
+  if(diff<0)return "past";
+  if(diff<=30*60*1000)return "soon";
+  return "upcoming";
+}
 function movieSessions(code){return allSessions().filter(s=>s.code===code);}
 function nextSession(code){return movieSessions(code).find(isUpcoming)||null;}
 function nextGlobalSession(){return allSessions().find(isUpcoming)||null;}
@@ -68,7 +75,25 @@ function openMovie(code,title=""){
   $("#detailTitle").textContent=m.title;
   $("#detailEng").textContent=m.eng||"";
   $("#detailShort").textContent=m.short||"";
-  $("#detailSynopsis").textContent=m.synopsis||"상세 줄거리 정보가 없습니다.";
+  const synopsis=$("#detailSynopsis");
+  synopsis.textContent=m.synopsis||"상세 줄거리 정보가 없습니다.";
+  synopsis.classList.add("synopsis-collapsed");
+  let synopsisToggle=$("#detailSynopsisToggle");
+  if(!synopsisToggle){
+    synopsisToggle=document.createElement("button");
+    synopsisToggle.id="detailSynopsisToggle";
+    synopsisToggle.className="synopsis-toggle";
+    synopsis.insertAdjacentElement("afterend",synopsisToggle);
+  }
+  const canExpand=(m.synopsis||"").trim().length>160;
+  synopsisToggle.hidden=!canExpand;
+  synopsisToggle.textContent="더 읽기";
+  synopsisToggle.setAttribute("aria-expanded","false");
+  synopsisToggle.onclick=()=>{
+    const collapsed=synopsis.classList.toggle("synopsis-collapsed");
+    synopsisToggle.textContent=collapsed?"더 읽기":"접기";
+    synopsisToggle.setAttribute("aria-expanded",String(!collapsed));
+  };
   $("#detailPeople").textContent=[m.director&&`감독 ${m.director}`,m.actors&&`출연 ${m.actors}`].filter(Boolean).join(" · ");
   $("#detailNext").textContent=s?`${fmtDate(s.date)} ${s.start} · ${s.minutes}분 · ${s.age}`:"현재 공개된 다음 상영 회차 없음";
   $("#detailBook").href=s?sessionBook(s):bookMovie(code);
@@ -114,7 +139,12 @@ function renderSessions(){
     const m=movieFor(s.code,s.title);
     const seat=s.availableSeats!=null?` · 잔여 ${s.availableSeats}석`:"";
     const poster=m.poster?`<img class="thumb" loading="lazy" src="${m.poster}" alt="${esc(m.title)} 포스터">`:'<div class="thumb poster-empty">NO POSTER</div>';
-    return `<article class="session" onclick="openMovie('${s.code}','${esc(s.title)}')">${poster}<div><div class="micro">${esc(s.age||"")} · ${s.minutes||""}분${seat}</div><h3>${esc(s.title)}</h3><p>${esc(m.short||"Dtryx 공개 상영작")}</p><div class="session-bottom"><strong>${esc(s.start)}</strong><span>→ ${esc(s.end||"")}</span><a class="mini book" href="${sessionBook({...s,date:day.date})}" target="_blank" rel="noopener" onclick="event.stopPropagation()">예매</a></div></div></article>`;
+    const state=sessionState(s,day.date);
+    const badge=state==="past"?'<span class="session-state past">상영 종료</span>':state==="soon"?'<span class="session-state soon">곧 시작</span>':"";
+    const booking=state==="past"
+      ?'<span class="mini book disabled" aria-disabled="true">예매 마감</span>'
+      :`<a class="mini book" href="${sessionBook({...s,date:day.date})}" target="_blank" rel="noopener" onclick="event.stopPropagation()">예매</a>`;
+    return `<article class="session ${state}" onclick="openMovie('${s.code}','${esc(s.title)}')">${poster}<div><div class="micro">${esc(s.age||"")} · ${s.minutes||""}분${seat} ${badge}</div><h3>${esc(s.title)}</h3><p>${esc(m.short||"Dtryx 공개 상영작")}</p><div class="session-bottom"><strong>${esc(s.start)}</strong><span>→ ${esc(s.end||"")}</span>${booking}</div></div></article>`;
   }).join("");
 }
 
@@ -242,3 +272,4 @@ $("#installBtn")?.addEventListener("click",async()=>{
 });
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
 boot();
+setInterval(()=>{if(live)renderSessions();},60000);
