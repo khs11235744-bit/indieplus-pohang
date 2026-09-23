@@ -1,0 +1,145 @@
+/* INDI+P v42 — hero typography, director portrait, desktop social share */
+
+@media(min-width:961px){
+  .hero-card{
+    grid-template-columns:minmax(300px,.78fr) minmax(0,1.22fr)!important;
+    gap:clamp(28px,3vw,48px)!important;
+    overflow:hidden!important;
+  }
+  .hero-backdrop{
+    width:min(100%,380px)!important;
+    max-width:380px!important;
+  }
+  .hero-copy{
+    min-width:0!important;
+    padding-right:clamp(22px,3vw,42px)!important;
+    overflow:visible!important;
+  }
+  .hero-copy h1,#heroTitle{
+    max-width:9.2ch!important;
+    font-family:Pretendard,"Noto Sans KR","Malgun Gothic",sans-serif!important;
+    font-weight:850!important;
+    font-size:clamp(54px,4.8vw,70px)!important;
+    line-height:1.01!important;
+    letter-spacing:-.045em!important;
+    word-break:keep-all!important;
+    overflow-wrap:normal!important;
+    text-rendering:geometricPrecision;
+    overflow:visible!important;
+  }
+  .hero-copy p,#heroDesc{
+    max-width:40ch!important;
+    font-family:Pretendard,"Noto Sans KR","Malgun Gothic",sans-serif!important;
+    word-break:keep-all!important;
+    overflow-wrap:break-word!important;
+  }
+  .stat{min-width:0!important;overflow:hidden!important}
+  .stat .big{
+    max-width:100%!important;
+    font-family:Pretendard,"Segoe UI",sans-serif!important;
+    font-size:clamp(42px,3.7vw,54px)!important;
+    line-height:1!important;
+    letter-spacing:-.045em!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+  }
+  .stat h3,.stat p{word-break:keep-all!important;overflow-wrap:break-word!important}
+}
+
+/* Director note portrait */
+#v30Master .v42-master-layout{
+  display:grid;
+  grid-template-columns:minmax(180px,240px) minmax(0,1fr);
+  gap:22px;
+  align-items:stretch;
+  margin-top:14px;
+}
+#v30Master .v42-director-portrait{
+  position:relative;
+  margin:0;
+  min-height:300px;
+  overflow:hidden;
+  background:#0c0e0f;
+  border:1px solid #343a41;
+}
+#v30Master .v42-director-portrait img{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:300px;
+  object-fit:cover;
+  object-position:center 24%;
+  filter:saturate(.82) contrast(1.04);
+}
+#v30Master .v42-director-portrait.signature img{
+  object-fit:contain;
+  padding:38px;
+  background:#e9e2d6;
+  filter:none;
+}
+#v30Master .v42-director-portrait figcaption{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  padding:8px 10px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.82));
+  color:#eee;
+  font:9px/1.45 Pretendard,sans-serif;
+}
+#v30Master .v42-director-portrait figcaption a{text-decoration:underline;text-underline-offset:2px}
+#v30Master .v42-master-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+#v30Master .m33-portrait{display:none!important}
+
+/* Desktop social share */
+#sharePanelV05 .v42-social-share{
+  display:none;
+}
+@media(min-width:961px){
+  #sharePanelV05 .v20-share-preview-pane{
+    grid-template-rows:auto minmax(0,1fr) auto auto auto auto!important;
+  }
+  #sharePanelV05 .v42-social-share{
+    grid-row:4;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:6px;
+    padding-top:8px;
+  }
+  #sharePanelV05 .v42-social-share button{
+    min-height:40px;
+    padding:8px 6px;
+    border:1px solid #3a4148;
+    border-radius:8px;
+    background:#0e1114;
+    color:#d7dbe0;
+    font:650 10px/1.2 Pretendard,sans-serif;
+  }
+  #sharePanelV05 .v42-social-share button:hover{
+    border-color:#79828b;
+    background:#151a1e;
+    color:#fff;
+  }
+  #sharePanelV05 .v42-social-share .v42-copy{
+    grid-column:span 2;
+  }
+  #sharePanelV05 .v42-share-status{
+    grid-row:5;
+    min-height:28px;
+    margin:6px 0 0;
+    padding:7px 9px;
+    border-left:2px solid #d8ff43;
+    background:#101316;
+    color:#9da6ad;
+    font:10px/1.45 Pretendard,sans-serif;
+  }
+  #sharePanelV05 .v20-share-preview-pane>small{grid-row:6!important}
+}
+@media(max-width:960px){
+  #v30Master .v42-master-layout{grid-template-columns:1fr;gap:12px}
+  #v30Master .v42-director-portrait{min-height:230px}
+  #v30Master .v42-director-portrait img{min-height:230px;max-height:320px}
+}
