@@ -3,8 +3,10 @@ import html as html_lib
 import json
 import os
 import re
+import time
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
@@ -61,9 +63,20 @@ OFFICIAL_DOMAINS = {
 }
 
 
-def get_text(url: str) -> str:
-    with urlopen(Request(url, headers=UA), timeout=25) as response:
+def get_text(url: str, timeout: int = 25) -> str:
+    with urlopen(Request(url, headers=UA), timeout=timeout) as response:
         return response.read().decode("utf-8", "replace")
+
+def get_text_retry(url: str, attempts: int = 3, timeout: int = 7) -> str:
+    last_error = None
+    for attempt in range(attempts):
+        try:
+            return get_text(url, timeout=timeout)
+        except Exception as exc:
+            last_error = exc
+            if attempt + 1 < attempts:
+                time.sleep(0.6 * (attempt + 1))
+    raise last_error
 
 
 def get_news_seed():
@@ -110,7 +123,7 @@ def shorten(text: str, limit: int = 120) -> str:
 
 
 def movie_detail(code: str):
-    page = get_text(f"{DTRYX}/movie/view.do?MovieCd={code}")
+    page = get_text(f"{DTRYX}/movie/view.do?MovieCd={code}", timeout=6)
     info = re.search(r'<h4 class="h4">.*?</h4>\s*<div class="etc">(.*?)</div>', page, re.S | re.I)
     meta = [clean(x) for x in re.findall(r"<span>(.*?)</span>", info.group(1), re.S | re.I)] if info else []
     poster_match = re.search(r'<div class="poster">.*?<img src="([^"]+)"', page, re.S | re.I)
@@ -135,25 +148,19 @@ def movie_detail(code: str):
 
 
 def build_cinema_payload():
-    page = get_text(DTRYX_MAIN)
+    page = get_text_retry(DTRYX_MAIN, attempts=3, timeout=7)
     playing = page.split("<!-- // 현재상영작 top 10 -->", 1)[0]
     movie_codes = unique(re.findall(r"MovieCd=(\d{6})", playing))
     movies = {}
-    for code in movie_codes:
-        try:
-            movies[code] = movie_detail(code)
-        except Exception as exc:
-            logger.warn(f"movie detail skipped {code}: {exc}")
 
     enabled = []
     for cls, date in re.findall(r'<a href="#" class="btnDay([^"]*)" data-dt="(\d{4}-\d{2}-\d{2})">', page):
         if "disabled" not in cls:
             enabled.append(date)
 
-    days = []
-    for date in sorted(dict.fromkeys(enabled)):
+    def fetch_day(date: str):
         query = urlencode({"BrandCd": BRAND, "CinemaCd": CINEMA, "PlaySDT": date, "cgid": CGID})
-        body = json.loads(get_text(f"{DTRYX}/cinema/showseq_list.do?{query}"))
+        body = json.loads(get_text_retry(f"{DTRYX}/cinema/showseq_list.do?{query}", attempts=2, timeout=6))
         sessions = []
         for item in body.get("Showseqlist", []):
             sessions.append({
@@ -170,8 +177,34 @@ def build_cinema_payload():
                 "bookable": str(item.get("NextSkipYn") or "").upper() == "Y",
             })
         sessions.sort(key=lambda x: x["start"])
-        days.append({"date": date, "sessions": sessions})
+        return {"date": date, "sessions": sessions}
 
+    dates = sorted(dict.fromkeys(enabled))
+    days = []
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        future_by_date = {pool.submit(fetch_day, date): date for date in dates}
+        for future in as_completed(future_by_date):
+            date = future_by_date[future]
+            try:
+                days.append(future.result())
+            except Exception as exc:
+                logger.warn(f"showseq skipped {date}: {exc}")
+    days.sort(key=lambda x: x["date"])
+
+    session_codes = unique(
+        session.get("code", "")
+        for day in days
+        for session in day.get("sessions", [])
+    )
+    # Schedule data is the priority. Detail pages are best-effort and concurrent.
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        future_by_code = {pool.submit(movie_detail, code): code for code in session_codes if code}
+        for future in as_completed(future_by_code):
+            code = future_by_code[future]
+            try:
+                movies[code] = future.result()
+            except Exception as exc:
+                logger.warn(f"movie detail skipped {code}: {exc}")
     now = datetime.now(KST).strftime("%Y-%m-%d %H:%M KST")
     hits = [key for key in ("GV", "기획전") if key in page]
     note = ("공개 극장 메인 페이지에 " + ", ".join(hits) + " 표기가 있습니다. 공식 극장 소식에서 상세를 확인하세요.") if hits else "공개 극장 메인 페이지 기준 별도 GV/기획전 표기를 확인하지 못했습니다."
@@ -495,8 +528,8 @@ def set_status(kind: str, ok: bool, detail: str):
     }, merge=True)
 
 
-@scheduler_fn.on_schedule(schedule="every 30 minutes")
-def sync_cinema(event: scheduler_fn.ScheduledEvent) -> None:
+@scheduler_fn.on_schedule(schedule="every 30 minutes", region="asia-northeast3")
+def sync_cinema_seoul(event: scheduler_fn.ScheduledEvent) -> None:
     try:
         live, movies, programs = build_cinema_payload()
         batch = DB.batch()
