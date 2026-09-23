@@ -1,0 +1,62 @@
+/* INDI+P v43 — direct share reliability and mobile fallback */
+#sharePanelV05 #nativeShareV05[data-share-ready="false"],
+#sharePanelV05 #nativeShareV05:disabled{
+  opacity:.58;
+  cursor:progress;
+}
+#sharePanelV05 #nativeShareV05[data-share-ready="true"]{
+  opacity:1;
+  cursor:pointer;
+}
+#sharePanelV05 .v42-share-status{
+  min-height:30px;
+  margin:7px 0 0;
+  padding:8px 10px;
+  border-left:2px solid #d8ff43;
+  background:#101316;
+  color:#9da6ad;
+  font:10px/1.5 Pretendard,sans-serif;
+}
+#sharePanelV05 .v42-social-share button{
+  touch-action:manipulation;
+}
+@media(max-width:960px){
+  #sharePanelV05 .v42-social-share{
+    display:none;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+    margin:10px 0 4px;
+  }
+  #sharePanelV05.v43-share-fallback-open .v42-social-share{
+    display:grid;
+  }
+  #sharePanelV05 .v42-social-share button{
+    min-height:46px;
+    border:1px solid #39414a;
+    border-radius:10px;
+    background:#11151a;
+    color:#e2e5e7;
+    font:650 11px/1.2 Pretendard,sans-serif;
+  }
+  #sharePanelV05 .v42-social-share .v42-copy{
+    grid-column:span 1;
+  }
+  #sharePanelV05 .v42-share-status{
+    margin:8px 0 12px;
+  }
+  #sharePanelV05 .share-actions{
+    gap:8px!important;
+  }
+  #sharePanelV05 .share-actions #nativeShareV05{
+    order:-2;
+    font-weight:800;
+  }
+  #sharePanelV05 .share-actions #saveShareV05{
+    order:2;
+  }
+}
+@media(min-width:961px){
+  #sharePanelV05 .v42-social-share{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+}

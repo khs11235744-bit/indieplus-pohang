@@ -4,6 +4,7 @@ const magazineArchive=()=>JSON.parse(localStorage.getItem("indiePohangMagazines"
 const saveMagazines=a=>localStorage.setItem("indiePohangMagazines",JSON.stringify(a));
 let v05Share={preset:"cinema",format:"feed",rating:0,tags:[],stamp:"",stillIndex:0,stillIndices:[0],layout:"auto",activePhoto:0,frames:[],textAlign:"left",titleScale:1,midScale:1,reviewScale:1,copyOffset:0};
 let shareGestureV05={pointers:new Map(),drag:null,pinch:null};
+window.__indipShareCache=window.__indipShareCache||{blob:null,file:null,key:"",code:"",text:"",ready:false,rendering:false};
 
 function userProfile(){
   const p=profile();
@@ -135,7 +136,7 @@ function openSharePanelV05(code,postId=""){
       '<div class="share-free-editor" id="shareFreeEditor"><div class="free-photo-head"><b id="freePhotoLabel">사진 1 편집</b><button id="resetFreeFrames" type="button">자동 위치로 초기화</button></div><label>X <input id="freeX" type="range" min="0" max="100" step="1"></label><label>Y <input id="freeY" type="range" min="0" max="100" step="1"></label><label>너비 <input id="freeW" type="range" min="18" max="100" step="1"></label><label>높이 <input id="freeH" type="range" min="18" max="100" step="1"></label></div>'+
       '<div class="share-copy-editor"><label>큰 제목<input id="shareTitleV05" maxlength="70" placeholder="큰 제목"></label><label>중간글<input id="shareMidV05" maxlength="120" placeholder="중간 문장 · 부제 · 감독/작품 정보"></label><label>짧은 비평<textarea id="shareTextV05" maxlength="700" placeholder="짧은 비평"></textarea></label></div><div class="share-text-tools"><label>큰 제목 크기<input id="shareTitleScale" type="range" min="70" max="150" step="5" value="100"></label><label>중간글 크기<input id="shareMidScale" type="range" min="70" max="150" step="5" value="100"></label><label>비평 크기<input id="shareReviewScale" type="range" min="70" max="150" step="5" value="100"></label><label>문구 위치<input id="shareCopyOffset" type="range" min="-15" max="20" step="1" value="0"></label><div><button data-text-align="left" class="on">왼쪽</button><button data-text-align="center">가운데</button><button data-text-align="right">오른쪽</button></div></div>'+
       '<div class="share-options"><label>별점 <input id="shareRating" type="range" min="0" max="5" step="0.5" value="0"><b id="shareRatingValue">0.0</b></label><label>태그 <input id="shareTags" type="text" placeholder="#독립영화 #포항 #오늘의영화"></label><label>도장 <select id="shareStamp"><option value="">없음</option><option>관람완료</option><option>강력추천</option><option>GV 참석</option><option>재관람</option><option>포항관객</option></select></label></div>'+
-      '<div class="share-preview"><img id="sharePreviewV05" alt="공유카드 미리보기"></div><div class="share-actions"><button class="primary" id="nativeShareV05">SNS로 공유</button><button class="ghostbtn" id="saveShareV05">이미지 저장</button><button class="ghostbtn" id="magazineSaveV05">긴 비평 쓰기</button></div><small>선택한 1~5장의 사진과 편집 상태가 그대로 PNG·SNS 공유에 반영됩니다.</small></div>';
+      '<div class="share-preview"><img id="sharePreviewV05" alt="공유카드 미리보기"></div><div class="share-actions"><button class="primary" id="nativeShareV05">바로 공유</button><button class="ghostbtn" id="saveShareV05">이미지 저장</button><button class="ghostbtn" id="magazineSaveV05">긴 비평 쓰기</button></div><small>선택한 1~5장의 사진과 편집 상태가 그대로 PNG·SNS 공유에 반영됩니다.</small></div>';
     document.body.appendChild(panel);
     document.getElementById("closeShareV05").onclick=()=>panel.classList.remove("open");
     panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("open")});
@@ -220,17 +221,49 @@ function bindGestureStageV05(){
   const end=e=>{if(!shareGestureV05.pointers.has(e.pointerId))return;shareGestureV05.pointers.delete(e.pointerId);try{stage.releasePointerCapture?.(e.pointerId)}catch(_){}shareGestureV05.pinch=null;if(shareGestureV05.pointers.size===1){const [id,p]=[...shareGestureV05.pointers.entries()][0],pos=v05Share.activePhoto;shareGestureV05.drag={id,pos,start:{...p},frame:{...v05Share.frames[pos]}}}else if(!shareGestureV05.pointers.size)shareGestureV05.drag=null;};
   stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);stage.addEventListener("lostpointercapture",e=>{if(shareGestureV05.pointers.has(e.pointerId))end(e)});
 }
+function shareCacheKeyV05(code,opts){return code+"|"+JSON.stringify(opts)}
+function shareTextV05(opts,m){return [m?.title,opts.text,(opts.tags||[]).map(t=>"#"+t).join(" "),"https://indip.web.app"].filter(Boolean).join("\n")}
+function setShareReadyV05(ready,label){
+  const b=document.getElementById("nativeShareV05");if(!b)return;
+  b.disabled=!ready;b.dataset.shareReady=ready?"true":"false";
+  if(label)b.textContent=label;else b.textContent=ready?"바로 공유":"공유 준비 중…";
+}
 async function refreshV05Preview(){
-  if(!activeMovieCode)return;const opts=readV05Opts();v05Share={...v05Share,...opts};
-  const blob=await makeShareBlobV05(activeMovieCode,opts);if(v05PreviewUrl)URL.revokeObjectURL(v05PreviewUrl);v05PreviewUrl=URL.createObjectURL(blob);
-  const img=document.getElementById("sharePreviewV05");if(img)img.src=v05PreviewUrl;
+  if(!activeMovieCode)return;const opts=readV05Opts(),code=activeMovieCode,m=MOVIES[code];v05Share={...v05Share,...opts};
+  const cache=window.__indipShareCache;cache.ready=false;cache.rendering=true;setShareReadyV05(false);
+  try{
+    const blob=await makeShareBlobV05(code,opts);
+    if(code!==activeMovieCode)return;
+    const file=new File([blob],"indip-"+code+"-"+opts.preset+"-"+opts.format+".png",{type:"image/png"});
+    cache.blob=blob;cache.file=file;cache.key=shareCacheKeyV05(code,opts);cache.code=code;cache.text=shareTextV05(opts,m);cache.ready=true;cache.rendering=false;cache.at=Date.now();
+    if(v05PreviewUrl)URL.revokeObjectURL(v05PreviewUrl);v05PreviewUrl=URL.createObjectURL(blob);
+    const img=document.getElementById("sharePreviewV05");if(img)img.src=v05PreviewUrl;
+    setShareReadyV05(true);
+  }catch(error){
+    cache.ready=false;cache.rendering=false;setShareReadyV05(false,"공유 준비 실패");
+    console.warn("share preview",error);
+  }
 }
 async function shareV05(){
-  const opts=readV05Opts(),blob=await makeShareBlobV05(activeMovieCode,opts),m=MOVIES[activeMovieCode];
-  const file=new File([blob],"indie-pohang-"+activeMovieCode+"-"+opts.preset+"-"+opts.format+".png",{type:"image/png"});
-  const shareText=[m.title,opts.text,(opts.tags||[]).map(t=>"#"+t).join(" ")].filter(Boolean).join("\n");
-  if(navigator.share&&navigator.canShare?.({files:[file]})){try{await navigator.share({title:m.title,text:shareText,files:[file]});return}catch(e){if(e.name==="AbortError")return}}
-  await downloadV05();
+  const opts=readV05Opts(),m=MOVIES[activeMovieCode],cache=window.__indipShareCache,key=shareCacheKeyV05(activeMovieCode,opts);
+  if(!cache.ready||cache.code!==activeMovieCode||cache.key!==key||!cache.file){
+    setShareReadyV05(false);toast("공유 이미지를 최신 상태로 준비 중입니다. 잠시 후 ‘바로 공유’를 다시 눌러주세요.");refreshV05Preview();return;
+  }
+  const file=cache.file,shareText=cache.text||shareTextV05(opts,m);
+  if(navigator.share){
+    try{
+      const fileCapable=!navigator.canShare||navigator.canShare({files:[file]});
+      if(fileCapable){await navigator.share({title:m?.title||"INDI+P",text:shareText,files:[file]});return}
+      await navigator.share({title:m?.title||"INDI+P",text:shareText,url:"https://indip.web.app"});return;
+    }catch(e){if(e?.name==="AbortError")return;console.warn("native share",e)}
+  }
+  if(navigator.clipboard?.write&&window.ClipboardItem){
+    try{await navigator.clipboard.write([new ClipboardItem({"image/png":cache.blob})]);toast("사진을 클립보드에 복사했습니다. Instagram·Threads 등 새 게시물에서 붙여넣으세요.");return}catch(e){console.warn("clipboard image",e)}
+  }
+  if(navigator.clipboard?.writeText){
+    try{await navigator.clipboard.writeText(shareText);toast("공유 문구를 복사했습니다. 이 브라우저는 사진 직접 공유를 지원하지 않습니다.");return}catch{}
+  }
+  toast("이 브라우저에서는 바로 공유를 지원하지 않습니다. 필요할 때만 ‘이미지 저장’을 이용해 주세요.");
 }
 async function downloadV05(){
   const opts=readV05Opts(),blob=await makeShareBlobV05(activeMovieCode,opts),url=URL.createObjectURL(blob),a=document.createElement("a");

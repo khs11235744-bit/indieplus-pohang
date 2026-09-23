@@ -62,9 +62,17 @@ async function makeShareBlob(code,format="feed",customText=""){
 async function shareMovieCard(code,format="feed",customText=""){
   const blob=await makeShareBlob(code,format,customText),m=MOVIES[code];
   const file=new File([blob],"indie-pohang-"+code+"-"+format+".png",{type:"image/png"});
-  const text=m.title+" — INDIE PORT";
-  if(navigator.share&&navigator.canShare?.({files:[file]})){try{await navigator.share({title:m.title,text,files:[file]});return}catch(e){if(e.name==="AbortError")return}}
-  const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);toast("공유카드를 이미지로 저장했습니다.");
+  const text=m.title+" — INDI+P\nhttps://indip.web.app";
+  if(navigator.share){
+    try{
+      const fileCapable=!navigator.canShare||navigator.canShare({files:[file]});
+      if(fileCapable){await navigator.share({title:m.title,text,files:[file]});return}
+      await navigator.share({title:m.title,text,url:"https://indip.web.app"});return;
+    }catch(e){if(e.name==="AbortError")return}
+  }
+  if(navigator.clipboard?.write&&window.ClipboardItem){try{await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]);toast("공유 이미지를 클립보드에 복사했습니다.");return}catch{}}
+  if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(text);toast("공유 문구를 복사했습니다.");return}catch{}}
+  toast("이 브라우저에서는 바로 공유가 제한됩니다. 저장은 ‘이미지 저장’에서만 할 수 있습니다.");
 }
 function renderCinemaDiary(){
   const section=document.getElementById("my"); if(!section)return;
@@ -118,7 +126,7 @@ function openSharePanel(code){
   activeMovieCode=code;let panel=document.getElementById("sharePanel");
   if(!panel){
     panel=document.createElement("div");panel.id="sharePanel";panel.className="share-panel";
-    panel.innerHTML='<div class="share-sheet"><button class="close" id="closeShare">×</button><div class="kicker">SOCIAL SHARE CARD</div><h2>영화 기록을 멋지게 공유</h2><p>영화 스틸과 내 문장을 자동으로 조합합니다.</p><div class="share-formats"><button data-format="feed" class="on">4:5 피드</button><button data-format="story">9:16 스토리</button><button data-format="square">1:1 정사각</button></div><textarea id="shareText" maxlength="240"></textarea><div class="share-preview"><img id="sharePreview" alt="공유카드 미리보기"></div><div class="share-actions"><button class="primary" id="nativeShare">SNS로 공유</button><button class="ghostbtn" id="saveShareImage">이미지 저장</button></div><small>모바일 공유 시트에서 Instagram·카카오톡·메시지 등 설치된 앱을 선택할 수 있습니다.</small></div>';
+    panel.innerHTML='<div class="share-sheet"><button class="close" id="closeShare">×</button><div class="kicker">SOCIAL SHARE CARD</div><h2>영화 기록을 멋지게 공유</h2><p>영화 스틸과 내 문장을 자동으로 조합합니다.</p><div class="share-formats"><button data-format="feed" class="on">4:5 피드</button><button data-format="story">9:16 스토리</button><button data-format="square">1:1 정사각</button></div><textarea id="shareText" maxlength="240"></textarea><div class="share-preview"><img id="sharePreview" alt="공유카드 미리보기"></div><div class="share-actions"><button class="primary" id="nativeShare">바로 공유</button><button class="ghostbtn" id="saveShareImage">이미지 저장</button></div><small>모바일 공유 시트에서 Instagram·카카오톡·메시지 등 설치된 앱을 선택할 수 있습니다.</small></div>';
     document.body.appendChild(panel);
     document.getElementById("closeShare").onclick=()=>panel.classList.remove("open");
     panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("open")});

@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const V42=window.INDIP_V42={version:'42.0.0',portraits:{},wikiCache:{},masterObserver:null};
+const V42=window.INDIP_V42={version:'43.0.0',portraits:{},wikiCache:{},masterObserver:null};
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -43,6 +43,7 @@ async function renderDirectorPortrait(){
   const img=document.createElement('img');img.src=p.path;img.alt=name+' 사진';img.loading='eager';img.fetchPriority='low';img.decoding='async';
   const cap=document.createElement('figcaption');cap.innerHTML='<a href="'+esc(p.source||'#')+'" target="_blank" rel="noopener noreferrer">사진 출처 ↗</a>';
   fig.append(img,cap);layout.insertBefore(fig,body);
+  setTimeout(prepareDirectorShare,30);
 }
 function observeMaster(){
   const body=$('#v30MasterBody');if(!body)return;
@@ -56,7 +57,15 @@ function sharePackText(){
   const m=(typeof MOVIES!=='undefined'&&typeof activeMovieCode!=='undefined')?MOVIES[activeMovieCode]:null;
   return [m?.title,opts?.text,(opts?.tags||[]).map(t=>'#'+t).join(' '),'https://indip.web.app'].filter(Boolean).join('\n');
 }
+function currentShareCache(){
+  if(typeof readV05Opts!=='function'||typeof activeMovieCode==='undefined')return null;
+  const cache=window.__indipShareCache,opts=readV05Opts();
+  if(!cache?.ready||cache.code!==activeMovieCode)return null;
+  const key=typeof shareCacheKeyV05==='function'?shareCacheKeyV05(activeMovieCode,opts):activeMovieCode+'|'+JSON.stringify(opts);
+  return cache.key===key?cache:null;
+}
 async function makeCurrentShareBlob(){
+  const cache=currentShareCache();if(cache?.blob)return cache.blob;
   if(typeof makeShareBlobV05!=='function'||typeof readV05Opts!=='function'||typeof activeMovieCode==='undefined')throw new Error('share renderer unavailable');
   return await makeShareBlobV05(activeMovieCode,readV05Opts());
 }
@@ -65,57 +74,79 @@ async function copyImage(blob){
   try{await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);return true}catch{return false}
 }
 async function copyText(text){try{await navigator.clipboard.writeText(text);return true}catch{return false}}
-function downloadBlob(blob,name='indip-share-card.png'){
-  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1800);
-}
 function setStatus(msg){
   const el=$('#sharePanelV05 .v42-share-status');if(el)el.textContent=msg;
   if(typeof toast==='function')toast(msg);
 }
-async function nativeShareWithPhoto(){
-  try{
-    const blob=await makeCurrentShareBlob(),text=sharePackText(),file=new File([blob],'indip-share-card.png',{type:'image/png'});
-    const can=!navigator.canShare||navigator.canShare({files:[file]});
-    if(navigator.share&&can){try{await navigator.share({title:'INDI+P',text,files:[file]});return}catch(e){if(e?.name==='AbortError')return}}
-    if(await copyImage(blob)){setStatus('사진을 클립보드에 복사했습니다. SNS 새 게시물에서 Ctrl+V로 붙여넣으세요.');return}
-    downloadBlob(blob);setStatus('브라우저 제한으로 사진을 저장했습니다. SNS에서 업로드해 주세요.');
-  }catch(e){setStatus('공유 이미지를 준비하지 못했습니다. 이미지 저장을 이용해 주세요.')}
+function nativeShareWithPhoto(){
+  const panel=$('#sharePanelV05');panel?.classList.remove('v43-share-fallback-open');
+  const cache=currentShareCache(),text=sharePackText();
+  if(!cache?.file){
+    setStatus('최신 공유 이미지를 준비 중입니다. 준비되면 바로 공유 버튼이 활성화됩니다.');
+    if(typeof refreshV05Preview==='function')refreshV05Preview();
+    return;
+  }
+  if(navigator.share){
+    try{
+      const fileCapable=!navigator.canShare||navigator.canShare({files:[cache.file]});
+      const payload=fileCapable?{title:'INDI+P',text,files:[cache.file]}:{title:'INDI+P',text,url:'https://indip.web.app'};
+      const promise=navigator.share(payload);
+      Promise.resolve(promise).catch(e=>{if(e?.name!=='AbortError'){console.warn('native share',e);openShareFallback(cache.blob,text)}});
+      return;
+    }catch(e){console.warn('native share sync',e)}
+  }
+  openShareFallback(cache.blob,text);
 }
-async function socialShare(kind){
+function socialShare(kind){
+  const cache=currentShareCache(),text=sharePackText();
+  if(!cache?.blob){setStatus('공유 이미지를 준비 중입니다. 잠시 후 다시 눌러주세요.');if(typeof refreshV05Preview==='function')refreshV05Preview();return}
+  const label=kind==='instagram'?'Instagram':kind==='threads'?'Threads':kind==='facebook'?'Facebook':'X';
   const target={instagram:'https://www.instagram.com/',threads:'https://www.threads.net/',facebook:'https://www.facebook.com/'}[kind]||'';
-  const text=sharePackText();
-  let popup=null;
-  if(kind==='x')popup=window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank','noopener');
-  else popup=window.open(target,'_blank','noopener');
-  try{
-    const blob=await makeCurrentShareBlob();const copied=await copyImage(blob);
-    if(copied){
-      setStatus((kind==='instagram'?'Instagram':kind==='threads'?'Threads':kind==='facebook'?'Facebook':'X')+'를 열었습니다. 사진은 클립보드에 있으니 새 게시물에서 Ctrl+V로 붙여넣으세요.');
-    }else{
-      downloadBlob(blob);setStatus('사진을 자동 첨부할 수 없어 PNG로 저장했습니다. 열린 SNS에서 업로드해 주세요.');
-    }
-  }catch{setStatus('공유 이미지 생성에 실패했습니다.')}
-  if(kind!=='x')await copyText(text).catch?.(()=>{});
+  if(kind==='x')window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank','noopener');
+  else window.open(target,'_blank','noopener');
+  copyImage(cache.blob).then(copied=>{
+    if(copied)setStatus(label+'를 열었습니다. 공유 사진이 클립보드에 복사되었습니다.');
+    else copyText(text).then(ok=>setStatus(ok?label+'를 열고 공유 문구를 복사했습니다.':'열린 '+label+'에서 직접 공유해 주세요.'));
+  });
+}
+function openShareFallback(blob,text){
+  const panel=$('#sharePanelV05');if(!panel)return;
+  panel.classList.add('v43-share-fallback-open');
+  setStatus('이 브라우저는 사진 파일 네이티브 공유가 제한됩니다. 아래 SNS를 선택하면 사진을 클립보드에 준비합니다.');
+  if(blob)copyImage(blob).then(ok=>{if(!ok&&text)copyText(text)});
 }
 function installDesktopSocial(panel){
-  if(!panel||panel.querySelector('.v42-social-share'))return;
+  if(!panel)return;
   const right=panel.querySelector('.v20-share-preview-pane'),actions=panel.querySelector('.share-actions');if(!right||!actions)return;
-  const native=panel.querySelector('#nativeShareV05');if(native){native.textContent='사진 포함 공유';native.onclick=nativeShareWithPhoto}
+  const native=panel.querySelector('#nativeShareV05');if(native){native.textContent='바로 공유';native.onclick=nativeShareWithPhoto}
+  if(panel.querySelector('.v42-social-share'))return;
   const row=document.createElement('div');row.className='v42-social-share';
   row.innerHTML='<button data-v42-social="instagram">Instagram</button><button data-v42-social="threads">Threads</button><button data-v42-social="x">X</button><button data-v42-social="facebook">Facebook</button><button class="v42-copy" data-v42-copy="image">사진 복사</button><button class="v42-copy" data-v42-copy="text">문구 복사</button>';
-  const status=document.createElement('div');status.className='v42-share-status';status.textContent='데스크톱에서는 사진을 클립보드에 복사해 각 SNS에 바로 붙여넣을 수 있습니다.';
+  const status=document.createElement('div');status.className='v42-share-status';status.textContent=navigator.share?'‘바로 공유’를 누르면 기기의 공유 메뉴로 사진을 넘깁니다.':'이 브라우저에서는 아래 SNS 버튼과 이미지 클립보드 공유를 사용합니다.';
   actions.insertAdjacentElement('afterend',row);row.insertAdjacentElement('afterend',status);
   row.addEventListener('click',async e=>{
     const b=e.target.closest('button');if(!b)return;
     if(b.dataset.v42Social){await socialShare(b.dataset.v42Social);return}
     if(b.dataset.v42Copy==='text'){if(await copyText(sharePackText()))setStatus('문구를 복사했습니다.');else setStatus('문구 복사 권한이 없어 직접 선택해 주세요.');return}
-    if(b.dataset.v42Copy==='image'){try{const blob=await makeCurrentShareBlob();if(await copyImage(blob))setStatus('사진을 클립보드에 복사했습니다.');else{downloadBlob(blob);setStatus('클립보드 이미지 복사가 제한되어 PNG로 저장했습니다.')}}catch{setStatus('사진 복사에 실패했습니다.')}}
+    if(b.dataset.v42Copy==='image'){const cache=currentShareCache();if(!cache?.blob){setStatus('공유 이미지를 준비 중입니다.');if(typeof refreshV05Preview==='function')refreshV05Preview();return}if(await copyImage(cache.blob))setStatus('사진을 클립보드에 복사했습니다.');else setStatus('이 브라우저가 이미지 클립보드를 지원하지 않습니다. 네이티브 공유 또는 문구 복사를 이용해 주세요.')}
   });
 }
 function patchShareOpen(){
   if(typeof openSharePanelV05!=='function'||V42.sharePatched)return;
   V42.sharePatched=true;const old=openSharePanelV05;
-  openSharePanelV05=function(...args){const out=old.apply(this,args);setTimeout(()=>installDesktopSocial($('#sharePanelV05')),100);return out}
+  openSharePanelV05=function(...args){const out=old.apply(this,args);const panel=$('#sharePanelV05');panel?.classList.remove('v43-share-fallback-open');setTimeout(()=>installDesktopSocial(panel),100);return out}
+}
+let directorShareCache={name:'',file:null,blob:null,ready:false};
+async function prepareDirectorShare(){
+  const body=$('#v30MasterBody');if(!body)return null;
+  const name=currentDirectorName(),ko=body.querySelector('b')?.textContent||name,tag=body.querySelector('.v30-master-tag')?.textContent||'감독의 작업 노트',note=body.querySelector('.v38-master-note')?.textContent||'',source=(body.querySelector('small')?.textContent||'').split(' · ')[1]||'';
+  if(directorShareCache.ready&&directorShareCache.name===name)return directorShareCache;
+  directorShareCache={name,file:null,blob:null,ready:false};
+  try{
+    const p=await portraitFor(name),blob=await directorStoryBlob(name,ko,tag,note,source,p),file=new File([blob],'indip-director-note.png',{type:'image/png'});
+    if(currentDirectorName()===name)directorShareCache={name,ko,note,file,blob,ready:true};
+  }catch(e){console.warn('director share prepare',e)}
+  return directorShareCache;
 }
 function loadImg(src){
   return new Promise((resolve,reject)=>{const img=new Image();img.crossOrigin='anonymous';img.onload=()=>resolve(img);img.onerror=reject;img.src=src});
@@ -142,20 +173,25 @@ async function directorStoryBlob(name,ko,tag,note,source,portrait){
   c.fillStyle='#d8ff43';c.font='800 30px sans-serif';c.fillText('indip.web.app',116,1810);
   return await new Promise(res=>canvas.toBlob(res,'image/png',.94));
 }
-async function shareDirectorStory(){
-  const body=$('#v30MasterBody');if(!body)return;
-  const name=currentDirectorName(),ko=body.querySelector('b')?.textContent||name,tag=body.querySelector('.v30-master-tag')?.textContent||'감독의 작업 노트',note=body.querySelector('.v38-master-note')?.textContent||'',source=(body.querySelector('small')?.textContent||'').split(' · ')[1]||'';
-  const p=await portraitFor(name),blob=await directorStoryBlob(name,ko,tag,note,source,p),file=new File([blob],'indip-director-note.png',{type:'image/png'});
-  try{if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){await navigator.share({files:[file],title:ko,text:note});return}}catch(e){if(e?.name==='AbortError')return}
-  if(await copyImage(blob)){if(typeof toast==='function')toast('감독 사진이 포함된 카드를 클립보드에 복사했습니다.');return}
-  downloadBlob(blob,'indip-director-note.png');if(typeof toast==='function')toast('감독 사진이 포함된 스토리 카드를 저장했습니다.');
+function shareDirectorStory(){
+  const cache=directorShareCache,name=currentDirectorName();
+  if(!cache.ready||cache.name!==name||!cache.file){if(typeof toast==='function')toast('감독 사진 공유카드를 준비 중입니다. 잠시 후 다시 눌러주세요.');prepareDirectorShare();return}
+  if(navigator.share){
+    try{
+      const fileCapable=!navigator.canShare||navigator.canShare({files:[cache.file]});
+      const payload=fileCapable?{files:[cache.file],title:cache.ko,text:cache.note}:{title:cache.ko,text:cache.note,url:'https://indip.web.app'};
+      Promise.resolve(navigator.share(payload)).catch(e=>{if(e?.name!=='AbortError')copyImage(cache.blob).then(ok=>typeof toast==='function'&&toast(ok?'사진을 클립보드에 복사했습니다.':'이 브라우저의 사진 공유가 제한됩니다.'))});
+      return;
+    }catch(e){console.warn('director native share',e)}
+  }
+  copyImage(cache.blob).then(ok=>{if(typeof toast==='function')toast(ok?'감독 사진 카드를 클립보드에 복사했습니다.':'이 브라우저에서는 사진 직접 공유가 제한됩니다.')});
 }
 function interceptDirectorShare(){
   document.addEventListener('click',e=>{const b=e.target.closest('[data-v30-share="master"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();shareDirectorStory();},true);
 }
-Object.assign(V42,{portraitFor,directorStoryBlob,makeCurrentShareBlob,nativeShareWithPhoto,shareDirectorStory});
+Object.assign(V42,{portraitFor,directorStoryBlob,makeCurrentShareBlob,nativeShareWithPhoto,shareDirectorStory,currentShareCache,prepareDirectorShare});
 async function init(){
-  await loadPortraitMap();observeMaster();patchShareOpen();interceptDirectorShare();
+  await loadPortraitMap();observeMaster();patchShareOpen();
   setTimeout(()=>{observeMaster();patchShareOpen();if($('#sharePanelV05'))installDesktopSocial($('#sharePanelV05'))},900);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();

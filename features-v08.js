@@ -507,12 +507,29 @@ function cardThumbVisualHtmlV2(thumbs,slide,index){
   const start=Number.isInteger(slide?.imageIndex)?slide.imageIndex:index,mode=slide?.photoMode||"single",count=mode==="duo"?2:mode==="trio"?3:mode==="quad"?4:1,imgs=Array.from({length:count},(_,i)=>thumbs[(start+i)%thumbs.length]).filter(Boolean);
   return '<div class="card-thumb-media mode-'+mode+'">'+imgs.map(src=>'<img src="'+src+'" alt="">').join("")+'</div>';
 }
+window.__cardShareCacheV2=window.__cardShareCacheV2||{ready:false,files:[],item:null,token:0};
+function scheduleCardSharePrepareV2(){
+  clearTimeout(window.__cardSharePrepareTimerV2);
+  const cache=window.__cardShareCacheV2;cache.ready=false;cache.token=(cache.token||0)+1;
+  const btn=document.getElementById("shareCardsV2");if(btn){btn.disabled=true;btn.textContent="공유 준비 중…"}
+  const token=cache.token;
+  window.__cardSharePrepareTimerV2=setTimeout(()=>prepareCardNewsShareV2(token),260);
+}
+async function prepareCardNewsShareV2(token=window.__cardShareCacheV2.token){
+  const cache=window.__cardShareCacheV2,item=studioItemFromForm(),slides=cardSlideDataV2(item),files=[];
+  try{
+    for(let i=0;i<slides.length;i++){const blob=await makeCardSlideBlobV2(item,slides[i],i);files.push(new File([blob],"indie-port-card-"+String(i+1).padStart(2,"0")+".png",{type:"image/png"}))}
+    if(token!==cache.token)return;
+    cache.ready=true;cache.files=files;cache.item=item;cache.at=Date.now();
+    const btn=document.getElementById("shareCardsV2");if(btn){btn.disabled=false;btn.textContent=files.length+"장 바로 공유"}
+  }catch(e){if(token!==cache.token)return;cache.ready=false;console.warn("card share prepare",e);const btn=document.getElementById("shareCardsV2");if(btn){btn.disabled=true;btn.textContent="공유 준비 실패"}}
+}
 function renderCardNewsV2(){
   const root=document.getElementById("cardNewsStudioV2");if(!root)return;const item=studioItemFromForm(),slides=cardSlideDataV2(item),thumbs=cardVisualsV2(item),cp=magPreset(item.preset);
   const formats=[["feed","4:5 피드"],["square","1:1"],["story","9:16 스토리"]],vars='--cp-bg:'+cp.bg+';--cp-text:'+cp.text+';--cp-muted:'+cp.muted+';--cp-accent:'+cp.accent,candidates=cardSentenceCandidatesV2(item.text);
   const manual=MAG_STUDIO.cardManual?'<section class="card-manual-editor"><div class="card-manual-head"><div><b>카드별 직접편집</b><small>문장·사진·콜라주·프리셋을 카드마다 따로 정하고 ↑↓로 순서까지 바꿀 수 있습니다.</small></div><button id="cardAutoReset" class="ghostbtn">자동분할로 복귀</button></div><div class="card-candidates">'+candidates.map((c,i)=>'<button data-card-candidate="'+i+'">'+esc(c)+'</button>').join("")+'</div><div class="card-edit-list">'+slides.map((s,i)=>'<article class="'+(i===MAG_STUDIO.cardActiveEdit?"active":"")+'" data-card-edit-row="'+i+'"><div><b>CARD '+String(i+1).padStart(2,"0")+'</b><span><button data-card-up="'+i+'" '+(i===0?"disabled":"")+'>↑</button><button data-card-down="'+i+'" '+(i===slides.length-1?"disabled":"")+'>↓</button></span></div><div class="card-edit-options"><label>사진<select data-card-image="'+i+'"><option value="-1" '+(s.imageIndex===-1?"selected":"")+'>사진 없음</option>'+thumbs.map((_,n)=>'<option value="'+n+'" '+(Number(s.imageIndex)===n?"selected":"")+'>PHOTO '+(n+1)+'</option>').join("")+'</select></label><label>배치<select data-card-mode="'+i+'"><option value="single" '+((s.photoMode||"single")==="single"?"selected":"")+'>1컷</option><option value="duo" '+(s.photoMode==="duo"?"selected":"")+'>2컷</option><option value="trio" '+(s.photoMode==="trio"?"selected":"")+'>3컷</option><option value="quad" '+(s.photoMode==="quad"?"selected":"")+'>4컷</option></select></label><label>프리셋<select data-card-preset="'+i+'">'+cardPresetOptionsV2(s.preset||item.preset)+'</select></label><label>역할<select data-card-role="'+i+'">'+cardRoleOptionsV2(s.role||(i===0?"cover":i===slides.length-1?"end":"body"))+'</select></label></div><div class="card-text-options"><label>글자 크기 <output data-card-scale-out="'+i+'">'+Math.round(cardTextTuneV2(s).scale*100)+'%</output><input data-card-scale="'+i+'" type="range" min="0.75" max="1.35" step="0.05" value="'+cardTextTuneV2(s).scale+'"></label><label>가로 위치 <output data-card-x-out="'+i+'">'+Math.round(cardTextTuneV2(s).x*100)+'%</output><input data-card-x="'+i+'" type="range" min="-0.06" max="0.18" step="0.01" value="'+cardTextTuneV2(s).x+'"></label><label>세로 위치 <output data-card-y-out="'+i+'">'+Math.round(cardTextTuneV2(s).y*100)+'%</output><input data-card-y="'+i+'" type="range" min="-0.08" max="0.18" step="0.01" value="'+cardTextTuneV2(s).y+'"></label></div><input data-card-title="'+i+'" value="'+esc(s.title||"")+'"><textarea data-card-body="'+i+'" maxlength="180">'+esc(s.body||"")+'</textarea></article>').join("")+'</div></section>':'';
   const thumbHtml=slides.map((s,i)=>{const sp=magPreset(s.preset||item.preset),t=cardTextTuneV2(s),role=s.role||(i===0?"cover":i===slides.length-1?"end":"body"),roleLabel=role==="cover"?"COVER":role==="end"?"END":"BODY",sv='--cp-bg:'+sp.bg+';--cp-text:'+sp.text+';--cp-muted:'+sp.muted+';--cp-accent:'+sp.accent+';--ct-scale:'+t.scale+';--ct-x:'+Math.round(t.x*140)+'px;--ct-y:'+Math.round(t.y*120)+'px';return '<article class="card-thumb-v2 preset-'+esc(s.preset||item.preset||"journal")+' role-'+role+'" style="'+sv+'">'+cardThumbVisualHtmlV2(thumbs,s,i)+'<span>'+roleLabel+' · CARD '+String(i+1).padStart(2,"0")+'</span><b>'+esc(s.title)+'</b><p>'+esc(s.body)+'</p><button class="card-save-one" data-card-save="'+i+'">이 장 PNG 저장</button></article>'}).join("");
-  root.innerHTML='<div class="cardnews-head"><div><div class="kicker">CARD NEWS STUDIO</div><h3>'+slides.length+'장 핵심 카드뉴스</h3><p>자동 분할을 그대로 쓰거나, 실제 원문에서 원하는 문장을 직접 골라 5장 순서를 편집할 수 있습니다.</p><div class="card-format-row">'+formats.map(([k,n])=>'<button data-card-format="'+k+'" class="'+(MAG_STUDIO.format===k?"on":"")+'">'+n+'</button>').join("")+'<button id="toggleCardManual" class="'+(MAG_STUDIO.cardManual?"on":"")+'">'+(MAG_STUDIO.cardManual?"직접편집 중":"문장 직접편집")+'</button></div></div><div class="cardnews-batch"><button class="ghostbtn" id="downloadCardsV2">'+slides.length+'장 ZIP 저장</button><button class="primary" id="shareCardsV2">'+slides.length+'장 SNS 공유</button></div></div><div class="cardnews-thumbs">'+thumbHtml+'</div>'+manual;
+  root.innerHTML='<div class="cardnews-head"><div><div class="kicker">CARD NEWS STUDIO</div><h3>'+slides.length+'장 핵심 카드뉴스</h3><p>자동 분할을 그대로 쓰거나, 실제 원문에서 원하는 문장을 직접 골라 5장 순서를 편집할 수 있습니다.</p><div class="card-format-row">'+formats.map(([k,n])=>'<button data-card-format="'+k+'" class="'+(MAG_STUDIO.format===k?"on":"")+'">'+n+'</button>').join("")+'<button id="toggleCardManual" class="'+(MAG_STUDIO.cardManual?"on":"")+'">'+(MAG_STUDIO.cardManual?"직접편집 중":"문장 직접편집")+'</button></div></div><div class="cardnews-batch"><button class="ghostbtn" id="downloadCardsV2">'+slides.length+'장 ZIP 저장</button><button class="primary" id="shareCardsV2">'+slides.length+'장 바로 공유</button></div></div><div class="cardnews-thumbs">'+thumbHtml+'</div>'+manual;
   root.querySelectorAll("[data-card-format]").forEach(b=>b.onclick=()=>{MAG_STUDIO.format=b.dataset.cardFormat;renderCardNewsV2()});document.getElementById("toggleCardManual").onclick=()=>MAG_STUDIO.cardManual?(MAG_STUDIO.cardManual=false,MAG_STUDIO.cardEdits=[],renderCardNewsV2()):enableCardManualV2();
   document.getElementById("cardAutoReset")?.addEventListener("click",()=>{MAG_STUDIO.cardManual=false;MAG_STUDIO.cardEdits=[];renderCardNewsV2()});root.querySelectorAll("[data-card-edit-row]").forEach(el=>el.onclick=e=>{if(e.target.closest("button,input,textarea,select"))return;MAG_STUDIO.cardActiveEdit=Number(el.dataset.cardEditRow);renderCardNewsV2()});
   root.querySelectorAll("[data-card-title]").forEach(el=>el.oninput=()=>{const i=Number(el.dataset.cardTitle);MAG_STUDIO.cardEdits[i].title=el.value;const t=root.querySelectorAll(".cardnews-thumbs b")[i];if(t)t.textContent=el.value});root.querySelectorAll("[data-card-body]").forEach(el=>el.oninput=()=>{const i=Number(el.dataset.cardBody);MAG_STUDIO.cardEdits[i].body=el.value;const p=root.querySelectorAll(".cardnews-thumbs p")[i];if(p)p.textContent=el.value});
@@ -525,6 +542,8 @@ function renderCardNewsV2(){
   root.querySelectorAll("[data-card-y]").forEach(el=>el.oninput=()=>{const i=Number(el.dataset.cardY),v=Number(el.value);MAG_STUDIO.cardEdits[i].textY=v;const o=root.querySelector('[data-card-y-out="'+i+'"]');if(o)o.textContent=Math.round(v*100)+'%';updateCardThumbTuneV2(root,i)});
   root.querySelectorAll("[data-card-up]").forEach(b=>b.onclick=()=>moveCardEditV2(Number(b.dataset.cardUp),-1));root.querySelectorAll("[data-card-down]").forEach(b=>b.onclick=()=>moveCardEditV2(Number(b.dataset.cardDown),1));root.querySelectorAll("[data-card-candidate]").forEach(b=>b.onclick=()=>setCardCandidateV2(candidates[Number(b.dataset.cardCandidate)]||""));
   document.getElementById("downloadCardsV2").onclick=()=>exportCardNewsV2(false);document.getElementById("shareCardsV2").onclick=()=>exportCardNewsV2(true);root.querySelectorAll("[data-card-save]").forEach(b=>b.onclick=()=>exportCardSlideV2(Number(b.dataset.cardSave)));
+  root.oninput=()=>scheduleCardSharePrepareV2();
+  scheduleCardSharePrepareV2();
 }
 async function exportCardSlideV2(index){
   const item=studioItemFromForm(),slides=cardSlideDataV2(item),slide=slides[index];if(!slide)return;
@@ -552,12 +571,25 @@ async function downloadCardZipV2(files,item){
   a.href=u;a.download="indie-port-"+safe+"-"+files.length+"cards.zip";a.click();setTimeout(()=>URL.revokeObjectURL(u),2500);
 }
 async function exportCardNewsV2(share){
+  if(share){
+    const cache=window.__cardShareCacheV2;
+    if(!cache?.ready||!cache.files?.length){toast("카드뉴스 공유 파일을 준비 중입니다. 잠시 후 다시 눌러주세요.");scheduleCardSharePrepareV2();return}
+    const files=cache.files,item=cache.item||studioItemFromForm(),text=[item.headline,(item.tags||[]).map(t=>"#"+t).join(" "),"https://indip.web.app"].filter(Boolean).join("\n");
+    if(navigator.share){
+      try{
+        const fileCapable=!navigator.canShare||navigator.canShare({files});
+        const payload=fileCapable?{title:item.headline,text,files}:{title:item.headline,text,url:"https://indip.web.app"};
+        Promise.resolve(navigator.share(payload)).then(()=>toast(fileCapable?files.length+"장을 공유 메뉴로 보냈습니다.":"공유 메뉴를 열었습니다.")).catch(e=>{if(e?.name!=="AbortError")console.warn("card native share",e)});
+        return;
+      }catch(e){console.warn("card native share sync",e)}
+    }
+    const first=files[0];
+    if(first&&navigator.clipboard?.write&&window.ClipboardItem){try{await navigator.clipboard.write([new ClipboardItem({"image/png":first})]);toast("첫 카드를 클립보드에 복사했습니다. 여러 장 공유는 지원되는 브라우저의 ‘바로 공유’를 이용하세요.");return}catch{}}
+    if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(text);toast("공유 문구를 복사했습니다.");return}catch{}}
+    toast("이 브라우저에서는 다중파일 바로 공유가 제한됩니다. ZIP 저장은 별도 저장 버튼에서만 실행됩니다.");return;
+  }
   const item=studioItemFromForm(),slides=cardSlideDataV2(item),files=[];
   for(let i=0;i<slides.length;i++){const blob=await makeCardSlideBlobV2(item,slides[i],i);files.push(new File([blob],"indie-port-card-"+String(i+1).padStart(2,"0")+".png",{type:"image/png"}))}
-  if(share){
-    if(navigator.share&&(!navigator.canShare||navigator.canShare({files}))){try{await navigator.share({title:item.headline,text:(item.tags||[]).map(t=>"#"+t).join(" "),files});toast(files.length+"장을 한 번에 공유했습니다.");return}catch(e){if(e.name==="AbortError")return}}
-    await downloadCardZipV2(files,item);toast("이 기기에서는 다중파일 SNS 공유가 제한되어 "+files.length+"장 ZIP으로 저장했습니다.");return;
-  }
   await downloadCardZipV2(files,item);toast(files.length+"장 카드뉴스를 ZIP 하나로 저장했습니다.");
 }
 async function initV08(){

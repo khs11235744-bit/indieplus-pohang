@@ -264,7 +264,7 @@
     }).join('');
   }
 
-  async function storyBlob(title,subtitle,body,footer){
+  function storyCanvas(title,subtitle,body,footer){
     const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;
     const c=canvas.getContext('2d');
     c.fillStyle='#11100e';c.fillRect(0,0,1080,1920);
@@ -275,7 +275,17 @@
     c.fillStyle='#d8d4cc';c.font='500 42px sans-serif';y=wrap(c,body,110,y+90,850,64);
     c.fillStyle='#8f968c';c.font='500 28px sans-serif';wrap(c,footer,110,1700,850,42);
     c.fillStyle='#d8ff43';c.font='800 32px sans-serif';c.fillText('indip.web.app',110,1810);
+    return canvas;
+  }
+  async function storyBlob(title,subtitle,body,footer){
+    const canvas=storyCanvas(title,subtitle,body,footer);
     return new Promise(res=>canvas.toBlob(res,'image/png',.94));
+  }
+  function storyFileSync(title,subtitle,body,footer){
+    const data=storyCanvas(title,subtitle,body,footer).toDataURL('image/png');
+    const raw=atob(data.split(',')[1]),bytes=new Uint8Array(raw.length);
+    for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
+    return new File([bytes],'indip-story.png',{type:'image/png'});
   }
   function wrap(c,text,x,y,max,line){
     const words=String(text||'').split(/\s+/);let row='';
@@ -286,7 +296,8 @@
     if(row)c.fillText(row,x,y);
     return y+line;
   }
-  async function shareStory(kind){
+  function shareStory(kind){
+    if(kind==='master'&&window.INDIP_V42?.shareDirectorStory){window.INDIP_V42.shareDirectorStory();return}
     let title='',subtitle='',body='',footer='';
     if(kind==='master'){
       const m=masterAt(V30.masterIndex);title=m.ko;subtitle='감독의 작업 노트 · '+m.tag;body=m.note;footer=m.source+' · '+m.disclaimer;
@@ -295,12 +306,20 @@
     }else{
       const m=musicItems()[0]||{};title='SOUND & CINEMA';subtitle=m.type||'오늘의 OST';body=(m.title||m.film||'')+' — '+(m.body||'');footer=[m.composer,m.film,'INDI+P'].filter(Boolean).join(' · ');
     }
-    const blob=await storyBlob(title,subtitle,body,footer);if(!blob)return;
-    const file=new File([blob],'indip-story.png',{type:'image/png'});
-    try{
-      if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title});return}
-    }catch(e){if(e?.name==='AbortError')return}
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='indip-story.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+    const file=storyFileSync(title,subtitle,body,footer),text=[title,body,'https://indip.web.app'].filter(Boolean).join('\n');
+    if(navigator.share){
+      try{
+        const fileCapable=!navigator.canShare||navigator.canShare({files:[file]});
+        const payload=fileCapable?{files:[file],title,text}:{title,text,url:'https://indip.web.app'};
+        Promise.resolve(navigator.share(payload)).catch(e=>{if(e?.name!=='AbortError')console.warn('culture share',e)});
+        return;
+      }catch(e){console.warn('culture share sync',e)}
+    }
+    if(navigator.clipboard?.write&&window.ClipboardItem){
+      navigator.clipboard.write([new ClipboardItem({'image/png':file})]).then(()=>toast?.('공유 이미지를 클립보드에 복사했습니다.')).catch(()=>navigator.clipboard?.writeText?.(text));
+      return;
+    }
+    navigator.clipboard?.writeText?.(text).then(()=>toast?.('공유 문구를 복사했습니다.'));
   }
 
   function bind(){
