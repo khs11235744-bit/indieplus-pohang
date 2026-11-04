@@ -1,0 +1,50 @@
+name: INDIE+ source safety gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax-and-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Check active JavaScript syntax
+        shell: bash
+        run: |
+          for file in app.js sw.js firebase-bridge.js firebase-client.js firebase-loader.js features-v42.js; do
+            if [ -f "$file" ]; then
+              node --check "$file"
+            fi
+          done
+      - name: Validate bundled film data JSON
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          paths=sorted(Path('data').glob('*.json'))
+          for path in paths:
+              with path.open(encoding='utf-8') as f:
+                  json.load(f)
+          print(f'Validated {len(paths)} data JSON files')
+          PY
+      - name: Python source compilation
+        run: |
+          python3 -m py_compile scripts/sync_dtryx.py
+          python3 -m py_compile scripts/build_news_weekly.py
+      - name: Verify Google Stitch/Jules documentation
+        run: |
+          test -s DESIGN.md
+          test -s AGENTS.md
+          test -s HARNESS.md
+
+# No API calls to cinemas; does not alter film schedules, users or Firebase.
