@@ -33,7 +33,7 @@ jobs:
           from pathlib import Path
           paths=sorted(Path('data').glob('*.json'))
           for path in paths:
-              with path.open(encoding='utf-8') as f:
+              with path.open(encoding='utf-8-sig') as f:
                   json.load(f)
           print(f'Validated {len(paths)} data JSON files')
           PY
