@@ -1,0 +1,20 @@
+/* 2026-11-04 INDIE PORT mobile usability / existing dark design preserved. */
+@media screen and (max-width:760px){
+  .mobile-nav button{
+    font-size:clamp(9px,2.55vw,11px)!important;
+    line-height:1.25!important;
+    min-height:44px!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .mobile-nav button span{font-size:17px!important;margin-bottom:3px!important}
+  .mobile-nav button:focus-visible{outline:2px solid #d8ff43;outline-offset:-3px}
+  .search-box,.sheet,.share-sheet{max-width:100%;min-width:0}
+  .sheet .synopsis,.sheet .lead,.search-results{overflow-wrap:anywhere}
+  .hero-copy,.hero-copy h1{min-width:0;max-width:100%}
+  .hero-copy h1{overflow-wrap:anywhere;word-break:keep-all}
+  #home{padding-bottom:calc(62px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .poster-card,.session,.news-card{transition:none!important;animation:none!important}
+}
